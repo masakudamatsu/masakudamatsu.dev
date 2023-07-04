@@ -51,6 +51,8 @@
         --cyan: #61fafa; /* chroma 60% while keeping the luminance at the level of pure cyan */
         --blue: #2e2ec7; /* chroma 60% while keeping the luminance at the level of pure blue */
         --purple: #e64de6; /* chroma 60% while keeping the luminance at the level of pure purple */
+        --garden-green: #295921; /* switch hue to 110deg from TJG's theme color */
+        --garden-green-light: #528048; /* brighten --garden-green to 4.54 (enough contrast against --white) while keeping chroma intact */
       }
       /* Background color */
       html {
@@ -114,6 +116,14 @@
           var(--red),
           var(--yellow),
           var(--green)
+        );
+      }
+      .tjg {
+        background: linear-gradient(
+          135deg,
+          var(--garden-green),
+          var(--garden-green-light),
+          var(--garden-green)
         );
       }
       /* section layout */
@@ -266,7 +276,7 @@
             <li>Canvas API</li>
           </ul>
         </section>
-        <section>
+        <section class="tjg">
           <h3>Translating Japanese Gardens</h3>
           <div>
             <span class="play playing">
