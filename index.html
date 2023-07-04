@@ -7,7 +7,16 @@
       Masa Kudamatsu — Kyoto-based web developer with UX design skills
     </title>
     <meta name="description" content="" />
-    <link rel="stylesheet" href="style.css" />
+    <!-- Asynchronously load CSS stylesheet (https://web.dev/defer-non-critical-css/#optimize)-->
+    <link
+      rel="preload"
+      href="style.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="style.css" />
+    </noscript>
   </head>
   <body>
     <header>
