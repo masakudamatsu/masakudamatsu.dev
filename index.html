@@ -75,7 +75,8 @@
       body {
         color: var(--white);
       }
-      .line-height-picker {
+      .line-height-picker,
+      .my-ideal-map {
         color: var(--black);
       }
       /* section background */
@@ -125,6 +126,32 @@
           var(--garden-green-light),
           var(--garden-green)
         );
+      }
+      .my-ideal-map {
+        --line-width: 1px;
+        --size: 40px;
+        --top-left-height: 14px;
+        --top-left-width: 28px;
+        --color-stop-bottom: calc(var(--top-left-height) + var(--line-width));
+        --color-stop-right: calc(var(--top-left-width) + var(--line-width));
+        background: 
+          /* vertical lines */ linear-gradient(
+            to right,
+            transparent var(--top-left-width),
+            var(--off-white) var(--top-left-width),
+            var(--off-white) var(--color-stop-right),
+            transparent var(--color-stop-right)
+          ),
+          /* horizontal lines */
+            linear-gradient(
+              to bottom,
+              transparent var(--top-left-height),
+              var(--off-white) var(--top-left-height),
+              var(--off-white) var(--color-stop-bottom),
+              transparent var(--color-stop-bottom)
+            ),
+          /* solid background */ linear-gradient(var(--white), var(--white));
+        background-size: var(--size) var(--size);
       }
       /* section layout */
       section {
@@ -324,7 +351,7 @@
             <li>Glyphhanger (to subset self-hosted font files)</li>
           </ul>
         </section>
-        <section>
+        <section class="my-ideal-map">
           <h3>My Ideal Map</h3>
           <div>
             <span class="play playing">
