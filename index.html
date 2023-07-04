@@ -43,6 +43,7 @@
         --black: #030303; /* (1) pure black would slow down scrolling on OLED screens (https://twitter.com/marcedwards/status/1053519077958803456) */
         --mid-grey: #767676; /* (1.1) ensure 4.5 to 1 contrast against #030303 (https://www.siegemedia.com/contrast-ratio#%23767676-on-%23030303) */
         --light-grey: #949494; /* (1.1.1.1) ensure 3 to 1 contrast against #fefefe (https://www.siegemedia.com/contrast-ratio#%23949494-on-%23fefefe) */
+        --off-white: #d1d1d1; /* (1.1.1.2) ensure 1.5 to 1 contrast against #fefefe (https://www.siegemedia.com/contrast-ratio#%23d1d1d1-on-%23fefefe) */
         --white: #fefefe; /* (1.1.1) ensure 4.5 to 1 contrast against #767676 (https://www.siegemedia.com/contrast-ratio#%23767676-on-%23fefefe) */
       }
       /* Background color */
@@ -65,6 +66,42 @@
       /* font */
       body {
         color: var(--white);
+      }
+      .line-height-picker {
+        color: var(--black);
+      }
+      /* section background */
+      .line-height-picker {
+        position: relative;
+        z-index: 0;
+      }
+      .line-height-picker .background {
+        background: var(--white);
+        color: var(--off-white);
+        columns: 150px 2;
+        column-gap: 20px;
+        height: 100%;
+        left: 0;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .line-height-picker .background p {
+        /* obtained with Roboto, x-height 2 to line-height 5, x-height 10px */
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 18.9279px;
+        font-weight: 400;
+        line-height: 1.3208;
+      }
+      .line-height-picker .background p + p {
+        /* obtained with Roboto, x-height 2 to line-height 5, x-height 10px */
+        margin-top: 10.9566px;
+      }
+      /* section layout */
+      section {
+        padding: 20px;
       }
     </style>
     <!-- Asynchronously load CSS stylesheet (https://web.dev/defer-non-critical-css/#optimize)-->
@@ -89,7 +126,36 @@
           All designed and coded from scratch by myself, along with test code in
           Jest, Cypress, and Testing Library
         </p>
-        <section>
+        <section class="line-height-picker">
+          <div aria-hidden class="background">
+            <p>
+              Reed College at that time offered perhaps the best calligraphy
+              instruction in the country. Throughout the campus every poster,
+              every label on every drawer, was beautifully hand calligraphed.
+              Because I had dropped out and didn’t have to take the normal
+              classes, I decided to take a calligraphy class to learn how to do
+              this. I learned about serif and sans serif typefaces, about
+              varying the amount of space between different letter combinations,
+              about what makes great typography great. It was beautiful,
+              historical, artistically subtle in a way that science can’t
+              capture, and I found it fascinating.
+            </p>
+            <p>
+              None of this had even a hope of any practical application in my
+              life. But 10 years later, when we were designing the first
+              Macintosh computer, it all came back to me. And we designed it all
+              into the Mac. It was the first computer with beautiful typography.
+              If I had never dropped in on that single course in college, the
+              Mac would have never had multiple typefaces or proportionally
+              spaced fonts. And since Windows just copied the Mac, it’s likely
+              that no personal computer would have them. If I had never dropped
+              out, I would have never dropped in on this calligraphy class, and
+              personal computers might not have the wonderful typography that
+              they do. Of course it was impossible to connect the dots looking
+              forward when I was in college. But it was very, very clear looking
+              backward 10 years later.
+            </p>
+          </div>
           <h3>Line-height Picker</h3>
           <div>
             <span class="play playing">
