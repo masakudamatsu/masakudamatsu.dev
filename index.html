@@ -45,6 +45,12 @@
         --light-grey: #949494; /* (1.1.1.1) ensure 3 to 1 contrast against #fefefe (https://www.siegemedia.com/contrast-ratio#%23949494-on-%23fefefe) */
         --off-white: #d1d1d1; /* (1.1.1.2) ensure 1.5 to 1 contrast against #fefefe (https://www.siegemedia.com/contrast-ratio#%23d1d1d1-on-%23fefefe) */
         --white: #fefefe; /* (1.1.1) ensure 4.5 to 1 contrast against #767676 (https://www.siegemedia.com/contrast-ratio#%23767676-on-%23fefefe) */
+        --red: #dc4343; /* chroma 60% while keeping the luminance at the level of pure red */
+        --yellow: #fefe65; /* chroma 60% while keeping the luminance at the level of pure yellow */
+        --green: #60f960; /* chroma 60% while keeping the luminance at the level of pure green */
+        --cyan: #61fafa; /* chroma 60% while keeping the luminance at the level of pure cyan */
+        --blue: #2e2ec7; /* chroma 60% while keeping the luminance at the level of pure blue */
+        --purple: #e64de6; /* chroma 60% while keeping the luminance at the level of pure purple */
       }
       /* Background color */
       html {
@@ -98,6 +104,17 @@
       .line-height-picker .background p + p {
         /* obtained with Roboto, x-height 2 to line-height 5, x-height 10px */
         margin-top: 10.9566px;
+      }
+      .triangulum {
+        background: conic-gradient(
+          var(--green),
+          var(--cyan),
+          var(--blue),
+          var(--purple),
+          var(--red),
+          var(--yellow),
+          var(--green)
+        );
       }
       /* section layout */
       section {
@@ -201,7 +218,7 @@
             <li>Opentype.js</li>
           </ul>
         </section>
-        <section>
+        <section class="triangulum">
           <h3>Triangulum Color Picker</h3>
           <div>
             <span class="play playing">
