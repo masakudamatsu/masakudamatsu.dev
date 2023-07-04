@@ -7,6 +7,38 @@
       Masa Kudamatsu — Kyoto-based web developer with UX design skills
     </title>
     <meta name="description" content="" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      * {
+        margin: 0;
+      }
+      canvas,
+      img,
+      picture,
+      svg,
+      video {
+        display: block;
+        max-width: 100%;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      /* Disable MacOS browsers' default subpixel antialising (see https://www.joshwcomeau.com/css/custom-css-reset/#four-font-smoothing-5) */
+      body {
+        -webkit-font-smoothing: antialiased;
+      }
+      /* Hard-wrap long words (https://www.joshwcomeau.com/css/custom-css-reset/#seven-word-wrapping-8) */
+      p {
+        overflow-wrap: break-word;
+      }
+    </style>
     <!-- Asynchronously load CSS stylesheet (https://web.dev/defer-non-critical-css/#optimize)-->
     <link
       rel="preload"
