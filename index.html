@@ -38,6 +38,34 @@
       p {
         overflow-wrap: break-word;
       }
+      /* Color scheme */
+      :root {
+        --black: #030303; /* (1) pure black would slow down scrolling on OLED screens (https://twitter.com/marcedwards/status/1053519077958803456) */
+        --mid-grey: #767676; /* (1.1) ensure 4.5 to 1 contrast against #030303 (https://www.siegemedia.com/contrast-ratio#%23767676-on-%23030303) */
+        --light-grey: #949494; /* (1.1.1.1) ensure 3 to 1 contrast against #fefefe (https://www.siegemedia.com/contrast-ratio#%23949494-on-%23fefefe) */
+        --white: #fefefe; /* (1.1.1) ensure 4.5 to 1 contrast against #767676 (https://www.siegemedia.com/contrast-ratio#%23767676-on-%23fefefe) */
+      }
+      /* Background color */
+      html {
+        /* Scroll-bounce areas (otherwise white background will be revealed) */
+        background: var(--black);
+      }
+      header {
+        background: var(--black);
+        border-bottom: 1px solid var(--light-grey);
+      }
+      main {
+        background: linear-gradient(150deg, var(--black), var(--mid-grey));
+      }
+      footer {
+        /* To smoothly transition into black in scroll-bounce areas */
+        background: linear-gradient(to bottom, var(--mid-grey), var(--black));
+        border-top: 1px solid var(--light-grey);
+      }
+      /* font */
+      body {
+        color: var(--white);
+      }
     </style>
     <!-- Asynchronously load CSS stylesheet (https://web.dev/defer-non-critical-css/#optimize)-->
     <link
