@@ -64,42 +64,21 @@
         /* Scroll-bounce areas (otherwise white background will be revealed) */
         background: var(--black);
       }
-      header {
+      .bg-black {
         background: var(--black);
-        border-bottom: 1px solid var(--light-grey);
       }
-      main {
+      .bg-black-to-mid-grey {
         background: linear-gradient(150deg, var(--black), var(--mid-grey));
       }
-      footer {
+      .bg-mid-grey-to-black {
         /* To smoothly transition into black in scroll-bounce areas */
         background: linear-gradient(to bottom, var(--mid-grey), var(--black));
-        border-top: 1px solid var(--light-grey);
       }
-      /* Color */
-      .color-white {
-        color: var(--white);
-      }
-      .color-black {
-        color: var(--black);
-      }
-      /* Leaf Card block */
-      .leaf-card {
-        border-radius: 0 var(--round-corner) 0 var(--round-corner);
-        /* Prevent background color leak outs (https://tumble.sneak.co.nz/post/928998513/fixing-the-background-bleed) */
-        -webkit-background-clip: padding-box;
-        -moz-background-clip: padding;
-        background-clip: padding-box;
-      }
-      .leaf-card:nth-of-type(even) {
-        border-radius: var(--round-corner) 0 var(--round-corner) 0;
-      }
-      /* section background */
-      .line-height-picker {
+      .bg-typeset {
         position: relative;
         z-index: 0;
       }
-      .line-height-picker .background {
+      .bg-typeset div.background {
         background: var(--white);
         border-radius: inherit;
         color: var(--off-white);
@@ -113,18 +92,18 @@
         width: 100%;
         z-index: -1;
       }
-      .line-height-picker .background p {
+      .bg-typeset div.background p {
         /* obtained with Roboto, x-height 2 to line-height 5, x-height 10px */
         font-family: Helvetica, Arial, sans-serif;
         font-size: 18.9279px;
         font-weight: 400;
         line-height: 1.3208;
       }
-      .line-height-picker .background p + p {
+      .bg-typeset div.background p + p {
         /* obtained with Roboto, x-height 2 to line-height 5, x-height 10px */
         margin-top: 10.9566px;
       }
-      .triangulum {
+      .bg-color {
         background: conic-gradient(
           var(--green),
           var(--cyan),
@@ -135,7 +114,7 @@
           var(--green)
         );
       }
-      .tjg {
+      .bg-garden {
         background: linear-gradient(
           135deg,
           var(--garden-green),
@@ -143,7 +122,7 @@
           var(--garden-green)
         );
       }
-      .my-ideal-map {
+      .bg-grid {
         --line-width: 1px;
         --size: 40px;
         --top-left-height: 14px;
@@ -168,6 +147,30 @@
             ),
           /* solid background */ linear-gradient(var(--white), var(--white));
         background-size: var(--size) var(--size);
+      }
+      header {
+        border-bottom: 1px solid var(--light-grey);
+      }
+      footer {
+        border-top: 1px solid var(--light-grey);
+      }
+      /* Color */
+      .color-white {
+        color: var(--white);
+      }
+      .color-black {
+        color: var(--black);
+      }
+      /* Leaf Card block */
+      .leaf-card {
+        border-radius: 0 var(--round-corner) 0 var(--round-corner);
+        /* Prevent background color leak outs (https://tumble.sneak.co.nz/post/928998513/fixing-the-background-bleed) */
+        -webkit-background-clip: padding-box;
+        -moz-background-clip: padding;
+        background-clip: padding-box;
+      }
+      .leaf-card:nth-of-type(even) {
+        border-radius: var(--round-corner) 0 var(--round-corner) 0;
       }
       /* section layout */
       section {
@@ -202,17 +205,17 @@
     </noscript>
   </head>
   <body class="color-white">
-    <header>
+    <header class="bg-black">
       <h1>Masa Kudamatsu — Kyoto-based web developer with UX design skills</h1>
     </header>
-    <main>
+    <main class="bg-black-to-mid-grey">
       <section>
         <h2>Works</h2>
         <p>
           All designed and coded from scratch by myself, along with test code in
           Jest, Cypress, and Testing Library
         </p>
-        <section class="leaf-card line-height-picker color-black">
+        <section class="leaf-card bg-typeset color-black">
           <div aria-hidden class="background">
             <p>
               Reed College at that time offered perhaps the best calligraphy
@@ -294,7 +297,7 @@
             </li>
           </ul>
         </section>
-        <section class="leaf-card triangulum">
+        <section class="leaf-card bg-color">
           <h3>Triangulum Color Picker</h3>
           <div>
             <span class="play playing">
@@ -339,7 +342,7 @@
             <li class="pill">Canvas API</li>
           </ul>
         </section>
-        <section class="leaf-card tjg">
+        <section class="leaf-card bg-garden">
           <h3>Translating Japanese Gardens</h3>
           <div>
             <span class="play playing">
@@ -394,7 +397,7 @@
             </li>
           </ul>
         </section>
-        <section class="leaf-card my-ideal-map color-black">
+        <section class="leaf-card bg-grid color-black">
           <h3>My Ideal Map</h3>
           <div>
             <span class="play playing">
@@ -459,7 +462,7 @@
         <p></p>
       </section>
     </main>
-    <footer>
+    <footer class="bg-mid-grey-to-black">
       <p>
         Thank you for scrolling down until the end. By now you know me better;
         did you notice the background is brighter than at the top of this page?
