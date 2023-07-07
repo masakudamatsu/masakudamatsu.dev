@@ -38,8 +38,8 @@
       p {
         overflow-wrap: break-word;
       }
-      /* Color scheme */
       :root {
+        /* Color scheme */
         --black: #030303; /* (1) pure black would slow down scrolling on OLED screens (https://twitter.com/marcedwards/status/1053519077958803456) */
         --mid-grey: #767676; /* (1.1) ensure 4.5 to 1 contrast against #030303 (https://www.siegemedia.com/contrast-ratio#%23767676-on-%23030303) */
         --light-grey: #949494; /* (1.1.1.1) ensure 3 to 1 contrast against #fefefe (https://www.siegemedia.com/contrast-ratio#%23949494-on-%23fefefe) */
@@ -53,6 +53,8 @@
         --purple: #e64de6; /* chroma 60% while keeping the luminance at the level of pure purple */
         --garden-green: #295921; /* switch hue to 110deg from TJG's theme color */
         --garden-green-light: #528048; /* brighten --garden-green to 4.54 (enough contrast against --white) while keeping chroma intact */
+        /* Shape */
+        --round-corner: 24px; /* TODO: match it with .pill once the font-family is fixed */
       }
       /* Background color */
       html {
@@ -79,6 +81,17 @@
       .my-ideal-map {
         color: var(--black);
       }
+      /* Leaf Card block */
+      .leaf-card {
+        border-radius: 0 var(--round-corner) 0 var(--round-corner);
+        /* Prevent background color leak outs (https://tumble.sneak.co.nz/post/928998513/fixing-the-background-bleed) */
+        -webkit-background-clip: padding-box;
+        -moz-background-clip: padding;
+        background-clip: padding-box;
+      }
+      .leaf-card:nth-of-type(even) {
+        border-radius: var(--round-corner) 0 var(--round-corner) 0;
+      }
       /* section background */
       .line-height-picker {
         position: relative;
@@ -86,6 +99,7 @@
       }
       .line-height-picker .background {
         background: var(--white);
+        border-radius: inherit;
         color: var(--off-white);
         columns: 150px 2;
         column-gap: 20px;
@@ -183,7 +197,7 @@
           All designed and coded from scratch by myself, along with test code in
           Jest, Cypress, and Testing Library
         </p>
-        <section class="line-height-picker">
+        <section class="leaf-card line-height-picker">
           <div aria-hidden class="background">
             <p>
               Reed College at that time offered perhaps the best calligraphy
@@ -258,7 +272,7 @@
             <li>Opentype.js</li>
           </ul>
         </section>
-        <section class="triangulum">
+        <section class="leaf-card triangulum">
           <h3>Triangulum Color Picker</h3>
           <div>
             <span class="play playing">
@@ -303,7 +317,7 @@
             <li>Canvas API</li>
           </ul>
         </section>
-        <section class="tjg">
+        <section class="leaf-card tjg">
           <h3>Translating Japanese Gardens</h3>
           <div>
             <span class="play playing">
@@ -351,7 +365,7 @@
             <li>Glyphhanger (to subset self-hosted font files)</li>
           </ul>
         </section>
-        <section class="my-ideal-map">
+        <section class="leaf-card my-ideal-map">
           <h3>My Ideal Map</h3>
           <div>
             <span class="play playing">
