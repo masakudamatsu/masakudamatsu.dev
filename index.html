@@ -76,12 +76,11 @@
         background: linear-gradient(to bottom, var(--mid-grey), var(--black));
         border-top: 1px solid var(--light-grey);
       }
-      /* font */
-      body {
+      /* Color */
+      .color-white {
         color: var(--white);
       }
-      .line-height-picker,
-      .my-ideal-map {
+      .color-black {
         color: var(--black);
       }
       /* Leaf Card block */
@@ -202,7 +201,7 @@
       <link rel="stylesheet" href="style.css" />
     </noscript>
   </head>
-  <body>
+  <body class="color-white">
     <header>
       <h1>Masa Kudamatsu — Kyoto-based web developer with UX design skills</h1>
     </header>
@@ -213,7 +212,7 @@
           All designed and coded from scratch by myself, along with test code in
           Jest, Cypress, and Testing Library
         </p>
-        <section class="leaf-card line-height-picker">
+        <section class="leaf-card line-height-picker color-black">
           <div aria-hidden class="background">
             <p>
               Reed College at that time offered perhaps the best calligraphy
@@ -395,7 +394,7 @@
             </li>
           </ul>
         </section>
-        <section class="leaf-card my-ideal-map">
+        <section class="leaf-card my-ideal-map color-black">
           <h3>My Ideal Map</h3>
           <div>
             <span class="play playing">
