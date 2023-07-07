@@ -174,7 +174,8 @@
       .padding {
         padding: 20px;
       }
-      section + section {
+      .vertical-spacing > * + * {
+        /* https://every-layout.dev/layouts/stack/ */
         margin-top: 20px;
       }
       /* pills */
@@ -206,8 +207,10 @@
     <header class="bg-black padding">
       <h1>Masa Kudamatsu — Kyoto-based web developer with UX design skills</h1>
     </header>
-    <main class="bg-black-to-mid-grey divider-light-grey padding">
-      <section>
+    <main
+      class="vertical-spacing bg-black-to-mid-grey divider-light-grey padding"
+    >
+      <section class="vertical-spacing">
         <h2>Works</h2>
         <p>
           All designed and coded from scratch by myself, along with test code in
@@ -460,7 +463,7 @@
         <p></p>
       </section>
     </main>
-    <footer class="padding bg-mid-grey-to-black divider-light-grey">
+    <footer class="padding vertical-spacing divider-light-grey">
       <p>
         Thank you for scrolling down until the end. By now you know me better;
         did you notice the background is brighter than at the top of this page?
