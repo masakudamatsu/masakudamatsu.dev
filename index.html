@@ -32,6 +32,7 @@
       }
       ul[role="list"] {
         list-style: none;
+        padding-left: 0; /* remove indentation */
       }
       /* Disable MacOS browsers' default subpixel antialising (see https://www.joshwcomeau.com/css/custom-css-reset/#four-font-smoothing-5) */
       body {
@@ -42,6 +43,9 @@
         overflow-wrap: break-word;
       }
       :root {
+        /* Whitespace scale */
+        --gap100: 10px;
+        --gap200: 20px;
         /* Color scheme */
         --black: #030303; /* (1) pure black would slow down scrolling on OLED screens (https://twitter.com/marcedwards/status/1053519077958803456) */
         --mid-grey: #767676; /* (1.1) ensure 4.5 to 1 contrast against #030303 (https://www.siegemedia.com/contrast-ratio#%23767676-on-%23030303) */
@@ -166,30 +170,51 @@
         -webkit-background-clip: padding-box;
         -moz-background-clip: padding;
         background-clip: padding-box;
+        display: grid;
+        gap: var(--gap100);
       }
       .leaf-card:nth-of-type(even) {
         border-radius: var(--round-corner) 0 var(--round-corner) 0;
       }
       /* section layout */
       .padding {
-        padding: 20px;
+        padding: var(--gap200);
       }
       .vertical-spacing > * + * {
         /* https://every-layout.dev/layouts/stack/ */
-        margin-top: 20px;
+        margin-top: var(--gap200);
       }
       /* pills */
       .pill {
-        border: 2px solid currentColor;
+        border: 1px solid currentColor;
         border-radius: 100px; /* TODO: specify once the font-family is fixed */
         color: currentColor;
         display: inline-block;
-        padding: 10px 20px;
+        padding: 5px 10px;
         text-align: center;
+        text-transform: uppercase;
       }
       .pill a {
         color: inherit;
         text-decoration: none;
+      }
+      /* Title-card Block */
+      .title-card {
+        background: var(--white);
+        box-shadow: 0px 0px 4px var(--mid-grey);
+        padding: var(--gap100);
+      }
+      .title-card h3 {
+        font-size: 2rem;
+      }
+      .title-card > p + p {
+        margin-top: 2px;
+      }
+      .title-card > p:last-of-type {
+        margin-top: 10px;
+      }
+      .title-card > ul {
+        margin-top: 10px;
       }
     </style>
     <!-- Asynchronously load CSS stylesheet (https://web.dev/defer-non-critical-css/#optimize)-->
@@ -246,156 +271,158 @@
               backward 10 years later.
             </p>
           </div>
-          <h3>Line-height Picker</h3>
           <figure>
             <img src="line-height-picker.png" />
           </figure>
-          <p>
-            <a
-              href="https://line-height-picker.vercel.app"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              line-height-picker.vercel.app
-            </a>
-            <a
-              href="https://github.com/masakudamatsu/line-height-picker"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              source code in GitHub
-            </a>
-          </p>
-          <p>Mar – Jul 2020</p>
-          <p>
-            Web tool to help set the line height of paragraph text beautifully
-          </p>
-          <ul role="list">
-            <li class="pill">React</li>
-            <li class="pill">Styled Components</li>
-            <li class="pill">
+          <div class="title-card">
+            <h3>Line-height Picker</h3>
+            <p>March–July 2020</p>
+            <p>
+              React, Styled Components, and
               <a
                 href="https://opentype.js.org/"
                 rel="noopener noreferrer"
                 target="_blank"
                 >Opentype.js</a
               >
-            </li>
-          </ul>
+            </p>
+            <p>
+              Web tool to help set the line height of paragraph text beautifully
+            </p>
+            <ul role="list">
+              <li class="pill">
+                <a
+                  href="https://line-height-picker.vercel.app"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  visit
+                </a>
+              </li>
+              <li class="pill">
+                <a
+                  href="https://github.com/masakudamatsu/line-height-picker"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  source code
+                </a>
+              </li>
+            </ul>
+          </div>
         </section>
         <section class="leaf-card padding bg-color">
-          <h3>Triangulum Color Picker</h3>
           <figure>
             <img src="triangulum-color-picker.png" />
           </figure>
-          <p>
-            <a
-              href="https://triangulum.netlify.app"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              triangulum.netlify.app
-            </a>
-            <a
-              href="https://github.com/masakudamatsu/triangulum-color-picker"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              source code in GitHub
-            </a>
-          </p>
-          <p>Dec 2020 – Mar 2021</p>
-          <p>Web tool to help pick accessible and harmonious colors</p>
-          <ul role="list">
-            <li class="pill">React</li>
-            <li class="pill">Next.js</li>
-            <li class="pill">Styled Components</li>
-            <li class="pill">Canvas API</li>
-          </ul>
+          <div class="title-card color-black">
+            <h3>Triangulum Color Picker</h3>
+            <p>December 2020–March 2021</p>
+            <p>Canvas API, React, Next.js, and Styled Components</p>
+            <p>Web tool to help pick accessible and harmonious colors</p>
+            <ul role="list">
+              <li class="pill">
+                <a
+                  href="https://triangulum.netlify.app"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  visit
+                </a>
+              </li>
+              <li class="pill">
+                <a
+                  href="https://github.com/masakudamatsu/triangulum-color-picker"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  source code
+                </a>
+              </li>
+            </ul>
+          </div>
         </section>
         <section class="leaf-card padding bg-garden">
-          <h3>Translating Japanese Gardens</h3>
           <figure>
             <img src="translating-japanese-gardens.png" />
           </figure>
-          <p>
-            <a
-              href="https://translating-japanese-gardens.pages.dev"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              translating-japanese-gardens.pages.dev
-            </a>
-            <a
-              href="https://github.com/masakudamatsu/translating-japanese-gardens"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              source code in GitHub
-            </a>
-          </p>
-          <p>Jun – Aug 2021</p>
-          <p>
-            My blog on historical Japanese garden design, with an aim to level
-            up the standard of web typography
-          </p>
-          <ul role="list">
-            <li class="pill">React</li>
-            <li class="pill">Next.js</li>
-            <li class="pill">Styled Components</li>
-            <li class="pill">
+          <div class="title-card color-black">
+            <h3>Translating Japanese Gardens</h3>
+            <p>June–August 2021</p>
+            <p>
+              React, Next.js, Styled Components, and
               <a
                 href="https://github.com/zachleat/glyphhanger"
                 rel="noopener noreferrer"
                 target="_blank"
                 >Glyphhanger</a
               >
-            </li>
-          </ul>
+            </p>
+            <p>
+              A blog on historical Japanese garden design, presented like a
+              hanging scroll
+            </p>
+            <ul role="list">
+              <li class="pill">
+                <a
+                  href="https://translating-japanese-gardens.pages.dev"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  visit
+                </a>
+              </li>
+              <li class="pill">
+                <a
+                  href="https://github.com/masakudamatsu/translating-japanese-gardens"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  source code
+                </a>
+              </li>
+            </ul>
+          </div>
         </section>
         <section class="leaf-card padding bg-grid color-black">
-          <h3>My Ideal Map</h3>
           <figure>
             <img src="my-ideal-map.png" />
           </figure>
-          <p>
-            <a
-              href="https://my-ideal-map.app"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              my-ideal-map.app
-            </a>
-          </p>
-          <p>Aug 2021 – present</p>
-          <p>
-            Full-stack web app that allows the user to save places with
-            rich-text notes on Google Maps
-          </p>
-          <ul role="list">
-            <li class="pill">React</li>
-            <li class="pill">Next.js</li>
-            <li class="pill">Styled Components</li>
-            <li class="pill">Geolocation API</li>
-            <li class="pill">
+          <div class="title-card">
+            <h3>My Ideal Map</h3>
+            <p>August 2021–present</p>
+            <p>
+              Geolocation API, React, Next.js, Styled Components, Prisma,
+              PostgreSQL,
               <a
                 href="https://mapsplatform.google.com"
                 rel="noopener noreferrer"
                 target="_blank"
                 >Google Maps Platform</a
-              >
-            </li>
-            <li class="pill">Prisma</li>
-            <li class="pill">PostgreSQL</li>
-            <li class="pill">
+              >, and
               <a
                 href="https://auth0.com"
                 rel="noopener noreferrer"
                 target="_blank"
                 >Auth0</a
               >
-            </li>
-          </ul>
+            </p>
+            <p>
+              Full-stack web app that allows the user to save places with
+              rich-text notes on Google Maps
+            </p>
+            <ul role="list">
+              <li class="pill">
+                <a
+                  href="https://my-ideal-map.app"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  visit
+                </a>
+              </li>
+            </ul>
+          </div>
         </section>
       </section>
       <section>
