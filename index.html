@@ -43,6 +43,8 @@
         overflow-wrap: break-word;
       }
       :root {
+        /* Video/Image max-width */
+        --video-max-width: 624px;
         /* Whitespace scale */
         --gap100: 10px;
         --gap200: 20px;
@@ -170,11 +172,30 @@
         -webkit-background-clip: padding-box;
         -moz-background-clip: padding;
         background-clip: padding-box;
-        display: grid;
+        display: flex;
+        flex-direction: column;
         gap: var(--gap100);
+        max-width: calc(var(--video-max-width) + var(--gap200) * 2);
+      }
+      /* Responsive layout */
+      @media screen and (min-width: 1130px) {
+        /* 1130px is derived from var(--video-max-width) * 5/3 + var(--gap100) + var(--gap200) * 4 */
+        .leaf-card {
+          align-items: flex-start; /* avoid stretching title-card */
+          flex-direction: row;
+          max-width: calc(
+            var(--video-max-width) * 5 / 3 + var(--gap100) + var(--gap200) * 2
+          );
+        }
+        .leaf-card .title-card {
+          width: calc(var(--video-max-width) * 2 / 3);
+        }
       }
       .leaf-card:nth-of-type(even) {
         border-radius: var(--round-corner) 0 var(--round-corner) 0;
+      }
+      .leaf-card figure {
+        max-width: var(--video-max-width);
       }
       /* section layout */
       .padding {
@@ -202,6 +223,7 @@
       .title-card {
         background: var(--white);
         box-shadow: 0px 0px 4px var(--mid-grey);
+        max-width: var(--video-max-width);
         padding: var(--gap100);
       }
       .title-card h3 {
