@@ -175,7 +175,7 @@
         display: flex;
         flex-direction: column;
         gap: var(--gap100);
-        max-width: calc(var(--video-max-width) + var(--gap200) * 2);
+        width: 100%;
       }
       /* Responsive layout */
       @media screen and (min-width: 1130px) {
@@ -192,6 +192,7 @@
         }
       }
       .leaf-card:nth-of-type(even) {
+        align-items: flex-end;
         border-radius: 0 var(--round-corner) 0 var(--round-corner);
       }
       .leaf-card figure {
@@ -225,6 +226,7 @@
         box-shadow: 0px 0px 4px var(--mid-grey);
         max-width: var(--video-max-width);
         padding: var(--gap100);
+        width: 100%; /* necessary to expand beyond its text content length */
       }
       .title-card h3 {
         font-size: 2rem;
