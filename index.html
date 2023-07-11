@@ -167,7 +167,7 @@
       }
       /* Leaf Card block */
       .leaf-card {
-        border-radius: 0 var(--round-corner) 0 var(--round-corner);
+        border-radius: var(--round-corner) 0 var(--round-corner) 0;
         /* Prevent background color leak outs (https://tumble.sneak.co.nz/post/928998513/fixing-the-background-bleed) */
         -webkit-background-clip: padding-box;
         -moz-background-clip: padding;
@@ -192,7 +192,7 @@
         }
       }
       .leaf-card:nth-of-type(even) {
-        border-radius: var(--round-corner) 0 var(--round-corner) 0;
+        border-radius: 0 var(--round-corner) 0 var(--round-corner);
       }
       .leaf-card figure {
         max-width: var(--video-max-width);
