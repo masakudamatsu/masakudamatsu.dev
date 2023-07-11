@@ -209,6 +209,21 @@
           width: calc(var(--video-max-width) * 2 / 3);
         }
       }
+      @media screen and (min-width: 1556px) {
+        /* 1556px is derived from var(--video-max-width) + 2 * var(--video-max-width) * 2/3 + 2 * var(--gap100) + 4 * var(--gap200) */
+        main > section {
+          align-items: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+        .alternate-position {
+          width: calc(
+            var(--video-max-width) * 7 / 3 + var(--gap100) * 2 + var(--gap200) *
+              2
+          );
+        }
+      }
       /* section layout */
       .padding {
         padding: var(--gap200);
