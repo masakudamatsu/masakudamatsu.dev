@@ -63,7 +63,7 @@
         --garden-green: #295921; /* switch hue to 110deg from TJG's theme color */
         --garden-green-light: #528048; /* brighten --garden-green to 4.54 (enough contrast against --white) while keeping chroma intact */
         /* Shape */
-        --round-corner: 24px; /* TODO: match it with .pill once the font-family is fixed */
+        --round-corner: 32px; /* TODO: match it with .pill once the font-family is fixed */
       }
       /* Background color */
       html {
@@ -183,6 +183,16 @@
       }
       .leaf-card figure {
         max-width: var(--video-max-width);
+      }
+      .leaf-card figure img {
+        /* TODO: replace img with video */
+        --border-radius: calc(var(--round-corner) - var(--gap200));
+        border-radius: var(--border-radius) 0 0 0;
+      }
+      .leaf-card:nth-of-type(even) figure img {
+        /* TODO: replace img with video */
+        --border-radius: calc(var(--round-corner) - var(--gap200));
+        border-radius: 0 var(--border-radius) 0 0;
       }
       /* Responsive layout */
       @media screen and (min-width: 1130px) {
