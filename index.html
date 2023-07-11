@@ -194,6 +194,10 @@
             var(--video-max-width) * 5 / 3 + var(--gap100) + var(--gap200) * 2
           );
         }
+        .leaf-card:nth-of-type(even) {
+          align-items: flex-start;
+          flex-direction: row-reverse;
+        }
         .leaf-card .title-card {
           width: calc(var(--video-max-width) * 2 / 3);
         }
