@@ -187,6 +187,13 @@
       /* Responsive layout */
       @media screen and (min-width: 1130px) {
         /* 1130px is derived from var(--video-max-width) * 5/3 + var(--gap100) + var(--gap200) * 4 */
+        .alternate-position {
+          display: flex;
+          flex-direction: column;
+        }
+        .alternate-position .leaf-card:nth-of-type(odd) {
+          align-self: flex-end;
+        }
         .leaf-card {
           align-items: flex-start; /* avoid stretching title-card */
           flex-direction: row;
