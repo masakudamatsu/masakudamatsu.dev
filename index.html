@@ -567,4 +567,22 @@
       </address>
     </footer>
   </body>
+  <script>
+    const videos = document.querySelectorAll("video");
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(callback, { threshold: 1.0 });
+      videos.forEach((video) => {
+        observer.observe(video);
+      });
+      function callback(videos) {
+        videos.forEach((video) => {
+          if (video.isIntersecting) {
+            video.target.play();
+          } else {
+            video.target.pause();
+          }
+        });
+      }
+    }
+  </script>
 </html>
