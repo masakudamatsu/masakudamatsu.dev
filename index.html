@@ -206,13 +206,11 @@
       .leaf-card figure {
         max-width: var(--video-max-width);
       }
-      .leaf-card figure img {
-        /* TODO: replace img with video */
+      .leaf-card figure video {
         --border-radius: calc(var(--round-corner) - var(--gap200));
         border-radius: var(--border-radius) 0 0 0;
       }
-      .leaf-card:nth-of-type(even) figure img {
-        /* TODO: replace img with video */
+      .leaf-card:nth-of-type(even) figure video {
         --border-radius: calc(var(--round-corner) - var(--gap200));
         border-radius: 0 var(--border-radius) 0 0;
       }
@@ -356,7 +354,17 @@
               </p>
             </div>
             <figure>
-              <img src="line-height-picker.png" />
+              <video
+                controls
+                muted
+                playsinline
+                poster="line-height-picker.png"
+                preload="metadata"
+              >
+                <source src="line-height-picker.mp4" type="video/mp4" />
+                <!-- Offer download -->
+                <a href="line-height-picker.mp4">Download the video</a>
+              </video>
             </figure>
             <div class="title-card">
               <h3>Line-height Picker</h3>
@@ -398,7 +406,17 @@
           </section>
           <section class="leaf-card padding bg-color">
             <figure>
-              <img src="triangulum-color-picker.png" />
+              <video
+                controls
+                muted
+                playsinline
+                poster="triangulum.png"
+                preload="metadata"
+              >
+                <source src="triangulum.mp4" type="video/mp4" />
+                <!-- Offer download -->
+                <a href="triangulum.mp4">Download the video</a>
+              </video>
             </figure>
             <div class="title-card color-black">
               <h3>Triangulum Color Picker</h3>
@@ -429,7 +447,17 @@
           </section>
           <section class="leaf-card padding bg-garden">
             <figure>
-              <img src="translating-japanese-gardens.png" />
+              <video
+                controls
+                muted
+                playsinline
+                poster="tjg.png"
+                preload="metadata"
+              >
+                <source src="tjg.mp4" type="video/mp4" />
+                <!-- Offer download -->
+                <a href="tjg.mp4">Download the video</a>
+              </video>
             </figure>
             <div class="title-card color-black">
               <h3>Translating Japanese Gardens</h3>
@@ -471,7 +499,17 @@
           </section>
           <section class="leaf-card padding bg-grid color-black">
             <figure>
-              <img src="my-ideal-map.png" />
+              <video
+                controls
+                muted
+                playsinline
+                poster="my-ideal-map.png"
+                preload="metadata"
+              >
+                <source src="my-ideal-map.mp4" type="video/mp4" />
+                <!-- Offer download -->
+                <a href="my-ideal-map.mp4">Download the video</a>
+              </video>
             </figure>
             <div class="title-card">
               <h3>My Ideal Map</h3>
