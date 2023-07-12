@@ -3,6 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google Fonts (to be removed by locally hosting it)-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway&family=Zen+Loop&display=swap"
+      rel="stylesheet"
+    />
     <title>
       Masa Kudamatsu — Kyoto-based web developer with UX design skills
     </title>
@@ -34,9 +41,24 @@
         list-style: none;
         padding-left: 0; /* remove indentation */
       }
-      /* Disable MacOS browsers' default subpixel antialising (see https://www.joshwcomeau.com/css/custom-css-reset/#four-font-smoothing-5) */
       body {
+        font-family: Raleway, "Trebuchet MS", sans-serif;
+        /* Disable MacOS browsers' default subpixel antialising (see https://www.joshwcomeau.com/css/custom-css-reset/#four-font-smoothing-5) */
         -webkit-font-smoothing: antialiased;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Zen Loop", cursive;
+        font-weight: 400;
+      }
+      h1 {
+        font-size: 5rem;
+        text-transform: uppercase;
+      }
+      h3 {
+        font-size: 4rem;
+        text-transform: uppercase;
       }
       /* Hard-wrap long words (https://www.joshwcomeau.com/css/custom-css-reset/#seven-word-wrapping-8) */
       p {
@@ -265,7 +287,7 @@
         width: 100%; /* necessary to expand beyond its text content length */
       }
       .title-card h3 {
-        font-size: 2rem;
+        font-size: 3rem;
       }
       .title-card > p + p {
         margin-top: 2px;
@@ -290,7 +312,8 @@
   </head>
   <body class="color-white">
     <header class="bg-black padding">
-      <h1>Masa Kudamatsu — Kyoto-based web developer with UX design skills</h1>
+      <h1>Masa Kudamatsu</h1>
+      <p>Kyoto-based web developer with UX design skills</p>
     </header>
     <main
       class="vertical-spacing bg-black-to-mid-grey divider-light-grey padding"
