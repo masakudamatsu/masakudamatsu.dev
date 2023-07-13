@@ -65,6 +65,7 @@
         overflow-wrap: break-word;
       }
       :root {
+        --minimum-target-size: 48px;
         /* Video/Image max-width */
         --video-max-width: 624px;
         /* Whitespace scale */
@@ -262,6 +263,12 @@
         /* https://every-layout.dev/layouts/stack/ */
         margin-top: var(--gap200);
       }
+      /* video controls */
+      .playbackButton {
+        display: none; /* to be removed in JavaScript */
+        height: var(--minimum-target-size);
+        width: var(--minimum-target-size);
+      }
       /* pills */
       .pill {
         border: 1px solid currentColor;
@@ -367,6 +374,13 @@
                 <a href="line-height-picker.mp4">Download the video</a>
               </video>
             </figure>
+            <button
+              aria-label="Play demo for Line-height Picker"
+              class="playbackButton"
+              type="button"
+            >
+              <img alt="" aria-hidden src="play.svg" />
+            </button>
             <div class="title-card">
               <h3>Line-height Picker</h3>
               <p>March–July 2020</p>
@@ -420,6 +434,13 @@
                 <a href="triangulum.mp4">Download the video</a>
               </video>
             </figure>
+            <button
+              aria-label="Play demo for Triangulum Color Picker"
+              class="playbackButton"
+              type="button"
+            >
+              <img alt="" aria-hidden src="play.svg" />
+            </button>
             <div class="title-card color-black">
               <h3>Triangulum Color Picker</h3>
               <p>December 2020–March 2021</p>
@@ -462,6 +483,13 @@
                 <a href="tjg.mp4">Download the video</a>
               </video>
             </figure>
+            <button
+              aria-label="Play demo for Translating Japanese Gardens"
+              class="playbackButton"
+              type="button"
+            >
+              <img alt="" aria-hidden src="play.svg" />
+            </button>
             <div class="title-card color-black">
               <h3>Translating Japanese Gardens</h3>
               <p>June–August 2021</p>
@@ -515,6 +543,13 @@
                 <a href="my-ideal-map.mp4">Download the video</a>
               </video>
             </figure>
+            <button
+              aria-label="Play demo for My Ideal Map"
+              class="playbackButton"
+              type="button"
+            >
+              <img alt="" aria-hidden src="play.svg" />
+            </button>
             <div class="title-card">
               <h3>My Ideal Map</h3>
               <p>August 2021–present</p>
@@ -573,6 +608,40 @@
   </body>
   <script>
     const videos = document.querySelectorAll("video");
+    const playbackButtons = document.querySelectorAll(".playbackButton");
+    // Disable the default video player
+    videos.forEach((video) => {
+      video.controls = false;
+    });
+    // Reveal playback buttons
+    playbackButtons.forEach((playbackButton) => {
+      playbackButton.style.display = "block";
+    });
+    for (let i = 0; i < videos.length; i++) {
+      // handleClick for playbackButtons
+      playbackButtons[i].addEventListener("click", (event) => {
+        event.stopPropagation();
+        if (videos[i].paused) {
+          videos[i].play();
+        } else {
+          videos[i].pause();
+        }
+      });
+      // toggle playbackButton label
+      videos[i].addEventListener("play", function () {
+        playbackButtons[i].children[0].src = "pause.svg";
+        playbackButtons[i].ariaLabel = `Pause ${playbackButtons[
+          i
+        ].ariaLabel.slice(5)}`; // drop "Play " at the beginning
+      });
+      videos[i].addEventListener("pause", function () {
+        playbackButtons[i].children[0].src = "play.svg";
+        playbackButtons[i].ariaLabel = `Play ${playbackButtons[
+          i
+        ].ariaLabel.slice(6)}`; // drop "Pause " at the beginning
+      });
+    }
+
     if ("IntersectionObserver" in window) {
       const observer = new IntersectionObserver(callback, { threshold: 1.0 });
       videos.forEach((video) => {
