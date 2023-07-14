@@ -202,8 +202,9 @@
         background-clip: padding-box;
         display: grid;
         gap: var(--gap100);
-        grid-template-areas: "video video" "button text";
+        grid-template-areas: "video video" "playback text" "button text";
         grid-template-columns: var(--minimum-target-size) 1fr;
+        grid-template-rows: auto var(--minimum-target-size) auto;
         width: 100%;
       }
       .leaf-card:nth-of-type(even) {
@@ -220,8 +221,20 @@
         --border-radius: calc(var(--round-corner) - var(--gap200));
         border-radius: 0 var(--border-radius) 0 0;
       }
-      .leaf-card .playbackButton {
+      .leaf-card .buttonGroup {
+        display: grid;
+        gap: var(--gap100);
         grid-area: button;
+        grid-template-areas: "." "website" "source";
+        grid-template-rows:
+          1fr var(--minimum-target-size)
+          var(--minimum-target-size);
+      }
+      .leaf-card:last-of-type .buttonGroup {
+        grid-template-areas: "." "." "website";
+      }
+      .leaf-card .playbackButton {
+        grid-area: playback;
       }
       .leaf-card .title-card {
         grid-area: text;
@@ -231,7 +244,7 @@
         /* 704px is derived from var(--video-max-width) + 4 * var(--gap200) */
         .leaf-card {
           /* left-align grid items */
-          grid-template-areas: "video video ." "button text .";
+          grid-template-areas: "video video ." "playback text ." "button text .";
           grid-template-columns:
             var(--minimum-target-size)
             calc(
@@ -242,7 +255,7 @@
         }
         .leaf-card:nth-of-type(even) {
           /* right-align grid items */
-          grid-template-areas: ". video video" ". button text";
+          grid-template-areas: ". video video" ". playback text" ". button text";
           grid-template-columns:
             1fr
             var(--minimum-target-size)
@@ -263,18 +276,29 @@
         }
         .leaf-card {
           align-items: flex-start; /* avoid stretching title-card */
-          grid-template-areas: "video text" "video button";
+          grid-template-areas: "video text" "video button" "video ." "video playback";
           grid-template-columns: 3fr 2fr;
+          grid-template-rows: auto var(--minimum-target-size) auto var(
+              --minimum-target-size
+            );
           max-width: calc(
             var(--video-max-width) * 5 / 3 + var(--gap100) + var(--gap200) * 2
           );
         }
         .leaf-card:nth-of-type(even) {
-          grid-template-areas: "text video" "button video";
+          grid-template-areas: "text video" "button video" ". video" "playback video";
           grid-template-columns: 2fr 3fr;
         }
         .leaf-card .title-card {
           width: calc(var(--video-max-width) * 2 / 3);
+        }
+        .leaf-card .buttonGroup {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+        }
+        .leaf-card:nth-of-type(even) .buttonGroup {
+          justify-content: flex-start;
         }
         .leaf-card .playbackButton {
           align-self: end;
@@ -311,6 +335,23 @@
         display: none; /* to be removed in JavaScript */
         height: var(--minimum-target-size);
         width: var(--minimum-target-size);
+      }
+      /* link buttons */
+      .linkButton {
+        align-items: center;
+        background: var(--white);
+        border: 1px solid var(--light-grey);
+        border-radius: 4px;
+        display: flex;
+        height: var(--minimum-target-size);
+        justify-content: center;
+        width: var(--minimum-target-size);
+      }
+      .linkButton[data-type="website"] {
+        grid-area: website;
+      }
+      .linkButton[data-type="source"] {
+        grid-area: source;
       }
       /* pills */
       .pill {
@@ -435,6 +476,28 @@
             >
               <img alt="" aria-hidden src="play.svg" />
             </button>
+            <div class="buttonGroup">
+              <a
+                aria-label="Visit Line-height Picker"
+                class="linkButton"
+                data-type="website"
+                href="https://line-height-picker.vercel.app"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <img alt="" aria-hidden src="open_in_new.svg" />
+              </a>
+              <a
+                aria-label="See source code for Line-height Picker"
+                class="linkButton"
+                data-type="source"
+                href="https://github.com/masakudamatsu/line-height-picker"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <img alt="" aria-hidden src="code.svg" />
+              </a>
+            </div>
             <div class="title-card">
               <h3>Line-height Picker</h3>
               <p>March–July 2020</p>
@@ -454,26 +517,6 @@
               <p lang="ja">
                 欧文フォントの行間を小文字のエックスの高さとの整数比で指定するためのWebツール。
               </p>
-              <ul role="list">
-                <li class="pill">
-                  <a
-                    href="https://line-height-picker.vercel.app"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    visit
-                  </a>
-                </li>
-                <li class="pill">
-                  <a
-                    href="https://github.com/masakudamatsu/line-height-picker"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    source code
-                  </a>
-                </li>
-              </ul>
             </div>
           </section>
           <section class="leaf-card padding bg-color">
@@ -498,6 +541,28 @@
             >
               <img alt="" aria-hidden src="play.svg" />
             </button>
+            <div class="buttonGroup">
+              <a
+                aria-label="Visit Triangulum Color Picker"
+                class="linkButton"
+                data-type="website"
+                href="https://triangulum.netlify.app"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <img alt="" aria-hidden src="open_in_new.svg" />
+              </a>
+              <a
+                aria-label="See source code for Triangulum Color Picker"
+                class="linkButton"
+                data-type="source"
+                href="https://github.com/masakudamatsu/triangulum-color-picker"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <img alt="" aria-hidden src="code.svg" />
+              </a>
+            </div>
             <div class="title-card color-black">
               <h3>Triangulum Color Picker</h3>
               <p>December 2020–March 2021</p>
@@ -506,26 +571,6 @@
               <p lang="ja">
                 色コードを入力すると、アクセシビリティーのために重要な黒との明度差、及び、他の色と調和させるための基準の1つとなる純色の含有割合を表示するWebツール。
               </p>
-              <ul role="list">
-                <li class="pill">
-                  <a
-                    href="https://triangulum.netlify.app"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    visit
-                  </a>
-                </li>
-                <li class="pill">
-                  <a
-                    href="https://github.com/masakudamatsu/triangulum-color-picker"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    source code
-                  </a>
-                </li>
-              </ul>
             </div>
           </section>
           <section class="leaf-card padding bg-garden">
@@ -550,6 +595,28 @@
             >
               <img alt="" aria-hidden src="play.svg" />
             </button>
+            <div class="buttonGroup">
+              <a
+                aria-label="Visit Translating Japanese Gardens"
+                class="linkButton"
+                data-type="website"
+                href="https://translating-japanese-gardens.pages.dev"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <img alt="" aria-hidden src="open_in_new.svg" />
+              </a>
+              <a
+                aria-label="See source code for Translating Japanese Gardens"
+                class="linkButton"
+                data-type="source"
+                href="https://github.com/masakudamatsu/translating-japanese-gardens"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <img alt="" aria-hidden src="code.svg" />
+              </a>
+            </div>
             <div class="title-card color-black">
               <h3>Translating Japanese Gardens</h3>
               <p>June–August 2021</p>
@@ -569,26 +636,6 @@
               <p lang="ja">
                 日本の名庭園のデザイン意図を深読みするブログ。掛軸をモチーフにUIをデザイン。
               </p>
-              <ul role="list">
-                <li class="pill">
-                  <a
-                    href="https://translating-japanese-gardens.pages.dev"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    visit
-                  </a>
-                </li>
-                <li class="pill">
-                  <a
-                    href="https://github.com/masakudamatsu/translating-japanese-gardens"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    source code
-                  </a>
-                </li>
-              </ul>
             </div>
           </section>
           <section class="leaf-card padding bg-grid color-black">
@@ -613,6 +660,18 @@
             >
               <img alt="" aria-hidden src="play.svg" />
             </button>
+            <div class="buttonGroup">
+              <a
+                aria-label="Visit My Ideal Map"
+                class="linkButton"
+                data-type="website"
+                href="https://my-ideal-map.app"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <img alt="" aria-hidden src="open_in_new.svg" />
+              </a>
+            </div>
             <div class="title-card">
               <h3>My Ideal Map</h3>
               <p>August 2021–present</p>
@@ -639,17 +698,6 @@
               <p lang="ja">
                 Googleマップ上に保存した場所についてのメモにリンクを貼ることができる、Webアプリ。
               </p>
-              <ul role="list">
-                <li class="pill">
-                  <a
-                    href="https://my-ideal-map.app"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    visit
-                  </a>
-                </li>
-              </ul>
             </div>
           </section>
         </div>
