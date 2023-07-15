@@ -117,6 +117,12 @@
       }
       h3 {
         font-size: calc(var(--font300-zenloop) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font300-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font300-zenloop)
+        );
       }
       @media screen and (max-width: 20.9375em) {
         /* = 335px / 16 */
