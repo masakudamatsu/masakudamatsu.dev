@@ -82,6 +82,8 @@
           (var(--whitespace100) + var(--xHeight)) / var(--font100-raleway)
         );
       }
+      h2::before,
+      h2::after,
       h3::before,
       h3::after,
       p::before,
@@ -129,6 +131,12 @@
                 var(--whitespace100)
             ) / var(--font200-zenloop)
         );
+      }
+      h2::before {
+        margin-bottom: calc(-7 / 16 * 1rem);
+      }
+      h2::after {
+        margin-top: calc(-10 / 16 * 1rem);
       }
       h3 {
         font-size: calc(var(--font300-zenloop) / 16 * 1rem);
