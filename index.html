@@ -181,7 +181,19 @@
       p {
         overflow-wrap: break-word;
       }
-      /* Vertical spacing */
+      /* Spacing */
+      header,
+      main,
+      footer {
+        padding: calc(var(--whitespace100) / 16 * 1rem);
+      }
+      @media screen and (min-width: 601px) {
+        header,
+        main,
+        footer {
+          padding: calc(var(--whitespace200) / 16 * 1rem);
+        }
+      }
       .whitespace-200 > * + * {
         margin-top: calc(var(--whitespace200) / 16 * 1rem);
       }
@@ -514,7 +526,7 @@
     </noscript>
   </head>
   <body class="color-white">
-    <header class="bg-black padding">
+    <header class="bg-black">
       <h1>Masa Kudamatsu</h1>
       <div class="whitespace-200">
         <p>Kyoto-based web developer with UX design best practices in mind</p>
@@ -523,9 +535,7 @@
         </p>
       </div>
     </header>
-    <main
-      class="vertical-spacing bg-black-to-mid-grey divider-light-grey padding"
-    >
+    <main class="vertical-spacing bg-black-to-mid-grey divider-light-grey">
       <section class="whitespace-300">
         <h2>Works</h2>
         <div class="whitespace-200">
@@ -887,7 +897,7 @@
         </div>
       </section>
     </main>
-    <footer class="padding vertical-spacing divider-light-grey">
+    <footer class="vertical-spacing divider-light-grey">
       <p>
         Thank you for scrolling down until the end. By now you know me better;
         did you notice the background is brighter than at the top of this page?
