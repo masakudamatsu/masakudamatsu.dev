@@ -82,6 +82,8 @@
           (var(--whitespace100) + var(--xHeight)) / var(--font100-raleway)
         );
       }
+      h1::before,
+      h1::after,
       h2::before,
       h2::after,
       h3::before,
@@ -123,6 +125,13 @@
             ) / var(--font500-zenloop)
         );
       }
+      h1::before {
+        margin-bottom: calc(-2 / 16 * 1rem);
+      }
+      h1::after {
+        margin-top: calc(-14 / 16 * 1rem);
+      }
+
       @media screen and (max-width: 38.75em) {
         /* = 620px / 16 */
         h1 {
@@ -133,6 +142,12 @@
                   var(--whitespace100)
               ) / var(--font400-zenloop)
           );
+        }
+        h1::before {
+          margin-bottom: calc(-4 / 16 * 1rem);
+        }
+        h1::after {
+          margin-top: calc(-12 / 16 * 1rem);
         }
       }
       h2 {
