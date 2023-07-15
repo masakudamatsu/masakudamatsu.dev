@@ -61,12 +61,17 @@
         --font300-zenloop: calc(var(--scale) * var(--font200-zenloop));
         --font400-zenloop: calc(var(--scale) * var(--font300-zenloop));
         --font500-zenloop: calc(var(--scale) * var(--font400-zenloop));
+        /* white space */
+        --whitespace100: calc(var(--scale) * var(--xHeight));
       }
       /* Font */
       body {
         font-family: Raleway, "Trebuchet MS", sans-serif;
         font-size: calc(var(--font100-raleway) / 16 * 1rem);
         font-weight: 400;
+        line-height: calc(
+          (var(--whitespace100) + var(--xHeight)) / var(--font100-raleway)
+        );
         /* Disable MacOS browsers' default subpixel antialising (see https://www.joshwcomeau.com/css/custom-css-reset/#four-font-smoothing-5) */
         -webkit-font-smoothing: antialiased;
         /* Make text rendering consistent across browsers (see https://andy-bell.co.uk/a-modern-css-reset/)*/
@@ -105,6 +110,9 @@
           "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
         font-size: calc(var(--font100-japanese) / 16 * 1rem);
         font-weight: 400;
+        line-height: calc(
+          (var(--whitespace100) + var(--xHeight)) / var(--font100-japanese)
+        );
       }
       /* Hard-wrap long words (https://www.joshwcomeau.com/css/custom-css-reset/#seven-word-wrapping-8) */
       p {
