@@ -23,6 +23,12 @@
       * {
         margin: 0;
       }
+      body {
+        /* Disable MacOS browsers' default subpixel antialising (see https://www.joshwcomeau.com/css/custom-css-reset/#four-font-smoothing-5) */
+        -webkit-font-smoothing: antialiased;
+        /* Make text rendering consistent across browsers (see https://andy-bell.co.uk/a-modern-css-reset/)*/
+        text-rendering: optimizeSpeed;
+      }
       canvas,
       img,
       picture,
@@ -65,17 +71,17 @@
         --whitespace100: calc(var(--scale) * var(--xHeight));
       }
       /* Font */
-      body {
+      p {
         font-family: Raleway, "Trebuchet MS", sans-serif;
         font-size: calc(var(--font100-raleway) / 16 * 1rem);
         font-weight: 400;
         line-height: calc(
           (var(--whitespace100) + var(--xHeight)) / var(--font100-raleway)
         );
-        /* Disable MacOS browsers' default subpixel antialising (see https://www.joshwcomeau.com/css/custom-css-reset/#four-font-smoothing-5) */
-        -webkit-font-smoothing: antialiased;
-        /* Make text rendering consistent across browsers (see https://andy-bell.co.uk/a-modern-css-reset/)*/
-        text-rendering: optimizeSpeed;
+      }
+      .pill {
+        font-family: Raleway, "Trebuchet MS", sans-serif;
+        font-weight: 400;
       }
       h1,
       h2,
@@ -105,7 +111,7 @@
           font-size: calc(var(--font250-zenloop) / 16 * 1rem);
         }
       }
-      *[lang="ja"] {
+      p[lang="ja"] {
         font-family: "Zen Kurenaido", "Helvetica Neue", "Segoe UI",
           "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
         font-size: calc(var(--font100-japanese) / 16 * 1rem);
