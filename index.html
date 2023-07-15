@@ -116,11 +116,23 @@
       }
       h1 {
         font-size: calc(var(--font500-zenloop) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font500-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font500-zenloop)
+        );
       }
       @media screen and (max-width: 38.75em) {
         /* = 620px / 16 */
         h1 {
           font-size: calc(var(--font400-zenloop) / 16 * 1rem);
+          line-height: calc(
+            (
+                var(--font400-zenloop) * var(--zenloop-capHeight) +
+                  var(--whitespace100)
+              ) / var(--font400-zenloop)
+          );
         }
       }
       h2 {
