@@ -123,6 +123,12 @@
       }
       h2 {
         font-size: calc(var(--font200-zenloop) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font200-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font200-zenloop)
+        );
       }
       h3 {
         font-size: calc(var(--font300-zenloop) / 16 * 1rem);
