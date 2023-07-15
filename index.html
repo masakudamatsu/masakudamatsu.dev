@@ -69,6 +69,7 @@
         --font500-zenloop: calc(var(--scale) * var(--font400-zenloop));
         /* white space */
         --whitespace100: calc(var(--scale) * var(--xHeight));
+        --whitespace200: calc(var(--scale) * var(--whitespace100));
       }
       /* Font */
       p {
@@ -142,6 +143,10 @@
       /* Hard-wrap long words (https://www.joshwcomeau.com/css/custom-css-reset/#seven-word-wrapping-8) */
       p {
         overflow-wrap: break-word;
+      }
+      /* Vertical spacing */
+      .whitespace-200 > * + * {
+        margin-top: calc(var(--whitespace200) / 16 * 1rem);
       }
       :root {
         --minimum-target-size: 48px;
@@ -448,9 +453,6 @@
         padding: var(--gap100);
         width: 100%; /* necessary to expand beyond its text content length */
       }
-      .title-card > p + p {
-        margin-top: 2px;
-      }
       .title-card > p:last-of-type {
         margin-top: 10px;
       }
@@ -472,24 +474,28 @@
   <body class="color-white">
     <header class="bg-black padding">
       <h1>Masa Kudamatsu</h1>
-      <p>Kyoto-based web developer with UX design best practices in mind</p>
-      <p lang="ja">
-        最良のユーザー体験を実現するためにコードを書く、京都在住のWebエンジニア
-      </p>
+      <div class="whitespace-200">
+        <p>Kyoto-based web developer with UX design best practices in mind</p>
+        <p lang="ja">
+          最良のユーザー体験を実現するためにコードを書く、京都在住のWebエンジニア
+        </p>
+      </div>
     </header>
     <main
       class="vertical-spacing bg-black-to-mid-grey divider-light-grey padding"
     >
       <section class="vertical-spacing">
         <h2>Works</h2>
-        <p>
-          All designed and coded from scratch by myself, along with test code in
-          Jest, Cypress, and Testing Library
-        </p>
-        <p lang="ja">
-          全て、テンプレートを使わずにデザイン・コーディングしています。また、Jest、Cypress、及び、Testing
-          Library を用いて、テストコードも書いています。
-        </p>
+        <div class="whitespace-200">
+          <p>
+            All designed and coded from scratch by myself, along with test code
+            in Jest, Cypress, and Testing Library
+          </p>
+          <p lang="ja">
+            全て、テンプレートを使わずにデザイン・コーディングしています。また、Jest、Cypress、及び、Testing
+            Library を用いて、テストコードも書いています。
+          </p>
+        </div>
         <div class="alternate-position vertical-spacing">
           <section class="leaf-card padding bg-typeset color-black">
             <div aria-hidden class="background">
@@ -567,13 +573,15 @@
             <div class="title-card">
               <h3>Line-height Picker</h3>
               <p>March–July 2020</p>
-              <p>
-                Web tool to help set the line height of paragraph text
-                beautifully
-              </p>
-              <p lang="ja">
-                欧文フォントの行間を小文字のエックスの高さとの整数比で指定するためのWebツール。
-              </p>
+              <div class="whitespace-200">
+                <p>
+                  Web tool to help set the line height of paragraph text
+                  beautifully
+                </p>
+                <p lang="ja">
+                  欧文フォントの行間を小文字のエックスの高さとの整数比で指定するためのWebツール。
+                </p>
+              </div>
               <ul role="list" class="pill-container">
                 <li class="pill">React</li>
                 <li class="pill">Styled Components</li>
@@ -635,10 +643,12 @@
             <div class="title-card color-black">
               <h3>Triangulum Color Picker</h3>
               <p>December 2020–March 2021</p>
-              <p>Web tool to help pick accessible and harmonious colors</p>
-              <p lang="ja">
-                色コードを入力すると、アクセシビリティーのために重要な黒との明度差、及び、他の色と調和させるための基準の1つとなる純色の含有割合を表示するWebツール。
-              </p>
+              <div class="whitespace-200">
+                <p>Web tool to help pick accessible and harmonious colors</p>
+                <p lang="ja">
+                  色コードを入力すると、アクセシビリティーのために重要な黒との明度差、及び、他の色と調和させるための基準の1つとなる純色の含有割合を表示するWebツール。
+                </p>
+              </div>
               <ul role="list" class="pill-container">
                 <li class="pill">Canvas API</li>
                 <li class="pill">React</li>
@@ -694,13 +704,15 @@
             <div class="title-card color-black">
               <h3>Translating Japanese Gardens</h3>
               <p>June–August 2021</p>
-              <p>
-                A blog on historical Japanese garden design, presented like a
-                hanging scroll
-              </p>
-              <p lang="ja">
-                日本の名庭園のデザイン意図を深読みするブログ。掛軸をモチーフにUIをデザイン。
-              </p>
+              <div class="whitespace-200">
+                <p>
+                  A blog on historical Japanese garden design, presented like a
+                  hanging scroll
+                </p>
+                <p lang="ja">
+                  日本の名庭園のデザイン意図を深読みするブログ。掛軸をモチーフにUIをデザイン。
+                </p>
+              </div>
               <ul role="list" class="pill-container">
                 <li class="pill">React</li>
                 <li class="pill">Next.js</li>
@@ -753,13 +765,15 @@
             <div class="title-card">
               <h3>My Ideal Map</h3>
               <p>August 2021–present</p>
-              <p>
-                Full-stack web app that allows the user to save places with
-                rich-text notes on Google Maps
-              </p>
-              <p lang="ja">
-                Googleマップ上に保存した場所についてのメモにリンクを貼ることができる、Webアプリ。
-              </p>
+              <div class="whitespace-200">
+                <p>
+                  Full-stack web app that allows the user to save places with
+                  rich-text notes on Google Maps
+                </p>
+                <p lang="ja">
+                  Googleマップ上に保存した場所についてのメモにリンクを貼ることができる、Webアプリ。
+                </p>
+              </div>
               <ul role="list" class="pill-container">
                 <li class="pill">Geolocation API</li>
                 <li class="pill">React</li>
@@ -790,7 +804,7 @@
       </section>
       <section class="vertical-spacing">
         <h2>About Me</h2>
-        <div class="vertical-spacing">
+        <div class="whitespace-200">
           <p>
             I was born and grew up in Tokyo. To study for a PhD in economics, I
             moved to London and lived there for five years. Then I landed a job
@@ -809,7 +823,7 @@
           </p>
           <p>So here I am!</p>
         </div>
-        <div class="vertical-spacing" lang="ja">
+        <div class="whitespace-200" lang="ja">
           <p>
             東京出身。経済学博士号取得のためロンドンに5年間留学後、膨大なデータの分析を得意とする研究者としてストックホルム大学で8年、大阪大学で2年半働く。
           </p>
