@@ -79,6 +79,19 @@
           (var(--whitespace100) + var(--xHeight)) / var(--font100-raleway)
         );
       }
+      p::before,
+      p::after {
+        content: "";
+        display: block;
+        height: 0;
+        width: 0;
+      }
+      p::before {
+        margin-bottom: calc(-6 / 16 * 1rem);
+      }
+      p::after {
+        margin-top: calc(-7 / 16 * 1rem);
+      }
       .pill {
         font-family: Raleway, "Trebuchet MS", sans-serif;
         font-weight: 400;
@@ -119,6 +132,12 @@
         line-height: calc(
           (var(--whitespace100) + var(--xHeight)) / var(--font100-japanese)
         );
+      }
+      p[lang="ja"]::before {
+        margin-bottom: calc(-6 / 16 * 1rem);
+      }
+      p[lang="ja"]::after {
+        margin-top: calc(-5 / 16 * 1rem);
       }
       /* Hard-wrap long words (https://www.joshwcomeau.com/css/custom-css-reset/#seven-word-wrapping-8) */
       p {
