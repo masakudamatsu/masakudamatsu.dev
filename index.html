@@ -58,10 +58,8 @@
         /* Font size (in px) */
         --font100-raleway: calc(var(--xHeight) / var(--raleway-xHeight));
         --font100-japanese: 17.6; /* make it look similar in size to Raleway if --xHeight: 10 */
-        --font100-zenloop: calc(
-          var(--font100-raleway) * var(--raleway-capHeight) /
-            var(--zenloop-capHeight)
-        );
+        --capHeight100: calc(var(--font100-raleway) * var(--raleway-capHeight));
+        --font100-zenloop: calc(var(--capHeight100) / var(--zenloop-capHeight));
         --font200-zenloop: calc(var(--scale) * var(--font100-zenloop));
         --font250-zenloop: calc(var(--sqrt-scale) * var(--font200-zenloop));
         --font300-zenloop: calc(var(--scale) * var(--font200-zenloop));
