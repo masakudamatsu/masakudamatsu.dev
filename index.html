@@ -255,6 +255,10 @@
         /* Shape */
         --round-corner: 32px; /* TODO: match it with .pill once the font-family is fixed */
       }
+      /* Measure */
+      .measure {
+        max-width: calc(var(--video-max-width) + var(--gap200));
+      }
       /* Background color */
       html {
         /* Scroll-bounce areas (otherwise white background will be revealed) */
@@ -569,7 +573,7 @@
     <main class="whitespace-400 bg-black-to-mid-grey divider-light-grey">
       <section class="whitespace-300">
         <h2>Works</h2>
-        <div class="whitespace-200">
+        <div class="measure whitespace-200">
           <p>
             All designed and coded from scratch by myself, along with test code
             in Jest, Cypress, and Testing Library
@@ -896,7 +900,7 @@
       </section>
       <section class="whitespace-300">
         <h2>About Me</h2>
-        <div class="whitespace-200">
+        <div class="measure whitespace-200">
           <p>
             I was born and grew up in Tokyo. To study for a PhD in economics, I
             moved to London and lived there for five years. Then I landed a job
@@ -915,7 +919,7 @@
           </p>
           <p>So here I am!</p>
         </div>
-        <div class="whitespace-200" lang="ja">
+        <div class="measure whitespace-200" lang="ja">
           <p>
             東京出身。経済学博士号取得のためロンドンに5年間留学後、膨大なデータの分析を得意とする研究者としてストックホルム大学で8年、大阪大学で2年半働く。
           </p>
