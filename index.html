@@ -79,6 +79,8 @@
           (var(--whitespace100) + var(--xHeight)) / var(--font100-raleway)
         );
       }
+      h3::before,
+      h3::after,
       p::before,
       p::after {
         content: "";
@@ -124,10 +126,19 @@
             ) / var(--font300-zenloop)
         );
       }
+      h3::before {
+        margin-bottom: calc(-5 / 16 * 1rem);
+      }
+      h3::after {
+        margin-top: calc(-11 / 16 * 1rem);
+      }
       @media screen and (max-width: 20.9375em) {
         /* = 335px / 16 */
         h3 {
           font-size: calc(var(--font250-zenloop) / 16 * 1rem);
+        }
+        h3::after {
+          margin-top: calc(-9 / 16 * 1rem);
         }
       }
       p[lang="ja"] {
