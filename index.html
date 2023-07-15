@@ -71,6 +71,7 @@
         --whitespace100: calc(var(--scale) * var(--xHeight));
         --whitespace200: calc(var(--scale) * var(--whitespace100));
         --whitespace300: calc(var(--scale) * var(--whitespace200));
+        --whitespace400: calc(var(--scale) * var(--whitespace300));
         --whitespace10: var(--xHeight);
       }
       /* Font */
@@ -226,6 +227,9 @@
       }
       .whitespace-300 > * + * {
         margin-top: calc(var(--whitespace300) / 16 * 1rem);
+      }
+      .whitespace-400 > * + * {
+        margin-top: calc(var(--whitespace400) / 16 * 1rem);
       }
       :root {
         --minimum-target-size: 48px;
@@ -562,7 +566,7 @@
         </p>
       </div>
     </header>
-    <main class="vertical-spacing bg-black-to-mid-grey divider-light-grey">
+    <main class="whitespace-400 bg-black-to-mid-grey divider-light-grey">
       <section class="whitespace-300">
         <h2>Works</h2>
         <div class="whitespace-200">
