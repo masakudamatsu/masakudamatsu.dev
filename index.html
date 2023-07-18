@@ -407,6 +407,17 @@
       .leaf-card .title-card {
         grid-area: text;
       }
+      /* Prevent layout shift in Safari when first playing the video (source: https://www.amitmerchant.com/prevent-image-layout-shift-using-this-simple-css-hack/) */
+      .leaf-card figure {
+        padding-top: 100%; /* 1 to 1 aspect ratio */
+        position: relative;
+      }
+      .leaf-card figure video {
+        left: 0;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+      }
       /* Responsive layout */
       @media screen and (min-width: 765.25px) {
         /* 704px is derived from var(--video-max-width) + 2 * var(--gap200) + 2 * var(--whitespace400) */
