@@ -361,6 +361,10 @@
       .color-black {
         color: var(--black);
       }
+      /* Utilities */
+      .hidden {
+        opacity: 0;
+      }
       /* Leaf Card block */
       .leaf-card {
         border-radius: var(--round-corner) 0 var(--round-corner) 0;
@@ -411,12 +415,21 @@
       .leaf-card figure {
         padding-top: 100%; /* 1 to 1 aspect ratio */
         position: relative;
+        z-index: 0; /* to create a stacking context */
       }
       .leaf-card figure video {
         left: 0;
         object-fit: cover;
         position: absolute;
         top: 0;
+      }
+      /* Poster image (<video poster=""> doesn't work with Safari for some reason... */
+      .leaf-card figure img {
+        left: 0;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        z-index: 1; /* hide the video until it's fully loaded */
       }
       /* Responsive layout */
       @media screen and (min-width: 765.25px) {
@@ -635,13 +648,13 @@
                 loop
                 muted
                 playsinline
-                poster="line-height-picker.png"
                 preload="metadata"
               >
                 <source src="line-height-picker.mp4" type="video/mp4" />
                 <!-- Offer download -->
                 <a href="line-height-picker.mp4">Download the video</a>
               </video>
+              <img alt="" src="line-height-picker.png" srcset="" />
             </figure>
             <button
               aria-label="Play demo for Line-height Picker"
@@ -709,13 +722,13 @@
                 loop
                 muted
                 playsinline
-                poster="triangulum.png"
                 preload="metadata"
               >
                 <source src="triangulum.mp4" type="video/mp4" />
                 <!-- Offer download -->
                 <a href="triangulum.mp4">Download the video</a>
               </video>
+              <img alt="" src="triangulum.png" srcset="" />
             </figure>
             <button
               aria-label="Play demo for Triangulum Color Picker"
@@ -774,13 +787,13 @@
                 loop
                 muted
                 playsinline
-                poster="tjg.png"
                 preload="metadata"
               >
                 <source src="tjg.mp4" type="video/mp4" />
                 <!-- Offer download -->
                 <a href="tjg.mp4">Download the video</a>
               </video>
+              <img alt="" src="tjg.png" srcset="" />
             </figure>
             <button
               aria-label="Play demo for Translating Japanese Gardens"
@@ -850,13 +863,13 @@
                 loop
                 muted
                 playsinline
-                poster="my-ideal-map.png"
                 preload="metadata"
               >
                 <source src="my-ideal-map.mp4" type="video/mp4" />
                 <!-- Offer download -->
                 <a href="my-ideal-map.mp4">Download the video</a>
               </video>
+              <img alt="" src="my-ideal-map.png" srcset="" />
             </figure>
             <button
               aria-label="Play demo for My Ideal Map"
@@ -1001,6 +1014,36 @@
       videos[i].addEventListener("suspend", handleEvent);
       videos[i].addEventListener("waiting", handleEvent);
     }
+
+    // prepare for hiding poster images once videos are fully loaded
+    const imgs = document.querySelectorAll(".leaf-card figure img");
+
+    // prepare for playing videos only when fully visible within the screen
+    const observer = new IntersectionObserver(callback, { threshold: 1.0 });
+    function callback(videos) {
+      videos.forEach((video) => {
+        if (video.isIntersecting) {
+          video.target.play();
+        } else {
+          video.target.pause();
+        }
+      });
+    }
+
+    for (let i = 0; i < videos.length; i++) {
+      /* start loading the entire video file */
+      videos[i].play();
+      // handle the event in which each video is fully loaded
+      const handleCanplaythrough = (event) => {
+        // hide poster images once the video is ready to play thorugh
+        if (imgs[i].className === "hidden") return; // Chrome and Firefox fires canplaythrough at the end of each loop; ignore such cases
+        imgs[i].classList.add("hidden");
+        // play videos only when fully visible within the screen
+        observer.observe(videos[i]);
+      };
+      videos[i].addEventListener("canplaythrough", handleCanplaythrough);
+    }
+
     const playbackButtons = document.querySelectorAll(".playbackButton");
     // Disable the default video player
     videos.forEach((video) => {
@@ -1033,22 +1076,6 @@
           i
         ].ariaLabel.slice(6)}`; // drop "Pause " at the beginning
       });
-    }
-
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver(callback, { threshold: 1.0 });
-      videos.forEach((video) => {
-        observer.observe(video);
-      });
-      function callback(videos) {
-        videos.forEach((video) => {
-          if (video.isIntersecting) {
-            video.target.play();
-          } else {
-            video.target.pause();
-          }
-        });
-      }
     }
   </script>
 </html>
