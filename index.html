@@ -968,6 +968,39 @@
   </body>
   <script>
     const videos = document.querySelectorAll("video");
+    // debugging
+    for (let i = 0; i < videos.length; i++) {
+      let handleEvent;
+      if (i === 0) {
+        handleEvent = (event) => {
+          console.log(`Line-height Picker: "${event.type}" event fired`);
+        };
+      } else if (i === 1) {
+        handleEvent = (event) => {
+          console.log(`Triangulum: "${event.type}" event fired`);
+        };
+      } else if (i === 2) {
+        handleEvent = (event) => {
+          console.log(`TJG: "${event.type}" event fired`);
+        };
+      } else if (i === 3) {
+        handleEvent = (event) => {
+          console.log(`My Ideal Map: "${event.type}" event fired`);
+        };
+      }
+      videos[i].addEventListener("loadstart", handleEvent);
+      videos[i].addEventListener("loadedmetadata", handleEvent);
+      videos[i].addEventListener("loadeddata", handleEvent);
+      videos[i].addEventListener("canplay", handleEvent);
+      videos[i].addEventListener("progress", handleEvent);
+      videos[i].addEventListener("canplaythrough", handleEvent);
+      videos[i].addEventListener("play", handleEvent);
+      videos[i].addEventListener("pause", handleEvent);
+      videos[i].addEventListener("error", handleEvent);
+      videos[i].addEventListener("stalled", handleEvent);
+      videos[i].addEventListener("suspend", handleEvent);
+      videos[i].addEventListener("waiting", handleEvent);
+    }
     const playbackButtons = document.querySelectorAll(".playbackButton");
     // Disable the default video player
     videos.forEach((video) => {
