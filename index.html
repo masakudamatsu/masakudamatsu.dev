@@ -981,6 +981,9 @@
   </body>
   <script>
     const videos = document.querySelectorAll("video");
+    const playbackButtons = document.querySelectorAll(".playbackButton");
+    const imgs = document.querySelectorAll(".leaf-card figure img");
+
     // debugging
     for (let i = 0; i < videos.length; i++) {
       let handleEvent;
@@ -1023,38 +1026,6 @@
       videos[i].addEventListener("waiting", handleEvent);
     }
 
-    // prepare for hiding poster images once videos are fully loaded
-    const imgs = document.querySelectorAll(".leaf-card figure img");
-
-    // prepare for playing videos only when fully visible within the screen
-    const observer = new IntersectionObserver(callback, { threshold: 1.0 });
-    function callback(videos) {
-      videos.forEach((video) => {
-        if (video.isIntersecting) {
-          video.target.play();
-        } else {
-          video.target.pause();
-        }
-      });
-    }
-
-    for (let i = 0; i < videos.length; i++) {
-      /* start loading the entire video file */
-      videos[i].play();
-      // handle the event in which each video is fully loaded
-      const handleCanplaythrough = (event) => {
-        // rewind the video to the beginning (it may have started playing before fully loaded)
-        videos[i].currentTime = 0;
-        // hide poster images once the video is ready to play thorugh
-        if (imgs[i].className === "hidden") return; // Chrome and Firefox fires canplaythrough at the end of each loop; ignore such cases
-        imgs[i].classList.add("hidden");
-        // play videos only when fully visible within the screen
-        observer.observe(videos[i]);
-      };
-      videos[i].addEventListener("canplaythrough", handleCanplaythrough);
-    }
-
-    const playbackButtons = document.querySelectorAll(".playbackButton");
     // Disable the default video player
     videos.forEach((video) => {
       video.controls = false;
@@ -1086,6 +1057,34 @@
           i
         ].ariaLabel.slice(6)}`; // drop "Pause " at the beginning
       });
+    }
+
+    // prepare for playing videos only when fully visible within the screen
+    const observer = new IntersectionObserver(callback, { threshold: 1.0 });
+    function callback(videos) {
+      videos.forEach((video) => {
+        if (video.isIntersecting) {
+          video.target.play();
+        } else {
+          video.target.pause();
+        }
+      });
+    }
+
+    for (let i = 0; i < videos.length; i++) {
+      /* start loading the entire video file */
+      videos[i].play();
+      // handle the event in which each video is fully loaded
+      const handleCanplaythrough = (event) => {
+        // rewind the video to the beginning (it may have started playing before fully loaded)
+        videos[i].currentTime = 0;
+        // hide poster images once the video is ready to play thorugh
+        if (imgs[i].className === "hidden") return; // Chrome and Firefox fires canplaythrough at the end of each loop; ignore such cases
+        imgs[i].classList.add("hidden");
+        // play videos only when fully visible within the screen
+        observer.observe(videos[i]);
+      };
+      videos[i].addEventListener("canplaythrough", handleCanplaythrough);
     }
   </script>
 </html>
