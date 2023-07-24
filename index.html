@@ -1043,6 +1043,8 @@
       videos[i].play();
       // handle the event in which each video is fully loaded
       const handleCanplaythrough = (event) => {
+        // rewind the video to the beginning (it may have started playing before fully loaded)
+        videos[i].currentTime = 0;
         // hide poster images once the video is ready to play thorugh
         if (imgs[i].className === "hidden") return; // Chrome and Firefox fires canplaythrough at the end of each loop; ignore such cases
         imgs[i].classList.add("hidden");
