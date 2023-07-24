@@ -986,19 +986,27 @@
       let handleEvent;
       if (i === 0) {
         handleEvent = (event) => {
-          console.log(`Line-height Picker: "${event.type}" event fired`);
+          console.log(
+            `Line-height Picker at ${videos[i].currentTime}: "${event.type}" event fired`
+          );
         };
       } else if (i === 1) {
         handleEvent = (event) => {
-          console.log(`Triangulum: "${event.type}" event fired`);
+          console.log(
+            `Triangulum at ${videos[i].currentTime}: "${event.type}" event fired`
+          );
         };
       } else if (i === 2) {
         handleEvent = (event) => {
-          console.log(`TJG: "${event.type}" event fired`);
+          console.log(
+            `TJG at ${videos[i].currentTime}: "${event.type}" event fired`
+          );
         };
       } else if (i === 3) {
         handleEvent = (event) => {
-          console.log(`My Ideal Map: "${event.type}" event fired`);
+          console.log(
+            `My Ideal Map at ${videos[i].currentTime}: "${event.type}" event fired`
+          );
         };
       }
       videos[i].addEventListener("loadstart", handleEvent);
