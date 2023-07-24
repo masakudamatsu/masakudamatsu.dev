@@ -528,6 +528,10 @@
         height: var(--minimum-target-size);
         width: var(--minimum-target-size);
       }
+      .playbackButton[disabled] {
+        cursor: not-allowed;
+        opacity: 0.4;
+      }
       /* link buttons */
       .linkButton {
         align-items: center;
@@ -659,6 +663,7 @@
             <button
               aria-label="Play demo for Line-height Picker"
               class="playbackButton"
+              disabled
               type="button"
             >
               <img alt="" aria-hidden src="play.svg" />
@@ -733,6 +738,7 @@
             <button
               aria-label="Play demo for Triangulum Color Picker"
               class="playbackButton"
+              disabled
               type="button"
             >
               <img alt="" aria-hidden src="play.svg" />
@@ -798,6 +804,7 @@
             <button
               aria-label="Play demo for Translating Japanese Gardens"
               class="playbackButton"
+              disabled
               type="button"
             >
               <img alt="" aria-hidden src="play.svg" />
@@ -874,6 +881,7 @@
             <button
               aria-label="Play demo for My Ideal Map"
               class="playbackButton"
+              disabled
               type="button"
             >
               <img alt="" aria-hidden src="play.svg" />
@@ -1044,19 +1052,6 @@
           videos[i].pause();
         }
       });
-      // toggle playbackButton label
-      videos[i].addEventListener("play", function () {
-        playbackButtons[i].children[0].src = "pause.svg";
-        playbackButtons[i].ariaLabel = `Pause ${playbackButtons[
-          i
-        ].ariaLabel.slice(5)}`; // drop "Play " at the beginning
-      });
-      videos[i].addEventListener("pause", function () {
-        playbackButtons[i].children[0].src = "play.svg";
-        playbackButtons[i].ariaLabel = `Play ${playbackButtons[
-          i
-        ].ariaLabel.slice(6)}`; // drop "Pause " at the beginning
-      });
     }
 
     // prepare for playing videos only when fully visible within the screen
@@ -1076,11 +1071,32 @@
       videos[i].play();
       // handle the event in which each video is fully loaded
       const handleCanplaythrough = (event) => {
+        // pause videos (to match the playback button labels)
+        videos[i].pause();
         // rewind the video to the beginning (it may have started playing before fully loaded)
         videos[i].currentTime = 0;
+
         // hide poster images once the video is ready to play thorugh
         if (imgs[i].className === "hidden") return; // Chrome and Firefox fires canplaythrough at the end of each loop; ignore such cases
         imgs[i].classList.add("hidden");
+
+        // change playback button appearance
+        playbackButtons[i].disabled = false;
+
+        // toggle playbackButton label in response to video playing status
+        videos[i].addEventListener("play", function () {
+          playbackButtons[i].children[0].src = "pause.svg";
+          playbackButtons[i].ariaLabel = `Pause ${playbackButtons[
+            i
+          ].ariaLabel.slice(5)}`; // drop "Play " at the beginning
+        });
+        videos[i].addEventListener("pause", function () {
+          playbackButtons[i].children[0].src = "play.svg";
+          playbackButtons[i].ariaLabel = `Play ${playbackButtons[
+            i
+          ].ariaLabel.slice(6)}`; // drop "Pause " at the beginning
+        });
+
         // play videos only when fully visible within the screen
         observer.observe(videos[i]);
       };
