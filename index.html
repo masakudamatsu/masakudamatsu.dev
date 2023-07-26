@@ -69,6 +69,7 @@
         --xHeight10: calc((1 / var(--scale)) * var(--xHeight));
         --font10-raleway: calc(var(--xHeight10) / var(--raleway-xHeight));
         /* white space */
+        /* If changed, adjust the `sizes` attribute for <img> */
         --whitespace100: calc(var(--scale) * var(--xHeight));
         --whitespace200: calc(var(--scale) * var(--whitespace100));
         --whitespace300: calc(var(--scale) * var(--whitespace200));
@@ -216,12 +217,14 @@
       footer {
         padding: calc(var(--whitespace400) / 16 * 1rem)
           calc(var(--whitespace100) / 16 * 1rem);
+        /* If changed, adjust the `sizes` attribute for <img> */
       }
       @media screen and (min-width: 601px) {
         header,
         main,
         footer {
           padding: calc(var(--whitespace400) / 16 * 1rem);
+          /* If changed, adjust the `sizes` attribute for <img> */
         }
       }
       .whitespace-200 > * + * {
@@ -238,6 +241,7 @@
         /* Video/Image max-width */
         --video-max-width: 624px;
         /* Whitespace scale */
+        /* If changed, adjust the `sizes` attribute for <img> */
         --gap100: 10px;
         --gap200: 20px;
         /* Color scheme */
@@ -516,6 +520,7 @@
       }
       /* section layout */
       .padding {
+        /* If changed, adjust the `sizes` attribute for <img> */
         padding: var(--gap200);
       }
       .vertical-spacing > * + * {
@@ -658,7 +663,16 @@
                 <!-- Offer download -->
                 <a href="line-height-picker.mp4">Download the video</a>
               </video>
-              <img alt="" src="line-height-picker.png" srcset="" />
+              <img
+                alt=""
+                sizes="(max-width: 600px) calc(100vw - 70px), (max-width: 766px) calc(100vw - 141.25px), 624px"
+                srcset="
+                  media/line-height-picker624.png   624w,
+                  media/line-height-picker990.png   990w,
+                  media/line-height-picker1248.png 1248w
+                "
+                src="media/line-height-picker624.png"
+              />
             </figure>
             <button
               aria-label="Play demo for Line-height Picker"
@@ -733,7 +747,16 @@
                 <!-- Offer download -->
                 <a href="triangulum.mp4">Download the video</a>
               </video>
-              <img alt="" src="triangulum.png" srcset="" />
+              <img
+                alt=""
+                sizes="(max-width: 600px) calc(100vw - 70px), (max-width: 766px) calc(100vw - 141.25px), 624px"
+                srcset="
+                  media/triangulum624.png   624w,
+                  media/triangulum990.png   990w,
+                  media/triangulum1248.png 1248w
+                "
+                src="media/triangulum624.png"
+              />
             </figure>
             <button
               aria-label="Play demo for Triangulum Color Picker"
@@ -799,7 +822,16 @@
                 <!-- Offer download -->
                 <a href="tjg.mp4">Download the video</a>
               </video>
-              <img alt="" src="tjg.png" srcset="" />
+              <img
+                alt=""
+                sizes="(max-width: 600px) calc(100vw - 70px), (max-width: 766px) calc(100vw - 141.25px), 624px"
+                srcset="
+                  media/tjg624.png   624w,
+                  media/tjg990.png   990w,
+                  media/tjg1248.png 1248w
+                "
+                src="media/tjg624.png"
+              />
             </figure>
             <button
               aria-label="Play demo for Translating Japanese Gardens"
@@ -876,7 +908,16 @@
                 <!-- Offer download -->
                 <a href="my-ideal-map.mp4">Download the video</a>
               </video>
-              <img alt="" src="my-ideal-map.png" srcset="" />
+              <img
+                alt=""
+                sizes="(max-width: 600px) calc(100vw - 70px), (max-width: 766px) calc(100vw - 141.25px), 624px"
+                srcset="
+                  media/my-ideal-map624.png   624w,
+                  media/my-ideal-map990.png   990w,
+                  media/my-ideal-map1248.png 1248w
+                "
+                src="media/my-ideal-map624.png"
+              />
             </figure>
             <button
               aria-label="Play demo for My Ideal Map"
