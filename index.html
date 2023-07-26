@@ -369,6 +369,9 @@
       .hidden {
         opacity: 0;
       }
+      .removed-if-js-disabled {
+        display: none; /* for JS-disabled users */
+      }
       /* Leaf Card block */
       .leaf-card {
         border-radius: var(--round-corner) 0 var(--round-corner) 0;
@@ -662,6 +665,7 @@
               </video>
               <img
                 alt=""
+                class="removed-if-js-disabled"
                 sizes="(max-width: 600px) calc(100vw - 70px), (max-width: 766px) calc(100vw - 141.25px), 624px"
                 srcset="
                   media/line-height-picker624.png   624w,
@@ -746,6 +750,7 @@
               </video>
               <img
                 alt=""
+                class="removed-if-js-disabled"
                 sizes="(max-width: 600px) calc(100vw - 70px), (max-width: 766px) calc(100vw - 141.25px), 624px"
                 srcset="
                   media/triangulum624.png   624w,
@@ -821,6 +826,7 @@
               </video>
               <img
                 alt=""
+                class="removed-if-js-disabled"
                 sizes="(max-width: 600px) calc(100vw - 70px), (max-width: 766px) calc(100vw - 141.25px), 624px"
                 srcset="
                   media/tjg624.png   624w,
@@ -907,6 +913,7 @@
               </video>
               <img
                 alt=""
+                class="removed-if-js-disabled"
                 sizes="(max-width: 600px) calc(100vw - 70px), (max-width: 766px) calc(100vw - 141.25px), 624px"
                 srcset="
                   media/my-ideal-map624.png   624w,
@@ -1037,6 +1044,10 @@
     // Reveal playback buttons
     playbackButtons.forEach((playbackButton) => {
       playbackButton.style.display = "block";
+    });
+    // Reveal poster images
+    imgs.forEach((img) => {
+      img.style.display = "block";
     });
     for (let i = 0; i < videos.length; i++) {
       // handleClick for playbackButtons
