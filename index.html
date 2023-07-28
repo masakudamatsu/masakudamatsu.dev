@@ -1040,20 +1040,11 @@
     const playbackButtons = document.querySelectorAll(".playbackButton");
     const imgs = document.querySelectorAll(".leaf-card figure img");
 
-    // Disable the default video player
-    videos.forEach((video) => {
-      video.controls = false;
-    });
-    // Reveal playback buttons
-    playbackButtons.forEach((playbackButton) => {
-      playbackButton.style.display = "block";
-    });
-    // Reveal poster images
-    imgs.forEach((img) => {
-      img.style.display = "block";
-    });
     for (let i = 0; i < videos.length; i++) {
-      // handleClick for playbackButtons
+      // Disable the default video player
+      videos[i].controls = false;
+      // Reveal playback buttons
+      playbackButtons[i].style.display = "block";
       playbackButtons[i].addEventListener("click", (event) => {
         event.stopPropagation();
         if (videos[i].paused) {
@@ -1062,6 +1053,8 @@
           videos[i].pause();
         }
       });
+      // Reveal poster images
+      imgs[i].style.display = "block";
     }
 
     // prepare for playing videos only when fully visible within the screen
