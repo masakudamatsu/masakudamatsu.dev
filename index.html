@@ -392,10 +392,13 @@
       .leaf-card figure {
         grid-area: video;
       }
+      /* Round the top-left or top-right corner of media */
+      .leaf-card figure img,
       .leaf-card figure video {
         --border-radius: calc(var(--round-corner) - var(--gap200));
         border-radius: var(--border-radius) 0 0 0;
       }
+      .leaf-card:nth-of-type(even) figure img,
       .leaf-card:nth-of-type(even) figure video {
         --border-radius: calc(var(--round-corner) - var(--gap200));
         border-radius: 0 var(--border-radius) 0 0;
