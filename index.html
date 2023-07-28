@@ -1080,7 +1080,6 @@
         videos[i].currentTime = 0;
 
         // hide poster images once the video is ready to play thorugh
-        if (imgs[i].className === "transparent") return; // Chrome and Firefox fires canplaythrough at the end of each loop; ignore such cases
         imgs[i].classList.add("transparent");
 
         // change playback button appearance
