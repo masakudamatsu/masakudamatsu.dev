@@ -393,11 +393,13 @@
         grid-area: video;
       }
       /* Round the top-left or top-right corner of media */
+      .leaf-card figure,
       .leaf-card figure img,
       .leaf-card figure video {
         --border-radius: calc(var(--round-corner) - var(--gap200));
         border-radius: var(--border-radius) 0 0 0;
       }
+      .leaf-card:nth-of-type(even) figure,
       .leaf-card:nth-of-type(even) figure img,
       .leaf-card:nth-of-type(even) figure video {
         --border-radius: calc(var(--round-corner) - var(--gap200));
@@ -437,7 +439,25 @@
       }
       /* Poster image (<video poster=""> doesn't work with Safari for some reason... */
       .leaf-card figure img {
+        transition: opacity 500ms linear;
         z-index: 1; /* hide the video until it's fully loaded */
+      }
+      /* Placeholder image */
+      .leaf-card[data-variant="line-height-picker"] figure {
+        background-image: url("media/line-height-picker3.png");
+        background-size: cover;
+      }
+      .leaf-card[data-variant="triangulum"] figure {
+        background-image: url("media/triangulum3.png");
+        background-size: cover;
+      }
+      .leaf-card[data-variant="tjg"] figure {
+        background-image: url("media/tjg3.png");
+        background-size: cover;
+      }
+      .leaf-card[data-variant="my-ideal-map"] figure {
+        background-image: url("media/my-ideal-map3.png");
+        background-size: cover;
       }
       /* Responsive layout */
       @media screen and (min-width: 765.25px) {
@@ -622,7 +642,10 @@
           </p>
         </div>
         <div class="alternate-position whitespace-300">
-          <section class="leaf-card padding bg-typeset color-black">
+          <section
+            class="leaf-card padding bg-typeset color-black"
+            data-variant="line-height-picker"
+          >
             <div aria-hidden class="background">
               <p>
                 Reed College at that time offered perhaps the best calligraphy
@@ -668,7 +691,7 @@
               </video>
               <img
                 alt=""
-                class="removed-if-js-disabled"
+                class="removed-if-js-disabled transparent"
                 sizes="(max-width: 600px) calc(100vw - 70px), (max-width: 766px) calc(100vw - 141.25px), 624px"
                 srcset="
                   media/line-height-picker624.png   624w,
@@ -736,7 +759,7 @@
               </ul>
             </div>
           </section>
-          <section class="leaf-card padding bg-color">
+          <section class="leaf-card padding bg-color" data-variant="triangulum">
             <figure>
               <video
                 height="624"
@@ -753,7 +776,7 @@
               </video>
               <img
                 alt=""
-                class="removed-if-js-disabled"
+                class="removed-if-js-disabled transparent"
                 sizes="(max-width: 600px) calc(100vw - 70px), (max-width: 766px) calc(100vw - 141.25px), 624px"
                 srcset="
                   media/triangulum624.png   624w,
@@ -812,7 +835,7 @@
               </ul>
             </div>
           </section>
-          <section class="leaf-card padding bg-garden">
+          <section class="leaf-card padding bg-garden" data-variant="tjg">
             <figure>
               <video
                 height="624"
@@ -829,7 +852,7 @@
               </video>
               <img
                 alt=""
-                class="removed-if-js-disabled"
+                class="removed-if-js-disabled transparent"
                 sizes="(max-width: 600px) calc(100vw - 70px), (max-width: 766px) calc(100vw - 141.25px), 624px"
                 srcset="
                   media/tjg624.png   624w,
@@ -899,7 +922,10 @@
               </ul>
             </div>
           </section>
-          <section class="leaf-card padding bg-grid color-black">
+          <section
+            class="leaf-card padding bg-grid color-black"
+            data-variant="my-ideal-map"
+          >
             <figure>
               <video
                 height="624"
@@ -916,7 +942,7 @@
               </video>
               <img
                 alt=""
-                class="removed-if-js-disabled"
+                class="removed-if-js-disabled transparent"
                 sizes="(max-width: 600px) calc(100vw - 70px), (max-width: 766px) calc(100vw - 141.25px), 624px"
                 srcset="
                   media/my-ideal-map624.png   624w,
@@ -1055,6 +1081,16 @@
       });
       // Reveal poster images
       imgs[i].classList.remove("removed-if-js-disabled");
+      if (imgs[i].complete) {
+        // image file has been cached
+        imgs[i].classList.remove("transparent");
+      } else {
+        // trigger load event handler
+        imgs[i].addEventListener("load", revealPosterImage, { once: true });
+        function revealPosterImage(event) {
+          event.target.classList.remove("transparent");
+        }
+      }
     }
 
     // prepare for playing videos only when fully visible within the screen
@@ -1108,6 +1144,37 @@
     }
 
     // // debugging
+    // for (let i = 0; i < imgs.length; i++) {
+    //   if (imgs[i].complete) {
+    //     console.log(`Poster image ${i} cached`);
+    //   } else {
+    //     let handleEvent;
+    //     if (i === 0) {
+    //       handleEvent = (event) => {
+    //         console.log(
+    //           `Poster image for Line-height Picker: "${event.type}" event fired`
+    //         );
+    //       };
+    //     } else if (i === 1) {
+    //       handleEvent = (event) => {
+    //         console.log(
+    //           `Poster image for Triangulum: "${event.type}" event fired`
+    //         );
+    //       };
+    //     } else if (i === 2) {
+    //       handleEvent = (event) => {
+    //         console.log(`Poster image for TJG: "${event.type}" event fired`);
+    //       };
+    //     } else if (i === 3) {
+    //       handleEvent = (event) => {
+    //         console.log(
+    //           `Poster image for My Ideal Map: "${event.type}" event fired`
+    //         );
+    //       };
+    //     }
+    //     imgs[i].addEventListener("load", handleEvent);
+    //   }
+    // }
     // for (let i = 0; i < videos.length; i++) {
     //   let handleEvent;
     //   if (i === 0) {
