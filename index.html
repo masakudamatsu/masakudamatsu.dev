@@ -1110,7 +1110,9 @@
         // play videos only when fully visible within the screen
         observer.observe(videos[i]);
       };
-      videos[i].addEventListener("canplaythrough", handleCanplaythrough);
+      videos[i].addEventListener("canplaythrough", handleCanplaythrough, {
+        once: true,
+      });
     }
 
     // // debugging
