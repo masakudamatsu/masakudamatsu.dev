@@ -1065,10 +1065,32 @@
     const videos = document.querySelectorAll("video");
     const playbackButtons = document.querySelectorAll(".playbackButton");
     const imgs = document.querySelectorAll(".leaf-card figure img");
-
+    const isNonRetinaScreen = window.matchMedia(
+      "(-webkit-max-device-pixel-ratio: 1)"
+    );
+    const isRetinaMobileScreen = window.matchMedia(
+      "(-webkit-min-device-pixel-ratio: 2) and (max-width: 382px)"
+    );
+    let filename;
     for (let i = 0; i < videos.length; i++) {
+      if (i === 0) {
+        filename = "line-height-picker";
+      } else if (i === 1) {
+        filename = "triangulum";
+      } else if (i === 2) {
+        filename = "tjg";
+      } else if (i === 3) {
+        filename = "my-ideal-map";
+      } else {
+        filename = null;
+      }
       // Disable the default video player
       videos[i].controls = false;
+      // Replace video files for mobile devices
+      if (isNonRetinaScreen.matches || isRetinaMobileScreen.matches) {
+        videos[i].children[0].src = `media/${filename}-mobile.mp4`;
+        videos[i].children[1].href = `media/${filename}-mobile.mp4`;
+      }
       // Reveal playback buttons
       playbackButtons[i].classList.remove("removed-if-js-disabled");
       playbackButtons[i].addEventListener("click", (event) => {
