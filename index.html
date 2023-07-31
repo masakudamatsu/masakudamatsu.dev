@@ -200,6 +200,7 @@
         line-height: calc(
           (var(--whitespace100) + var(--xHeight)) / var(--font100-japanese)
         );
+        line-break: strict; /* to prevent ッ from being at the beginning of a line */
       }
       p[lang="ja"]::before {
         margin-bottom: calc(-6 / 16 * 1rem);
