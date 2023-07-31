@@ -10,6 +10,10 @@
       href="https://fonts.googleapis.com/css2?family=Raleway&family=Zen+Kurenaido&family=Zen+Loop&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/yakuhanjp@3.4.1/dist/css/yakuhanjp-narrow.min.css"
+    />
     <title>
       Masa Kudamatsu — Kyoto-based web developer with UX design skills
     </title>
@@ -193,14 +197,16 @@
         }
       }
       p[lang="ja"] {
-        font-family: "Zen Kurenaido", "Helvetica Neue", "Segoe UI",
-          "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+        font-family: "YakuHanJP_Narrow", "Zen Kurenaido", "Helvetica Neue",
+          "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo,
+          sans-serif;
         font-size: calc(var(--font100-japanese) / 16 * 1rem);
         font-weight: 400;
         line-height: calc(
           (var(--whitespace100) + var(--xHeight)) / var(--font100-japanese)
         );
         line-break: strict; /* to prevent ッ from being at the beginning of a line */
+        text-align: justify;
       }
       p[lang="ja"]::before {
         margin-bottom: calc(-6 / 16 * 1rem);
