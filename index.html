@@ -1121,6 +1121,9 @@
       // Start loading the entire video files
       videos[i].play();
 
+      // track whether the video has been fully loaded
+      let isVideoLoaded = false;
+
       // Reveal poster images
       if (imgs[i].complete) {
         // image file has been cached
@@ -1129,11 +1132,14 @@
         // Detect when the image is loaded
         imgs[i].addEventListener("load", revealPosterImage, { once: true });
         function revealPosterImage(event) {
-          event.target.classList.remove("transparent");
+          if (!isVideoLoaded) {
+            event.target.classList.remove("transparent");
+          }
         }
       }
       // Handle the event in which each video is fully loaded
       const handleCanplaythrough = (event) => {
+        isVideoLoaded = true;
         // pause videos (to match the playback button labels)
         videos[i].pause();
         // rewind the video to the beginning (it may have started playing before fully loaded)
