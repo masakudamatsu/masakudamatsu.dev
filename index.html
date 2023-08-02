@@ -612,6 +612,18 @@
         padding: calc(var(--whitespace100) / 16 * 1rem);
         width: 100%; /* necessary to expand beyond its text content length */
       }
+      /* spinning animation */
+      .spinning {
+        animation: rotation 1s linear infinite;
+      }
+      @keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
     </style>
     <!-- Asynchronously load CSS stylesheet (https://web.dev/defer-non-critical-css/#optimize)-->
     <link
@@ -714,16 +726,17 @@
               disabled
               type="button"
             >
-              <!-- downloaded from https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aplay_arrow%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
+              <!-- Material Icon "Progress Activity" https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aprogress_activity%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
               <svg
                 aria-hidden
+                class="spinning"
                 xmlns="http://www.w3.org/2000/svg"
                 height="48"
                 viewBox="0 -960 960 960"
                 width="48"
               >
                 <path
-                  d="M320-203v-560l440 280-440 280Zm60-280Zm0 171 269-171-269-171v342Z"
+                  d="M480-80q-84 0-157-31t-127-85q-54-54-85-127T80-480q0-84 31-157t85-127q54-54 127-85t157-31q12 0 21 9t9 21q0 12-9 21t-21 9q-141 0-240.5 99.5T140-480q0 141 99.5 240.5T480-140q141 0 240.5-99.5T820-480q0-12 9-21t21-9q12 0 21 9t9 21q0 84-31 157t-85 127q-54 54-127 85T480-80Z"
                 />
               </svg>
             </button>
@@ -833,16 +846,17 @@
               disabled
               type="button"
             >
-              <!-- downloaded from https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aplay_arrow%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
+              <!-- Material Icon "Progress Activity" https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aprogress_activity%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
               <svg
                 aria-hidden
+                class="spinning"
                 xmlns="http://www.w3.org/2000/svg"
                 height="48"
                 viewBox="0 -960 960 960"
                 width="48"
               >
                 <path
-                  d="M320-203v-560l440 280-440 280Zm60-280Zm0 171 269-171-269-171v342Z"
+                  d="M480-80q-84 0-157-31t-127-85q-54-54-85-127T80-480q0-84 31-157t85-127q54-54 127-85t157-31q12 0 21 9t9 21q0 12-9 21t-21 9q-141 0-240.5 99.5T140-480q0 141 99.5 240.5T480-140q141 0 240.5-99.5T820-480q0-12 9-21t21-9q12 0 21 9t9 21q0 84-31 157t-85 127q-54 54-127 85T480-80Z"
                 />
               </svg>
             </button>
@@ -943,16 +957,17 @@
               disabled
               type="button"
             >
-              <!-- downloaded from https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aplay_arrow%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
+              <!-- Material Icon "Progress Activity" https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aprogress_activity%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
               <svg
                 aria-hidden
+                class="spinning"
                 xmlns="http://www.w3.org/2000/svg"
                 height="48"
                 viewBox="0 -960 960 960"
                 width="48"
               >
                 <path
-                  d="M320-203v-560l440 280-440 280Zm60-280Zm0 171 269-171-269-171v342Z"
+                  d="M480-80q-84 0-157-31t-127-85q-54-54-85-127T80-480q0-84 31-157t85-127q54-54 127-85t157-31q12 0 21 9t9 21q0 12-9 21t-21 9q-141 0-240.5 99.5T140-480q0 141 99.5 240.5T480-140q141 0 240.5-99.5T820-480q0-12 9-21t21-9q12 0 21 9t9 21q0 84-31 157t-85 127q-54 54-127 85T480-80Z"
                 />
               </svg>
             </button>
@@ -1067,16 +1082,17 @@
               disabled
               type="button"
             >
-              <!-- downloaded from https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aplay_arrow%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
+              <!-- Material Icon "Progress Activity" https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aprogress_activity%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
               <svg
                 aria-hidden
+                class="spinning"
                 xmlns="http://www.w3.org/2000/svg"
                 height="48"
                 viewBox="0 -960 960 960"
                 width="48"
               >
                 <path
-                  d="M320-203v-560l440 280-440 280Zm60-280Zm0 171 269-171-269-171v342Z"
+                  d="M480-80q-84 0-157-31t-127-85q-54-54-85-127T80-480q0-84 31-157t85-127q54-54 127-85t157-31q12 0 21 9t9 21q0 12-9 21t-21 9q-141 0-240.5 99.5T140-480q0 141 99.5 240.5T480-140q141 0 240.5-99.5T820-480q0-12 9-21t21-9q12 0 21 9t9 21q0 84-31 157t-85 127q-54 54-127 85T480-80Z"
                 />
               </svg>
             </button>
@@ -1283,6 +1299,7 @@
 
         // change playback button appearance
         playbackButtons[i].disabled = false;
+        playbackButtons[i].children[0].classList.remove("spinning");
 
         // toggle playbackButton label in response to video playing status
         videos[i].addEventListener("play", function () {
