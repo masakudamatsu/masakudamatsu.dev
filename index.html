@@ -566,13 +566,14 @@
       }
       /* Button Block */
       .button {
+        /* Reset <button> style */
+        border: 0;
         /* Label placement */
         align-items: center;
         display: flex;
         justify-content: center;
         /* Texture */
         background: var(--white);
-        border: 1px solid var(--light-grey); /* --mid-grey would appear too dark compared to icons in --mid-grey */
         fill: var(--mid-grey);
         /* Shape */
         border-radius: 4px;
@@ -727,7 +728,7 @@
             </figure>
             <button
               aria-label="Play demo for Line-height Picker"
-              class="button removed-if-js-disabled"
+              class="button shadow removed-if-js-disabled"
               data-type="playback"
               disabled
               type="button"
@@ -749,7 +750,7 @@
             <div class="buttonGroup">
               <a
                 aria-label="Visit Line-height Picker"
-                class="button"
+                class="button shadow"
                 data-type="website"
                 href="https://line-height-picker.vercel.app"
                 rel="noopener noreferrer"
@@ -770,7 +771,7 @@
               </a>
               <a
                 aria-label="See source code for Line-height Picker"
-                class="button"
+                class="button shadow"
                 data-type="source"
                 href="https://github.com/masakudamatsu/line-height-picker"
                 rel="noopener noreferrer"
@@ -847,7 +848,8 @@
             </figure>
             <button
               aria-label="Play demo for Triangulum Color Picker"
-              class="button removed-if-js-disabled"
+              class="button shadow removed-if-js-disabled"
+              class="button shadow playbackButton removed-if-js-disabled"
               data-type="playback"
               disabled
               type="button"
@@ -869,7 +871,7 @@
             <div class="buttonGroup">
               <a
                 aria-label="Visit Triangulum Color Picker"
-                class="button"
+                class="button shadow"
                 data-type="website"
                 href="https://triangulum.netlify.app"
                 rel="noopener noreferrer"
@@ -890,7 +892,7 @@
               </a>
               <a
                 aria-label="See source code for Triangulum Color Picker"
-                class="button"
+                class="button shadow"
                 data-type="source"
                 href="https://github.com/masakudamatsu/triangulum-color-picker"
                 rel="noopener noreferrer"
@@ -958,7 +960,7 @@
             </figure>
             <button
               aria-label="Play demo for Translating Japanese Gardens"
-              class="button removed-if-js-disabled"
+              class="button shadow removed-if-js-disabled"
               data-type="playback"
               disabled
               type="button"
@@ -980,7 +982,7 @@
             <div class="buttonGroup">
               <a
                 aria-label="Visit Translating Japanese Gardens"
-                class="button"
+                class="button shadow"
                 data-type="website"
                 href="https://translating-japanese-gardens.pages.dev"
                 rel="noopener noreferrer"
@@ -1001,7 +1003,7 @@
               </a>
               <a
                 aria-label="See source code for Translating Japanese Gardens"
-                class="button"
+                class="button shadow"
                 data-type="source"
                 href="https://github.com/masakudamatsu/translating-japanese-gardens"
                 rel="noopener noreferrer"
@@ -1083,7 +1085,7 @@
             </figure>
             <button
               aria-label="Play demo for My Ideal Map"
-              class="button removed-if-js-disabled"
+              class="button shadow removed-if-js-disabled"
               data-type="playback"
               disabled
               type="button"
@@ -1105,7 +1107,7 @@
             <div class="buttonGroup">
               <a
                 aria-label="Visit My Ideal Map"
-                class="button"
+                class="button shadow"
                 data-type="website"
                 href="https://my-ideal-map.app"
                 rel="noopener noreferrer"
