@@ -608,7 +608,6 @@
       /* Title-card Block */
       .title-card {
         background: var(--white);
-        box-shadow: 0px 0px 4px var(--mid-grey);
         padding: calc(var(--whitespace100) / 16 * 1rem);
         width: 100%; /* necessary to expand beyond its text content length */
       }
@@ -623,6 +622,13 @@
         100% {
           transform: rotate(360deg);
         }
+      }
+      /* Shadow utility */
+      .shadow {
+        /* Layerd shadow approach: https://tobiasahlin.com/blog/layered-smooth-box-shadows/ */
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.15),
+          0px 0px 2px rgba(0, 0, 0, 0.15), 0px 0px 4px rgba(0, 0, 0, 0.15),
+          0px 0px 8px rgba(0, 0, 0, 0.15);
       }
     </style>
     <!-- Asynchronously load CSS stylesheet (https://web.dev/defer-non-critical-css/#optimize)-->
@@ -784,7 +790,7 @@
                 </svg>
               </a>
             </div>
-            <div class="title-card whitespace-300">
+            <div class="title-card shadow whitespace-300">
               <div class="whitespace-200">
                 <h3>Line-height Picker</h3>
                 <p>March–July 2020</p>
@@ -904,7 +910,7 @@
                 </svg>
               </a>
             </div>
-            <div class="title-card whitespace-300 color-black">
+            <div class="title-card shadow whitespace-300 color-black">
               <div class="whitespace-200">
                 <h3>Triangulum Color Picker</h3>
                 <p>December 2020–March 2021</p>
@@ -1015,7 +1021,7 @@
                 </svg>
               </a>
             </div>
-            <div class="title-card whitespace-300 color-black">
+            <div class="title-card shadow whitespace-300 color-black">
               <div class="whitespace-200">
                 <h3>Translating Japanese Gardens</h3>
 
@@ -1119,7 +1125,7 @@
                 </svg>
               </a>
             </div>
-            <div class="title-card whitespace-300">
+            <div class="title-card shadow whitespace-300">
               <div class="whitespace-200">
                 <h3>My Ideal Map</h3>
                 <p>August 2021–present</p>
