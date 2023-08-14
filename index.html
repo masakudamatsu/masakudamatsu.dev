@@ -242,14 +242,14 @@
       .whitespace-400 > * + * {
         margin-top: calc(var(--whitespace400) / 16 * 1rem);
       }
+      .padding {
+        /* If changed, adjust the `sizes` attribute for <img> */
+        padding: calc(var(--whitespace200) / 16 * 1rem);
+      }
       :root {
         --minimum-target-size: 48px;
         /* Video/Image max-width */
         --video-max-width: 624px;
-        /* Whitespace scale */
-        /* If changed, adjust the `sizes` attribute for <img> */
-        --gap100: 10px;
-        --gap200: 20px;
         /* Color scheme */
         --black: #030303; /* (1) pure black would slow down scrolling on OLED screens (https://twitter.com/marcedwards/status/1053519077958803456) */
         --mid-grey: #767676; /* (1.1) ensure 4.5 to 1 contrast against #030303 (https://www.siegemedia.com/contrast-ratio#%23767676-on-%23030303) */
@@ -423,7 +423,7 @@
         -moz-background-clip: padding;
         background-clip: padding-box;
         display: grid;
-        gap: var(--gap100);
+        gap: calc(var(--whitespace100) / 16 * 1rem);
         grid-template-areas: "video video" "playback text" "button text";
         grid-template-columns: var(--minimum-target-size) 1fr;
         grid-template-rows: auto var(--minimum-target-size) auto;
@@ -439,18 +439,22 @@
       .leaf-card .video,
       .leaf-card .video img,
       .leaf-card .video video {
-        --border-radius: calc(var(--round-corner) - var(--gap200));
+        --border-radius: calc(
+          var(--round-corner) - var(--whitespace200) / 16 * 1rem
+        );
         border-radius: var(--border-radius) 0 0 0;
       }
       .leaf-card:nth-of-type(even) .video,
       .leaf-card:nth-of-type(even) .video img,
       .leaf-card:nth-of-type(even) .video video {
-        --border-radius: calc(var(--round-corner) - var(--gap200));
+        --border-radius: calc(
+          var(--round-corner) - var(--whitespace200) / 16 * 1rem
+        );
         border-radius: 0 var(--border-radius) 0 0;
       }
       .leaf-card .buttonGroup {
         display: grid;
-        gap: var(--gap100);
+        gap: calc(var(--whitespace100) / 16 * 1rem);
         grid-area: button;
         grid-template-areas: "." "website" "source";
         grid-template-rows:
@@ -473,15 +477,15 @@
         grid-area: source;
       }
       /* Responsive layout */
-      @media screen and (min-width: 765.25px) {
-        /* 704px is derived from var(--video-max-width) + 2 * var(--gap200) + 2 * var(--whitespace400) */
+      @media screen and (min-width: 780.25px) {
+        /* breakpoint: var(--video-max-width) + 2 * var(--whitespace200) + 2 * var(--whitespace400) */
         .leaf-card {
           /* left-align grid items */
           grid-template-areas: "video video ." "playback text ." "button text .";
           grid-template-columns:
             var(--minimum-target-size)
             calc(
-              var(--video-max-width) - var(--gap100) -
+              var(--video-max-width) - (var(--whitespace100) / 16 * 1rem) -
                 var(--minimum-target-size)
             )
             1fr;
@@ -493,13 +497,13 @@
             1fr
             var(--minimum-target-size)
             calc(
-              var(--video-max-width) - var(--gap100) -
+              var(--video-max-width) - (var(--whitespace100) / 16 * 1rem) -
                 var(--minimum-target-size)
             );
         }
       }
-      @media screen and (min-width: 1191.25px) {
-        /* 1130px is derived from var(--video-max-width) * 5/3 + var(--gap100) + 2 * var(--gap200) + 2 * var(--whitespace400) */
+      @media screen and (min-width: 1216.25px) {
+        /* breakpoint: var(--video-max-width) * 5/3 + var(--whitespace100) + 2 * var(--whitespace200) + 2 * var(--whitespace400) */
         .alternate-position {
           display: flex;
           flex-direction: column;
@@ -515,7 +519,8 @@
               --minimum-target-size
             );
           max-width: calc(
-            var(--video-max-width) * 5 / 3 + var(--gap100) + var(--gap200) * 2
+            var(--video-max-width) * 5 / 3 + (var(--whitespace100) / 16 * 1rem) +
+              (var(--whitespace200) / 16 * 1rem) * 2
           );
         }
         .leaf-card:nth-of-type(even) {
@@ -540,8 +545,8 @@
           justify-self: end;
         }
       }
-      @media screen and (min-width: 1617.25px) {
-        /* 1556px is derived from var(--video-max-width) + 2 * var(--video-max-width) * 2/3 + 2 * var(--gap100) + 2 * var(--gap200) + 2 * var(--whitespace400) */
+      @media screen and (min-width: 1632.25px) {
+        /* breakpoint: var(--video-max-width) + 2 * var(--video-max-width) * 2/3 + 2 * var(--whitespace100) + 2 * var(--whitespace200) + 2 * var(--whitespace400) */
         main > section {
           align-items: center;
           display: flex;
@@ -550,19 +555,10 @@
         }
         .alternate-position {
           width: calc(
-            var(--video-max-width) * 7 / 3 + var(--gap100) * 2 + var(--gap200) *
-              2
+            var(--video-max-width) * 7 / 3 + var(--whitespace100) / 16 * 1rem *
+              2 + var(--whitespace200) / 16 * 1rem * 2
           );
         }
-      }
-      /* section layout */
-      .padding {
-        /* If changed, adjust the `sizes` attribute for <img> */
-        padding: var(--gap200);
-      }
-      .vertical-spacing > * + * {
-        /* https://every-layout.dev/layouts/stack/ */
-        margin-top: var(--gap200);
       }
       /* Button Block */
       .button {
@@ -783,7 +779,7 @@
               <img
                 alt=""
                 class="removed-if-js-disabled transparent"
-                sizes="(max-width: 600px) calc(100vw - 70px), (max-width: 766px) calc(100vw - 141.25px), 624px"
+                sizes="(max-width: 600px) calc(100vw - 75px), (max-width: 780px) calc(100vw - 146.25px), 624px"
                 srcset="
                   media/line-height-picker624.png   624w,
                   media/line-height-picker990.png   990w,
@@ -904,7 +900,7 @@
                 alt=""
                 class="removed-if-js-disabled transparent"
                 loading="lazy"
-                sizes="(max-width: 600px) calc(100vw - 70px), (max-width: 766px) calc(100vw - 141.25px), 624px"
+                sizes="(max-width: 600px) calc(100vw - 75px), (max-width: 766px) calc(100vw - 141.25px), 624px"
                 srcset="
                   media/triangulum624.png   624w,
                   media/triangulum990.png   990w,
@@ -1017,7 +1013,7 @@
                 alt=""
                 class="removed-if-js-disabled transparent"
                 loading="lazy"
-                sizes="(max-width: 600px) calc(100vw - 70px), (max-width: 766px) calc(100vw - 141.25px), 624px"
+                sizes="(max-width: 600px) calc(100vw - 75px), (max-width: 766px) calc(100vw - 141.25px), 624px"
                 srcset="
                   media/tjg624.png   624w,
                   media/tjg990.png   990w,
@@ -1140,7 +1136,7 @@
                 alt=""
                 class="removed-if-js-disabled transparent"
                 loading="lazy"
-                sizes="(max-width: 600px) calc(100vw - 70px), (max-width: 766px) calc(100vw - 141.25px), 624px"
+                sizes="(max-width: 600px) calc(100vw - 75px), (max-width: 766px) calc(100vw - 141.25px), 624px"
                 srcset="
                   media/my-ideal-map624.png   624w,
                   media/my-ideal-map990.png   990w,
@@ -1284,7 +1280,7 @@
         </div>
       </section>
     </main>
-    <footer class="vertical-spacing divider-light-grey">
+    <footer class="whitespace-200 divider-light-grey">
       <p>
         Thank you for scrolling down until the end. By now you know me better;
         did you notice the background is brighter than at the top of this page?
