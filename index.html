@@ -450,7 +450,7 @@
         opacity: 0;
       }
       .removed-if-js-disabled {
-        display: none; /* for JS-disabled users */
+        visibility: hidden; /* for JS-disabled users; "display: none" would be overridden with "display: flex" for playback buttons  */
       }
       /* Video block */
       /* Prevent layout shift in Safari when first playing the video (source: https://www.amitmerchant.com/prevent-image-layout-shift-using-this-simple-css-hack/) */
