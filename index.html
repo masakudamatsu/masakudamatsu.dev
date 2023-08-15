@@ -92,6 +92,11 @@
           (var(--whitespace100) + var(--xHeight)) / var(--font100-raleway)
         );
       }
+      .blockquote.fallback,
+      p.fallback {
+        letter-spacing: 0.0182em; /* Add 0.35px for the width of "Kyoto-based web developer with UX design best practices in mind" to be equal. */
+        word-spacing: -0.0058em; /* Remove 1px for the width of "Kyoto-based web developer with UX design best practices in mind" so it wraps at 692px or below. */
+      }
       .blockquote blockquote {
         font-style: italic;
       }
@@ -129,7 +134,7 @@
       h1,
       h2,
       h3 {
-        font-family: "Zen Loop", cursive;
+        font-family: "Zen Loop", "Courier New", monospace;
         font-weight: 400;
         text-transform: uppercase;
       }
@@ -142,13 +147,25 @@
             ) / var(--font500-zenloop)
         );
       }
+      h1.fallback {
+        --font500-couriernew: calc(
+          var(--font500-zenloop) * (33 / 50)
+        ); /* For the width "MASA KUDAMATSU" to be equal, font-size needs to be 33px for Courier New when it's 50px for Zen Loop */
+        font-size: calc(var(--font500-couriernew) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font500-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font500-couriernew)
+        );
+        word-spacing: 0.03em; /* Add 2px so Courier New wraps the word for less than 660px wide screens */
+      }
       h1::before {
         margin-bottom: calc(-2 / 16 * 1rem);
       }
       h1::after {
         margin-top: calc(-14 / 16 * 1rem);
       }
-
       @media screen and (max-width: 38.75em) {
         /* = 620px / 16 */
         h1 {
@@ -159,6 +176,19 @@
                   var(--whitespace100)
               ) / var(--font400-zenloop)
           );
+        }
+        h1.fallback {
+          --font400-couriernew: calc(
+            var(--font400-zenloop) * (33 / 50)
+          ); /* For the width "MASA KUDAMATSU" to be equal, font-size needs to be 33px for Courier New when it's 50px for Zen Loop */
+          font-size: calc(var(--font400-couriernew) / 16 * 1rem);
+          line-height: calc(
+            (
+                var(--font400-zenloop) * var(--zenloop-capHeight) +
+                  var(--whitespace100)
+              ) / var(--font400-couriernew)
+          );
+          word-spacing: 0.0453em; /* Add 2px to wrap the word at less than 403px wide screens */
         }
         h1::before {
           margin-bottom: calc(-4 / 16 * 1rem);
@@ -176,6 +206,18 @@
             ) / var(--font200-zenloop)
         );
       }
+      h2.fallback {
+        --font200-couriernew: calc(
+          var(--font200-zenloop) * (21 / 30)
+        ); /* For the width "WORKS" to be equal, font-size needs to be 21px for Courier New when it's 30px for Zen Loop */
+        font-size: calc(var(--font200-couriernew) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font200-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font200-couriernew)
+        );
+      }
       h2::before {
         margin-bottom: calc(-7 / 16 * 1rem);
       }
@@ -191,6 +233,18 @@
             ) / var(--font300-zenloop)
         );
       }
+      h3.fallback {
+        --font300-couriernew: calc(
+          var(--font300-zenloop) * (24 / 45)
+        ); /* For the width "LINE-HEIGHT PICKER" to be equal, font-size needs to be 24px for Courier New when it's 45px for Zen Loop */
+        font-size: calc(var(--font300-couriernew) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font300-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font300-couriernew)
+        );
+      }
       h3::before {
         margin-bottom: calc(-5 / 16 * 1rem);
       }
@@ -201,6 +255,12 @@
         /* = 345px / 16 */
         h3 {
           font-size: calc(var(--font250-zenloop) / 16 * 1rem);
+        }
+        h3.fallback {
+          --font250-couriernew: calc(
+            var(--font250-zenloop) * (24 / 45)
+          ); /* For the width "LINE-HEIGHT PICKER" to be equal, font-size needs to be 24px for Courier New when it's 45px for Zen Loop */
+          font-size: calc(var(--font250-couriernew) / 16 * 1rem);
         }
         h3::after {
           margin-top: calc(-9 / 16 * 1rem);
@@ -2053,6 +2113,36 @@ body {
     </footer>
   </body>
   <script>
+    // Fallback font styling
+    const zenloopElements = document.querySelectorAll("h1, h2 ,h3");
+    const ralewayElements = document.querySelectorAll("p, .blockquote");
+    zenloopElements.forEach((zenloopElement) => {
+      zenloopElement.classList.add("fallback");
+    });
+    ralewayElements.forEach((ralewayElement) => {
+      ralewayElement.classList.add("fallback");
+    });
+    document.fonts.load("16px 'Zen Loop'").then(
+      function () {
+        zenloopElements.forEach((zenloopElement) => {
+          zenloopElement.classList.remove("fallback");
+        });
+      },
+      function () {
+        console.info("Zen Loop fails to be loaded");
+      }
+    );
+    document.fonts.load("16px 'Raleway'").then(
+      function () {
+        ralewayElements.forEach((ralewayElement) => {
+          ralewayElement.classList.remove("fallback");
+        });
+      },
+      function () {
+        console.info("Raleway fails to be loaded");
+      }
+    );
+    // Custom video player
     const videos = document.querySelectorAll("video");
     const playbackButtons = document.querySelectorAll(
       ".button[data-type='playback']"
