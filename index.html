@@ -353,12 +353,21 @@
       .bg-black {
         background: var(--black);
       }
-      .bg-black-to-mid-grey {
-        background: linear-gradient(150deg, var(--black), var(--mid-grey));
-      }
       .bg-mid-grey-to-black {
         /* To smoothly transition into black in scroll-bounce areas */
         background: linear-gradient(to bottom, var(--mid-grey), var(--black));
+      }
+      .bg-green {
+        /* Hue around 150, Chroma around 5%, and Luminance 1 to 1.5 */
+        background: linear-gradient(135deg, #000c05, #232f28, #000c05);
+      }
+      .bg-purple {
+        /* Hue around 270, Chroma around 5%, and Luminance 1 to 1.5 */
+        background: linear-gradient(135deg, #05000c, #302a37, #05000c);
+      }
+      .bg-brown {
+        /* Hue around 30, Chroma around 5%, and Luminance 1 to 1.5 */
+        background: linear-gradient(135deg, #0c0600, #322c26, #0c0600);
       }
       .bg-typeset {
         position: relative;
@@ -807,8 +816,8 @@
         </p>
       </div>
     </header>
-    <main class="bg-black-to-mid-grey divider-light-grey">
-      <section class="whitespace-300">
+    <main>
+      <section class="bg-green divider-light-grey whitespace-300">
         <h2>Works</h2>
         <div class="measure whitespace-200">
           <p>
@@ -1381,7 +1390,7 @@
           </section>
         </div>
       </section>
-      <section class="whitespace-300">
+      <section class="bg-purple divider-light-grey whitespace-300">
         <h2>Blog</h2>
         <p class="measure whitespace-200">
           I’ve been blogging about web development on
@@ -2051,7 +2060,7 @@ body {
           </section>
         </div>
       </section>
-      <section class="whitespace-300">
+      <section class="bg-brown divider-light-grey whitespace-300">
         <h2>About Me</h2>
         <div class="measure whitespace-200">
           <p>
@@ -2098,11 +2107,8 @@ body {
         </div>
       </section>
     </main>
-    <footer class="whitespace-200 divider-light-grey">
-      <p>
-        Thank you for scrolling down until the end. By now you know me better;
-        did you notice the background is brighter than at the top of this page?
-      </p>
+    <footer class="whitespace-200 bg-black divider-light-grey">
+      <p>Thank you for scrolling down until the end.</p>
       <address>
         Designed and coded from scratch with vanilla HTML/CSS/JavaScript by Masa
         Kudamatsu (<a href="mailto:masakudamatsu@gmail.com"
