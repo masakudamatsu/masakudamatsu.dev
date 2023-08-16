@@ -266,7 +266,8 @@
           margin-top: calc(-9 / 16 * 1rem);
         }
       }
-      p[lang="ja"] {
+      p[lang="ja"],
+      [lang="ja"] p {
         font-family: "YakuHanJP_Narrow", "Zen Kurenaido", "Helvetica Neue",
           "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo,
           sans-serif;
@@ -278,10 +279,12 @@
         line-break: strict; /* to prevent ッ from being at the beginning of a line */
         text-align: justify;
       }
-      p[lang="ja"]::before {
+      p[lang="ja"]::before,
+      [lang="ja"] p::before {
         margin-bottom: calc(-6 / 16 * 1rem);
       }
-      p[lang="ja"]::after {
+      p[lang="ja"]::after,
+      [lang="ja"] p::after {
         margin-top: calc(-5 / 16 * 1rem);
       }
       /* Hard-wrap long words (https://www.joshwcomeau.com/css/custom-css-reset/#seven-word-wrapping-8) */
