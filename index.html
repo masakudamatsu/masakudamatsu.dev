@@ -290,7 +290,7 @@
       }
       /* Spacing */
       header,
-      main,
+      main > section,
       footer {
         padding: calc(var(--whitespace400) / 16 * 1rem)
           calc(var(--whitespace100) / 16 * 1rem);
@@ -298,7 +298,7 @@
       }
       @media screen and (min-width: 601px) {
         header,
-        main,
+        main > section,
         footer {
           padding: calc(var(--whitespace400) / 16 * 1rem);
           /* If changed, adjust the `sizes` attribute for <img> */
@@ -807,7 +807,7 @@
         </p>
       </div>
     </header>
-    <main class="whitespace-400 bg-black-to-mid-grey divider-light-grey">
+    <main class="bg-black-to-mid-grey divider-light-grey">
       <section class="whitespace-300">
         <h2>Works</h2>
         <div class="measure whitespace-200">
