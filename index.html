@@ -288,6 +288,15 @@
       p {
         overflow-wrap: break-word;
       }
+      /* link text style */
+      a {
+        color: currentColor;
+        text-decoration-thickness: 1px; /* Match the stroke width of Raleway 400 */
+        text-underline-position: under; /* Draw underline below the descender */
+      }
+      [lang="ja"] a {
+        text-decoration-thickness: 0.5px; /* Match the stroke width of Zen Kurenaido 400 */
+      }
       /* Spacing */
       header,
       main > section,
