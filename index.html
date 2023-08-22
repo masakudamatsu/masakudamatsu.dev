@@ -343,6 +343,27 @@
       [lang="ja"] a {
         text-decoration-thickness: 0.5px; /* Match the stroke width of Zen Kurenaido 400 */
       }
+      a:focus {
+        border-color: var(--focusBlueLight);
+        border-style: var(--focus-ring-style);
+        border-width: var(--focus-ring-width);
+        outline: none;
+        padding: 0 var(--focus-ring-width);
+        text-decoration-line: none;
+      }
+      .title-card a:focus {
+        border-color: var(--focusBlueDark);
+      }
+      a.button:focus,
+      a:focus:not(:focus-within) {
+        border: 0;
+        padding: 0;
+        text-decoration-line: underline;
+      }
+      .pill a:focus {
+        border: 0;
+        padding: 0;
+      }
       /* Spacing */
       header,
       main > section,
@@ -385,6 +406,8 @@
         --light-grey: #838383; /* (5.54) ensure 3 to 1 contrast against --white (https://www.siegemedia.com/contrast-ratio#%23767676-on-%23030303) */
         --off-white: #bfbfbf; /* (11.42) ensure 1.5 to 1 contrast against --white */
         --white: #e8e8e8; /* (17.14) base color */
+        --focusBlueDark: #217ee1;
+        --focusBlueLight: #64a3e6;
         --green-black: #06130d; /* (1.11) Hue around 150, Chroma around 5%, Luminance similar to --black */
         --green-grey: #2b3832; /* Hue around 150, Chroma around 5%, and Luminance 1.5 times --black-green */
         --purple-black: #150e1d; /* (1.11) Hue around 270, Chroma around 5%, Luminance similar to --black */
@@ -401,6 +424,10 @@
         --garden-green-light: #528048; /* brighten --garden-green to 4.54 (enough contrast against --white) while keeping chroma intact */
         /* Shape */
         --round-corner: 32px; /* TODO: match it with .pill once the font-family is fixed */
+        /* Focus style */
+        --focus-ring-style: solid;
+        --focus-ring-width: 2px;
+        --focus-ring-offset: 2px;
       }
       /* Measure */
       .measure {
@@ -784,6 +811,18 @@
         fill: var(--black);
         padding: 5px;
       }
+      .button:focus {
+        outline-color: var(--focusBlueDark);
+        outline-offset: var(--focus-ring-offset);
+        outline-style: var(--focus-ring-style);
+        outline-width: var(--focus-ring-width);
+      }
+      .bg-garden .button:focus {
+        outline-color: var(--focusBlueLight);
+      }
+      .button:focus:not(:focus-visible) {
+        outline: none;
+      }
       /* Text Button Block */
       .text-button {
         align-items: center;
@@ -885,6 +924,12 @@
       .pill a {
         color: inherit;
         text-decoration: none;
+      }
+      .pill:focus-within {
+        outline-color: var(--focusBlueDark);
+        outline-offset: var(--focus-ring-offset);
+        outline-style: var(--focus-ring-style);
+        outline-width: var(--focus-ring-width);
       }
       /* Title-card Block */
       .title-card {
