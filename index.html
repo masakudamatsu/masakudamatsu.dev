@@ -343,26 +343,63 @@
       [lang="ja"] a {
         text-decoration-thickness: 0.5px; /* Match the stroke width of Zen Kurenaido 400 */
       }
+      a[target] {
+        --space-for-icon: 1.2em;
+      }
+      p a[target],
+      footer a[target] {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke-width='1.5' stroke='rgb(232,232,232)' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6' /%3E%3Cpath d='M11 13l9 -9' /%3E%3Cpath d='M15 4h5v5' /%3E%3C/svg%3E");
+        background-position: center right;
+        background-repeat: no-repeat;
+        background-size: 1.1em;
+        padding-right: var(--space-for-icon);
+      }
+      [lang="ja"] a[target] {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke-width='1' stroke='rgb(232,232,232)' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6' /%3E%3Cpath d='M11 13l9 -9' /%3E%3Cpath d='M15 4h5v5' /%3E%3C/svg%3E");
+        background-position: center right;
+        background-repeat: no-repeat;
+        background-size: 1.1em;
+        padding-right: var(--space-for-icon);
+      }
+      figcaption a[target] {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke-width='1' stroke='rgb(18,18,18)' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6' /%3E%3Cpath d='M11 13l9 -9' /%3E%3Cpath d='M15 4h5v5' /%3E%3C/svg%3E");
+        background-position: center right;
+        background-repeat: no-repeat;
+        background-size: 1.1em;
+        padding-right: var(--space-for-icon);
+      }
       a:focus {
         border-color: var(--focusBlueLight);
         border-style: var(--focus-ring-style);
         border-width: var(--focus-ring-width);
         outline: none;
-        padding: 0 var(--focus-ring-width);
+        padding-left: var(--focus-ring-width);
+        padding-right: calc(
+          var(--focus-ring-width) + var(--space-for-icon, 0px)
+        );
         text-decoration-line: none;
       }
       .title-card a:focus {
         border-color: var(--focusBlueDark);
       }
-      a.button:focus,
-      a:focus:not(:focus-within) {
+      /* Cancel focus style for button links */
+      a.button:focus {
         border: 0;
-        padding: 0;
-        text-decoration-line: underline;
+        padding-left: 0;
+        padding-right: 0;
       }
+      /* Cancel focus style for pills */
       .pill a:focus {
         border: 0;
-        padding: 0;
+        padding-left: 0;
+        padding-right: var(--space-for-icon, "0px");
+      }
+      /* Cancel focus style for non-keyboard users */
+      a:focus:not(:focus-visible) {
+        border: 0;
+        padding-left: 0;
+        padding-right: var(--space-for-icon, "0px");
+        text-decoration-line: underline;
       }
       /* Spacing */
       header,
@@ -822,6 +859,7 @@
       }
       .button:focus:not(:focus-visible) {
         outline: none;
+        padding-right: 0; /* for link buttons */
       }
       /* Text Button Block */
       .text-button {
@@ -922,8 +960,15 @@
         text-align: center;
       }
       .pill a {
+        /* Style text */
         color: inherit;
         text-decoration: none;
+        /* Add the open-in icon */
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke-width='1' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6' /%3E%3Cpath d='M11 13l9 -9' /%3E%3Cpath d='M15 4h5v5' /%3E%3C/svg%3E");
+        background-position: center right;
+        background-repeat: no-repeat;
+        background-size: 1.1em;
+        padding-right: 1.2em;
       }
       .pill:focus-within {
         outline-color: var(--focusBlueDark);
