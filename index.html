@@ -47,6 +47,12 @@
       textarea {
         font: inherit;
       }
+      button {
+        /* Reset OS-specfic / browser-specific default style (see https://ishadeed.com/article/styling-the-good-old-button/#the-default-styles) */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
       address,
       cite {
         font-style: normal; /* reset the default italic */
