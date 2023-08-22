@@ -47,8 +47,12 @@
       textarea {
         font: inherit;
       }
+      address,
       cite {
         font-style: normal; /* reset the default italic */
+      }
+      small {
+        font-size: inherit; /* reset the default 'smaller' value */
       }
       ul[role="list"] {
         list-style: none;
@@ -84,24 +88,43 @@
       }
       /* Font */
       .blockquote,
+      .font-footer,
       p {
         font-family: Raleway, "Trebuchet MS", sans-serif;
-        font-size: calc(var(--font100-raleway) / 16 * 1rem);
         font-weight: 400;
+      }
+      .blockquote,
+      p {
+        font-size: calc(var(--font100-raleway) / 16 * 1rem);
         line-height: calc(
           (var(--whitespace100) + var(--xHeight)) / var(--font100-raleway)
         );
+      }
+      .font-footer {
+        font-size: calc(var(--font10-raleway) / 16 * 1rem);
+        line-height: calc(
+          (var(--whitespace10) + var(--xHeight10)) / var(--font10-raleway)
+        );
+        max-width: 33em;
       }
       .blockquote.fallback,
       p.fallback {
         letter-spacing: 0.0182em; /* Add 0.35px for the width of "Kyoto-based web developer with UX design best practices in mind" to be equal. */
         word-spacing: -0.0058em; /* Remove 1px for the width of "Kyoto-based web developer with UX design best practices in mind" so it wraps at 692px or below. */
       }
+      .font-footer.fallback {
+        letter-spacing: 0.0115em; /* Add 0.15px */
+        word-spacing: 0.00865em; /* Add 1px which is divided by 9 word spaces in "to custom fonts, and language switched between English and Japanese" */
+      }
       .blockquote blockquote {
         font-style: italic;
       }
       .blockquote::before,
       .blockquote::after,
+      .font-footer::before,
+      .font-footer::after,
+      .footer-title::before,
+      .footer-title::after,
       h1::before,
       h1::after,
       h2::before,
@@ -123,6 +146,12 @@
       p::after {
         margin-top: calc(-7 / 16 * 1rem);
       }
+      .font-footer::before {
+        margin-bottom: calc(-4 / 16 * 1rem);
+      }
+      .font-footer::after {
+        margin-top: calc(-4 / 16 * 1rem);
+      }
       .pill {
         font-family: Raleway, "Trebuchet MS", sans-serif;
         font-size: var(--font10-raleway / 16 * 1rem);
@@ -133,7 +162,8 @@
       }
       h1,
       h2,
-      h3 {
+      h3,
+      .footer-title {
         font-family: "Zen Loop", "Courier New", monospace;
         font-weight: 400;
         text-transform: uppercase;
@@ -224,7 +254,8 @@
       h2::after {
         margin-top: calc(-10 / 16 * 1rem);
       }
-      h3 {
+      h3,
+      .footer-title {
         font-size: calc(var(--font300-zenloop) / 16 * 1rem);
         line-height: calc(
           (
@@ -233,7 +264,8 @@
             ) / var(--font300-zenloop)
         );
       }
-      h3.fallback {
+      h3.fallback,
+      .footer-title.fallback {
         --font300-couriernew: calc(
           var(--font300-zenloop) * (24 / 45)
         ); /* For the width "LINE-HEIGHT PICKER" to be equal, font-size needs to be 24px for Courier New when it's 45px for Zen Loop */
@@ -245,24 +277,29 @@
             ) / var(--font300-couriernew)
         );
       }
-      h3::before {
+      h3::before,
+      .footer-title::before {
         margin-bottom: calc(-5 / 16 * 1rem);
       }
-      h3::after {
+      h3::after,
+      .footer-title::after {
         margin-top: calc(-11 / 16 * 1rem);
       }
       @media screen and (max-width: 21.5625em) {
         /* = 345px / 16 */
-        h3 {
+        h3,
+        .footer-title {
           font-size: calc(var(--font250-zenloop) / 16 * 1rem);
         }
-        h3.fallback {
+        h3.fallback,
+        .footer-title.fallback {
           --font250-couriernew: calc(
             var(--font250-zenloop) * (24 / 45)
           ); /* For the width "LINE-HEIGHT PICKER" to be equal, font-size needs to be 24px for Courier New when it's 45px for Zen Loop */
           font-size: calc(var(--font250-couriernew) / 16 * 1rem);
         }
-        h3::after {
+        h3::after,
+        .footer-title::after {
           margin-top: calc(-9 / 16 * 1rem);
         }
       }
@@ -436,7 +473,7 @@
         --top-left-width: 28px;
         --color-stop-bottom: calc(var(--top-left-height) + var(--line-width));
         --color-stop-right: calc(var(--top-left-width) + var(--line-width));
-        background: 
+        background:
           /* vertical lines */ linear-gradient(
             to right,
             transparent var(--top-left-width),
@@ -727,6 +764,86 @@
         fill: var(--black);
         padding: 5px;
       }
+      /* Text Button Block */
+      .text-button {
+        align-items: center;
+        display: inline-flex;
+        height: var(--minimum-target-size);
+        text-decoration: none; /* disable <a> element's underline */
+      }
+      /* Footer Block */
+      .footer {
+        display: grid;
+        grid-template-areas: "contact" "sitemap" "paragraphs" "copyright";
+        row-gap: calc(var(--whitespace200) / 16 * 1rem);
+      }
+      .footer .footer-paragraphs {
+        padding-top: calc(
+          (var(--minimum-target-size) - var(--xHeight10) * 1px) / 2
+        );
+      }
+      @media screen and (min-width: 468px) {
+        .footer {
+          /* center-align the footer section */
+          grid-template-areas: ". contact ." ". sitemap ." ". paragraphs ." ". copyright .";
+          grid-template-columns:
+            1fr calc(33 * var(--font10-raleway) / 16 * 1rem)
+            1fr;
+        }
+      }
+      @media screen and (min-width: 806px) {
+        .footer {
+          grid-template-areas:
+            ". contact . paragraphs ."
+            ". sitemap . paragraphs .";
+          grid-template-columns:
+            1fr 15.6rem calc(var(--whitespace400) / 16 * 1rem)
+            25.3rem 1fr;
+        }
+        .footer .contact,
+        .footer .sitemap {
+          align-items: flex-end;
+        }
+        .footer .text-button {
+          justify-content: flex-end;
+        }
+        .footer li {
+          text-align: right;
+        }
+        .footer .footer-paragraphs {
+          padding-top: 0;
+        }
+      }
+      /* Contact Block */
+      .contact {
+        grid-area: contact;
+      }
+      .contact ul {
+        margin-top: calc(
+          (var(--minimum-target-size) - var(--xHeight10) * 1px) / 2
+        );
+      }
+      .contact ul > li + li {
+        margin-top: 8px;
+      }
+      .sitemap {
+        grid-area: sitemap;
+      }
+      .sitemap ul > li + li {
+        margin-top: 8px;
+      }
+      .footer-paragraphs {
+        grid-area: paragraphs;
+      }
+      .footer-paragraphs > * + * {
+        margin-top: calc(var(--whitespace100) / 16 * 1rem);
+      }
+      #works,
+      #blog,
+      #about {
+        scroll-margin-top: calc(var(--whitespace400) / 16 * 1rem);
+        /* Reference: https://css-tricks.com/hash-tag-links-padding/#aa-update-just-use-scroll-margin-top */
+      }
       /* pills */
       .pill-container {
         --row-gap: calc(var(--whitespace10) / 16 * 1rem);
@@ -842,7 +959,7 @@
     </header>
     <main>
       <section class="bg-green divider-light-grey whitespace-300">
-        <h2>Works</h2>
+        <h2 id="works">Works</h2>
         <div class="measure whitespace-200">
           <p>
             All designed and coded from scratch by myself, along with test code
@@ -1415,7 +1532,7 @@
         </div>
       </section>
       <section class="bg-purple divider-light-grey whitespace-300">
-        <h2>Blog</h2>
+        <h2 id="blog">Blog</h2>
         <p class="measure whitespace-200">
           I’ve been blogging about web development on
           <a
@@ -1642,7 +1759,7 @@ export const FileUploader = ({handleFile}) => {
                 </div>
               </div>
               <h3>How to customize the file upload button in React</h3>
-              <p>March 2020; Last updated in July 2020</p>
+              <p>March 2020; Last updated in August 2023</p>
               <figure class="blockquote">
                 <blockquote>“very helpful article. thanks :)”</blockquote>
                 <figcaption>
@@ -2085,7 +2202,7 @@ body {
         </div>
       </section>
       <section class="bg-brown divider-light-grey whitespace-300">
-        <h2>About Me</h2>
+        <h2 id="about">About Me</h2>
         <div class="measure whitespace-200">
           <p>
             While my life has been eclectic, I’ve always been interested in the
@@ -2170,14 +2287,59 @@ body {
         </div>
       </section>
     </main>
-    <footer class="whitespace-200 bg-black divider-light-grey">
-      <p>Thank you for scrolling down until the end.</p>
-      <address>
-        Designed and coded from scratch with vanilla HTML/CSS/JavaScript by Masa
-        Kudamatsu (<a href="mailto:masakudamatsu@gmail.com"
-          >masakudamatsu@gmail.com</a
-        >) in Kyoto, Japan. Please feel free to contact me. :-)
+    <footer class="footer bg-black divider-light-grey">
+      <address class="contact">
+        <p class="footer-title">Masa Kudamatsu</p>
+        <ul role="list">
+          <li>
+            <a
+              class="text-button font-footer"
+              href="mailto:masakudamatsu@gmail.com?subject=Sent%20From%20Website"
+              rel="noopener noreferrer"
+              target="_blank"
+              >masakudamatsu@gmail.com</a
+            >
+          </li>
+          <li>
+            <a
+              class="text-button font-footer"
+              href="https://twitter.com/masa_kudamatsu"
+              rel="noopener noreferrer"
+              target="_blank"
+              >Twitter/X (@masa_kudamatsu)</a
+            >
+          </li>
+        </ul>
       </address>
+      <nav class="sitemap">
+        <ul role="list">
+          <li>
+            <a class="text-button font-footer" href="#works">Works</a>
+          </li>
+          <li>
+            <a class="text-button font-footer" href="#blog">Blog</a>
+          </li>
+          <li><a class="text-button font-footer" href="#about">About Me</a></li>
+        </ul>
+      </nav>
+      <div class="footer-paragraphs">
+        <p class="font-footer">Thank you for scrolling down until the end.</p>
+        <p class="font-footer">
+          This site is designed and coded from scratch by myself, with vanilla
+          JavaScript only to
+          <em>progressively enhance</em> the user experiences of viewing videos
+          looping without sound, text swapped from system fonts to custom fonts,
+          and language switched between English and Japanese.
+        </p>
+        <p class="font-footer">
+          No framework such as React is used, to minimize the bundle size so
+          that the user will be able to start experiencing this page as fast as
+          possible.
+        </p>
+        <p class="font-footer">
+          <small>&copy; 2023 Masayuki Kudamatsu</small>
+        </p>
+      </div>
     </footer>
   </body>
   <script>
