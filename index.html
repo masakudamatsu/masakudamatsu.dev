@@ -374,17 +374,17 @@
         /* Video/Image max-width */
         --video-max-width: 624px;
         /* Color scheme */
-        --black: #030303; /* (1) pure black would slow down scrolling on OLED screens (https://twitter.com/marcedwards/status/1053519077958803456) */
-        --mid-grey: #767676; /* (1.1) ensure 4.5 to 1 contrast against #030303 (https://www.siegemedia.com/contrast-ratio#%23767676-on-%23030303) */
-        --light-grey: #949494; /* (1.1.1.1) ensure 3 to 1 contrast against #fefefe (https://www.siegemedia.com/contrast-ratio#%23949494-on-%23fefefe) */
-        --off-white: #d1d1d1; /* (1.1.1.2) ensure 1.5 to 1 contrast against #fefefe (https://www.siegemedia.com/contrast-ratio#%23d1d1d1-on-%23fefefe) */
-        --white: #fefefe; /* (1.1.1) ensure 4.5 to 1 contrast against #767676 (https://www.siegemedia.com/contrast-ratio#%23767676-on-%23fefefe) */
-        --green-black: #000c05; /* Hue around 150, Chroma around 5%, and Luminance 1 */
-        --green-grey: #232f28; /* Hue around 150, Chroma around 5%, and Luminance 1.5 */
-        --purple-black: #05000c; /* Hue around 270, Chroma around 5%, and Luminance 1 */
-        --purple-grey: #302a37; /* Hue around 270, Chroma around 5%, and Luminance 1.5 */
-        --brown-black: #0c0600; /* Hue around 30, Chroma around 5%, and Luminance 1 */
-        --brown-grey: #322c26; /* Hue around 30, Chroma around 5%, and Luminance 1.5 */
+        --black: #121212; /* (1.12) base color */
+        --mid-grey: #646464; /* (3.55) ensure 3 to 1 contrast against --black (https://www.siegemedia.com/contrast-ratio#%23949494-on-%23fefefe) */
+        --light-grey: #838383; /* (5.54) ensure 3 to 1 contrast against --white (https://www.siegemedia.com/contrast-ratio#%23767676-on-%23030303) */
+        --off-white: #bfbfbf; /* (11.42) ensure 1.5 to 1 contrast against --white */
+        --white: #e8e8e8; /* (17.14) base color */
+        --green-black: #06130d; /* (1.11) Hue around 150, Chroma around 5%, Luminance similar to --black */
+        --green-grey: #2b3832; /* Hue around 150, Chroma around 5%, and Luminance 1.5 times --black-green */
+        --purple-black: #150e1d; /* (1.11) Hue around 270, Chroma around 5%, Luminance similar to --black */
+        --purple-grey: #3b3441; /* (1.75) Hue around 270, Chroma around 5%, Luminance 1.5 times --purple-black */
+        --brown-black: #160f09; /* (1.11) Hue around 30, Chroma around 5%, and Luminance similar to --black */
+        --brown-grey: #3c362f; /* (1.76) Hue around 30, Chroma around 5%, and Luminance 1.5 times --black-brown */
         --red: #dc4343; /* chroma 60% while keeping the luminance at the level of pure red */
         --yellow: #fefe65; /* chroma 60% while keeping the luminance at the level of pure yellow */
         --green: #60f960; /* chroma 60% while keeping the luminance at the level of pure green */
