@@ -868,8 +868,15 @@
         align-items: center;
         display: inline-flex;
         height: var(--minimum-target-size);
-        text-decoration: none; /* disable <a> element's underline */
+        text-decoration-line: none; /* disable <a> element's underline */
       }
+      @media (any-hover: hover) {
+        .text-button:hover {
+          text-decoration-line: underline;
+          text-decoration-thickness: 0.5px;
+        }
+      }
+
       /* Footer Block */
       .footer {
         display: grid;
