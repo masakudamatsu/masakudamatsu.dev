@@ -344,7 +344,8 @@
         text-decoration-thickness: 1px; /* Match the stroke width of Raleway 400 */
         text-underline-position: under; /* Draw underline below the descender */
       }
-      [lang="ja"] a {
+      [lang="ja"] a,
+      footer a {
         text-decoration-thickness: 0.5px; /* Match the stroke width of Zen Kurenaido 400 */
       }
       a[target] {
@@ -415,7 +416,6 @@
       @media (any-hover: hover) {
         .text-button:hover {
           text-decoration-line: underline;
-          text-decoration-thickness: 0.5px;
         }
       }
       a:active {
@@ -2428,8 +2428,6 @@ body {
             <a
               class="text-button font-footer"
               href="mailto:masakudamatsu@gmail.com?subject=Sent%20From%20Website"
-              rel="noopener noreferrer"
-              target="_blank"
               >masakudamatsu@gmail.com</a
             >
           </li>
