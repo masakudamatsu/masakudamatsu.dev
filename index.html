@@ -418,6 +418,9 @@
           text-decoration-thickness: 0.5px;
         }
       }
+      a:active {
+        text-decoration-line: none;
+      }
       /* Spacing */
       header,
       main > section,
@@ -875,6 +878,9 @@
       .button:focus:not(:focus-visible) {
         outline: none;
         padding-right: 0; /* for link buttons */
+      }
+      .button:active {
+        transform: scale(0.95);
       }
       /* Footer Block */
       .footer {
