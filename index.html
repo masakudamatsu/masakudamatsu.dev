@@ -313,6 +313,13 @@
           margin-top: calc(-9 / 16 * 1rem);
         }
       }
+      /* Optical alignment */
+      h1,
+      .footer-title {
+        transform: translateX(
+          -0.05em
+        ); /* text-indent does not work as we use ::before for text scropping */
+      }
       p[lang="ja"],
       [lang="ja"] p {
         font-family: "YakuHanJP_Narrow", "Zen Kurenaido", "Helvetica Neue",
