@@ -413,6 +413,9 @@
         height: var(--minimum-target-size);
         text-decoration-line: none; /* disable <a> element's underline */
       }
+      .text-button:focus:not(:focus-visible) {
+        text-decoration-line: none;
+      }
       @media (any-hover: hover) {
         .text-button:hover {
           text-decoration-line: underline;
