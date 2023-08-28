@@ -487,6 +487,7 @@
         --light-grey: #838383; /* (5.54) ensure 3 to 1 contrast against --white (https://www.siegemedia.com/contrast-ratio#%23767676-on-%23030303) */
         --off-white: #bfbfbf; /* (11.42) ensure 1.5 to 1 contrast against --white */
         --white: #e8e8e8; /* (17.14) base color */
+        --pure-white: #fff; /* For section titles to appear as white as body text in --white */
         --focusBlueDark: #217ee1;
         --focusBlueLight: #64a3e6;
         --green-black: #06130d; /* (1.11) Hue around 150, Chroma around 5%, Luminance similar to --black */
@@ -627,6 +628,9 @@
       /* Color */
       .color-white {
         color: var(--white);
+      }
+      .color-pure-white {
+        color: var(--pure-white);
       }
       .color-black {
         color: var(--black);
@@ -1120,7 +1124,7 @@
     <main>
       <section class="bg-green divider-light-grey whitespace-300">
         <div class="measure whitespace-300">
-          <h2 id="works">Works</h2>
+          <h2 class="color-pure-white" id="works">Works</h2>
           <div class="whitespace-200">
             <p>
               All designed and coded from scratch by myself, along with test
@@ -1695,7 +1699,7 @@
       </section>
       <section class="bg-purple divider-light-grey whitespace-300">
         <div class="measure whitespace-300">
-          <h2 id="blog">Blog</h2>
+          <h2 class="color-pure-white" id="blog">Blog</h2>
           <p class="whitespace-200">
             I’ve been blogging about web development on
             <a
@@ -2366,7 +2370,7 @@ body {
       </section>
       <section class="bg-brown divider-light-grey">
         <div class="measure whitespace-300">
-          <h2 id="about">About Me</h2>
+          <h2 class="color-pure-white" id="about">About Me</h2>
           <div class="whitespace-200">
             <p>
               While my life has been eclectic, I’ve always been interested in
