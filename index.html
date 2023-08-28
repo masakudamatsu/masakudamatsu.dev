@@ -639,9 +639,6 @@
       .transparent {
         opacity: 0;
       }
-      .removed-if-js-disabled {
-        visibility: hidden; /* for JS-disabled users; "display: none" would be overridden with "display: flex" for playback buttons  */
-      }
       /* Video block */
       /* Prevent layout shift in Safari when first playing the video (source: https://www.amitmerchant.com/prevent-image-layout-shift-using-this-simple-css-hack/) */
       .video {
@@ -661,6 +658,9 @@
       .video img {
         transition: opacity 500ms linear;
         z-index: 1; /* hide the video until it's fully loaded */
+      }
+      .video img.removed-if-js-disabled {
+        display: none;
       }
       /* Placeholder image */
       .video[data-variant="line-height-picker"] {
@@ -885,6 +885,9 @@
         border-radius: 4px;
         height: var(--minimum-target-size);
         width: var(--minimum-target-size);
+      }
+      .button.removed-if-js-disabled {
+        display: none;
       }
       .button[disabled] {
         cursor: not-allowed;
