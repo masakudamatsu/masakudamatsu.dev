@@ -27,6 +27,16 @@
       * {
         margin: 0;
       }
+      /* 
+        Enable kerning and ligature 
+         https://helpx.adobe.com/fonts/using/open-type-syntax.html#kern
+         https://helpx.adobe.com/fonts/using/open-type-syntax.html#liga 
+         https://helpx.adobe.com/fonts/using/open-type-syntax.html#calt
+      */
+      :root {
+        font-kerning: normal;
+        font-variant-ligatures: common-ligatures contextual;
+      }
       body {
         /* Disable MacOS browsers' default subpixel antialising (see https://www.joshwcomeau.com/css/custom-css-reset/#four-font-smoothing-5) */
         -webkit-font-smoothing: antialiased;
