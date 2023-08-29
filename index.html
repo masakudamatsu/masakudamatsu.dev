@@ -66,6 +66,7 @@
         -moz-appearance: none;
         appearance: none;
         border: 0;
+        color: inherit;
         padding: 0;
         /* To indicate interactivity */
         cursor: pointer;
@@ -112,11 +113,13 @@
       /* Font */
       .blockquote,
       .font-footer,
+      .language-selector,
       p {
         font-family: Raleway, "Trebuchet MS", sans-serif;
         font-weight: 400;
       }
       .blockquote,
+      .language-selector,
       p {
         font-size: calc(var(--font100-raleway) / 16 * 1rem);
         line-height: calc(
@@ -148,6 +151,8 @@
       .font-footer::after,
       .footer-title::before,
       .footer-title::after,
+      .language-selector::before,
+      .language-selector::after,
       h1::before,
       h1::after,
       h2::before,
@@ -169,6 +174,14 @@
       p::after {
         margin-top: calc(-7 / 16 * 1rem);
       }
+      /* 
+      for some reason, text crop behaves differently between <p> and <button>.
+      we don't need to crop text for buttons to achieve the desired vertical spacing.
+      .language-selector::before {
+      }
+      .language-selector::after {
+      } 
+      */
       .font-footer::before {
         margin-bottom: calc(-4 / 16 * 1rem);
       }
@@ -362,7 +375,8 @@
         overflow-wrap: break-word;
       }
       /* link text style */
-      a {
+      a,
+      .language-selector {
         color: currentColor;
         text-decoration-thickness: 1px; /* Match the stroke width of Raleway 400 */
         text-underline-position: under; /* Draw underline below the descender */
@@ -1092,6 +1106,56 @@
           0px 0px 2px rgba(0, 0, 0, 0.15), 0px 0px 4px rgba(0, 0, 0, 0.15),
           0px 0px 8px rgba(0, 0, 0, 0.15);
       }
+      /* Paragraph-wrapper block */
+      .paragraph-wrapper {
+        --duration-enter: 250ms;
+        --duration-exit: 150ms;
+        --ease-in: cubic-bezier(0, 0, 0.2, 1);
+        --ease-out: cubic-bezier(0.4, 0, 1, 1);
+        position: relative;
+      }
+      .paragraph-wrapper[data-status="js-enabled"] div[lang="ja"],
+      .paragraph-wrapper[data-status="english"] div[lang="ja"],
+      .paragraph-wrapper[data-status="japanese"] div[lang="ja"] {
+        position: absolute;
+        top: 0;
+        transform: translateY(0.3em); /* Match the first line of text */
+      }
+      .paragraph-wrapper[data-status="js-enabled"] div[lang="ja"] {
+        opacity: 0;
+        pointer-events: none;
+      }
+      /* Transition to Japanese */
+      .paragraph-wrapper[data-status="japanese"] div:first-of-type {
+        opacity: 0;
+        transition: opacity var(--duration-exit) var(--ease-out);
+      }
+      .paragraph-wrapper[data-status="japanese"] div[lang="ja"] {
+        opacity: 1;
+        pointer-events: auto;
+        transition: opacity var(--duration-enter) var(--ease-in)
+          var(--duration-exit);
+      }
+      /* Transition back to English */
+      .paragraph-wrapper[data-status="english"] div[lang="ja"] {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--duration-exit) var(--ease-out);
+      }
+      .paragraph-wrapper[data-status="english"] div:first-of-type {
+        opacity: 1;
+        transition: opacity var(--duration-enter) var(--ease-in)
+          var(--duration-exit);
+      }
+      /* Language selector block */
+      .language-selector {
+        background-color: inherit;
+        text-align: start;
+        text-decoration-line: underline;
+      }
+      .language-selector.removed-if-js-disabled {
+        display: none;
+      }
     </style>
     <!-- Asynchronously load CSS stylesheet (https://web.dev/defer-non-critical-css/#optimize)-->
     <link
@@ -1117,26 +1181,61 @@
   <body class="color-white">
     <header class="whitespace-300 bg-black">
       <h1>Masa Kudamatsu</h1>
-      <div class="whitespace-200">
-        <p>Kyoto-based web developer with UX design best practices in mind</p>
-        <p lang="ja">
-          最良のユーザー体験を実現するためにコードを書く、京都在住のWebエンジニア
-        </p>
+      <div class="paragraph-wrapper whitespace-300" data-status="js-disabled">
+        <div class="whitespace-200">
+          <p>Kyoto-based web developer with UX design best practices in mind</p>
+          <button
+            class="language-selector removed-if-js-disabled"
+            type="button"
+          >
+            Japanese
+          </button>
+        </div>
+        <div class="measure whitespace-200" lang="ja">
+          <p>
+            最良のユーザー体験を実現するためにコードを書く、京都在住のWebエンジニア
+          </p>
+          <button
+            class="language-selector removed-if-js-disabled"
+            type="button"
+          >
+            English
+          </button>
+        </div>
       </div>
     </header>
     <main>
       <section class="bg-green divider-light-grey whitespace-300">
         <div class="measure whitespace-300">
           <h2 class="color-pure-white" id="works">Works</h2>
-          <div class="whitespace-200">
-            <p>
-              All designed and coded from scratch by myself, along with test
-              code in Jest, Cypress, and Testing Library
-            </p>
-            <p lang="ja">
-              全て、テンプレートを使わずにデザインとコーディングをしています。また、Jest、Cypress、及び、Testing
-              Library を用いて、テストコードも書いています。
-            </p>
+          <div
+            class="paragraph-wrapper whitespace-300"
+            data-status="js-disabled"
+          >
+            <div class="whitespace-200">
+              <p>
+                All designed and coded from scratch by myself, along with test
+                code in Jest, Cypress, and Testing Library
+              </p>
+              <button
+                class="language-selector removed-if-js-disabled"
+                type="button"
+              >
+                Japanese
+              </button>
+            </div>
+            <div class="measure whitespace-200" lang="ja">
+              <p>
+                全て、テンプレートを使わずにデザインとコーディングをしています。また、Jest、Cypress、及び、Testing
+                Library を用いて、テストコードも書いています。
+              </p>
+              <button
+                class="language-selector removed-if-js-disabled"
+                type="button"
+              >
+                English
+              </button>
+            </div>
           </div>
         </div>
         <div class="alternate-position whitespace-300">
@@ -1326,14 +1425,33 @@
                 <h3>Line-height Picker</h3>
                 <p>March–July 2020</p>
               </div>
-              <div class="whitespace-200">
-                <p>
-                  A web tool to help set the line-height of paragraph text
-                  beautifully
-                </p>
-                <p lang="ja">
-                  欧文フォントの行間を小文字のエックスの高さとの比で指定するためのWebツール
-                </p>
+              <div
+                class="paragraph-wrapper whitespace-300"
+                data-status="js-disabled"
+              >
+                <div class="whitespace-200">
+                  <p>
+                    A web tool to help set the line-height of paragraph text
+                    beautifully
+                  </p>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    Japanese
+                  </button>
+                </div>
+                <div class="measure whitespace-200" lang="ja">
+                  <p>
+                    欧文フォントの行間を小文字のエックスの高さとの比で指定するためのWebツール
+                  </p>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    English
+                  </button>
+                </div>
               </div>
               <ul role="list" class="pill-container">
                 <li class="pill">React</li>
@@ -1447,11 +1565,32 @@
                 <h3>Triangulum Color Picker</h3>
                 <p>December 2020–March 2021</p>
               </div>
-              <div class="whitespace-200">
-                <p>A web tool to help pick accessible and harmonious colors</p>
-                <p lang="ja">
-                  色コードを入力すると、アクセシビリティーのために役立つ黒との明度差、及び、他の色と調和するかどうかの基準として利用できる準食の含有割合を表示するWebツール。
-                </p>
+              <div
+                class="paragraph-wrapper whitespace-300"
+                data-status="js-disabled"
+              >
+                <div class="whitespace-200">
+                  <p>
+                    A web tool to help pick accessible and harmonious colors
+                  </p>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    Japanese
+                  </button>
+                </div>
+                <div class="measure whitespace-200" lang="ja">
+                  <p>
+                    色コードを入力すると、アクセシビリティーのために役立つ黒との明度差、及び、他の色と調和するかどうかの基準として利用できる準食の含有割合を表示するWebツール。
+                  </p>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    English
+                  </button>
+                </div>
               </div>
               <ul role="list" class="pill-container">
                 <li class="pill">Canvas API</li>
@@ -1560,14 +1699,33 @@
 
                 <p>June–August 2021</p>
               </div>
-              <div class="whitespace-200">
-                <p>
-                  A blog on historical Japanese garden design, presented like a
-                  hanging scroll
-                </p>
-                <p lang="ja">
-                  日本の名庭園のデザイン意図を深読みするブログ。掛軸をモチーフにUIをデザイン。
-                </p>
+              <div
+                class="paragraph-wrapper whitespace-300"
+                data-status="js-disabled"
+              >
+                <div class="whitespace-200">
+                  <p>
+                    A blog on historical Japanese garden design, presented like
+                    a hanging scroll
+                  </p>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    Japanese
+                  </button>
+                </div>
+                <div class="measure whitespace-200" lang="ja">
+                  <p>
+                    日本の名庭園のデザイン意図を深読みするブログ。掛軸をモチーフにUIをデザイン。
+                  </p>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    English
+                  </button>
+                </div>
               </div>
               <ul role="list" class="pill-container">
                 <li class="pill">React</li>
@@ -1661,16 +1819,35 @@
                 <h3>My Ideal Map</h3>
                 <p>August – December 2021, August 2022 — present</p>
               </div>
-              <div class="whitespace-200">
-                <p>
-                  A full-stack web app that allows the user to save places on
-                  the embedded Google Maps with links to external sites. I’m
-                  planning on making the app available to the public by the end
-                  of this year.
-                </p>
-                <p lang="ja">
-                  Googleマップ上の場所を保存する際のメモにリンクを貼ることができる、Webアプリ。今年中に一般公開予定。
-                </p>
+              <div
+                class="paragraph-wrapper whitespace-300"
+                data-status="js-disabled"
+              >
+                <div class="whitespace-200">
+                  <p>
+                    A full-stack web app that allows the user to save places on
+                    the embedded Google Maps with links to external sites. I’m
+                    planning on making the app available to the public by the
+                    end of this year.
+                  </p>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    Japanese
+                  </button>
+                </div>
+                <div class="measure whitespace-200" lang="ja">
+                  <p>
+                    Googleマップ上の場所を保存する際のメモにリンクを貼ることができる、Webアプリ。今年中に一般公開予定。
+                  </p>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    English
+                  </button>
+                </div>
               </div>
               <ul role="list" class="pill-container">
                 <li class="pill">Geolocation API</li>
@@ -2374,87 +2551,104 @@ body {
       <section class="bg-brown divider-light-grey">
         <div class="measure whitespace-300">
           <h2 class="color-pure-white" id="about">About Me</h2>
-          <div class="whitespace-200">
-            <p>
-              While my life has been eclectic, I’ve always been interested in
-              the use of “metaphors”.
-            </p>
-            <p>
-              Since 2019, I have been learning web development (initially at
-              <a
-                href="https://www.codecademy.com/learn/paths/full-stack-engineer-career-path"
-                rel="noopener noreferrer"
-                target="_blank"
-                >CodeCademy</a
-              >,
-              <a
-                href="https://epicreact.dev"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Epic React</a
-              >, and
-              <a
-                href="https://testingjavascript.com"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Testing JavaScript</a
-              >; and then on a learning-by-doing basis) because web developers
-              use code as “metaphors” for user interface and user experience.
-            </p>
-            <p>
-              I studied interior design (at Inchbald School of Design,
-              2014–2015) because designers use shapes and textures as
-              “metaphors” for human feelings.
-            </p>
-            <p>
-              I did my PhD in economics (at London School of Economics,
-              2002–2007) because economists use mathematics as “metaphors” for
-              human decision-making.
-            </p>
-            <p>
-              My previous career as an academic data analyst (at Stockholm
-              University, 2007–2015, and at Osaka University, 2016–2019) helped
-              me acquire coding skills and the mindset to keep up with the
-              latest methodologies, both of which have been beneficial as I
-              learn web development.
-            </p>
-            <p>
-              On days off, I enjoy listening to eclectic genres of music
-              (classical, drum and bass, visual-kei rock, hiphop and R&B, etc.),
-              dancing salsa and bachata, learning tea ceremony, cycling around
-              Kyoto, and uploading seasonal photographs to
-              <a
-                href="https://www.instagram.com/masakudamatsu/"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Instagram (@masakudamatsu)</a
-              >.
-            </p>
-          </div>
-          <div class="measure whitespace-200" lang="ja">
-            <p>
-              これまでの人生を振り返ると、「比喩」への関心だけはブレていないことに気づきます。
-            </p>
-            <p>
-              2019年以降、ウェブサイトを作り続けてきたのは、コードを「比喩」として用いて、ユーザー体験を表現できるから。
-            </p>
-            <p>
-              ロンドンのデザインスクールでインテリアデザインを1年間（2014–2015年）学んだのは、形と質感を「比喩」として用いて、空間や家具から伝わってくるメッセージを表現できたから。
-            </p>
-            <p>
-              5年間のロンドン留学（2002–2007年）で経済学の博士号を取ったのは、数学を「比喩」として用いて、人間の行動を記述することができたから。
-            </p>
-            <p>
-              データ分析を得意とする学術研究者として、ストックホルム大学（2007–2015年）と大阪大学（2016–2019年）で働いた経験から、プログラミングスキル、及び、知識を常にアップデートする姿勢を学び、どちらもウェブサイト作成に生かされています。
-            </p>
-            <p>
-              休みの日には、様々なジャンルの音楽を聴いたり、サルサやバチャータを踊ったり、茶の湯を習ったり、サイクリングで京都を見て回ったり、季節の写真を<a
-                href="https://www.instagram.com/masakudamatsu/"
-                rel="noopener noreferrer"
-                target="_blank"
-                >インスタグラム（@masakudamatsu）</a
-              >にアップしたりしています。
-            </p>
+          <div
+            class="paragraph-wrapper whitespace-300"
+            data-status="js-disabled"
+          >
+            <div class="whitespace-200">
+              <p>
+                While my life has been eclectic, I’ve always been interested in
+                the use of “metaphors”.
+              </p>
+              <p>
+                Since 2019, I have been learning web development (initially at
+                <a
+                  href="https://www.codecademy.com/learn/paths/full-stack-engineer-career-path"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >CodeCademy</a
+                >,
+                <a
+                  href="https://epicreact.dev"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Epic React</a
+                >, and
+                <a
+                  href="https://testingjavascript.com"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Testing JavaScript</a
+                >; and then on a learning-by-doing basis) because web developers
+                use code as “metaphors” for user interface and user experience.
+              </p>
+              <p>
+                I studied interior design (at Inchbald School of Design,
+                2014–2015) because designers use shapes and textures as
+                “metaphors” for human feelings.
+              </p>
+              <p>
+                I did my PhD in economics (at London School of Economics,
+                2002–2007) because economists use mathematics as “metaphors” for
+                human decision-making.
+              </p>
+              <p>
+                My previous career as an academic data analyst (at Stockholm
+                University, 2007–2015, and at Osaka University, 2016–2019)
+                helped me acquire coding skills and the mindset to keep up with
+                the latest methodologies, both of which have been beneficial as
+                I learn web development.
+              </p>
+              <p>
+                On days off, I enjoy listening to eclectic genres of music
+                (classical, drum and bass, visual-kei rock, hiphop and R&B,
+                etc.), dancing salsa and bachata, learning tea ceremony, cycling
+                around Kyoto, and uploading seasonal photographs to
+                <a
+                  href="https://www.instagram.com/masakudamatsu/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Instagram (@masakudamatsu)</a
+                >.
+              </p>
+              <button
+                class="language-selector removed-if-js-disabled"
+                type="button"
+              >
+                Japanese
+              </button>
+            </div>
+            <div class="measure whitespace-200" lang="ja">
+              <p>
+                これまでの人生を振り返ると、「比喩」への関心だけはブレていないことに気づきます。
+              </p>
+              <p>
+                2019年以降、ウェブサイトを作り続けてきたのは、コードを「比喩」として用いて、ユーザー体験を表現できるから。
+              </p>
+              <p>
+                ロンドンのデザインスクールでインテリアデザインを1年間（2014–2015年）学んだのは、形と質感を「比喩」として用いて、空間や家具から伝わってくるメッセージを表現できたから。
+              </p>
+              <p>
+                5年間のロンドン留学（2002–2007年）で経済学の博士号を取ったのは、数学を「比喩」として用いて、人間の行動を記述することができたから。
+              </p>
+              <p>
+                データ分析を得意とする学術研究者として、ストックホルム大学（2007–2015年）と大阪大学（2016–2019年）で働いた経験から、プログラミングスキル、及び、知識を常にアップデートする姿勢を学び、どちらもウェブサイト作成に生かされています。
+              </p>
+              <p>
+                休みの日には、様々なジャンルの音楽を聴いたり、サルサやバチャータを踊ったり、茶の湯を習ったり、サイクリングで京都を見て回ったり、季節の写真を<a
+                  href="https://www.instagram.com/masakudamatsu/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >インスタグラム（@masakudamatsu）</a
+                >にアップしたりしています。
+              </p>
+              <button
+                class="language-selector removed-if-js-disabled"
+                type="button"
+              >
+                English
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -2513,6 +2707,32 @@ body {
     </footer>
   </body>
   <script>
+    // Language selector
+    const paragraphWrappers = document.querySelectorAll(".paragraph-wrapper");
+    paragraphWrappers.forEach((paragraphWrapper) => {
+      paragraphWrapper.classList.remove("whitespace-300");
+      paragraphWrapper.dataset.status = "js-enabled";
+    });
+    const languageSelectors = document.querySelectorAll(".language-selector");
+    languageSelectors.forEach((languageSelector) => {
+      languageSelector.classList.remove("removed-if-js-disabled");
+      languageSelector.addEventListener("click", () => {
+        paragraphWrappers.forEach((paragraphWrapper) => {
+          if (
+            paragraphWrapper.dataset.status === "js-enabled" ||
+            paragraphWrapper.dataset.status === "english"
+          ) {
+            paragraphWrapper.dataset.status = "japanese";
+          } else if (paragraphWrapper.dataset.status === "japanese") {
+            paragraphWrapper.dataset.status = "english";
+          } else {
+            console.error(
+              "paragraph-wrapper data-status value is not english or japanese."
+            );
+          }
+        });
+      });
+    });
     // Fallback font styling
     const zenloopElements = document.querySelectorAll("h1, h2 ,h3");
     const ralewayElements = document.querySelectorAll("p, .blockquote");
