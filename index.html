@@ -894,11 +894,17 @@
         justify-content: center;
         /* Texture */
         background: var(--white);
+        color: var(
+          --mid-grey
+        ); /* to control SVG icon's stroke="currentColor" */
         fill: var(--mid-grey);
         /* Shape */
         border-radius: 4px;
         height: var(--minimum-target-size);
         width: var(--minimum-target-size);
+      }
+      .button svg {
+        width: 100%; /* Necessary for Safari to render <svg> without height/width attributes */
       }
       .button.removed-if-js-disabled {
         display: none;
@@ -1383,18 +1389,19 @@
               disabled
               type="button"
             >
-              <!-- Material Icon "Progress Activity" https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aprogress_activity%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
+              <!-- Tabler Icons loader-2 https://tabler-icons.io/i/loader-2 -->
               <svg
                 aria-hidden="true"
                 class="spinning"
-                xmlns="http://www.w3.org/2000/svg"
-                height="48"
-                viewBox="0 -960 960 960"
-                width="48"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1"
+                viewBox="0 0 24 24"
               >
-                <path
-                  d="M480-80q-84 0-157-31t-127-85q-54-54-85-127T80-480q0-84 31-157t85-127q54-54 127-85t157-31q12 0 21 9t9 21q0 12-9 21t-21 9q-141 0-240.5 99.5T140-480q0 141 99.5 240.5T480-140q141 0 240.5-99.5T820-480q0-12 9-21t21-9q12 0 21 9t9 21q0 84-31 157t-85 127q-54 54-127 85T480-80Z"
-                />
+                <path d="M12 3a9 9 0 1 0 9 9"></path>
+                <path d=""></path>
               </svg>
             </button>
             <div class="buttonGroup">
@@ -1406,17 +1413,21 @@
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <!-- downloaded from https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aopen_in_new%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
+                <!-- Tabler Icon external-link https://tabler-icons.io/i/external-link -->
                 <svg
                   aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="48"
-                  viewBox="0 -960 960 960"
-                  width="48"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  viewBox="0 0 24 24"
                 >
                   <path
-                    d="M180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h279v60H180v600h600v-279h60v279q0 24-18 42t-42 18H180Zm202-219-42-43 398-398H519v-60h321v321h-60v-218L382-339Z"
-                  />
+                    d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
+                  ></path>
+                  <path d="M11 13l9 -9"></path>
+                  <path d="M15 4h5v5"></path>
                 </svg>
               </a>
               <a
@@ -1427,17 +1438,19 @@
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <!-- downloaded from https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Acode%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
+                <!-- Tabler Icon code https://tabler-icons.io/i/code -->
                 <svg
                   aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="48"
-                  viewBox="0 -960 960 960"
-                  width="48"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  viewBox="0 0 24 24"
                 >
-                  <path
-                    d="M320-242 80-482l242-242 43 43-199 199 197 197-43 43Zm318 2-43-43 199-199-197-197 43-43 240 240-242 242Z"
-                  />
+                  <path d="M7 8l-4 4l4 4"></path>
+                  <path d="M17 8l4 4l-4 4"></path>
+                  <path d="M14 4l-4 16"></path>
                 </svg>
               </a>
             </div>
@@ -1523,18 +1536,19 @@
               disabled
               type="button"
             >
-              <!-- Material Icon "Progress Activity" https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aprogress_activity%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
+              <!-- Tabler Icons loader-2 https://tabler-icons.io/i/loader-2 -->
               <svg
                 aria-hidden="true"
                 class="spinning"
-                xmlns="http://www.w3.org/2000/svg"
-                height="48"
-                viewBox="0 -960 960 960"
-                width="48"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1"
+                viewBox="0 0 24 24"
               >
-                <path
-                  d="M480-80q-84 0-157-31t-127-85q-54-54-85-127T80-480q0-84 31-157t85-127q54-54 127-85t157-31q12 0 21 9t9 21q0 12-9 21t-21 9q-141 0-240.5 99.5T140-480q0 141 99.5 240.5T480-140q141 0 240.5-99.5T820-480q0-12 9-21t21-9q12 0 21 9t9 21q0 84-31 157t-85 127q-54 54-127 85T480-80Z"
-                />
+                <path d="M12 3a9 9 0 1 0 9 9"></path>
+                <path d=""></path>
               </svg>
             </button>
             <div class="buttonGroup">
@@ -1546,17 +1560,21 @@
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <!-- downloaded from https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aopen_in_new%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
+                <!-- Tabler Icon external-link https://tabler-icons.io/i/external-link -->
                 <svg
                   aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="48"
-                  viewBox="0 -960 960 960"
-                  width="48"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  viewBox="0 0 24 24"
                 >
                   <path
-                    d="M180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h279v60H180v600h600v-279h60v279q0 24-18 42t-42 18H180Zm202-219-42-43 398-398H519v-60h321v321h-60v-218L382-339Z"
-                  />
+                    d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
+                  ></path>
+                  <path d="M11 13l9 -9"></path>
+                  <path d="M15 4h5v5"></path>
                 </svg>
               </a>
               <a
@@ -1567,17 +1585,19 @@
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <!-- downloaded from https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Acode%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
+                <!-- Tabler Icon code https://tabler-icons.io/i/code -->
                 <svg
                   aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="48"
-                  viewBox="0 -960 960 960"
-                  width="48"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  viewBox="0 0 24 24"
                 >
-                  <path
-                    d="M320-242 80-482l242-242 43 43-199 199 197 197-43 43Zm318 2-43-43 199-199-197-197 43-43 240 240-242 242Z"
-                  />
+                  <path d="M7 8l-4 4l4 4"></path>
+                  <path d="M17 8l4 4l-4 4"></path>
+                  <path d="M14 4l-4 16"></path>
                 </svg>
               </a>
             </div>
@@ -1656,18 +1676,19 @@
               disabled
               type="button"
             >
-              <!-- Material Icon "Progress Activity" https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aprogress_activity%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
+              <!-- Tabler Icons loader-2 https://tabler-icons.io/i/loader-2 -->
               <svg
                 aria-hidden="true"
                 class="spinning"
-                xmlns="http://www.w3.org/2000/svg"
-                height="48"
-                viewBox="0 -960 960 960"
-                width="48"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1"
+                viewBox="0 0 24 24"
               >
-                <path
-                  d="M480-80q-84 0-157-31t-127-85q-54-54-85-127T80-480q0-84 31-157t85-127q54-54 127-85t157-31q12 0 21 9t9 21q0 12-9 21t-21 9q-141 0-240.5 99.5T140-480q0 141 99.5 240.5T480-140q141 0 240.5-99.5T820-480q0-12 9-21t21-9q12 0 21 9t9 21q0 84-31 157t-85 127q-54 54-127 85T480-80Z"
-                />
+                <path d="M12 3a9 9 0 1 0 9 9"></path>
+                <path d=""></path>
               </svg>
             </button>
             <div class="buttonGroup">
@@ -1679,17 +1700,21 @@
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <!-- downloaded from https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aopen_in_new%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
+                <!-- Tabler Icon external-link https://tabler-icons.io/i/external-link -->
                 <svg
                   aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="48"
-                  viewBox="0 -960 960 960"
-                  width="48"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  viewBox="0 0 24 24"
                 >
                   <path
-                    d="M180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h279v60H180v600h600v-279h60v279q0 24-18 42t-42 18H180Zm202-219-42-43 398-398H519v-60h321v321h-60v-218L382-339Z"
-                  />
+                    d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
+                  ></path>
+                  <path d="M11 13l9 -9"></path>
+                  <path d="M15 4h5v5"></path>
                 </svg>
               </a>
               <a
@@ -1700,17 +1725,19 @@
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <!-- downloaded from https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Acode%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
+                <!-- Tabler Icon code https://tabler-icons.io/i/code -->
                 <svg
                   aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="48"
-                  viewBox="0 -960 960 960"
-                  width="48"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  viewBox="0 0 24 24"
                 >
-                  <path
-                    d="M320-242 80-482l242-242 43 43-199 199 197 197-43 43Zm318 2-43-43 199-199-197-197 43-43 240 240-242 242Z"
-                  />
+                  <path d="M7 8l-4 4l4 4"></path>
+                  <path d="M17 8l4 4l-4 4"></path>
+                  <path d="M14 4l-4 16"></path>
                 </svg>
               </a>
             </div>
@@ -1798,18 +1825,19 @@
               disabled
               type="button"
             >
-              <!-- Material Icon "Progress Activity" https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aprogress_activity%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
+              <!-- Tabler Icons loader-2 https://tabler-icons.io/i/loader-2 -->
               <svg
                 aria-hidden="true"
                 class="spinning"
-                xmlns="http://www.w3.org/2000/svg"
-                height="48"
-                viewBox="0 -960 960 960"
-                width="48"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1"
+                viewBox="0 0 24 24"
               >
-                <path
-                  d="M480-80q-84 0-157-31t-127-85q-54-54-85-127T80-480q0-84 31-157t85-127q54-54 127-85t157-31q12 0 21 9t9 21q0 12-9 21t-21 9q-141 0-240.5 99.5T140-480q0 141 99.5 240.5T480-140q141 0 240.5-99.5T820-480q0-12 9-21t21-9q12 0 21 9t9 21q0 84-31 157t-85 127q-54 54-127 85T480-80Z"
-                />
+                <path d="M12 3a9 9 0 1 0 9 9"></path>
+                <path d=""></path>
               </svg>
             </button>
             <div class="buttonGroup">
@@ -1821,17 +1849,21 @@
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <!-- downloaded from https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aopen_in_new%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 -->
+                <!-- Tabler Icon external-link https://tabler-icons.io/i/external-link -->
                 <svg
                   aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="48"
-                  viewBox="0 -960 960 960"
-                  width="48"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  viewBox="0 0 24 24"
                 >
                   <path
-                    d="M180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h279v60H180v600h600v-279h60v279q0 24-18 42t-42 18H180Zm202-219-42-43 398-398H519v-60h321v321h-60v-218L382-339Z"
-                  />
+                    d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
+                  ></path>
+                  <path d="M11 13l9 -9"></path>
+                  <path d="M15 4h5v5"></path>
                 </svg>
               </a>
             </div>
@@ -2878,19 +2910,26 @@ body {
 
         // toggle playbackButton label in response to video playing status
         videos[i].addEventListener("play", function () {
+          // Tabler Icon player-pause https://tabler-icons.io/i/player-pause
           playbackButtons[i].children[0].children[0].setAttribute(
             "d",
-            "M525-200v-560h235v560H525Zm-325 0v-560h235v560H200Zm385-60h115v-440H585v440Zm-325 0h115v-440H260v440Zm0-440v440-440Zm325 0v440-440Z"
-          ); /* Material Icon "Pause", https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Apause%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 */
+            "M6 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"
+          );
+          playbackButtons[i].children[0].children[1].setAttribute(
+            "d",
+            "M14 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"
+          );
           playbackButtons[i].ariaLabel = `Pause ${playbackButtons[
             i
           ].ariaLabel.slice(5)}`; // drop "Play " at the beginning
         });
         videos[i].addEventListener("pause", function () {
+          // Tabler Icon player-play https://tabler-icons.io/i/player-play
           playbackButtons[i].children[0].children[0].setAttribute(
             "d",
-            "M320-203v-560l440 280-440 280Zm60-280Zm0 171 269-171-269-171v342Z"
-          ); /* Material Icon "Play Arrow", https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aplay_arrow%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048 */
+            "M7 4v16l13 -8z"
+          );
+          playbackButtons[i].children[0].children[1].setAttribute("d", "");
           playbackButtons[i].ariaLabel = `Play ${playbackButtons[
             i
           ].ariaLabel.slice(6)}`; // drop "Pause " at the beginning
