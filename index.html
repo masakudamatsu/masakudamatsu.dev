@@ -1044,7 +1044,11 @@
         background-size: 1.1em;
         padding-right: 1.2em;
       }
-      .pill:focus-within {
+      .pill:has(:focus-visible) {
+        /*
+          This pseudo selector is the `focus-visible` version of `:focus-within`. 
+          See https://larsmagnus.co/blog/focus-visible-within-the-missing-pseudo-class 
+        */
         outline-color: var(--focusBlueDark);
         outline-offset: var(--focus-ring-offset);
         outline-style: var(--focus-ring-style);
