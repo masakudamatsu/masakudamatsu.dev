@@ -71,6 +71,19 @@
         /* To indicate interactivity */
         cursor: pointer;
       }
+      /* Make "active" state style in iOS Safari and Android Chrome consistent  */
+      a,
+      button {
+        -webkit-tap-highlight-color: var(
+          --light-grey
+        ); /* if background is --black */
+      }
+      .button,
+      .leaf-card a {
+        -webkit-tap-highlight-color: var(
+          --mid-grey
+        ); /* if background is --white */
+      }
       address,
       cite {
         font-style: normal; /* reset the default italic */
