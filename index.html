@@ -1103,18 +1103,6 @@
           /* 11px at 1217px wide screens; 16px at 1633px wide screens or wider */
         }
       }
-      /* spinning animation */
-      .spinning {
-        animation: rotation 1s linear infinite;
-      }
-      @keyframes rotation {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
       /* Shadow utility */
       .shadow {
         /* Layerd shadow approach: https://tobiasahlin.com/blog/layered-smooth-box-shadows/ */
@@ -1122,12 +1110,15 @@
           0px 0px 2px rgba(0, 0, 0, 0.15), 0px 0px 4px rgba(0, 0, 0, 0.15),
           0px 0px 8px rgba(0, 0, 0, 0.15);
       }
+      /* Animation */
+      :root {
+        --ease-in: cubic-bezier(0, 0, 0.2, 1);
+        --ease-out: cubic-bezier(0.4, 0, 1, 1);
+      }
       /* Paragraph-wrapper block */
       .paragraph-wrapper {
         --duration-enter: 250ms;
         --duration-exit: 150ms;
-        --ease-in: cubic-bezier(0, 0, 0.2, 1);
-        --ease-out: cubic-bezier(0.4, 0, 1, 1);
         position: relative;
       }
       .paragraph-wrapper[data-status="js-enabled"] div[lang="ja"],
@@ -1171,6 +1162,18 @@
       }
       .language-selector.removed-if-js-disabled {
         display: none;
+      }
+      /* spinning animation */
+      .spinning {
+        animation: rotation 1s linear infinite;
+      }
+      @keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
       }
     </style>
     <!-- Asynchronously load CSS stylesheet (https://web.dev/defer-non-critical-css/#optimize)-->
