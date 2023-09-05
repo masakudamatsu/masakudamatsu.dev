@@ -1115,6 +1115,18 @@
         --ease-in: cubic-bezier(0, 0, 0.2, 1);
         --ease-out: cubic-bezier(0.4, 0, 1, 1);
       }
+      body {
+        animation: fadein 1s var(--ease-in);
+        animation-fill-mode: backwards;
+      }
+      @keyframes fadein {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
       /* Paragraph-wrapper block */
       .paragraph-wrapper {
         --duration-enter: 250ms;
