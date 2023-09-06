@@ -115,6 +115,7 @@
         --font500-zenloop: calc(var(--scale) * var(--font400-zenloop));
         --xHeight10: calc((1 / var(--scale)) * var(--xHeight));
         --font10-raleway: calc(var(--xHeight10) / var(--raleway-xHeight));
+        --font10-japanese: calc(var(--font100-japanese) * (1 / var(--scale)));
         /* white space */
         /* If changed, adjust the `sizes` attribute for <img> */
         --whitespace100: calc(var(--scale) * var(--xHeight));
@@ -145,6 +146,9 @@
           (var(--whitespace10) + var(--xHeight10)) / var(--font10-raleway)
         );
         max-width: 33em;
+      }
+      [lang="ja"] .font-footer {
+        font-size: calc(var(--font10-japanese) / 16 * 1rem);
       }
       .blockquote.fallback,
       p.fallback {
@@ -1016,7 +1020,7 @@
       .footer-paragraphs {
         grid-area: paragraphs;
       }
-      .footer-paragraphs > * + * {
+      .whitespace-footer > * + * {
         margin-top: calc(var(--whitespace100) / 16 * 1rem);
       }
       /* In-page link scrolling behavior */
@@ -3075,20 +3079,52 @@ body {
           <li><a class="text-button font-footer" href="#about">About Me</a></li>
         </ul>
       </nav>
-      <div class="footer-paragraphs">
-        <p class="font-footer">Thank you for scrolling down until the end.</p>
-        <p class="font-footer">
-          This site is designed and coded from scratch by myself, with vanilla
-          JavaScript only to
-          <em>progressively enhance</em> the user experiences of viewing videos
-          looping without sound, text swapped from system fonts to custom fonts,
-          and language switched between English and Japanese.
-        </p>
-        <p class="font-footer">
-          No framework such as React is used, to minimize the bundle size so
-          that the user will be able to start experiencing this page as fast as
-          possible.
-        </p>
+      <div class="footer-paragraphs whitespace-footer">
+        <div
+          class="paragraph-wrapper whitespace-footer"
+          data-status="js-disabled"
+        >
+          <div class="whitespace-footer">
+            <p class="font-footer">
+              Thank you for scrolling down until the end.
+            </p>
+            <p class="font-footer">
+              This site is designed and coded from scratch by myself, with
+              vanilla JavaScript only to
+              <em>progressively enhance</em> the user experiences of viewing
+              videos looping without sound, text swapped from system fonts to
+              custom fonts, and language switched between English and Japanese.
+            </p>
+            <p class="font-footer">
+              No framework such as React is used, to minimize the bundle size so
+              that the user will be able to start experiencing this page as fast
+              as possible.
+            </p>
+            <button
+              class="language-selector font-footer removed-if-js-disabled"
+              type="button"
+            >
+              Japanese
+            </button>
+          </div>
+          <div class="measure whitespace-footer" lang="ja">
+            <p class="font-footer">
+              一番下までスクロールしていただきありがとうございます。
+            </p>
+            <p class="font-footer">
+              このサイトは私自身でデザインとプログラミングをして作成しました。JavaScriptを無効にしても機能しますが、有効にすることで三つのユーザー体験（ループ動画、Webフォントの表示、言語の切り替え）がより良いものになります。
+            </p>
+            <p class="font-footer">
+              ReactなどのJavaScriptフレームワークは使っていません。コードを最小限に抑えることで、ユーザーがこのページを少しでも早く見始めることができるようにするためです。
+            </p>
+            <button
+              class="language-selector font-footer removed-if-js-disabled"
+              type="button"
+            >
+              English
+            </button>
+          </div>
+        </div>
         <p class="font-footer">
           <small>&copy; 2023 Masayuki Kudamatsu</small>
         </p>
@@ -3107,6 +3143,7 @@ body {
     paragraphWrappers.forEach((paragraphWrapper) => {
       paragraphWrapper.classList.remove("whitespace-200"); // for blog posts
       paragraphWrapper.classList.remove("whitespace-300");
+      paragraphWrapper.classList.remove("whitespace-footer"); // for footer
       paragraphWrapper.dataset.status = "js-enabled";
     });
     const languageSelectors = document.querySelectorAll(".language-selector");
