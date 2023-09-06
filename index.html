@@ -2760,6 +2760,12 @@ body {
     </footer>
   </body>
   <script>
+    // Show elements hidden for JS-disabled users
+    document
+      .querySelectorAll(".removed-if-js-disabled")
+      .forEach((hiddenElement) => {
+        hiddenElement.classList.remove("removed-if-js-disabled");
+      });
     // Language selector
     const paragraphWrappers = document.querySelectorAll(".paragraph-wrapper");
     paragraphWrappers.forEach((paragraphWrapper) => {
@@ -2768,7 +2774,6 @@ body {
     });
     const languageSelectors = document.querySelectorAll(".language-selector");
     languageSelectors.forEach((languageSelector) => {
-      languageSelector.classList.remove("removed-if-js-disabled");
       languageSelector.addEventListener("click", () => {
         paragraphWrappers.forEach((paragraphWrapper) => {
           if (
@@ -2863,7 +2868,6 @@ body {
       // Disable the default video player
       videos[i].controls = false;
       // Reveal playback buttons
-      playbackButtons[i].classList.remove("removed-if-js-disabled");
       playbackButtons[i].addEventListener("click", (event) => {
         event.stopPropagation();
         if (videos[i].paused) {
@@ -2872,8 +2876,6 @@ body {
           videos[i].pause();
         }
       });
-      // Start loading poster images
-      imgs[i].classList.remove("removed-if-js-disabled");
       // Start loading the entire video files
       videos[i].play();
 
