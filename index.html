@@ -1205,6 +1205,9 @@
       .language-selector.removed-if-js-disabled {
         display: none;
       }
+      p.removed-if-js-disabled {
+        display: none;
+      }
       /* spinning animation */
       .spinning {
         animation: rotation 1s linear infinite;
@@ -1424,13 +1427,13 @@
             <div class="title-card shadow whitespace-300">
               <div class="whitespace-200">
                 <h3>My Ideal Map</h3>
-                <p>August – December 2021, August 2022 — present</p>
               </div>
               <div
                 class="paragraph-wrapper whitespace-300"
                 data-status="js-disabled"
               >
                 <div class="whitespace-200">
+                  <p>August–December 2021, August 2022–present</p>
                   <p>
                     A full-stack web app for those who love exploring cities to
                     save places on the embedded Google Maps
@@ -1446,6 +1449,9 @@
                   </button>
                 </div>
                 <div class="measure whitespace-200" lang="ja">
+                  <p class="removed-if-js-disabled">
+                    2021年8月〜12月、2022年8月〜現在
+                  </p>
                   <p>
                     街歩きが好きなユーザーが、Googleマップ上の場所を保存する際のメモに、外部サイトへのリンクを貼ることができるようにしたWebアプリ。今年中に一般公開予定。
                   </p>
@@ -1586,14 +1592,13 @@
             <div class="title-card shadow whitespace-300 color-black">
               <div class="whitespace-200">
                 <h3>Translating Japanese Gardens</h3>
-
-                <p>June–August 2021</p>
               </div>
               <div
                 class="paragraph-wrapper whitespace-300"
                 data-status="js-disabled"
               >
                 <div class="whitespace-200">
+                  <p>June–August 2021</p>
                   <p>
                     A blog for a Japanese garden design enthusiast (that is, me)
                     to articulate his thought on the design intent behind
@@ -1607,6 +1612,7 @@
                   </button>
                 </div>
                 <div class="measure whitespace-200" lang="ja">
+                  <p class="removed-if-js-disabled">2021年6月〜8月</p>
                   <p>
                     日本庭園愛好家（私のことです）が、歴史的な名庭園のデザイン意図を深読みするブログ。
                   </p>
@@ -1736,13 +1742,13 @@
             <div class="title-card shadow whitespace-300 color-black">
               <div class="whitespace-200">
                 <h3>Triangulum Color Picker</h3>
-                <p>December 2020–March 2021</p>
               </div>
               <div
                 class="paragraph-wrapper whitespace-300"
                 data-status="js-disabled"
               >
                 <div class="whitespace-200">
+                  <p>December 2020–March 2021</p>
                   <p>
                     A web tool for web designers to pick accessible and
                     harmonious colors with ease.
@@ -1755,6 +1761,7 @@
                   </button>
                 </div>
                 <div class="measure whitespace-200" lang="ja">
+                  <p class="removed-if-js-disabled">2020年12月〜2021年3月</p>
                   <p>
                     Webデザイナーが、アクセシビリティーと他の色との調和を考慮した色を選びやすくしたWebツール。
                   </p>
@@ -1965,13 +1972,13 @@
             <div class="title-card shadow whitespace-300">
               <div class="whitespace-200">
                 <h3>Line-height Picker</h3>
-                <p>March–July 2020</p>
               </div>
               <div
                 class="paragraph-wrapper whitespace-300"
                 data-status="js-disabled"
               >
                 <div class="whitespace-200">
+                  <p>March–July 2020</p>
                   <p>
                     A web tool for web designers to set the line height of
                     paragraph text as the ratio to the x-height of a chosen
@@ -1985,6 +1992,7 @@
                   </button>
                 </div>
                 <div class="measure whitespace-200" lang="ja">
+                  <p class="removed-if-js-disabled">2020年3月〜7月</p>
                   <p>
                     Webデザイナーが、欧文フォントの行間を小文字のエックスの高さとの比で指定するためのWebツール。
                   </p>
@@ -2126,12 +2134,12 @@
                 </div>
               </div>
               <h3>Definitive Edition of “How to Favicon” in 2023</h3>
-              <p>January 2021; Last updated in August 2023</p>
               <div
                 class="paragraph-wrapper whitespace-200"
                 data-status="js-disabled"
               >
                 <div class="whitespace-200">
+                  <p>January 2021; Last updated in August 2023</p>
                   <figure class="blockquote">
                     <blockquote>
                       “Favicon support is a complicated topic. See this guide
@@ -2193,6 +2201,9 @@
                   </button>
                 </div>
                 <div class="measure whitespace-200" lang="ja">
+                  <p class="removed-if-js-disabled">
+                    2021年1月（2023年8月更新）
+                  </p>
                   <figure class="blockquote">
                     <blockquote>
                       「ファビコンの実装方法は複雑です。詳しくはこのガイドをご覧ください。」
@@ -2310,12 +2321,12 @@ export const FileUploader = ({handleFile}) => {
                 </div>
               </div>
               <h3>How to customize the file upload button in React</h3>
-              <p>March 2020; Last updated in August 2023</p>
               <div
                 class="paragraph-wrapper whitespace-200"
                 data-status="js-disabled"
               >
                 <div class="whitespace-200">
+                  <p>March 2020; Last updated in August 2023</p>
                   <figure class="blockquote">
                     <blockquote>“very helpful article. thanks :)”</blockquote>
                     <figcaption>
@@ -2350,6 +2361,9 @@ export const FileUploader = ({handleFile}) => {
                   </button>
                 </div>
                 <div class="measure whitespace-200" lang="ja">
+                  <p class="removed-if-js-disabled">
+                    2020年3月（2023年8月更新）
+                  </p>
                   <figure class="blockquote">
                     <blockquote>
                       「とても役に立つ記事。ありがとう(^_^)」
@@ -2446,12 +2460,12 @@ export const FileUploader = ({handleFile}) => {
                 Don't nest &lt;nav&gt; inside &lt;header&gt;. Do nest the
                 hamburger menu button inside &lt;nav&gt;.
               </h3>
-              <p>June 2021</p>
               <div
                 class="paragraph-wrapper whitespace-200"
                 data-status="js-disabled"
               >
                 <div class="whitespace-200">
+                  <p>June 2021</p>
                   <figure class="blockquote">
                     <blockquote>
                       “I am building my portfolio atm and this article was
@@ -2488,6 +2502,7 @@ export const FileUploader = ({handleFile}) => {
                   </button>
                 </div>
                 <div class="measure whitespace-200" lang="ja">
+                  <p class="removed-if-js-disabled">2021年6月</p>
                   <figure class="blockquote">
                     <blockquote>
                       「今、自分のポートフォリオを作成中で、この記事はちょうどいいタイミングで役に立った。ありがとう。」
@@ -2576,12 +2591,12 @@ export const FileUploader = ({handleFile}) => {
                 </div>
               </div>
               <h3>Mastering the art of `alt` text for images</h3>
-              <p>May 2021; Last updated in August 2021</p>
               <div
                 class="paragraph-wrapper whitespace-200"
                 data-status="js-disabled"
               >
                 <div class="whitespace-200">
+                  <p>May 2021; Last updated in August 2021</p>
                   <figure class="blockquote">
                     <blockquote>
                       “I am enjoying this deep dive into HTML elements and
@@ -2605,6 +2620,9 @@ export const FileUploader = ({handleFile}) => {
                   </button>
                 </div>
                 <div class="measure whitespace-200" lang="ja">
+                  <p class="removed-if-js-disabled">
+                    2021年5月（2021年8月更新）
+                  </p>
                   <figure class="blockquote">
                     <blockquote>
                       「HTMLの要素や属性を深く掘り下げるこの記事を楽しく読んでいます...」
@@ -2692,12 +2710,12 @@ const loader = new Loader({
                 4 gotchas when setting up Google Maps API with Next.js and
                 ESLint
               </h3>
-              <p>February 2021; Last updated in September 2021</p>
               <div
                 class="paragraph-wrapper whitespace-200"
                 data-status="js-disabled"
               >
                 <div class="whitespace-200">
+                  <p>February 2021; Last updated in September 2021</p>
                   <figure class="blockquote">
                     <blockquote>
                       “This is a great article. There's not nearly enough Nextjs
@@ -2733,6 +2751,9 @@ const loader = new Loader({
                   </button>
                 </div>
                 <div class="measure whitespace-200" lang="ja">
+                  <p class="removed-if-js-disabled">
+                    2021年2月（2021年9月更新）
+                  </p>
                   <figure class="blockquote">
                     <blockquote>
                       「これは素晴らしい記事です。Next.jsについての記事はもっとたくさんあるべきです。」
@@ -2819,12 +2840,12 @@ body {
                 </div>
               </div>
               <h3>System Font Stack: its history and rationale</h3>
-              <p>March 2020; Last updated in September 2020</p>
               <div
                 class="paragraph-wrapper whitespace-200"
                 data-status="js-disabled"
               >
                 <div class="whitespace-200">
+                  <p>March 2020; Last updated in September 2020</p>
                   <figure class="blockquote">
                     <blockquote>
                       “An excellent overview and analysis of trends on the
@@ -2849,6 +2870,9 @@ body {
                   </button>
                 </div>
                 <div class="measure whitespace-200" lang="ja">
+                  <p class="removed-if-js-disabled">
+                    2020年3月（2020年9月更新）
+                  </p>
                   <figure class="blockquote">
                     <blockquote>
                       「システムフォントスタックと呼ばれるアプローチの動向に関する優れた概要と分析、共有に感謝します。」
