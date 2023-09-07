@@ -136,16 +136,26 @@
       .language-selector,
       p {
         font-size: calc(var(--font100-raleway) / 16 * 1rem);
+      }
+      .blockquote,
+      p {
         line-height: calc(
           (var(--whitespace100) + var(--xHeight)) / var(--font100-raleway)
         );
       }
+      .language-selector {
+        line-height: 1.32; /* With a smaller value, MacOS Safari would fail to draw the underline (#3) */
+      }
+
       .font-footer {
         font-size: calc(var(--font10-raleway) / 16 * 1rem);
         line-height: calc(
           (var(--whitespace10) + var(--xHeight10)) / var(--font10-raleway)
         );
         max-width: 33em;
+      }
+      .font-footer.language-selector {
+        line-height: 2; /* With a smaller value, MacOS Safari would fail to draw the underline (#3) */
       }
       [lang="ja"] .font-footer {
         font-size: calc(var(--font10-japanese) / 16 * 1rem);
