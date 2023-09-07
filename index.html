@@ -40,6 +40,8 @@
       body {
         /* Disable MacOS browsers' default subpixel antialising (see https://www.joshwcomeau.com/css/custom-css-reset/#four-font-smoothing-5) */
         -webkit-font-smoothing: antialiased;
+        /* Prevent MacOS Firefox from rendering text strokes thicker than Chrome and Safari (#4) */
+        -moz-osx-font-smoothing: grayscale;
         /* Wrap very long words like URLs (see https://www.joshwcomeau.com/css/custom-css-reset/#seven-word-wrapping-8) */
         overflow-wrap: break-word;
         /* Make text rendering consistent across browsers (see https://andy-bell.co.uk/a-modern-css-reset/)*/
@@ -136,16 +138,26 @@
       .language-selector,
       p {
         font-size: calc(var(--font100-raleway) / 16 * 1rem);
+      }
+      .blockquote,
+      p {
         line-height: calc(
           (var(--whitespace100) + var(--xHeight)) / var(--font100-raleway)
         );
       }
+      .language-selector {
+        line-height: 1.43; /* With a smaller value, MacOS Safari would fail to draw the underline (#3) */
+      }
+
       .font-footer {
         font-size: calc(var(--font10-raleway) / 16 * 1rem);
         line-height: calc(
           (var(--whitespace10) + var(--xHeight10)) / var(--font10-raleway)
         );
         max-width: 33em;
+      }
+      .font-footer.language-selector {
+        line-height: 2; /* With a smaller value, MacOS Safari would fail to draw the underline (#3) */
       }
       [lang="ja"] .font-footer {
         font-size: calc(var(--font10-japanese) / 16 * 1rem);
@@ -410,7 +422,7 @@
       .language-selector {
         color: currentColor;
         text-decoration-thickness: 1px; /* Match the stroke width of Raleway 400 */
-        text-underline-position: under; /* Draw underline below the descender */
+        text-underline-offset: 0.26em; /* Draw underline below the descender, consistently across browsers (#5) */
       }
       [lang="ja"] a,
       footer a {
