@@ -40,6 +40,8 @@
       body {
         /* Disable MacOS browsers' default subpixel antialising (see https://www.joshwcomeau.com/css/custom-css-reset/#four-font-smoothing-5) */
         -webkit-font-smoothing: antialiased;
+        /* Prevent MacOS Firefox from rendering text strokes thicker than Chrome and Safari (#4) */
+        -moz-osx-font-smoothing: grayscale;
         /* Wrap very long words like URLs (see https://www.joshwcomeau.com/css/custom-css-reset/#seven-word-wrapping-8) */
         overflow-wrap: break-word;
         /* Make text rendering consistent across browsers (see https://andy-bell.co.uk/a-modern-css-reset/)*/
