@@ -1,1 +1,3394 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Masa Kudamatsu — Kyoto-based web developer with UX design skills
+    </title>
+    <!-- Google Fonts (to be removed by locally hosting it)-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital@0;1&family=Zen+Kurenaido&family=Zen+Loop&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/yakuhanjp@3.4.1/dist/css/yakuhanjp-narrow.min.css"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      * {
+        margin: 0;
+      }
+      /* 
+        Enable kerning and ligature 
+         https://helpx.adobe.com/fonts/using/open-type-syntax.html#kern
+         https://helpx.adobe.com/fonts/using/open-type-syntax.html#liga 
+         https://helpx.adobe.com/fonts/using/open-type-syntax.html#calt
+      */
+      :root {
+        font-kerning: normal;
+        font-variant-ligatures: common-ligatures contextual;
+      }
+      body {
+        /* Disable MacOS browsers' default subpixel antialising (see https://www.joshwcomeau.com/css/custom-css-reset/#four-font-smoothing-5) */
+        -webkit-font-smoothing: antialiased;
+        /* Wrap very long words like URLs (see https://www.joshwcomeau.com/css/custom-css-reset/#seven-word-wrapping-8) */
+        overflow-wrap: break-word;
+        /* Make text rendering consistent across browsers (see https://andy-bell.co.uk/a-modern-css-reset/)*/
+        text-rendering: optimizeSpeed;
+      }
+      canvas,
+      img,
+      picture,
+      svg,
+      video {
+        display: block;
+        height: auto; /* preserve aspect ratio set with height and width attributes */
+        max-width: 100%;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      button {
+        /* Reset OS-specfic / browser-specific default style (see https://ishadeed.com/article/styling-the-good-old-button/#the-default-styles) */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: 0;
+        color: inherit;
+        padding: 0;
+        /* To indicate interactivity */
+        cursor: pointer;
+      }
+      /* Make "active" state style in iOS Safari and Android Chrome consistent  */
+      a,
+      button {
+        -webkit-tap-highlight-color: var(
+          --light-grey
+        ); /* if background is --black */
+      }
+      .button,
+      .leaf-card a {
+        -webkit-tap-highlight-color: var(
+          --mid-grey
+        ); /* if background is --white */
+      }
+      address,
+      cite {
+        font-style: normal; /* reset the default italic */
+      }
+      small {
+        font-size: inherit; /* reset the default 'smaller' value */
+      }
+      ul[role="list"] {
+        list-style: none;
+        padding-left: 0; /* remove indentation */
+      }
+      :root {
+        /* Font Metrics */
+        --xHeight: 10;
+        --scale: 1.5;
+        --sqrt-scale: 1.225;
+        --raleway-xHeight: calc(519 / 1000); /* sxHeight / unitsPerEm */
+        --raleway-capHeight: calc(710 / 1000); /* sCapHeight / unitsPerEm */
+        --zenloop-capHeight: calc(690 / 1000); /* sCapHeight / unitsPerEm */
+        /* Font size (in px) */
+        --font100-raleway: calc(var(--xHeight) / var(--raleway-xHeight));
+        --font100-japanese: 17.6; /* make it look similar in size to Raleway if --xHeight: 10 */
+        --capHeight100: calc(var(--font100-raleway) * var(--raleway-capHeight));
+        --font100-zenloop: calc(var(--capHeight100) / var(--zenloop-capHeight));
+        --font200-zenloop: calc(var(--scale) * var(--font100-zenloop));
+        --font250-zenloop: calc(var(--sqrt-scale) * var(--font200-zenloop));
+        --font300-zenloop: calc(var(--scale) * var(--font200-zenloop));
+        --font400-zenloop: calc(var(--scale) * var(--font300-zenloop));
+        --font500-zenloop: calc(var(--scale) * var(--font400-zenloop));
+        --xHeight10: calc((1 / var(--scale)) * var(--xHeight));
+        --font10-raleway: calc(var(--xHeight10) / var(--raleway-xHeight));
+        --font10-japanese: calc(var(--font100-japanese) * (1 / var(--scale)));
+        /* white space */
+        /* If changed, adjust the `sizes` attribute for <img> */
+        --whitespace100: calc(var(--scale) * var(--xHeight));
+        --whitespace200: calc(var(--scale) * var(--whitespace100));
+        --whitespace300: calc(var(--scale) * var(--whitespace200));
+        --whitespace400: calc(var(--scale) * var(--whitespace300));
+        --whitespace10: var(--xHeight);
+      }
+      /* Font */
+      .blockquote,
+      .font-footer,
+      .language-selector,
+      p {
+        font-family: Raleway, "Trebuchet MS", sans-serif;
+        font-weight: 400;
+      }
+      .blockquote,
+      .language-selector,
+      p {
+        font-size: calc(var(--font100-raleway) / 16 * 1rem);
+        line-height: calc(
+          (var(--whitespace100) + var(--xHeight)) / var(--font100-raleway)
+        );
+      }
+      .font-footer {
+        font-size: calc(var(--font10-raleway) / 16 * 1rem);
+        line-height: calc(
+          (var(--whitespace10) + var(--xHeight10)) / var(--font10-raleway)
+        );
+        max-width: 33em;
+      }
+      [lang="ja"] .font-footer {
+        font-size: calc(var(--font10-japanese) / 16 * 1rem);
+      }
+      .blockquote.fallback,
+      p.fallback {
+        letter-spacing: 0.0182em; /* Add 0.35px for the width of "Kyoto-based web developer with UX design best practices in mind" to be equal. */
+        word-spacing: -0.0058em; /* Remove 1px for the width of "Kyoto-based web developer with UX design best practices in mind" so it wraps at 692px or below. */
+      }
+      .font-footer.fallback {
+        letter-spacing: 0.0115em; /* Add 0.15px */
+        word-spacing: 0.00865em; /* Add 1px which is divided by 9 word spaces in "to custom fonts, and language switched between English and Japanese" */
+      }
+      .blockquote blockquote {
+        font-style: italic;
+      }
+      [lang="ja"] .blockquote blockquote {
+        font-style: normal;
+      }
+      .blockquote::before,
+      .blockquote::after,
+      .font-footer::before,
+      .font-footer::after,
+      .footer-title::before,
+      .footer-title::after,
+      .language-selector::before,
+      .language-selector::after,
+      h1::before,
+      h1::after,
+      h2::before,
+      h2::after,
+      h3::before,
+      h3::after,
+      p::before,
+      p::after {
+        content: "";
+        display: block;
+        height: 0;
+        width: 0;
+      }
+      .blockquote::before,
+      p::before {
+        margin-bottom: calc(-6 / 16 * 1rem);
+      }
+      .blockquote::after,
+      p::after {
+        margin-top: calc(-7 / 16 * 1rem);
+      }
+      /* 
+      for some reason, text crop behaves differently between <p> and <button>.
+      we don't need to crop text for buttons to achieve the desired vertical spacing.
+      .language-selector::before {
+      }
+      .language-selector::after {
+      } 
+      */
+      .font-footer::before {
+        margin-bottom: calc(-4 / 16 * 1rem);
+      }
+      .font-footer::after {
+        margin-top: calc(-4 / 16 * 1rem);
+      }
+      .pill {
+        font-family: Raleway, "Trebuchet MS", sans-serif;
+        font-size: var(--font10-raleway / 16 * 1rem);
+        font-weight: 400;
+        line-height: calc(
+          (var(--whitespace10) + var(--xHeight10)) / var(--font10-raleway)
+        );
+      }
+      h1,
+      h2,
+      h3,
+      .footer-title {
+        font-family: "Zen Loop", "Courier New", monospace;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+      .title-card[data-variant="blog"] h3 {
+        letter-spacing: -0.01em;
+        text-transform: capitalize;
+        word-spacing: -0.01em;
+      }
+      h2 {
+        letter-spacing: 0.02em;
+      }
+      h1 {
+        font-size: calc(var(--font500-zenloop) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font500-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font500-zenloop)
+        );
+      }
+      h1.fallback {
+        --font500-couriernew: calc(
+          var(--font500-zenloop) * (33 / 50)
+        ); /* For the width "MASA KUDAMATSU" to be equal, font-size needs to be 33px for Courier New when it's 50px for Zen Loop */
+        font-size: calc(var(--font500-couriernew) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font500-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font500-couriernew)
+        );
+        word-spacing: 0.03em; /* Add 2px so Courier New wraps the word for less than 660px wide screens */
+      }
+      h1::before {
+        margin-bottom: calc(-2 / 16 * 1rem);
+      }
+      h1::after {
+        margin-top: calc(-14 / 16 * 1rem);
+      }
+      @media screen and (max-width: 38.75em) {
+        /* = 620px / 16 */
+        h1 {
+          font-size: calc(var(--font400-zenloop) / 16 * 1rem);
+          line-height: calc(
+            (
+                var(--font400-zenloop) * var(--zenloop-capHeight) +
+                  var(--whitespace100)
+              ) / var(--font400-zenloop)
+          );
+        }
+        h1.fallback {
+          --font400-couriernew: calc(
+            var(--font400-zenloop) * (33 / 50)
+          ); /* For the width "MASA KUDAMATSU" to be equal, font-size needs to be 33px for Courier New when it's 50px for Zen Loop */
+          font-size: calc(var(--font400-couriernew) / 16 * 1rem);
+          line-height: calc(
+            (
+                var(--font400-zenloop) * var(--zenloop-capHeight) +
+                  var(--whitespace100)
+              ) / var(--font400-couriernew)
+          );
+          word-spacing: 0.0453em; /* Add 2px to wrap the word at less than 403px wide screens */
+        }
+        h1::before {
+          margin-bottom: calc(-4 / 16 * 1rem);
+        }
+        h1::after {
+          margin-top: calc(-12 / 16 * 1rem);
+        }
+      }
+      h2 {
+        font-size: calc(var(--font200-zenloop) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font200-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font200-zenloop)
+        );
+      }
+      h2.fallback {
+        --font200-couriernew: calc(
+          var(--font200-zenloop) * (21 / 30)
+        ); /* For the width "WORKS" to be equal, font-size needs to be 21px for Courier New when it's 30px for Zen Loop */
+        font-size: calc(var(--font200-couriernew) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font200-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font200-couriernew)
+        );
+      }
+      h2::before {
+        margin-bottom: calc(-7 / 16 * 1rem);
+      }
+      h2::after {
+        margin-top: calc(-10 / 16 * 1rem);
+      }
+      h3,
+      .footer-title {
+        font-size: calc(var(--font300-zenloop) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font300-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font300-zenloop)
+        );
+      }
+      h3.fallback,
+      .footer-title.fallback {
+        --font300-couriernew: calc(
+          var(--font300-zenloop) * (24 / 45)
+        ); /* For the width "LINE-HEIGHT PICKER" to be equal, font-size needs to be 24px for Courier New when it's 45px for Zen Loop */
+        font-size: calc(var(--font300-couriernew) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font300-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font300-couriernew)
+        );
+      }
+      h3::before,
+      .footer-title::before {
+        margin-bottom: calc(-5 / 16 * 1rem);
+      }
+      h3::after,
+      .footer-title::after {
+        margin-top: calc(-11 / 16 * 1rem);
+      }
+      @media screen and (max-width: 21.5625em) {
+        /* = 345px / 16 */
+        h3,
+        .footer-title {
+          font-size: calc(var(--font250-zenloop) / 16 * 1rem);
+        }
+        h3.fallback,
+        .footer-title.fallback {
+          --font250-couriernew: calc(
+            var(--font250-zenloop) * (24 / 45)
+          ); /* For the width "LINE-HEIGHT PICKER" to be equal, font-size needs to be 24px for Courier New when it's 45px for Zen Loop */
+          font-size: calc(var(--font250-couriernew) / 16 * 1rem);
+        }
+        h3::after,
+        .footer-title::after {
+          margin-top: calc(-9 / 16 * 1rem);
+        }
+      }
+      /* Optical alignment */
+      h1,
+      .footer-title {
+        transform: translateX(
+          -0.05em
+        ); /* text-indent does not work as we use ::before for text scropping */
+      }
+      p[lang="ja"],
+      [lang="ja"] blockquote,
+      [lang="ja"] figcaption,
+      [lang="ja"] p {
+        font-family: "YakuHanJP_Narrow", "Zen Kurenaido", "Helvetica Neue",
+          "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo,
+          sans-serif;
+        font-size: calc(var(--font100-japanese) / 16 * 1rem);
+        font-weight: 400;
+        line-height: calc(
+          (var(--whitespace100) + var(--xHeight)) / var(--font100-japanese)
+        );
+        line-break: strict; /* to prevent ッ from being at the beginning of a line */
+        text-align: justify;
+      }
+      p[lang="ja"]::before,
+      [lang="ja"] blockquote::before,
+      [lang="ja"] figcaption::before,
+      [lang="ja"] p::before {
+        margin-bottom: calc(-6 / 16 * 1rem);
+      }
+      p[lang="ja"]::after,
+      [lang="ja"] blockquote::after,
+      [lang="ja"] figcaption::before,
+      [lang="ja"] p::after {
+        margin-top: calc(-5 / 16 * 1rem);
+      }
+      /* Hard-wrap long words (https://www.joshwcomeau.com/css/custom-css-reset/#seven-word-wrapping-8) */
+      p {
+        overflow-wrap: break-word;
+      }
+      /* link text style */
+      a,
+      .language-selector {
+        color: currentColor;
+        text-decoration-thickness: 1px; /* Match the stroke width of Raleway 400 */
+        text-underline-position: under; /* Draw underline below the descender */
+      }
+      [lang="ja"] a,
+      footer a {
+        text-decoration-thickness: 0.5px; /* Match the stroke width of Zen Kurenaido 400 */
+      }
+      figcaption a[target],
+      footer a[target],
+      p a[target] {
+        --space-for-icon: 1.2em;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke-width='1' stroke='rgb(232,232,232)' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6' /%3E%3Cpath d='M11 13l9 -9' /%3E%3Cpath d='M15 4h5v5' /%3E%3C/svg%3E");
+        background-position: center right;
+        background-repeat: no-repeat;
+        background-size: 1.1em;
+        padding-right: var(--space-for-icon);
+      }
+      a:focus {
+        border-color: var(--focusBlueLight);
+        border-style: var(--focus-ring-style);
+        border-width: var(--focus-ring-width);
+        outline: none;
+        padding-left: var(--focus-ring-width);
+        padding-right: calc(
+          var(--focus-ring-width) + var(--space-for-icon, 0px)
+        );
+        text-decoration-line: none;
+      }
+      .title-card a:focus {
+        border-color: var(--focusBlueDark);
+      }
+      /* Cancel focus style for button links */
+      a.button:focus {
+        border: 0;
+        padding-left: 0;
+        padding-right: 0;
+      }
+      /* Cancel focus style for pills */
+      .pill a:focus {
+        border: 0;
+        padding-left: 0;
+        padding-right: var(--space-for-icon, "0px");
+      }
+      /* Cancel focus style for non-keyboard users */
+      a:focus:not(:focus-visible) {
+        border: 0;
+        padding-left: 0;
+        padding-right: var(--space-for-icon, "0px");
+        text-decoration-line: underline;
+      }
+      .pill a:focus:not(:focus-visible) {
+        text-decoration-line: none;
+      }
+      /* Text Button Block */
+      .text-button {
+        align-items: center;
+        display: inline-flex;
+        height: var(--minimum-target-size);
+        text-decoration-line: none; /* disable <a> element's underline */
+      }
+      .text-button:focus:not(:focus-visible) {
+        text-decoration-line: none;
+      }
+      @media (any-hover: hover) {
+        .text-button:hover {
+          text-decoration-line: underline;
+        }
+      }
+      a:active {
+        text-decoration-line: none;
+      }
+      /* Spacing */
+      header,
+      main > section,
+      footer {
+        padding: calc(var(--whitespace400) / 16 * 1rem)
+          calc(var(--whitespace100) / 16 * 1rem);
+        /* If changed, adjust the `sizes` attribute for <img> */
+      }
+      @media screen and (min-width: 601px) {
+        header,
+        main > section,
+        footer {
+          padding: calc(var(--whitespace400) / 16 * 1rem);
+          /* If changed, adjust the `sizes` attribute for <img> */
+        }
+      }
+      .whitespace-100 > * + * {
+        margin-top: calc(var(--whitespace100) / 16 * 1rem);
+      }
+      .whitespace-200 > * + * {
+        margin-top: calc(var(--whitespace200) / 16 * 1rem);
+      }
+      .whitespace-300 > * + * {
+        margin-top: calc(var(--whitespace300) / 16 * 1rem);
+      }
+      .whitespace-400 > * + * {
+        margin-top: calc(var(--whitespace400) / 16 * 1rem);
+      }
+      .padding {
+        /* If changed, adjust the `sizes` attribute for <img> */
+        padding: calc(var(--whitespace200) / 16 * 1rem);
+      }
+      :root {
+        --minimum-target-size: 48px;
+        /* Video/Image max-width */
+        --video-max-width: 624px;
+        /* Color scheme */
+        --black: #121212; /* (1.12) base color */
+        --mid-grey: #646464; /* (3.55) ensure 3 to 1 contrast against --black (https://www.siegemedia.com/contrast-ratio#%23949494-on-%23fefefe) */
+        --light-grey: #838383; /* (5.54) ensure 3 to 1 contrast against --white (https://www.siegemedia.com/contrast-ratio#%23767676-on-%23030303) */
+        --off-white: #bfbfbf; /* (11.42) ensure 1.5 to 1 contrast against --white */
+        --white: #e8e8e8; /* (17.14) base color */
+        --pure-white: #fff; /* For section titles to appear as white as body text in --white */
+        --focusBlueDark: #217ee1;
+        --focusBlueLight: #64a3e6;
+        --green-black: #06130d; /* (1.11) Hue around 150, Chroma around 5%, Luminance similar to --black */
+        --green-grey: #2b3832; /* Hue around 150, Chroma around 5%, and Luminance 1.5 times --black-green */
+        --purple-black: #150e1d; /* (1.11) Hue around 270, Chroma around 5%, Luminance similar to --black */
+        --purple-grey: #3b3441; /* (1.75) Hue around 270, Chroma around 5%, Luminance 1.5 times --purple-black */
+        --brown-black: #160f09; /* (1.11) Hue around 30, Chroma around 5%, and Luminance similar to --black */
+        --brown-grey: #3c362f; /* (1.76) Hue around 30, Chroma around 5%, and Luminance 1.5 times --black-brown */
+        --red: #dc4343; /* chroma 60% while keeping the luminance at the level of pure red */
+        --yellow: #fefe65; /* chroma 60% while keeping the luminance at the level of pure yellow */
+        --green: #60f960; /* chroma 60% while keeping the luminance at the level of pure green */
+        --cyan: #61fafa; /* chroma 60% while keeping the luminance at the level of pure cyan */
+        --blue: #2e2ec7; /* chroma 60% while keeping the luminance at the level of pure blue */
+        --purple: #e64de6; /* chroma 60% while keeping the luminance at the level of pure purple */
+        --garden-green: #295921; /* switch hue to 110deg from TJG's theme color */
+        --garden-green-light: #528048; /* brighten --garden-green to 4.54 (enough contrast against --white) while keeping chroma intact */
+        /* Shape */
+        --round-corner: 32px; /* TODO: match it with .pill once the font-family is fixed */
+        /* Focus style */
+        --focus-ring-style: solid;
+        --focus-ring-width: 2px;
+        --focus-ring-offset: 2px;
+      }
+      /* Measure */
+      .measure {
+        max-width: var(--video-max-width);
+      }
+      /* Background color */
+      html {
+        /* Scroll-bounce areas (otherwise white background will be revealed) */
+        background: var(--black);
+      }
+      .bg-black {
+        background: var(--black);
+      }
+      .bg-green {
+        background: linear-gradient(
+          135deg,
+          var(--green-black),
+          var(--green-grey),
+          var(--green-black)
+        );
+      }
+      .bg-purple {
+        background: linear-gradient(
+          135deg,
+          var(--purple-black),
+          var(--purple-grey),
+          var(--purple-black)
+        );
+      }
+      .bg-brown {
+        background: linear-gradient(
+          135deg,
+          var(--brown-black),
+          var(--brown-grey),
+          var(--brown-black)
+        );
+      }
+      .bg-typeset {
+        position: relative;
+        z-index: 0;
+      }
+      .bg-typeset div.background {
+        background: var(--white);
+        border-radius: inherit;
+        color: var(--off-white);
+        columns: 150px 2;
+        column-gap: 20px;
+        height: 100%;
+        left: 0;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .bg-typeset div.background p {
+        /* obtained with Roboto, x-height 2 to line-height 5, x-height 10px */
+        font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-size: 18.9279px;
+        font-weight: 400;
+        line-height: 1.3208;
+      }
+      .bg-typeset div.background p + p {
+        /* obtained with Roboto, x-height 2 to line-height 5, x-height 10px */
+        margin-top: 10.9566px;
+      }
+      .bg-color {
+        background: conic-gradient(
+          var(--green),
+          var(--cyan),
+          var(--blue),
+          var(--purple),
+          var(--red),
+          var(--yellow),
+          var(--green)
+        );
+      }
+      .bg-garden {
+        background: linear-gradient(
+          135deg,
+          var(--garden-green),
+          var(--garden-green-light),
+          var(--garden-green)
+        );
+      }
+      .bg-grid {
+        --line-width: 1px;
+        --size: 40px;
+        --top-left-height: 14px;
+        --top-left-width: 28px;
+        --color-stop-bottom: calc(var(--top-left-height) + var(--line-width));
+        --color-stop-right: calc(var(--top-left-width) + var(--line-width));
+        background:
+          /* vertical lines */ linear-gradient(
+            to right,
+            transparent var(--top-left-width),
+            var(--off-white) var(--top-left-width),
+            var(--off-white) var(--color-stop-right),
+            transparent var(--color-stop-right)
+          ),
+          /* horizontal lines */
+            linear-gradient(
+              to bottom,
+              transparent var(--top-left-height),
+              var(--off-white) var(--top-left-height),
+              var(--off-white) var(--color-stop-bottom),
+              transparent var(--color-stop-bottom)
+            ),
+          /* solid background */ linear-gradient(var(--white), var(--white));
+        background-size: var(--size) var(--size);
+      }
+      /* Divider */
+      .divider-light-grey {
+        border-top: 1px solid var(--light-grey);
+      }
+      /* Color */
+      .color-white {
+        color: var(--white);
+      }
+      .color-pure-white {
+        color: var(--pure-white);
+      }
+      .color-black {
+        color: var(--black);
+      }
+      /* Utilities */
+      .transparent {
+        opacity: 0;
+      }
+      /* Video block */
+      /* Prevent layout shift in Safari when first playing the video (source: https://www.amitmerchant.com/prevent-image-layout-shift-using-this-simple-css-hack/) */
+      .video {
+        padding-top: 100%; /* 1 to 1 aspect ratio */
+        position: relative;
+        z-index: 0; /* to create a stacking context */
+      }
+      .video video,
+      .video img {
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      /* Poster image (<video poster=""> doesn't work with Safari for some reason... */
+      .video img {
+        transition: opacity 500ms linear;
+        z-index: 1; /* hide the video until it's fully loaded */
+      }
+      .video img.removed-if-js-disabled {
+        display: none;
+      }
+      /* Placeholder image */
+      .video[data-variant="line-height-picker"] {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAlmVYSWZNTQAqAAAACAAEARoABQAAAAEAAAA+ARsABQAAAAEAAABGASgAAwAAAAEAAgAAh2kABAAAAAEAAABOAAAAAAAAAJAAAAABAAAAkAAAAAEABJKGAAcAAAASAAAAhKABAAMAAAABAAEAAKACAAQAAAABAAAAA6ADAAQAAAABAAAAAwAAAABBU0NJSQAAAFNjcmVlbnNob3Rl3WWkAAAACXBIWXMAABYlAAAWJQFJUiTwAAAC1WlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNi4wLjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgICAgICAgICAgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iPgogICAgICAgICA8dGlmZjpZUmVzb2x1dGlvbj4xNDQ8L3RpZmY6WVJlc29sdXRpb24+CiAgICAgICAgIDx0aWZmOlhSZXNvbHV0aW9uPjE0NDwvdGlmZjpYUmVzb2x1dGlvbj4KICAgICAgICAgPHRpZmY6UmVzb2x1dGlvblVuaXQ+MjwvdGlmZjpSZXNvbHV0aW9uVW5pdD4KICAgICAgICAgPGV4aWY6UGl4ZWxYRGltZW5zaW9uPjYyNDwvZXhpZjpQaXhlbFhEaW1lbnNpb24+CiAgICAgICAgIDxleGlmOkNvbG9yU3BhY2U+MTwvZXhpZjpDb2xvclNwYWNlPgogICAgICAgICA8ZXhpZjpVc2VyQ29tbWVudD5TY3JlZW5zaG90PC9leGlmOlVzZXJDb21tZW50PgogICAgICAgICA8ZXhpZjpQaXhlbFlEaW1lbnNpb24+NjI1PC9leGlmOlBpeGVsWURpbWVuc2lvbj4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+Cia6nDcAAAAqSURBVAgdFcbBEQAgCASxBUGwBvpv03PMKzYz6m6E4dIlM3FzYteBn1g8mp8FpF5JSk8AAAAASUVORK5CYII=);
+        background-size: cover;
+      }
+      .video[data-variant="triangulum"] {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAlmVYSWZNTQAqAAAACAAEARoABQAAAAEAAAA+ARsABQAAAAEAAABGASgAAwAAAAEAAgAAh2kABAAAAAEAAABOAAAAAAAAAJAAAAABAAAAkAAAAAEABJKGAAcAAAASAAAAhKABAAMAAAABAAEAAKACAAQAAAABAAAAA6ADAAQAAAABAAAAAwAAAABBU0NJSQAAAFNjcmVlbnNob3Rl3WWkAAAACXBIWXMAABYlAAAWJQFJUiTwAAAC1WlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNi4wLjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgICAgICAgICAgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iPgogICAgICAgICA8dGlmZjpZUmVzb2x1dGlvbj4xNDQ8L3RpZmY6WVJlc29sdXRpb24+CiAgICAgICAgIDx0aWZmOlhSZXNvbHV0aW9uPjE0NDwvdGlmZjpYUmVzb2x1dGlvbj4KICAgICAgICAgPHRpZmY6UmVzb2x1dGlvblVuaXQ+MjwvdGlmZjpSZXNvbHV0aW9uVW5pdD4KICAgICAgICAgPGV4aWY6UGl4ZWxYRGltZW5zaW9uPjYyNDwvZXhpZjpQaXhlbFhEaW1lbnNpb24+CiAgICAgICAgIDxleGlmOkNvbG9yU3BhY2U+MTwvZXhpZjpDb2xvclNwYWNlPgogICAgICAgICA8ZXhpZjpVc2VyQ29tbWVudD5TY3JlZW5zaG90PC9leGlmOlVzZXJDb21tZW50PgogICAgICAgICA8ZXhpZjpQaXhlbFlEaW1lbnNpb24+NjI1PC9leGlmOlBpeGVsWURpbWVuc2lvbj4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+Cia6nDcAAAAySURBVAgdAScA2P8BLyst//j49wD5/f4AAh8cGgAVDw4AAf39AATY4OAA8/LyAP8AAgBLkBBbyxBUigAAAABJRU5ErkJggg==);
+        background-size: cover;
+      }
+      .video[data-variant="tjg"] {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAlmVYSWZNTQAqAAAACAAEARoABQAAAAEAAAA+ARsABQAAAAEAAABGASgAAwAAAAEAAgAAh2kABAAAAAEAAABOAAAAAAAAAJAAAAABAAAAkAAAAAEABJKGAAcAAAASAAAAhKABAAMAAAABAAEAAKACAAQAAAABAAAAA6ADAAQAAAABAAAAAwAAAABBU0NJSQAAAFNjcmVlbnNob3Rl3WWkAAAACXBIWXMAABYlAAAWJQFJUiTwAAAC1WlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNi4wLjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgICAgICAgICAgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iPgogICAgICAgICA8dGlmZjpZUmVzb2x1dGlvbj4xNDQ8L3RpZmY6WVJlc29sdXRpb24+CiAgICAgICAgIDx0aWZmOlhSZXNvbHV0aW9uPjE0NDwvdGlmZjpYUmVzb2x1dGlvbj4KICAgICAgICAgPHRpZmY6UmVzb2x1dGlvblVuaXQ+MjwvdGlmZjpSZXNvbHV0aW9uVW5pdD4KICAgICAgICAgPGV4aWY6UGl4ZWxYRGltZW5zaW9uPjYyNDwvZXhpZjpQaXhlbFhEaW1lbnNpb24+CiAgICAgICAgIDxleGlmOkNvbG9yU3BhY2U+MTwvZXhpZjpDb2xvclNwYWNlPgogICAgICAgICA8ZXhpZjpVc2VyQ29tbWVudD5TY3JlZW5zaG90PC9leGlmOlVzZXJDb21tZW50PgogICAgICAgICA8ZXhpZjpQaXhlbFlEaW1lbnNpb24+NjI1PC9leGlmOlBpeGVsWURpbWVuc2lvbj4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+Cia6nDcAAAAySURBVAgdAScA2P8B8/T0/wADBAAD//8AAf3+/v/f4uAADwsKAASdnZ4A4N3ZAAYHCACB8BEpfunpVAAAAABJRU5ErkJggg==);
+        background-size: cover;
+      }
+      .video[data-variant="my-ideal-map"] {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAlmVYSWZNTQAqAAAACAAEARoABQAAAAEAAAA+ARsABQAAAAEAAABGASgAAwAAAAEAAgAAh2kABAAAAAEAAABOAAAAAAAAAJAAAAABAAAAkAAAAAEABJKGAAcAAAASAAAAhKABAAMAAAABAAEAAKACAAQAAAABAAAAA6ADAAQAAAABAAAAAwAAAABBU0NJSQAAAFNjcmVlbnNob3Rl3WWkAAAACXBIWXMAABYlAAAWJQFJUiTwAAAC1WlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNi4wLjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgICAgICAgICAgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iPgogICAgICAgICA8dGlmZjpZUmVzb2x1dGlvbj4xNDQ8L3RpZmY6WVJlc29sdXRpb24+CiAgICAgICAgIDx0aWZmOlhSZXNvbHV0aW9uPjE0NDwvdGlmZjpYUmVzb2x1dGlvbj4KICAgICAgICAgPHRpZmY6UmVzb2x1dGlvblVuaXQ+MjwvdGlmZjpSZXNvbHV0aW9uVW5pdD4KICAgICAgICAgPGV4aWY6UGl4ZWxYRGltZW5zaW9uPjYyNDwvZXhpZjpQaXhlbFhEaW1lbnNpb24+CiAgICAgICAgIDxleGlmOkNvbG9yU3BhY2U+MTwvZXhpZjpDb2xvclNwYWNlPgogICAgICAgICA8ZXhpZjpVc2VyQ29tbWVudD5TY3JlZW5zaG90PC9leGlmOlVzZXJDb21tZW50PgogICAgICAgICA8ZXhpZjpQaXhlbFlEaW1lbnNpb24+NjI1PC9leGlmOlBpeGVsWURpbWVuc2lvbj4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+Cia6nDcAAAAvSURBVAgdYywoKPp/5/59BkZGBgYWXR1NBkt7awaGv/8YWJ68es1w6+hRBmYgBwAXXA9CUBv59gAAAABJRU5ErkJggg==);
+        background-size: cover;
+      }
+      /* Code block */
+      .code {
+        background-color: var(--black);
+        color: rgb(100, 255, 100);
+        padding-top: 100%; /* 1 to 1 aspect ratio */
+        position: relative;
+        z-index: 0; /* to create a stacking context */
+      }
+      .code img {
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .code pre,
+      .code code {
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .code code {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        padding: calc(var(--whitespace100) / 16 * 1rem);
+      }
+      .code code[data-variant="alt-text"] {
+        justify-content: flex-start;
+        overflow: hidden;
+      }
+      /* Blockquote block */
+      .blockquote {
+        padding: 0 1em; /* indentation */
+      }
+      .blockquote blockquote {
+        text-indent: -0.2em;
+      }
+      [lang="ja"] .blockquote blockquote {
+        text-indent: -0.5em;
+      }
+      .blockquote.removed-if-js-disabled {
+        display: none;
+      }
+      /* Leaf Card block */
+      .leaf-card {
+        border-radius: var(--round-corner) 0 var(--round-corner) 0;
+        /* Prevent background color leak outs (https://tumble.sneak.co.nz/post/928998513/fixing-the-background-bleed) */
+        -webkit-background-clip: padding-box;
+        -moz-background-clip: padding;
+        background-clip: padding-box;
+        display: grid;
+        gap: calc(var(--whitespace100) / 16 * 1rem);
+        grid-template-areas: "video video" "playback text" "button text";
+        grid-template-columns: var(--minimum-target-size) 1fr;
+        grid-template-rows: auto var(--minimum-target-size) auto;
+        width: 100%;
+      }
+      .leaf-card:nth-of-type(even) {
+        border-radius: 0 var(--round-corner) 0 var(--round-corner);
+      }
+      .leaf-card .video,
+      .leaf-card .code {
+        grid-area: video;
+      }
+      /* Round the top-left or top-right corner of media */
+      .leaf-card .video,
+      .leaf-card .video img,
+      .leaf-card .video video {
+        --border-radius: calc(
+          var(--round-corner) - var(--whitespace200) / 16 * 1rem
+        );
+        border-radius: var(--border-radius) 0 0 0;
+      }
+      .leaf-card:nth-of-type(even) .video,
+      .leaf-card:nth-of-type(even) .video img,
+      .leaf-card:nth-of-type(even) .video video {
+        --border-radius: calc(
+          var(--round-corner) - var(--whitespace200) / 16 * 1rem
+        );
+        border-radius: 0 var(--border-radius) 0 0;
+      }
+      .leaf-card .buttonGroup {
+        display: grid;
+        gap: calc(var(--whitespace100) / 16 * 1rem);
+        grid-area: button;
+        grid-template-areas: "." "website" "source";
+        grid-template-rows:
+          1fr var(--minimum-target-size)
+          var(--minimum-target-size);
+      }
+      .leaf-card .button[data-type="playback"] {
+        grid-area: playback;
+      }
+      .leaf-card .title-card {
+        grid-area: text;
+      }
+      .leaf-card .button[data-type="website"] {
+        grid-area: website;
+      }
+      .leaf-card .button[data-type="source"] {
+        grid-area: source;
+      }
+      /* Responsive layout */
+      @media screen and (min-width: 780.25px) {
+        /* breakpoint: var(--video-max-width) + 2 * var(--whitespace200) + 2 * var(--whitespace400) */
+        .leaf-card {
+          /* left-align grid items */
+          grid-template-areas: "video video ." "playback text ." "button text .";
+          grid-template-columns:
+            var(--minimum-target-size)
+            calc(
+              var(--video-max-width) - (var(--whitespace100) / 16 * 1rem) -
+                var(--minimum-target-size)
+            )
+            1fr;
+        }
+        .leaf-card:nth-of-type(even) {
+          /* right-align grid items */
+          grid-template-areas: ". video video" ". playback text" ". button text";
+          grid-template-columns:
+            1fr
+            var(--minimum-target-size)
+            calc(
+              var(--video-max-width) - (var(--whitespace100) / 16 * 1rem) -
+                var(--minimum-target-size)
+            );
+        }
+      }
+      @media screen and (min-width: 1216.25px) {
+        /* breakpoint: var(--video-max-width) * 5/3 + var(--whitespace100) + 2 * var(--whitespace200) + 2 * var(--whitespace400) */
+        .alternate-position {
+          display: flex;
+          flex-direction: column;
+        }
+        .alternate-position .leaf-card:nth-of-type(odd) {
+          align-self: flex-end;
+        }
+        .leaf-card {
+          align-items: flex-start; /* avoid stretching title-card */
+          grid-template-areas: "video text" "video button" "video ." "video playback";
+          grid-template-columns: 3fr 2fr;
+          grid-template-rows: auto var(--minimum-target-size) auto var(
+              --minimum-target-size
+            );
+          max-width: calc(
+            var(--video-max-width) * 5 / 3 + (var(--whitespace100) / 16 * 1rem) +
+              (var(--whitespace200) / 16 * 1rem) * 2
+          );
+        }
+        .leaf-card:nth-of-type(even) {
+          grid-template-areas: "text video" "button video" ". video" "playback video";
+          grid-template-columns: 2fr 3fr;
+        }
+        .leaf-card .title-card {
+          width: calc(var(--video-max-width) * 2 / 3);
+        }
+        .leaf-card .buttonGroup {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+        }
+        .leaf-card:nth-of-type(even) .buttonGroup {
+          justify-content: flex-start;
+        }
+        .leaf-card .button[data-type="playback"] {
+          align-self: end;
+        }
+        .leaf-card:nth-of-type(even) .button[data-type="playback"] {
+          justify-self: end;
+        }
+      }
+      @media screen and (min-width: 1632.25px) {
+        /* breakpoint: var(--video-max-width) + 2 * var(--video-max-width) * 2/3 + 2 * var(--whitespace100) + 2 * var(--whitespace200) + 2 * var(--whitespace400) */
+        main > section {
+          align-items: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+        .alternate-position {
+          width: calc(
+            var(--video-max-width) * 7 / 3 + var(--whitespace100) / 16 * 1rem *
+              2 + var(--whitespace200) / 16 * 1rem * 2
+          );
+        }
+      }
+      .buttonGroup[data-variant="blog"] {
+        column-gap: calc(var(--whitespace100) / 16 * 1rem);
+        display: flex;
+        justify-content: flex-end;
+      }
+      /* Button Block */
+      .button {
+        /* Label placement */
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        /* Texture */
+        background: var(--white);
+        color: var(
+          --mid-grey
+        ); /* to control SVG icon's stroke="currentColor" */
+        fill: var(--mid-grey);
+        /* Shape */
+        border-radius: 4px;
+        height: var(--minimum-target-size);
+        width: var(--minimum-target-size);
+      }
+      .button svg {
+        width: 100%; /* Necessary for Safari to render <svg> without height/width attributes */
+      }
+      .title-card[data-variant="blog"] .button {
+        background: transparent;
+        border: 1px solid var(--white);
+        color: var(--white);
+      }
+      .button.removed-if-js-disabled {
+        display: none;
+      }
+      .button[disabled] {
+        cursor: not-allowed;
+        opacity: 0.4;
+      }
+      .button:focus {
+        outline-color: var(--focusBlueDark);
+        outline-offset: var(--focus-ring-offset);
+        outline-style: var(--focus-ring-style);
+        outline-width: var(--focus-ring-width);
+      }
+      .bg-garden .button:focus {
+        outline-color: var(--focusBlueLight);
+      }
+      .button:focus:not(:focus-visible) {
+        outline: none;
+        padding-right: 0; /* for link buttons */
+      }
+      .button:active {
+        transform: scale(0.95);
+      }
+      /* Footer Block */
+      .footer {
+        display: grid;
+        grid-template-areas: "contact" "sitemap" "paragraphs" "copyright";
+        row-gap: calc(var(--whitespace200) / 16 * 1rem);
+      }
+      .footer .footer-paragraphs {
+        padding-top: calc(
+          (var(--minimum-target-size) - var(--xHeight10) * 1px) / 2
+        );
+      }
+      @media screen and (min-width: 468px) {
+        .footer {
+          /* center-align the footer section */
+          grid-template-areas: ". contact ." ". sitemap ." ". paragraphs ." ". copyright .";
+          grid-template-columns:
+            1fr calc(33 * var(--font10-raleway) / 16 * 1rem)
+            1fr;
+        }
+      }
+      @media screen and (min-width: 806px) {
+        .footer {
+          grid-template-areas:
+            ". contact . paragraphs ."
+            ". sitemap . paragraphs .";
+          grid-template-columns:
+            1fr 15.6rem calc(var(--whitespace400) / 16 * 1rem)
+            25.3rem 1fr;
+        }
+        .footer .contact,
+        .footer .sitemap {
+          align-items: flex-end;
+        }
+        .footer .text-button {
+          justify-content: flex-end;
+        }
+        .footer li {
+          text-align: right;
+        }
+        .footer .footer-paragraphs {
+          padding-top: 0;
+        }
+      }
+      /* Contact Block */
+      .contact {
+        grid-area: contact;
+      }
+      .contact ul {
+        margin-top: calc(
+          (var(--minimum-target-size) - var(--xHeight10) * 1px) / 2
+        );
+      }
+      .contact ul > li + li {
+        margin-top: 8px;
+      }
+      .sitemap {
+        grid-area: sitemap;
+      }
+      .sitemap ul > li + li {
+        margin-top: 8px;
+      }
+      .footer-paragraphs {
+        grid-area: paragraphs;
+      }
+      .whitespace-footer > * + * {
+        margin-top: calc(var(--whitespace100) / 16 * 1rem);
+      }
+      /* In-page link scrolling behavior */
+      html {
+        scroll-behavior: smooth;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+      #works,
+      #blog,
+      #about {
+        scroll-margin-top: calc(var(--whitespace400) / 16 * 1rem);
+        /* Reference: https://css-tricks.com/hash-tag-links-padding/#aa-update-just-use-scroll-margin-top */
+      }
+      /* pills */
+      .pill-container {
+        --row-gap: calc(var(--whitespace10) / 16 * 1rem);
+        column-gap: calc(
+          var(--row-gap) / 2
+        ); /* to be optically equal to row-gap */
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: var(--row-gap);
+      }
+      .pill {
+        border: 1px solid currentColor;
+        border-radius: 100px; /* TODO: specify once the font-family is fixed */
+        color: currentColor;
+        display: inline-block;
+        padding: 0 10px;
+        text-align: center;
+      }
+      .pill a {
+        /* Style text */
+        color: inherit;
+        text-decoration: none;
+        /* Add the open-in icon */
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke-width='1' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6' /%3E%3Cpath d='M11 13l9 -9' /%3E%3Cpath d='M15 4h5v5' /%3E%3C/svg%3E");
+        background-position: center right;
+        background-repeat: no-repeat;
+        background-size: 1.1em;
+        padding-right: 1.2em;
+      }
+      .pill:has(:focus-visible) {
+        /*
+          This pseudo selector is the `focus-visible` version of `:focus-within`. 
+          See https://larsmagnus.co/blog/focus-visible-within-the-missing-pseudo-class 
+        */
+        outline-color: var(--focusBlueDark);
+        outline-offset: var(--focus-ring-offset);
+        outline-style: var(--focus-ring-style);
+        outline-width: var(--focus-ring-width);
+      }
+      /* Title-card Block */
+      .title-card {
+        background: var(--white);
+        padding: calc(var(--whitespace100) / 16 * 1rem);
+        width: 100%; /* necessary to expand beyond its text content length */
+      }
+      .title-card[data-variant="blog"] {
+        background: transparent;
+        border: 1px solid var(--white);
+        max-width: calc(
+          var(--video-max-width) - var(--gap100) - var(--minimum-target-size)
+        );
+      }
+      /* Masonry composition */
+      .masonry code {
+        font-size: calc(4.13px + (7 / 460) * 100vw);
+        /* 9px at 320px wide screens; 16px at 780px wide screens */
+      }
+      @media screen and (min-width: 780.25px) {
+        .masonry {
+          columns: 2;
+          gap: var(--whitespace100);
+        }
+        .masonry code {
+          font-size: calc(-0.7724px + (6 / 435) * 100vw);
+          /* 10px at 781px wide screens; 16px at 1216px wide screens */
+        }
+        .masonry section {
+          break-inside: avoid;
+        }
+      }
+      @media screen and (min-width: 1216.25px) {
+        .masonry {
+          columns: 3;
+          max-width: calc(
+            var(--video-max-width) + 2 * var(--video-max-width) * 2 / 3 + 2 *
+              var(--whitespace100) / 16 * 1rem + 2 * var(--whitespace200) / 16 *
+              1rem
+          );
+        }
+        .masonry code {
+          font-size: clamp(11px, calc(-3.6274px + 5 / 416 * 100vw), 16px);
+          /* 11px at 1217px wide screens; 16px at 1633px wide screens or wider */
+        }
+      }
+      /* Shadow utility */
+      .shadow {
+        /* Layerd shadow approach: https://tobiasahlin.com/blog/layered-smooth-box-shadows/ */
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.15),
+          0px 0px 2px rgba(0, 0, 0, 0.15), 0px 0px 4px rgba(0, 0, 0, 0.15),
+          0px 0px 8px rgba(0, 0, 0, 0.15);
+      }
+      /* Animation */
+      :root {
+        --ease-in: cubic-bezier(0, 0, 0.2, 1);
+        --ease-out: cubic-bezier(0.4, 0, 1, 1);
+      }
+      body {
+        animation: fadein 1s var(--ease-in);
+        animation-fill-mode: backwards;
+      }
+      @keyframes fadein {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      /* Paragraph-wrapper block */
+      .paragraph-wrapper {
+        --duration-enter: 250ms;
+        --duration-exit: 150ms;
+        position: relative;
+      }
+      .paragraph-wrapper[data-status="js-enabled"] div[lang="ja"],
+      .paragraph-wrapper[data-status="english"] div[lang="ja"],
+      .paragraph-wrapper[data-status="japanese"] div[lang="ja"] {
+        position: absolute;
+        top: 0;
+        transform: translateY(0.3em); /* Match the first line of text */
+      }
+      .paragraph-wrapper[data-status="js-enabled"] div[lang="ja"] {
+        opacity: 0;
+        pointer-events: none;
+      }
+      /* Transition to Japanese */
+      .paragraph-wrapper[data-status="japanese"] div:first-of-type {
+        opacity: 0;
+        transition: opacity var(--duration-exit) var(--ease-out);
+      }
+      .paragraph-wrapper[data-status="japanese"] div[lang="ja"] {
+        opacity: 1;
+        pointer-events: auto;
+        transition: opacity var(--duration-enter) var(--ease-in)
+          var(--duration-exit);
+      }
+      /* Transition back to English */
+      .paragraph-wrapper[data-status="english"] div[lang="ja"] {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--duration-exit) var(--ease-out);
+      }
+      .paragraph-wrapper[data-status="english"] div:first-of-type {
+        opacity: 1;
+        transition: opacity var(--duration-enter) var(--ease-in)
+          var(--duration-exit);
+      }
+      /* Language selector block */
+      .language-selector {
+        background-color: inherit;
+        text-align: start;
+        text-decoration-line: underline;
+      }
+      .language-selector.removed-if-js-disabled {
+        display: none;
+      }
+      /* spinning animation */
+      .spinning {
+        animation: rotation 1s linear infinite;
+      }
+      @keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+    <!-- Asynchronously load CSS stylesheet (https://web.dev/defer-non-critical-css/#optimize)-->
+    <link
+      rel="preload"
+      href="style.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="style.css" />
+    </noscript>
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="The portfolio site of Masa Kudamatsu, showcasing his works and blog articles along with self-introduction."
+    />
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <!-- Open Graph: meta data -->
+    <meta property="og:title" content="Masa Kudamatsu" />
+    <meta
+      property="og:description"
+      content="The portfolio site of Masa Kudamatsu, showcasing his works and blog articles along with self-introduction"
+    />
+    <meta property="og:url" content="https://masakudamatsu.dev/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en-JP" />
+    <!-- Open Graph: image -->
+    <meta property="og:image" content="/open-graph-v1.0.0.png" />
+    <meta property="og:image:height" content="632" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:type" content="image/png" />
+    <meta
+      name="twitter:image:alt"
+      content="The uppercase characters MASA KUDAMATSU are rendered in a typeface featuring knot-like shapes for M and K, below which the string of text reads Kyoto-based web developer with UX design best practices in mind."
+    />
+    <!-- Twitter-specific -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@masa_kudamatsu" />
+  </head>
+  <body class="color-white">
+    <header class="whitespace-300 bg-black">
+      <h1>Masa Kudamatsu</h1>
+      <div class="paragraph-wrapper whitespace-300" data-status="js-disabled">
+        <div class="whitespace-200">
+          <p>Kyoto-based web developer with UX design best practices in mind</p>
+          <button
+            class="language-selector removed-if-js-disabled"
+            type="button"
+          >
+            Japanese
+          </button>
+        </div>
+        <div class="measure whitespace-200" lang="ja">
+          <p>
+            最良のユーザー体験を実現するためにコードを書く、京都在住のWebエンジニア
+          </p>
+          <button
+            class="language-selector removed-if-js-disabled"
+            type="button"
+          >
+            English
+          </button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="bg-green divider-light-grey whitespace-300">
+        <div class="measure whitespace-300">
+          <h2 class="color-pure-white" id="works">Works</h2>
+          <div
+            class="paragraph-wrapper whitespace-300"
+            data-status="js-disabled"
+          >
+            <div class="whitespace-200">
+              <p>
+                All designed and coded from scratch by myself, along with test
+                code in Jest, Cypress, and Testing Library
+              </p>
+              <button
+                class="language-selector removed-if-js-disabled"
+                type="button"
+              >
+                Japanese
+              </button>
+            </div>
+            <div class="measure whitespace-200" lang="ja">
+              <p>
+                テンプレートを使わずにデザインとコーディングをし、Jest、Cypress、Testing
+                Library を用いたテストコードも書いています。
+              </p>
+              <button
+                class="language-selector removed-if-js-disabled"
+                type="button"
+              >
+                English
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="alternate-position whitespace-300">
+          <section class="leaf-card padding bg-grid color-black">
+            <figure class="video" data-variant="my-ideal-map">
+              <video
+                height="624"
+                width="624"
+                controls
+                loop
+                muted
+                playsinline
+                preload="metadata"
+              >
+                <source src="media/my-ideal-map.mp4" type="video/mp4" />
+                <!-- Offer download -->
+                <a href="media/my-ideal-map.mp4">Download the video</a>
+              </video>
+              <img
+                alt=""
+                class="removed-if-js-disabled transparent"
+                loading="lazy"
+                sizes="(max-width: 600px) calc(100vw - 75px), (max-width: 766px) calc(100vw - 141.25px), 624px"
+                srcset="
+                  media/my-ideal-map624.png   624w,
+                  media/my-ideal-map990.png   990w,
+                  media/my-ideal-map1248.png 1248w
+                "
+                src="media/my-ideal-map624.png"
+              />
+            </figure>
+            <button
+              aria-label="Play  demo for My Ideal Map"
+              class="button shadow removed-if-js-disabled"
+              data-type="playback"
+              disabled
+              type="button"
+            >
+              <!-- Tabler Icons loader-2 https://tabler-icons.io/i/loader-2 -->
+              <svg
+                aria-hidden="true"
+                class="spinning"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 3a9 9 0 1 0 9 9"></path>
+                <path d=""></path>
+              </svg>
+            </button>
+            <div class="buttonGroup">
+              <a
+                aria-label="Visit My Ideal Map"
+                class="button shadow"
+                data-type="website"
+                href="https://my-ideal-map.app"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <!-- Tabler Icon external-link https://tabler-icons.io/i/external-link -->
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
+                  ></path>
+                  <path d="M11 13l9 -9"></path>
+                  <path d="M15 4h5v5"></path>
+                </svg>
+              </a>
+              <a
+                aria-label="See source code for My Ideal Map"
+                class="button shadow"
+                data-type="source"
+                href="https://github.com/masakudamatsu/mima"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <!-- Tabler Icon code https://tabler-icons.io/i/code -->
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M7 8l-4 4l4 4"></path>
+                  <path d="M17 8l4 4l-4 4"></path>
+                  <path d="M14 4l-4 16"></path>
+                </svg>
+              </a>
+            </div>
+            <div class="title-card shadow whitespace-300">
+              <div class="whitespace-200">
+                <h3>My Ideal Map</h3>
+                <p>August – December 2021, August 2022 — present</p>
+              </div>
+              <div
+                class="paragraph-wrapper whitespace-300"
+                data-status="js-disabled"
+              >
+                <div class="whitespace-200">
+                  <p>
+                    A full-stack web app for those who love exploring cities to
+                    save places on the embedded Google Maps
+                    <em>with links to external sites</em>. I’m planning on
+                    making the app available to the public by the end of this
+                    year.
+                  </p>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    Japanese
+                  </button>
+                </div>
+                <div class="measure whitespace-200" lang="ja">
+                  <p>
+                    街歩きが好きなユーザーが、Googleマップ上の場所を保存する際のメモに、外部サイトへのリンクを貼ることができるようにしたWebアプリ。今年中に一般公開予定。
+                  </p>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    English
+                  </button>
+                </div>
+              </div>
+              <ul role="list" class="pill-container">
+                <li class="pill">Geolocation API</li>
+                <li class="pill">React</li>
+                <li class="pill">Next.js</li>
+                <li class="pill">Styled Components</li>
+                <li class="pill">Prisma</li>
+                <li class="pill">PostgreSQL</li>
+                <li class="pill">
+                  <a
+                    href="https://mapsplatform.google.com"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    >Google Maps Platform</a
+                  >
+                </li>
+                <li class="pill">
+                  <a
+                    href="https://auth0.com"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    >Auth0</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </section>
+          <section class="leaf-card padding bg-garden">
+            <figure class="video" data-variant="tjg">
+              <video
+                height="624"
+                width="624"
+                controls
+                loop
+                muted
+                playsinline
+                preload="metadata"
+              >
+                <source src="media/tjg.mp4" type="video/mp4" />
+                <!-- Offer download -->
+                <a href="media/tjg.mp4">Download the video</a>
+              </video>
+              <img
+                alt=""
+                class="removed-if-js-disabled transparent"
+                loading="lazy"
+                sizes="(max-width: 600px) calc(100vw - 75px), (max-width: 766px) calc(100vw - 141.25px), 624px"
+                srcset="
+                  media/tjg624.png   624w,
+                  media/tjg990.png   990w,
+                  media/tjg1248.png 1248w
+                "
+                src="media/tjg624.png"
+              />
+            </figure>
+            <button
+              aria-label="Play  demo for Translating Japanese Gardens"
+              class="button shadow removed-if-js-disabled"
+              data-type="playback"
+              disabled
+              type="button"
+            >
+              <!-- Tabler Icons loader-2 https://tabler-icons.io/i/loader-2 -->
+              <svg
+                aria-hidden="true"
+                class="spinning"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 3a9 9 0 1 0 9 9"></path>
+                <path d=""></path>
+              </svg>
+            </button>
+            <div class="buttonGroup">
+              <a
+                aria-label="Visit Translating Japanese Gardens"
+                class="button shadow"
+                data-type="website"
+                href="https://translating-japanese-gardens.pages.dev"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <!-- Tabler Icon external-link https://tabler-icons.io/i/external-link -->
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
+                  ></path>
+                  <path d="M11 13l9 -9"></path>
+                  <path d="M15 4h5v5"></path>
+                </svg>
+              </a>
+              <a
+                aria-label="See source code for Translating Japanese Gardens"
+                class="button shadow"
+                data-type="source"
+                href="https://github.com/masakudamatsu/translating-japanese-gardens"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <!-- Tabler Icon code https://tabler-icons.io/i/code -->
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M7 8l-4 4l4 4"></path>
+                  <path d="M17 8l4 4l-4 4"></path>
+                  <path d="M14 4l-4 16"></path>
+                </svg>
+              </a>
+            </div>
+            <div class="title-card shadow whitespace-300 color-black">
+              <div class="whitespace-200">
+                <h3>Translating Japanese Gardens</h3>
+
+                <p>June–August 2021</p>
+              </div>
+              <div
+                class="paragraph-wrapper whitespace-300"
+                data-status="js-disabled"
+              >
+                <div class="whitespace-200">
+                  <p>
+                    A blog for a Japanese garden design enthusiast (that is, me)
+                    to articulate his thought on the design intent behind
+                    historical gardens.
+                  </p>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    Japanese
+                  </button>
+                </div>
+                <div class="measure whitespace-200" lang="ja">
+                  <p>
+                    日本庭園愛好家（私のことです）が、歴史的な名庭園のデザイン意図を深読みするブログ。
+                  </p>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    English
+                  </button>
+                </div>
+              </div>
+              <ul role="list" class="pill-container">
+                <li class="pill">React</li>
+                <li class="pill">Next.js</li>
+                <li class="pill">Styled Components</li>
+                <li class="pill">
+                  <a
+                    href="https://github.com/zachleat/glyphhanger"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    >Glyphhanger</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </section>
+          <section class="leaf-card padding bg-color">
+            <figure class="video" data-variant="triangulum">
+              <video
+                height="624"
+                width="624"
+                controls
+                loop
+                muted
+                playsinline
+                preload="metadata"
+              >
+                <source src="media/triangulum.mp4" type="video/mp4" />
+                <!-- Offer download -->
+                <a href="media/triangulum.mp4">Download the video</a>
+              </video>
+              <img
+                alt=""
+                class="removed-if-js-disabled transparent"
+                loading="lazy"
+                sizes="(max-width: 600px) calc(100vw - 75px), (max-width: 766px) calc(100vw - 141.25px), 624px"
+                srcset="
+                  media/triangulum624.png   624w,
+                  media/triangulum990.png   990w,
+                  media/triangulum1248.png 1248w
+                "
+                src="media/triangulum624.png"
+              />
+            </figure>
+            <button
+              aria-label="Play  demo for Triangulum Color Picker"
+              class="button shadow removed-if-js-disabled"
+              data-type="playback"
+              disabled
+              type="button"
+            >
+              <!-- Tabler Icons loader-2 https://tabler-icons.io/i/loader-2 -->
+              <svg
+                aria-hidden="true"
+                class="spinning"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 3a9 9 0 1 0 9 9"></path>
+                <path d=""></path>
+              </svg>
+            </button>
+            <div class="buttonGroup">
+              <a
+                aria-label="Visit Triangulum Color Picker"
+                class="button shadow"
+                data-type="website"
+                href="https://triangulum.netlify.app"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <!-- Tabler Icon external-link https://tabler-icons.io/i/external-link -->
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
+                  ></path>
+                  <path d="M11 13l9 -9"></path>
+                  <path d="M15 4h5v5"></path>
+                </svg>
+              </a>
+              <a
+                aria-label="See source code for Triangulum Color Picker"
+                class="button shadow"
+                data-type="source"
+                href="https://github.com/masakudamatsu/triangulum-color-picker"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <!-- Tabler Icon code https://tabler-icons.io/i/code -->
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M7 8l-4 4l4 4"></path>
+                  <path d="M17 8l4 4l-4 4"></path>
+                  <path d="M14 4l-4 16"></path>
+                </svg>
+              </a>
+            </div>
+            <div class="title-card shadow whitespace-300 color-black">
+              <div class="whitespace-200">
+                <h3>Triangulum Color Picker</h3>
+                <p>December 2020–March 2021</p>
+              </div>
+              <div
+                class="paragraph-wrapper whitespace-300"
+                data-status="js-disabled"
+              >
+                <div class="whitespace-200">
+                  <p>
+                    A web tool for web designers to pick accessible and
+                    harmonious colors with ease.
+                  </p>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    Japanese
+                  </button>
+                </div>
+                <div class="measure whitespace-200" lang="ja">
+                  <p>
+                    Webデザイナーが、アクセシビリティーと他の色との調和を考慮した色を選びやすくしたWebツール。
+                  </p>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    English
+                  </button>
+                </div>
+              </div>
+              <ul role="list" class="pill-container">
+                <li class="pill">Canvas API</li>
+                <li class="pill">React</li>
+                <li class="pill">Next.js</li>
+                <li class="pill">Styled Components</li>
+              </ul>
+            </div>
+          </section>
+          <section class="leaf-card padding bg-typeset color-black">
+            <div aria-hidden="true" class="background">
+              <p>
+                I am honored to be with you today at your commencement from one
+                of the finest universities in the world. I never graduated from
+                college. Truth be told, this is the closest I’ve ever gotten to
+                a college graduation. Today I want to tell you three stories
+                from my life. That’s it. No big deal. Just three stories.
+              </p>
+              <p>The first story is about connecting the dots.</p>
+              <p>
+                I dropped out of Reed College after the first 6 months, but then
+                stayed around as a drop-in for another 18 months or so before I
+                really quit. So why did I drop out?
+              </p>
+              <p>
+                It started before I was born. My biological mother was a young,
+                unwed college graduate student, and she decided to put me up for
+                adoption. She felt very strongly that I should be adopted by
+                college graduates, so everything was all set for me to be
+                adopted at birth by a lawyer and his wife. Except that when I
+                popped out they decided at the last minute that they really
+                wanted a girl. So my parents, who were on a waiting list, got a
+                call in the middle of the night asking: “We have an unexpected
+                baby boy; do you want him?” They said: “Of course.” My
+                biological mother later found out that my mother had never
+                graduated from college and that my father had never graduated
+                from high school. She refused to sign the final adoption papers.
+                She only relented a few months later when my parents promised
+                that I would someday go to college.
+              </p>
+              <p>
+                And 17 years later I did go to college. But I naively chose a
+                college that was almost as expensive as Stanford, and all of my
+                working-class parents’ savings were being spent on my college
+                tuition. After six months, I couldn’t see the value in it. I had
+                no idea what I wanted to do with my life and no idea how college
+                was going to help me figure it out. And here I was spending all
+                of the money my parents had saved their entire life. So I
+                decided to drop out and trust that it would all work out OK. It
+                was pretty scary at the time, but looking back it was one of the
+                best decisions I ever made. The minute I dropped out I could
+                stop taking the required classes that didn’t interest me, and
+                begin dropping in on the ones that looked interesting.
+              </p>
+              <p>
+                It wasn’t all romantic. I didn’t have a dorm room, so I slept on
+                the floor in friends’ rooms, I returned Coke bottles for the 5¢
+                deposits to buy food with, and I would walk the 7 miles across
+                town every Sunday night to get one good meal a week at the Hare
+                Krishna temple. I loved it. And much of what I stumbled into by
+                following my curiosity and intuition turned out to be priceless
+                later on. Let me give you one example:
+              </p>
+              <p>
+                Reed College at that time offered perhaps the best calligraphy
+                instruction in the country. Throughout the campus every poster,
+                every label on every drawer, was beautifully hand calligraphed.
+                Because I had dropped out and didn’t have to take the normal
+                classes, I decided to take a calligraphy class to learn how to
+                do this. I learned about serif and sans serif typefaces, about
+                varying the amount of space between different letter
+                combinations, about what makes great typography great. It was
+                beautiful, historical, artistically subtle in a way that science
+                can’t capture, and I found it fascinating.
+              </p>
+              <p>
+                None of this had even a hope of any practical application in my
+                life. But 10 years later, when we were designing the first
+                Macintosh computer, it all came back to me. And we designed it
+                all into the Mac. It was the first computer with beautiful
+                typography. If I had never dropped in on that single course in
+                college, the Mac would have never had multiple typefaces or
+                proportionally spaced fonts. And since Windows just copied the
+                Mac, it’s likely that no personal computer would have them. If I
+                had never dropped out, I would have never dropped in on this
+                calligraphy class, and personal computers might not have the
+                wonderful typography that they do. Of course it was impossible
+                to connect the dots looking forward when I was in college. But
+                it was very, very clear looking backward 10 years later.
+              </p>
+              <p>
+                Again, you can’t connect the dots looking forward; you can only
+                connect them looking backward. So you have to trust that the
+                dots will somehow connect in your future. You have to trust in
+                something — your gut, destiny, life, karma, whatever. This
+                approach has never let me down, and it has made all the
+                difference in my life.
+              </p>
+            </div>
+            <figure class="video" data-variant="line-height-picker">
+              <video
+                height="624"
+                width="624"
+                controls
+                loop
+                muted
+                playsinline
+                preload="metadata"
+              >
+                <source src="media/line-height-picker.mp4" type="video/mp4" />
+                <!-- Offer download -->
+                <a href="media/line-height-picker.mp4">Download the video</a>
+              </video>
+              <img
+                alt=""
+                class="removed-if-js-disabled transparent"
+                sizes="(max-width: 600px) calc(100vw - 75px), (max-width: 780px) calc(100vw - 146.25px), 624px"
+                srcset="
+                  media/line-height-picker624.png   624w,
+                  media/line-height-picker990.png   990w,
+                  media/line-height-picker1248.png 1248w
+                "
+                src="media/line-height-picker624.png"
+              />
+            </figure>
+            <button
+              aria-label="Play  demo for Line-height Picker"
+              class="button shadow removed-if-js-disabled"
+              data-type="playback"
+              disabled
+              type="button"
+            >
+              <!-- Tabler Icons loader-2 https://tabler-icons.io/i/loader-2 -->
+              <svg
+                aria-hidden="true"
+                class="spinning"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 3a9 9 0 1 0 9 9"></path>
+                <path d=""></path>
+              </svg>
+            </button>
+            <div class="buttonGroup">
+              <a
+                aria-label="Visit Line-height Picker"
+                class="button shadow"
+                data-type="website"
+                href="https://line-height-picker.vercel.app"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <!-- Tabler Icon external-link https://tabler-icons.io/i/external-link -->
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
+                  ></path>
+                  <path d="M11 13l9 -9"></path>
+                  <path d="M15 4h5v5"></path>
+                </svg>
+              </a>
+              <a
+                aria-label="See source code for Line-height Picker"
+                class="button shadow"
+                data-type="source"
+                href="https://github.com/masakudamatsu/line-height-picker"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <!-- Tabler Icon code https://tabler-icons.io/i/code -->
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M7 8l-4 4l4 4"></path>
+                  <path d="M17 8l4 4l-4 4"></path>
+                  <path d="M14 4l-4 16"></path>
+                </svg>
+              </a>
+            </div>
+            <div class="title-card shadow whitespace-300">
+              <div class="whitespace-200">
+                <h3>Line-height Picker</h3>
+                <p>March–July 2020</p>
+              </div>
+              <div
+                class="paragraph-wrapper whitespace-300"
+                data-status="js-disabled"
+              >
+                <div class="whitespace-200">
+                  <p>
+                    A web tool for web designers to set the line height of
+                    paragraph text as the ratio to the x-height of a chosen
+                    font.
+                  </p>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    Japanese
+                  </button>
+                </div>
+                <div class="measure whitespace-200" lang="ja">
+                  <p>
+                    Webデザイナーが、欧文フォントの行間を小文字のエックスの高さとの比で指定するためのWebツール。
+                  </p>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    English
+                  </button>
+                </div>
+              </div>
+              <ul role="list" class="pill-container">
+                <li class="pill">React</li>
+                <li class="pill">Styled Components</li>
+                <li class="pill">
+                  <a
+                    href="https://opentype.js.org/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    >Opentype.js</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </section>
+      <section class="bg-purple divider-light-grey whitespace-300">
+        <div class="measure whitespace-300">
+          <h2 class="color-pure-white" id="blog">Blog</h2>
+          <div
+            class="paragraph-wrapper whitespace-300"
+            data-status="js-disabled"
+          >
+            <div class="whitespace-200">
+              <p>
+                I’ve been blogging about web development on
+                <a
+                  href="https://medium.com/web-dev-survey-from-kyoto"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Medium</a
+                >
+                and
+                <a
+                  href="https://dev.to/masakudamatsu/series/9903"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Dev Community</a
+                >. Here are some of the most popular posts:
+              </p>
+              <button
+                class="language-selector removed-if-js-disabled"
+                type="button"
+              >
+                Japanese
+              </button>
+            </div>
+            <div class="measure whitespace-200" lang="ja">
+              <p>
+                英語でWebプログラミングについてのブログを
+                <a
+                  href="https://medium.com/web-dev-survey-from-kyoto"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Medium</a
+                >
+                と
+                <a
+                  href="https://dev.to/masakudamatsu/series/9903"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Dev Community</a
+                >
+                で書いています。反響のあったブログ記事を幾つか紹介します。
+              </p>
+              <button
+                class="language-selector removed-if-js-disabled"
+                type="button"
+              >
+                English
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="masonry whitespace-100">
+          <section class="title-card whitespace-300" data-variant="blog">
+            <div class="whitespace-200">
+              <div class="whitespace-100">
+                <figure class="code">
+                  <pre><code>
+&lt;link 
+  rel=&quot;icon&quot; 
+  href=&quot;/favicon.ico&quot; 
+  sizes=&quot;48x48&quot; 
+/&gt;
+&lt;link 
+  rel=&quot;icon&quot; 
+  href=&quot;/favicon.svg&quot; 
+  sizes=&quot;any&quot; 
+  type=&quot;image/svg+xml&quot;
+/&gt;
+&lt;link 
+  rel=&quot;apple-touch-icon&quot; 
+  href=&quot;/apple-touch-icon.png&quot;
+/&gt;
+&lt;link 
+  rel=&quot;manifest&quot; 
+  href=&quot;/site.webmanifest&quot; 
+/&gt;  
+                </code></pre>
+                </figure>
+                <div class="buttonGroup" data-variant="blog">
+                  <a
+                    aria-label="My blog post on favicons, hosted by Dev Community"
+                    class="button"
+                    data-type="source"
+                    href="https://dev.to/masakudamatsu/favicon-nightmare-how-to-maintain-sanity-3al7"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <!-- Tabler Icon external-link https://tabler-icons.io/i/external-link -->
+                    <svg
+                      aria-hidden="true"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="0.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
+                      ></path>
+                      <path d="M11 13l9 -9"></path>
+                      <path d="M15 4h5v5"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <h3>Definitive Edition of “How to Favicon” in 2023</h3>
+              <p>January 2021; Last updated in August 2023</p>
+              <div
+                class="paragraph-wrapper whitespace-200"
+                data-status="js-disabled"
+              >
+                <div class="whitespace-200">
+                  <figure class="blockquote">
+                    <blockquote>
+                      “Favicon support is a complicated topic. See this guide
+                      for more information.”
+                    </blockquote>
+                    <figcaption>
+                      &mdash;
+                      <cite
+                        ><a
+                          href="https://caniuse.com/link-icon-svg"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          >Can I Use?</a
+                        ></cite
+                      >
+                    </figcaption>
+                  </figure>
+                  <figure class="blockquote">
+                    <blockquote>
+                      “I invite you to read Masa Kudamatsu’s obsessively
+                      researched How to Favicon in 2021.”
+                    </blockquote>
+                    <figcaption>
+                      &mdash; Adam, Nathan & Patrick
+                      <cite
+                        ><a
+                          href="https://iconmap.io/blog"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          >“We Analyzed 425,909 Favicons”</a
+                        ></cite
+                      >
+                    </figcaption>
+                  </figure>
+                  <figure class="blockquote">
+                    <blockquote>
+                      “If you’re looking for the definitive way to handle
+                      favicons-and-such these days, Masa Kudamatsu’s more recent
+                      and extraordinarily well-researched article is where I’d
+                      start.”
+                    </blockquote>
+                    <figcaption>
+                      &mdash; Lee Reamsnyder
+                      <cite
+                        ><a
+                          href="https://iconmap.io/blog"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          >“How to Favicon in 2021”</a
+                        ></cite
+                      >
+                    </figcaption>
+                  </figure>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    Japanese
+                  </button>
+                </div>
+                <div class="measure whitespace-200" lang="ja">
+                  <figure class="blockquote removed-if-js-disabled">
+                    <blockquote>
+                      「ファビコンの実装方法は複雑です。詳しくはこのガイドをご覧ください。」
+                    </blockquote>
+                    <figcaption>
+                      &mdash;
+                      <cite
+                        ><a
+                          href="https://caniuse.com/link-icon-svg"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          >Can I Use?</a
+                        ></cite
+                      >（訳は引用者）
+                    </figcaption>
+                  </figure>
+                  <figure class="blockquote">
+                    <blockquote>
+                      「最新（2021年）のfaviconの設置方法についてめちゃくちゃ細かくまとめられてる記事を見つけた。ありがたい&勉強になる」
+                    </blockquote>
+                    <figcaption>
+                      &mdash;
+                      <a
+                        href="https://twitter.com/rriver/status/1432572421203128321?s=20"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >Rriver</a
+                      >
+                    </figcaption>
+                  </figure>
+                  <figure class="blockquote">
+                    <blockquote>
+                      「ファビコン博士になれるくらい詳しく書いてあります。」
+                    </blockquote>
+                    <figcaption>
+                      &mdash;
+                      <a
+                        href="https://zenn.dev/bissy/articles/27c5c09a83b27dce11ff"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >bissy</a
+                      >
+                    </figcaption>
+                  </figure>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    English
+                  </button>
+                </div>
+              </div>
+            </div>
+            <ul role="list" class="pill-container">
+              <li class="pill">HTML</li>
+              <li class="pill">SVG</li>
+            </ul>
+          </section>
+          <section class="title-card whitespace-300" data-variant="blog">
+            <div class="whitespace-200">
+              <div class="whitespace-100">
+                <figure class="code">
+                  <pre><code>
+export const FileUploader = ({handleFile}) => {
+  const hiddenFileInput = useRef(null);
+  const handleClick = event => {
+    hiddenFileInput.current.click();
+  };
+  const handleChange = event => {
+    const fileUploaded = event.target.files[0];
+    handleFile(fileUploaded);
+  };
+  return (
+    &lt;&gt;
+      &lt;button onClick={handleClick}&gt;
+        Upload a file
+      &lt;/button&gt;
+      &lt;input
+        type=&quot;file&quot;
+        ref={hiddenFileInput}
+        onChange={handleChange}
+        style={{display: 'none'}}
+      /&gt;
+    &lt;/&gt;
+  );
+};
+                  </code></pre>
+                </figure>
+                <div class="buttonGroup" data-variant="blog">
+                  <a
+                    aria-label="My blog post on upload buttons, hosted by Medium"
+                    class="button"
+                    data-type="website"
+                    href="https://medium.com/web-dev-survey-from-kyoto/how-to-customize-the-file-upload-button-in-react-b3866a5973d8?sk=84049c3c66edb56a84afe87ce4a4525c"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <!-- Tabler Icon external-link https://tabler-icons.io/i/external-link -->
+                    <svg
+                      aria-hidden="true"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="0.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
+                      ></path>
+                      <path d="M11 13l9 -9"></path>
+                      <path d="M15 4h5v5"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <h3>How to customize the file upload button in React</h3>
+              <p>March 2020; Last updated in August 2023</p>
+              <div
+                class="paragraph-wrapper whitespace-200"
+                data-status="js-disabled"
+              >
+                <div class="whitespace-200">
+                  <figure class="blockquote">
+                    <blockquote>“very helpful article. thanks :)”</blockquote>
+                    <figcaption>
+                      &mdash;
+                      <a
+                        href="https://medium.com/@alekoxanta/very-helpful-article-thanks-4ac82e42ad91"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >Aleko Khantadze</a
+                      >
+                    </figcaption>
+                  </figure>
+                  <figure class="blockquote">
+                    <blockquote>
+                      “The TLDR is a killer! Awesome! Thank you!”
+                    </blockquote>
+                    <figcaption>
+                      &mdash;
+                      <a
+                        href="https://medium.com/@munir_56373/the-tldr-is-a-killer-awesome-thank-you-fcc598df3750"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >Munir Ahmad</a
+                      >
+                    </figcaption>
+                  </figure>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    Japanese
+                  </button>
+                </div>
+                <div class="measure whitespace-200" lang="ja">
+                  <figure class="blockquote removed-if-js-disabled">
+                    <blockquote>
+                      「とても役に立つ記事。ありがとう(^_^)」
+                    </blockquote>
+                    <figcaption>
+                      &mdash;
+                      <a
+                        href="https://medium.com/@alekoxanta/very-helpful-article-thanks-4ac82e42ad91"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >Aleko Khantadze</a
+                      >（訳は引用者）
+                    </figcaption>
+                  </figure>
+                  <figure class="blockquote">
+                    <blockquote>
+                      「要約が見事！ 素晴らしい！ ありがとう！」
+                    </blockquote>
+                    <figcaption>
+                      &mdash;
+                      <a
+                        href="https://medium.com/@munir_56373/the-tldr-is-a-killer-awesome-thank-you-fcc598df3750"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >Munir Ahmad</a
+                      >（訳は引用者）
+                    </figcaption>
+                  </figure>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    English
+                  </button>
+                </div>
+              </div>
+            </div>
+            <ul role="list" class="pill-container">
+              <li class="pill">React</li>
+            </ul>
+          </section>
+          <section class="title-card whitespace-300" data-variant="blog">
+            <div class="whitespace-200">
+              <div class="whitespace-100">
+                <figure class="code">
+                  <pre><code>
+&lt;div&gt;
+  &lt;header&gt;&lt;/header&gt;
+  &lt;nav&gt;
+    &lt;button
+      type=&quot;button&quot; 
+      aria-controls=&quot;navigation-drawer&quot; 
+      aria-expanded=&quot;false&quot;
+    &gt;
+      &lt;img alt=&quot;menu&quot; src=&quot;hamburger.svg&quot;/&gt;
+    &lt;/button&gt;
+    &lt;ul id=&quot;navigation-drawer&quot;&gt;
+      &lt;li&gt;&lt;a&gt;Page 1&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a&gt;Page 2&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/div&gt;
+                  </code></pre>
+                </figure>
+                <div class="buttonGroup" data-variant="blog">
+                  <a
+                    aria-label="My blog post on landmark roles, hosted by Medium"
+                    class="button"
+                    data-type="website"
+                    href="https://medium.com/web-dev-survey-from-kyoto/dont-nest-nav-inside-header-do-nest-the-hamburger-menu-button-inside-nav-e30935ab212f?sk=cb8b80b3a8a576f25e460491d0ad34bb"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <!-- Tabler Icon external-link https://tabler-icons.io/i/external-link -->
+                    <svg
+                      aria-hidden="true"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="0.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
+                      ></path>
+                      <path d="M11 13l9 -9"></path>
+                      <path d="M15 4h5v5"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <h3>
+                Don't nest &lt;nav&gt; inside &lt;header&gt;. Do nest the
+                hamburger menu button inside &lt;nav&gt;.
+              </h3>
+              <p>June 2021</p>
+              <div
+                class="paragraph-wrapper whitespace-200"
+                data-status="js-disabled"
+              >
+                <div class="whitespace-200">
+                  <figure class="blockquote">
+                    <blockquote>
+                      “I am building my portfolio atm and this article was
+                      helpful and timely. thank you.”
+                    </blockquote>
+                    <figcaption>
+                      &mdash;<a
+                        href="https://dev.to/adeleke5140/comment/1n7nd"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >Kehinde Adeleke
+                      </a>
+                    </figcaption>
+                  </figure>
+                  <figure class="blockquote">
+                    <blockquote>
+                      “great article, very complete and informative. thanks!”
+                    </blockquote>
+                    <figcaption>
+                      &mdash;
+                      <a
+                        href="https://dev.to/rafaelbpires/comment/1nb81"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >Rafael B. Pires</a
+                      >
+                    </figcaption>
+                  </figure>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    Japanese
+                  </button>
+                </div>
+                <div class="measure whitespace-200" lang="ja">
+                  <figure class="blockquote removed-if-js-disabled">
+                    <blockquote>
+                      「今、自分のポートフォリオを作成中で、この記事はちょうどいいタイミングで役に立った。ありがとう。」
+                    </blockquote>
+                    <figcaption>
+                      &mdash;<a
+                        href="https://dev.to/adeleke5140/comment/1n7nd"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >Kehinde Adeleke </a
+                      >（訳は引用者）
+                    </figcaption>
+                  </figure>
+                  <figure class="blockquote">
+                    <blockquote>
+                      「良い記事、完成度が高くて、ためになる。ありがとう！」
+                    </blockquote>
+                    <figcaption>
+                      &mdash;
+                      <a
+                        href="https://dev.to/rafaelbpires/comment/1nb81"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >Rafael B. Pires</a
+                      >（訳は引用者）
+                    </figcaption>
+                  </figure>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    English
+                  </button>
+                </div>
+              </div>
+            </div>
+            <ul role="list" class="pill-container">
+              <li class="pill">HTML</li>
+              <li class="pill">Accessibility</li>
+            </ul>
+          </section>
+          <section class="title-card whitespace-300" data-variant="blog">
+            <div class="whitespace-200">
+              <div class="whitespace-100">
+                <figure class="code">
+                  <pre><code data-variant="alt-text">
+&lt;figure&gt;
+  &lt;img 
+    src=&quot;images/parsing-model-overview.svg&quot; 
+    alt=&quot;
+      The Network leads to the Input Stream Preprocessor, which leads to the Tokenizer, which leads to the Tree Construction stage.
+    &quot;&gt;
+  &lt;figcaption&gt;
+    Flowchart representation of the parsing 
+    model.
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+                  </code></pre>
+                </figure>
+                <div class="buttonGroup" data-variant="blog">
+                  <a
+                    aria-label="My blog post on alt text, hosted by Medium"
+                    class="button"
+                    data-type="website"
+                    href="https://medium.com/web-dev-survey-from-kyoto/mastering-the-art-of-alt-text-for-images-fb25c4bdb38f?sk=7b3ed15cee41de79b2f2e5f7309e55ab"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <!-- Tabler Icon external-link https://tabler-icons.io/i/external-link -->
+                    <svg
+                      aria-hidden="true"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="0.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
+                      ></path>
+                      <path d="M11 13l9 -9"></path>
+                      <path d="M15 4h5v5"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <h3>Mastering the art of `alt` text for images</h3>
+              <p>May 2021; Last updated in August 2021</p>
+              <div
+                class="paragraph-wrapper whitespace-200"
+                data-status="js-disabled"
+              >
+                <div class="whitespace-200">
+                  <figure class="blockquote">
+                    <blockquote>
+                      “I am enjoying this deep dive into HTML elements and
+                      attributes...”
+                    </blockquote>
+                    <figcaption>
+                      &mdash;
+                      <a
+                        href="https://dev.to/grahamthedev/comment/1ej0n"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >GrahamTheDev</a
+                      >
+                    </figcaption>
+                  </figure>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    Japanese
+                  </button>
+                </div>
+                <div class="measure whitespace-200" lang="ja">
+                  <figure class="blockquote removed-if-js-disabled">
+                    <blockquote>
+                      「HTMLの要素や属性を深く掘り下げるこの記事を楽しく読んでいます...」
+                    </blockquote>
+                    <figcaption>
+                      &mdash;
+                      <a
+                        href="https://dev.to/grahamthedev/comment/1ej0n"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >GrahamTheDev</a
+                      >（訳は引用者）
+                    </figcaption>
+                  </figure>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    English
+                  </button>
+                </div>
+              </div>
+            </div>
+            <ul role="list" class="pill-container">
+              <li class="pill">HTML</li>
+              <li class="pill">Accessibility</li>
+            </ul>
+          </section>
+          <section class="title-card whitespace-300" data-variant="blog">
+            <div class="whitespace-200">
+              <div class="whitespace-100">
+                <figure class="code">
+                  <pre><code>
+/* Gotcha #1 */                    
+#__next {
+  height: 100%;
+}
+
+
+/* Gotcha #2 */
+const googlemap = useRef(null);
+new google.maps.Map(googlemap.current);
+
+
+/* Gotcha #3 */                    
+const google = window.google;
+
+
+/* Gotcha #4 */
+const loader = new Loader({
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  version: 'weekly',
+});
+                  </code></pre>
+                </figure>
+                <div class="buttonGroup" data-variant="blog">
+                  <a
+                    aria-label="My blog post on how to embed Google Maps in Next.js apps, hosted by Medium"
+                    class="button"
+                    data-type="website"
+                    href="https://medium.com/web-dev-survey-from-kyoto/3-gotchas-of-google-maps-api-when-used-with-next-js-and-eslint-dba627c9657d?sk=c014d4011eee4e634981c08b135831f1"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <!-- Tabler Icon external-link https://tabler-icons.io/i/external-link -->
+                    <svg
+                      aria-hidden="true"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="0.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
+                      ></path>
+                      <path d="M11 13l9 -9"></path>
+                      <path d="M15 4h5v5"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <h3>
+                4 gotchas when setting up Google Maps API with Next.js and
+                ESLint
+              </h3>
+              <p>February 2021; Last updated in September 2021</p>
+              <div
+                class="paragraph-wrapper whitespace-200"
+                data-status="js-disabled"
+              >
+                <div class="whitespace-200">
+                  <figure class="blockquote">
+                    <blockquote>
+                      “This is a great article. There's not nearly enough Nextjs
+                      content out there as there should be.”
+                    </blockquote>
+                    <figcaption>
+                      &mdash;
+                      <a
+                        href="https://dev.to/rcabre95/comment/1h962"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >Raphael Cabrera</a
+                      >
+                    </figcaption>
+                  </figure>
+                  <figure class="blockquote">
+                    <blockquote>“Thanks for this! Super helpful.”</blockquote>
+                    <figcaption>
+                      &mdash;
+                      <a
+                        href="https://medium.com/@blakebrown_6272/thanks-for-this-super-helpful-8c95a20d72ee"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >Blake Brown</a
+                      >
+                    </figcaption>
+                  </figure>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    Japanese
+                  </button>
+                </div>
+                <div class="measure whitespace-200" lang="ja">
+                  <figure class="blockquote removed-if-js-disabled">
+                    <blockquote>
+                      「これは素晴らしい記事です。Next.jsについての記事はもっとたくさんあるべきです。」
+                    </blockquote>
+                    <figcaption>
+                      &mdash;
+                      <a
+                        href="https://dev.to/rcabre95/comment/1h962"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >Raphael Cabrera</a
+                      >（訳は引用者）
+                    </figcaption>
+                  </figure>
+                  <figure class="blockquote">
+                    <blockquote>
+                      「ありがとう！ すごく役に立ちます。」
+                    </blockquote>
+                    <figcaption>
+                      &mdash;
+                      <a
+                        href="https://medium.com/@blakebrown_6272/thanks-for-this-super-helpful-8c95a20d72ee"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >Blake Brown</a
+                      >（訳は引用者）
+                    </figcaption>
+                  </figure>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    English
+                  </button>
+                </div>
+              </div>
+            </div>
+            <ul role="list" class="pill-container">
+              <li class="pill">Next.js</li>
+              <li class="pill">React</li>
+              <li class="pill">ESLint</li>
+              <li class="pill">Google Maps API</li>
+            </ul>
+          </section>
+          <section class="title-card whitespace-300" data-variant="blog">
+            <div class="whitespace-200">
+              <div class="whitespace-100">
+                <figure class="code">
+                  <pre><code>
+body {
+  font-family: 
+    -apple-system, BlinkMacSystemFont, 
+    "Segoe UI”, Roboto, “Helvetica Neue”, 
+    Arial, sans-serif;
+}
+                  </code></pre>
+                </figure>
+                <div class="buttonGroup" data-variant="blog">
+                  <a
+                    aria-label="My blog post on system font stack, hosted by Medium"
+                    class="button"
+                    data-type="website"
+                    href="https://medium.com/towards-more-beautiful-web-typography/survey-system-font-stack-5f73a3b39776?sk=1146fc332b93995a83493f2f887acc72"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <!-- Tabler Icon external-link https://tabler-icons.io/i/external-link -->
+                    <svg
+                      aria-hidden="true"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="0.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
+                      ></path>
+                      <path d="M11 13l9 -9"></path>
+                      <path d="M15 4h5v5"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <h3>System Font Stack: its history and rationale</h3>
+              <p>March 2020; Last updated in September 2020</p>
+              <div
+                class="paragraph-wrapper whitespace-200"
+                data-status="js-disabled"
+              >
+                <div class="whitespace-200">
+                  <figure class="blockquote">
+                    <blockquote>
+                      “An excellent overview and analysis of trends on the
+                      System Font Stack approach, thank you very much for
+                      sharing.”
+                    </blockquote>
+                    <figcaption>
+                      &mdash;
+                      <a
+                        href="https://medium.com/@chsq2206/an-excellent-overview-and-analysis-of-trends-on-the-system-font-stack-approach-thank-you-very-7cd9ebf39edd"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >Christian</a
+                      >
+                    </figcaption>
+                  </figure>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    Japanese
+                  </button>
+                </div>
+                <div class="measure whitespace-200" lang="ja">
+                  <figure class="blockquote removed-if-js-disabled">
+                    <blockquote>
+                      「システムフォントスタックと呼ばれるアプローチの動向に関する優れた概要と分析、共有に感謝します。」
+                    </blockquote>
+                    <figcaption>
+                      &mdash;
+                      <a
+                        href="https://medium.com/@chsq2206/an-excellent-overview-and-analysis-of-trends-on-the-system-font-stack-approach-thank-you-very-7cd9ebf39edd"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >Christian</a
+                      >（訳は引用者）
+                    </figcaption>
+                  </figure>
+                  <button
+                    class="language-selector removed-if-js-disabled"
+                    type="button"
+                  >
+                    English
+                  </button>
+                </div>
+              </div>
+            </div>
+            <ul role="list" class="pill-container">
+              <li class="pill">CSS</li>
+            </ul>
+          </section>
+        </div>
+      </section>
+      <section class="bg-brown divider-light-grey">
+        <div class="measure whitespace-300">
+          <h2 class="color-pure-white" id="about">About Me</h2>
+          <div
+            class="paragraph-wrapper whitespace-300"
+            data-status="js-disabled"
+          >
+            <div class="whitespace-200">
+              <p>
+                While my life has been eclectic, I’ve always been interested in
+                the use of “metaphors”.
+              </p>
+              <p>
+                Since 2019, I have been enjoying learning web
+                development—initially at
+                <a
+                  href="https://www.codecademy.com/learn/paths/full-stack-engineer-career-path"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >CodeCademy</a
+                >,
+                <a
+                  href="https://epicreact.dev"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Epic React</a
+                >, and
+                <a
+                  href="https://testingjavascript.com"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Testing JavaScript</a
+                >, and then on a learning-by-doing basis—because web developers
+                use code as “metaphors” for user interface and user experience.
+              </p>
+              <p>
+                During 2014–2015, I studied interior design—at
+                <a
+                  href="https://www.inchbald.co.uk/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Inchbald School of Design</a
+                >—because designers use shapes and textures as “metaphors” for
+                human feelings.
+              </p>
+              <p>
+                From 2002–2007, I did my PhD in economics—at
+                <a
+                  href="https://www.lse.ac.uk/economics"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >London School of Economics</a
+                >—because economists use mathematics as “metaphors” for human
+                decision-making.
+              </p>
+              <p>
+                My previous career as an academic data analyst—at
+                <a
+                  href="https://www.su.se/institute-for-international-economic-studies/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Stockholm University</a
+                >
+                (2007–2015) and
+                <a
+                  href="https://www.osipp.osaka-u.ac.jp/en/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Osaka University</a
+                >
+                (2016–2019)—helped me acquire coding skills and the mindset to
+                keep up with the latest methodologies, both of which have been
+                beneficial as I learn web development.
+              </p>
+              <p>
+                Some of my hobbies also reflect my interest in the use of
+                “metaphors”. I listen to a wide variety of music because the
+                sound is a metaphor of emotion; I dance salsa and bachata
+                because the body movement is a metaphor of melody and rhythm; I
+                practice tea ceremony because it is a metaphor of the Japanese
+                philosophy known as <i lang="ja">wabi-sabi</i>.
+              </p>
+              <p>
+                And I upload the photos of seasonal flowers and
+                <i lang="ja">wagashi</i> sweets in Kyoto to
+                <a
+                  href="https://www.instagram.com/masakudamatsu/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Instagram (@masakudamatsu)</a
+                >
+                for creating a metaphor of passing through four
+                seasons—something I realized while writing this.
+              </p>
+              <button
+                class="language-selector removed-if-js-disabled"
+                type="button"
+              >
+                Japanese
+              </button>
+            </div>
+            <div class="measure whitespace-200" lang="ja">
+              <p>
+                これまでの人生を振り返ると、「比喩」への関心だけはブレていないことに気づきます。
+              </p>
+              <p>
+                2019年以降、Webプログラミングを楽しんで学び続けてこれたのは、コードを「比喩」として用いて、ユーザー体験を表現できるから。最初は、<a
+                  href="https://www.codecademy.com/learn/paths/full-stack-engineer-career-path"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >CodeCademy</a
+                >、
+                <a
+                  href="https://epicreact.dev"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Epic React</a
+                >、及び
+                <a
+                  href="https://testingjavascript.com"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Testing JavaScript</a
+                >
+                で、その後は実際にWebサイト・アプリを作ることで、学んできました。
+              </p>
+              <p>
+                2014–2015年に、ロンドンのデザインスクール (<a
+                  href="https://www.inchbald.co.uk/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Inchbald School of Design</a
+                >)
+                でインテリアデザインを学んだのは、形と質感を「比喩」として用いて、空間や家具から伝わってくるメッセージを表現できたから。
+              </p>
+              <p>
+                2002年から2007年までのロンドン留学 (<a
+                  href="https://www.lse.ac.uk/economics"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >London School of Economics</a
+                >)
+                で経済学の博士号を取ったのは、数学を「比喩」として用いて、人間の行動を記述することができたから。
+              </p>
+              <p>
+                データ分析を得意とする学術研究者として、<a
+                  href="https://www.su.se/institute-for-international-economic-studies/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >ストックホルム大学</a
+                >（2007–2015年）と<a
+                  href="https://www.osipp.osaka-u.ac.jp/en/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >大阪大学</a
+                >（2016–2019年）で働いたことで、一般的なプログラミングスキルを習得し、知識を常にアップデートする姿勢を身につけました。どちらもWebプログラミングに生かされています。
+              </p>
+              <p>
+                「比喩」への関心は、趣味にも及びます。様々なジャンルの音楽を聴くのは、音が感情の「比喩」だから。サルサやバチャータを踊るのは、体の動きがリズムの「比喩」だから。茶の湯を習っているのは、侘び寂びという哲学の「比喩」だから。
+              </p>
+              <p>
+                そして、京都の季節の花や和菓子の写真を<a
+                  href="https://www.instagram.com/masakudamatsu/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >インスタグラム（@masakudamatsu）</a
+                >にアップしているのは、四季が巡っていることの「比喩」になるから、と今書いていて気づきました。
+              </p>
+              <button
+                class="language-selector removed-if-js-disabled"
+                type="button"
+              >
+                English
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer bg-black divider-light-grey">
+      <address class="contact">
+        <p class="footer-title">Masa Kudamatsu</p>
+        <ul role="list">
+          <li>
+            <a
+              class="text-button font-footer"
+              href="mailto:masakudamatsu@gmail.com?subject=Sent%20From%20Website"
+              >masakudamatsu@gmail.com</a
+            >
+          </li>
+          <li>
+            <a
+              class="text-button font-footer"
+              href="https://twitter.com/masa_kudamatsu"
+              rel="noopener noreferrer"
+              target="_blank"
+              >Twitter/X (@masa_kudamatsu)</a
+            >
+          </li>
+        </ul>
+      </address>
+      <nav class="sitemap">
+        <ul role="list">
+          <li>
+            <a class="text-button font-footer" href="#works">Works</a>
+          </li>
+          <li>
+            <a class="text-button font-footer" href="#blog">Blog</a>
+          </li>
+          <li><a class="text-button font-footer" href="#about">About Me</a></li>
+        </ul>
+      </nav>
+      <div class="footer-paragraphs whitespace-footer">
+        <div
+          class="paragraph-wrapper whitespace-footer"
+          data-status="js-disabled"
+        >
+          <div class="whitespace-footer">
+            <p class="font-footer">
+              Thank you for scrolling down until the end.
+            </p>
+            <p class="font-footer">
+              This site is designed and coded from scratch by myself, with
+              vanilla JavaScript only to
+              <em>progressively enhance</em> the user experiences of viewing
+              videos looping without sound, text swapped from system fonts to
+              custom fonts, and language switched between English and Japanese.
+            </p>
+            <p class="font-footer">
+              No framework such as React is used, to minimize the bundle size so
+              that the user will be able to start experiencing this page as fast
+              as possible.
+            </p>
+            <button
+              class="language-selector font-footer removed-if-js-disabled"
+              type="button"
+            >
+              Japanese
+            </button>
+          </div>
+          <div class="measure whitespace-footer" lang="ja">
+            <p class="font-footer">
+              一番下までスクロールしていただきありがとうございます。
+            </p>
+            <p class="font-footer">
+              このサイトは私自身でデザインとプログラミングをして作成しました。JavaScriptを無効にしても機能しますが、有効にすることで三つのユーザー体験（ループ動画、Webフォントの表示、言語の切り替え）がより良いものになります。
+            </p>
+            <p class="font-footer">
+              ReactなどのJavaScriptフレームワークは使っていません。コードを最小限に抑えることで、ユーザーがこのページを少しでも早く見始めることができるようにするためです。
+            </p>
+            <button
+              class="language-selector font-footer removed-if-js-disabled"
+              type="button"
+            >
+              English
+            </button>
+          </div>
+        </div>
+        <p class="font-footer">
+          <small>&copy; 2023 Masayuki Kudamatsu</small>
+        </p>
+      </div>
+    </footer>
+  </body>
+  <script>
+    // Show elements hidden for JS-disabled users
+    document
+      .querySelectorAll(".removed-if-js-disabled")
+      .forEach((hiddenElement) => {
+        hiddenElement.classList.remove("removed-if-js-disabled");
+      });
+    // Language selector
+    const paragraphWrappers = document.querySelectorAll(".paragraph-wrapper");
+    paragraphWrappers.forEach((paragraphWrapper) => {
+      paragraphWrapper.classList.remove("whitespace-200"); // for blog posts
+      paragraphWrapper.classList.remove("whitespace-300");
+      paragraphWrapper.classList.remove("whitespace-footer"); // for footer
+      paragraphWrapper.dataset.status = "js-enabled";
+    });
+    const languageSelectors = document.querySelectorAll(".language-selector");
+    languageSelectors.forEach((languageSelector) => {
+      languageSelector.addEventListener("click", () => {
+        paragraphWrappers.forEach((paragraphWrapper) => {
+          if (
+            paragraphWrapper.dataset.status === "js-enabled" ||
+            paragraphWrapper.dataset.status === "english"
+          ) {
+            paragraphWrapper.dataset.status = "japanese";
+          } else if (paragraphWrapper.dataset.status === "japanese") {
+            paragraphWrapper.dataset.status = "english";
+          } else {
+            console.error(
+              "paragraph-wrapper data-status value is not english or japanese."
+            );
+          }
+        });
+      });
+    });
+    // Fallback font styling
+    const zenloopElements = document.querySelectorAll("h1, h2 ,h3");
+    const ralewayElements = document.querySelectorAll("p, .blockquote");
+    zenloopElements.forEach((zenloopElement) => {
+      zenloopElement.classList.add("fallback");
+    });
+    ralewayElements.forEach((ralewayElement) => {
+      ralewayElement.classList.add("fallback");
+    });
+    document.fonts.load("16px 'Zen Loop'").then(
+      function () {
+        zenloopElements.forEach((zenloopElement) => {
+          zenloopElement.classList.remove("fallback");
+        });
+      },
+      function () {
+        console.info("Zen Loop fails to be loaded");
+      }
+    );
+    document.fonts.load("16px 'Raleway'").then(
+      function () {
+        ralewayElements.forEach((ralewayElement) => {
+          ralewayElement.classList.remove("fallback");
+        });
+      },
+      function () {
+        console.info("Raleway fails to be loaded");
+      }
+    );
+    // Custom video player
+    const videos = document.querySelectorAll("video");
+    const playbackButtons = document.querySelectorAll(
+      ".button[data-type='playback']"
+    );
+    const imgs = document.querySelectorAll(".leaf-card .video img");
+    const isNonRetinaScreen = window.matchMedia(
+      "(-webkit-max-device-pixel-ratio: 1)"
+    );
+    const isRetinaMobileScreen = window.matchMedia(
+      "(-webkit-min-device-pixel-ratio: 2) and (max-width: 382px)"
+    );
+
+    // Prepare for playing videos only when fully visible within the screen
+    const observer = new IntersectionObserver(callback, { threshold: 1.0 });
+    function callback(videos) {
+      videos.forEach((video) => {
+        if (video.isIntersecting) {
+          video.target.play();
+        } else {
+          video.target.pause();
+        }
+      });
+    }
+
+    // Prepare for replacing video files by screen width
+    let filename;
+    // Loop over all videos
+    for (let i = 0; i < videos.length; i++) {
+      // Replace video files for mobile devices
+      if (i === 0) {
+        filename = "line-height-picker";
+      } else if (i === 1) {
+        filename = "triangulum";
+      } else if (i === 2) {
+        filename = "tjg";
+      } else if (i === 3) {
+        filename = "my-ideal-map";
+      } else {
+        filename = null;
+      }
+      if (isNonRetinaScreen.matches || isRetinaMobileScreen.matches) {
+        videos[i].children[0].src = `media/${filename}-mobile.mp4`;
+        videos[i].children[1].href = `media/${filename}-mobile.mp4`;
+      }
+      // Disable the default video player
+      videos[i].controls = false;
+      // Reveal playback buttons
+      playbackButtons[i].addEventListener("click", (event) => {
+        event.stopPropagation();
+        if (videos[i].paused) {
+          videos[i].play();
+        } else {
+          videos[i].pause();
+        }
+      });
+      // Start loading the entire video files
+      videos[i].play();
+
+      // track whether the video has been fully loaded
+      let isVideoLoaded = false;
+
+      // Reveal poster images
+      if (imgs[i].complete) {
+        // image file has been cached
+        imgs[i].classList.remove("transparent");
+      } else {
+        // Detect when the image is loaded
+        imgs[i].addEventListener("load", revealPosterImage, { once: true });
+        function revealPosterImage(event) {
+          if (!isVideoLoaded) {
+            event.target.classList.remove("transparent");
+          }
+        }
+      }
+      // Handle the event in which each video is fully loaded
+      const handleCanplaythrough = (event) => {
+        isVideoLoaded = true;
+        // pause videos (to match the playback button labels)
+        videos[i].pause();
+        // rewind the video to the beginning (it may have started playing before fully loaded)
+        videos[i].currentTime = 0;
+
+        // hide poster images once the video is ready to play thorugh
+        imgs[i].classList.add("transparent");
+
+        // change playback button appearance
+        playbackButtons[i].disabled = false;
+        playbackButtons[i].children[0].classList.remove("spinning");
+
+        // toggle playbackButton label in response to video playing status
+        videos[i].addEventListener("play", function () {
+          // Tabler Icon player-pause https://tabler-icons.io/i/player-pause
+          playbackButtons[i].children[0].children[0].setAttribute(
+            "d",
+            "M6 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"
+          );
+          playbackButtons[i].children[0].children[1].setAttribute(
+            "d",
+            "M14 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"
+          );
+          playbackButtons[i].ariaLabel = `Pause ${playbackButtons[
+            i
+          ].ariaLabel.slice(5)}`; // drop "Play " at the beginning
+        });
+        videos[i].addEventListener("pause", function () {
+          // Tabler Icon player-play https://tabler-icons.io/i/player-play
+          playbackButtons[i].children[0].children[0].setAttribute(
+            "d",
+            "M7 4v16l13 -8z"
+          );
+          playbackButtons[i].children[0].children[1].setAttribute("d", "");
+          playbackButtons[i].ariaLabel = `Play ${playbackButtons[
+            i
+          ].ariaLabel.slice(6)}`; // drop "Pause " at the beginning
+        });
+
+        // play videos only when fully visible within the screen
+        observer.observe(videos[i]);
+      };
+      videos[i].addEventListener("canplaythrough", handleCanplaythrough, {
+        once: true,
+      });
+    }
+    // // debugging
+    // for (let i = 0; i < imgs.length; i++) {
+    //   if (imgs[i].complete) {
+    //     console.log(`Poster image ${i} cached`);
+    //   } else {
+    //     let handleEvent;
+    //     if (i === 0) {
+    //       handleEvent = (event) => {
+    //         console.log(
+    //           `Poster image for Line-height Picker: "${event.type}" event fired`
+    //         );
+    //       };
+    //     } else if (i === 1) {
+    //       handleEvent = (event) => {
+    //         console.log(
+    //           `Poster image for Triangulum: "${event.type}" event fired`
+    //         );
+    //       };
+    //     } else if (i === 2) {
+    //       handleEvent = (event) => {
+    //         console.log(`Poster image for TJG: "${event.type}" event fired`);
+    //       };
+    //     } else if (i === 3) {
+    //       handleEvent = (event) => {
+    //         console.log(
+    //           `Poster image for My Ideal Map: "${event.type}" event fired`
+    //         );
+    //       };
+    //     }
+    //     imgs[i].addEventListener("load", handleEvent);
+    //   }
+    // }
+    // for (let i = 0; i < videos.length; i++) {
+    //   let handleEvent;
+    //   if (i === 0) {
+    //     handleEvent = (event) => {
+    //       console.log(
+    //         `Line-height Picker at ${videos[i].currentTime}: "${event.type}" event fired`
+    //       );
+    //     };
+    //   } else if (i === 1) {
+    //     handleEvent = (event) => {
+    //       console.log(
+    //         `Triangulum at ${videos[i].currentTime}: "${event.type}" event fired`
+    //       );
+    //     };
+    //   } else if (i === 2) {
+    //     handleEvent = (event) => {
+    //       console.log(
+    //         `TJG at ${videos[i].currentTime}: "${event.type}" event fired`
+    //       );
+    //     };
+    //   } else if (i === 3) {
+    //     handleEvent = (event) => {
+    //       console.log(
+    //         `My Ideal Map at ${videos[i].currentTime}: "${event.type}" event fired`
+    //       );
+    //     };
+    //   }
+    //   videos[i].addEventListener("loadstart", handleEvent);
+    //   videos[i].addEventListener("loadedmetadata", handleEvent);
+    //   videos[i].addEventListener("loadeddata", handleEvent);
+    //   videos[i].addEventListener("canplay", handleEvent);
+    //   videos[i].addEventListener("progress", handleEvent);
+    //   videos[i].addEventListener("canplaythrough", handleEvent);
+    //   videos[i].addEventListener("play", handleEvent);
+    //   videos[i].addEventListener("pause", handleEvent);
+    //   videos[i].addEventListener("error", handleEvent);
+    //   videos[i].addEventListener("stalled", handleEvent);
+    //   videos[i].addEventListener("suspend", handleEvent);
+    //   videos[i].addEventListener("waiting", handleEvent);
+    // }
+  </script>
+</html>
