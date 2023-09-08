@@ -899,6 +899,12 @@
           justify-self: end;
         }
       }
+      section[data-variant="about"] {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
       @media screen and (min-width: 1632.25px) {
         /* breakpoint: var(--video-max-width) + 2 * var(--video-max-width) * 2/3 + 2 * var(--whitespace100) + 2 * var(--whitespace200) + 2 * var(--whitespace400) */
         main > section {
@@ -2909,7 +2915,7 @@ body {
           </section>
         </div>
       </section>
-      <section class="bg-brown divider-light-grey">
+      <section class="bg-brown divider-light-grey" data-variant="about">
         <div class="measure whitespace-300">
           <h2 class="color-pure-white" id="about">About Me</h2>
           <div
