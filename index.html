@@ -113,8 +113,10 @@
         --font100-japanese: 17.6; /* make it look similar in size to Raleway if --xHeight: 10 */
         --capHeight100: calc(var(--font100-raleway) * var(--raleway-capHeight));
         --font100-zenloop: calc(var(--capHeight100) / var(--zenloop-capHeight));
-        --font200-zenloop: calc(var(--scale) * var(--font100-zenloop));
-        --font250-zenloop: calc(var(--sqrt-scale) * var(--font200-zenloop));
+        --font200-zenloop: calc(
+          var(--scale) * var(--scale) * var(--xHeight) /
+            var(--zenloop-capHeight)
+        );
         --font300-zenloop: calc(var(--scale) * var(--font200-zenloop));
         --font400-zenloop: calc(var(--scale) * var(--font300-zenloop));
         --font500-zenloop: calc(var(--scale) * var(--font400-zenloop));
@@ -260,8 +262,8 @@
       h1::after {
         margin-top: calc(-14 / 16 * 1rem);
       }
-      @media screen and (max-width: 42.125em) {
-        /* = 674px / 16 (under which the zen loop would wrap the text) */
+      @media screen and (max-width: 45.5em) {
+        /* = 728px / 16 (under which the zen loop would wrap the text) */
         h1 {
           font-size: calc(var(--font400-zenloop) / 16 * 1rem);
           line-height: calc(
@@ -349,18 +351,30 @@
       .footer-title::after {
         margin-top: calc(-11 / 16 * 1rem);
       }
-      @media screen and (max-width: 21.5625em) {
-        /* = 345px / 16 */
+      @media screen and (max-width: 23.5em) {
+        /* = 376px / 16 */
         h3,
         .footer-title {
-          font-size: calc(var(--font250-zenloop) / 16 * 1rem);
+          font-size: calc(var(--font200-zenloop) / 16 * 1rem);
+          line-height: calc(
+            (
+                var(--font200-zenloop) * var(--zenloop-capHeight) +
+                  var(--whitespace100)
+              ) / var(--font200-zenloop)
+          );
         }
         h3.fallback,
         .footer-title.fallback {
-          --font250-couriernew: calc(
-            var(--font250-zenloop) * (24 / 45)
+          --font200-couriernew: calc(
+            var(--font200-zenloop) * (24 / 45)
           ); /* For the width "LINE-HEIGHT PICKER" to be equal, font-size needs to be 24px for Courier New when it's 45px for Zen Loop */
-          font-size: calc(var(--font250-couriernew) / 16 * 1rem);
+          font-size: calc(var(--font200-couriernew) / 16 * 1rem);
+          line-height: calc(
+            (
+                var(--font200-zenloop) * var(--zenloop-capHeight) +
+                  var(--whitespace100)
+              ) / var(--font200-couriernew)
+          );
         }
         h3::after,
         .footer-title::after {
@@ -1002,13 +1016,15 @@
             1fr;
         }
       }
-      @media screen and (min-width: 806px) {
+      @media screen and (min-width: 830px) {
         .footer {
           grid-template-areas:
             ". contact . paragraphs ."
             ". sitemap . paragraphs .";
           grid-template-columns:
-            1fr 15.6rem calc(var(--whitespace400) / 16 * 1rem)
+            /* 17.1rem = width of MASA KUDAMATSU (273.68px) when rendered with font-size for .footer-title (48.913px) */
+            /* 25.3rem = width of footer paragraph (404.8px) */
+            1fr 17.1rem calc(var(--whitespace400) / 16 * 1rem)
             25.3rem 1fr;
         }
         .footer .contact,
@@ -1023,6 +1039,9 @@
         }
         .footer .footer-paragraphs {
           padding-top: 0;
+        }
+        .footer-title {
+          transform: translateX(0); /* disable optical left-alignment */
         }
       }
       /* Contact Block */
