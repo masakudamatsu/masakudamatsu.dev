@@ -907,6 +907,13 @@
           flex-direction: column;
           justify-content: center;
         }
+        main > section[data-variant="blog"] > div:first-child {
+          width: calc(
+            var(--video-max-width) + 2 * var(--video-max-width) * 2 / 3 + 2 *
+              var(--whitespace100) / 16 * 1rem + 2 * var(--whitespace200) / 16 *
+              1rem
+          ); /* same as .masonry for wide screens */
+        }
         .alternate-position {
           width: calc(
             var(--video-max-width) * 7 / 3 + var(--whitespace100) / 16 * 1rem *
@@ -2020,11 +2027,14 @@
           </section>
         </div>
       </section>
-      <section class="bg-purple divider-light-grey whitespace-300">
-        <div class="measure whitespace-300">
+      <section
+        class="bg-purple divider-light-grey whitespace-300"
+        data-variant="blog"
+      >
+        <div class="whitespace-300">
           <h2 class="color-pure-white" id="blog">Blog</h2>
           <div
-            class="paragraph-wrapper whitespace-300"
+            class="paragraph-wrapper measure whitespace-300"
             data-status="js-disabled"
           >
             <div class="whitespace-200">
