@@ -529,6 +529,12 @@
         --minimum-target-size: 48px;
         /* Video/Image max-width */
         --video-max-width: 624px;
+        /* maximum content width */
+        --work-section-max-width: calc(
+          var(--video-max-width) + 2 * var(--video-max-width) * 2 / 3 + 2 *
+            var(--whitespace100) / 16 * 1rem + 2 * var(--whitespace200) / 16 *
+            1rem
+        );
         /* Color scheme */
         --black: #121212; /* (1.12) base color */
         --mid-grey: #646464; /* (3.55) ensure 3 to 1 contrast against --black (https://www.siegemedia.com/contrast-ratio#%23949494-on-%23fefefe) */
@@ -914,17 +920,10 @@
           justify-content: center;
         }
         main > section[data-variant="blog"] > div:first-child {
-          width: calc(
-            var(--video-max-width) + 2 * var(--video-max-width) * 2 / 3 + 2 *
-              var(--whitespace100) / 16 * 1rem + 2 * var(--whitespace200) / 16 *
-              1rem
-          ); /* same as .masonry for wide screens */
+          width: var(--work-section-max-width);
         }
         .alternate-position {
-          width: calc(
-            var(--video-max-width) * 7 / 3 + var(--whitespace100) / 16 * 1rem *
-              2 + var(--whitespace200) / 16 * 1rem * 2
-          );
+          width: var(--work-section-max-width);
         }
       }
       .buttonGroup[data-variant="blog"] {
@@ -1132,11 +1131,7 @@
       @media screen and (min-width: 1216.25px) {
         .masonry {
           columns: 3;
-          max-width: calc(
-            var(--video-max-width) + 2 * var(--video-max-width) * 2 / 3 + 2 *
-              var(--whitespace100) / 16 * 1rem + 2 * var(--whitespace200) / 16 *
-              1rem
-          );
+          max-width: var(--work-section-max-width);
         }
         .masonry code {
           font-size: clamp(11px, calc(-3.6274px + 5 / 416 * 100vw), 16px);
