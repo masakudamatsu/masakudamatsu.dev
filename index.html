@@ -125,35 +125,25 @@
         --whitespace300: calc(var(--scale) * var(--whitespace200));
         --whitespace400: calc(var(--scale) * var(--whitespace300));
         --whitespace10: var(--xHeight);
-      }
-      /* Font */
-      .blockquote,
-      .font-footer,
-      .language-selector,
-      p {
-        font-family: Raleway, "Trebuchet MS", sans-serif;
-        font-weight: 400;
-      }
-      .blockquote,
-      .language-selector,
-      p {
-        font-size: calc(var(--font100-raleway) / 16 * 1rem);
-      }
-      .blockquote,
-      p {
-        line-height: calc(
+        /* line height */
+        --line-height-body: calc(
           (var(--whitespace100) + var(--xHeight)) / var(--font100-raleway)
         );
+      }
+      /* Font */
+      body {
+        font-family: Raleway, "Trebuchet MS", sans-serif;
+        font-size: calc(var(--font100-raleway) / 16 * 1rem);
+        font-weight: 400;
+        line-height: var(--line-height-body);
       }
       .language-selector {
         line-height: 1.43; /* With a smaller value, MacOS Safari would fail to draw the underline (#3) */
       }
-
-      .font-footer {
+      footer {
         font-size: calc(var(--font10-raleway) / 16 * 1rem);
-        line-height: calc(
-          (var(--whitespace10) + var(--xHeight10)) / var(--font10-raleway)
-        );
+      }
+      .font-footer {
         max-width: 33em;
       }
       .font-footer.language-selector {
