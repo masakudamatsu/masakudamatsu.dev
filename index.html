@@ -693,6 +693,15 @@
       .transparent {
         opacity: 0;
       }
+      @media screen and (min-width: 28.625rem) {
+        /* 458px if Zen Kurenaido's font-size is 17.6px (to match the x-height of 10px with Raleway) */
+        .line-break {
+          /* Ref: https://css-tricks.com/injecting-line-break/#comment-1601720 */
+          align-items: flex-start;
+          display: flex;
+          flex-direction: column;
+        }
+      }
       /* Video block */
       /* Prevent layout shift in Safari when first playing the video (source: https://www.amitmerchant.com/prevent-image-layout-shift-using-this-simple-css-hack/) */
       .video {
@@ -1277,8 +1286,9 @@
         <h1>Masa Kudamatsu</h1>
         <div class="paragraph-wrapper whitespace-300" data-status="js-disabled">
           <div class="whitespace-200">
-            <p>
-              Kyoto-based web developer with UX design best practices in mind
+            <p class="line-break">
+              Kyoto-based web developer
+              <span>with UX design best practices in mind</span>
             </p>
             <button
               class="language-selector removed-if-js-disabled"
@@ -1288,8 +1298,10 @@
             </button>
           </div>
           <div class="measure whitespace-200" lang="ja">
-            <p>
-              最良のユーザー体験を実現するためにコードを書く、京都在住のWebエンジニア
+            <p class="line-break">
+              最良のユーザー体験を実現するためにコードを書く<span
+                >京都在住のWebエンジニア</span
+              >
             </p>
             <button
               class="language-selector removed-if-js-disabled"
