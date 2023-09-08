@@ -107,6 +107,9 @@
         --zenloop-capHeight: calc(690 / 1000); /* sCapHeight / unitsPerEm */
         /* Font size (in px) */
         --font100-raleway: calc(var(--xHeight) / var(--raleway-xHeight));
+        --font50-raleway: calc(
+          (1 / var(--sqrt-scale)) * var(--font100-raleway)
+        );
         --font100-japanese: 17.6; /* make it look similar in size to Raleway if --xHeight: 10 */
         --capHeight100: calc(var(--font100-raleway) * var(--raleway-capHeight));
         --font100-zenloop: calc(var(--capHeight100) / var(--zenloop-capHeight));
@@ -139,6 +142,9 @@
       }
       .language-selector {
         line-height: 1.43; /* With a smaller value, MacOS Safari would fail to draw the underline (#3) */
+      }
+      .pill {
+        font-size: calc(var(--font50-raleway) / 16 * 1rem);
       }
       footer {
         font-size: calc(var(--font10-raleway) / 16 * 1rem);
@@ -209,14 +215,6 @@
       }
       .font-footer::after {
         margin-top: calc(-4 / 16 * 1rem);
-      }
-      .pill {
-        font-family: Raleway, "Trebuchet MS", sans-serif;
-        font-size: var(--font10-raleway / 16 * 1rem);
-        font-weight: 400;
-        line-height: calc(
-          (var(--whitespace10) + var(--xHeight10)) / var(--font10-raleway)
-        );
       }
       h1,
       h2,
