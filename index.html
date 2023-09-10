@@ -427,6 +427,9 @@
         background-size: 1.1em;
         padding-right: var(--space-for-icon);
       }
+      [lang="ja"] a[target] {
+        background-position: 100% 71%; /* to align the icon bottom with Zen Kurenaido Latin glyph baseline */
+      }
       a:focus {
         border-color: var(--focusBlueLight);
         border-style: var(--focus-ring-style);
