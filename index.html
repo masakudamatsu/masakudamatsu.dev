@@ -1115,6 +1115,9 @@
         border: 1px solid var(--white);
       }
       /* Masonry composition */
+      .masonry > * + * {
+        margin-top: calc(var(--whitespace200) / 16 * 1rem);
+      }
       .masonry code {
         font-size: calc(4.13px + (7 / 460) * 100vw);
         /* 9px at 320px wide screens; 16px at 780px wide screens */
@@ -1122,7 +1125,7 @@
       @media screen and (min-width: 780.25px) {
         .masonry {
           columns: 2;
-          gap: var(--whitespace100);
+          column-gap: calc(var(--whitespace200) / 16 * 1rem);
         }
         .masonry code {
           font-size: calc(-0.7724px + (6 / 435) * 100vw);
@@ -2099,7 +2102,7 @@
             </div>
           </div>
         </div>
-        <div class="masonry whitespace-100">
+        <div class="masonry">
           <section class="title-card whitespace-300" data-variant="blog">
             <div class="whitespace-200">
               <div class="whitespace-100">
