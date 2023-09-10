@@ -27,10 +27,10 @@
       * {
         margin: 0;
       }
-      /* 
-        Enable kerning and ligature 
+      /*
+        Enable kerning and ligature
          https://helpx.adobe.com/fonts/using/open-type-syntax.html#kern
-         https://helpx.adobe.com/fonts/using/open-type-syntax.html#liga 
+         https://helpx.adobe.com/fonts/using/open-type-syntax.html#liga
          https://helpx.adobe.com/fonts/using/open-type-syntax.html#calt
       */
       :root {
@@ -104,7 +104,11 @@
         --sqrt-scale: 1.225;
         --raleway-xHeight: calc(519 / 1000); /* sxHeight / unitsPerEm */
         --raleway-capHeight: calc(710 / 1000); /* sCapHeight / unitsPerEm */
+        --raleway-topcrop: -0.33em; /* text box top to x-height when line height is 1 */
+        --raleway-bottomcrop: -0.14em; /* baseline to text box bottom when line height is 1 */
         --zenloop-capHeight: calc(690 / 1000); /* sCapHeight / unitsPerEm */
+        --zenloop-topcrop: -0.1em; /* text box top to cap height when line height is 1 */
+        --zenloop-bottomcrop: -0.22em; /* baseline to text box bottom when line height is 1 */ /* Font size (in px) */
         /* Font size (in px) */
         --font100-raleway: calc(var(--xHeight) / var(--raleway-xHeight));
         --font50-raleway: calc(
@@ -130,20 +134,20 @@
         --whitespace300: calc(var(--scale) * var(--whitespace200));
         --whitespace400: calc(var(--scale) * var(--whitespace300));
         --whitespace10: var(--xHeight);
-        /* line height */
-        --line-height-body: calc(
-          (var(--whitespace100) + var(--xHeight)) / var(--font100-raleway)
-        );
       }
       /* Font */
       body {
+        --line-height: calc(
+          (var(--whitespace100) + var(--xHeight)) / var(--font100-raleway)
+        ); /* to be used for text cropping */
         font-family: Raleway, "Trebuchet MS", sans-serif;
         font-size: calc(var(--font100-raleway) / 16 * 1rem);
         font-weight: 400;
-        line-height: var(--line-height-body);
+        line-height: var(--line-height);
       }
       .language-selector {
-        line-height: 1.43; /* With a smaller value, MacOS Safari would fail to draw the underline (#3) */
+        --line-height: 1.43; /* With a smaller value, MacOS Safari would fail to draw the underline (#3) */
+        line-height: var(--line-height);
       }
       .pill {
         font-size: calc(var(--font50-raleway) / 16 * 1rem);
@@ -155,7 +159,8 @@
         max-width: 33em;
       }
       .font-footer.language-selector {
-        line-height: 2; /* With a smaller value, MacOS Safari would fail to draw the underline (#3) */
+        --line-height: 2; /* With a smaller value, MacOS Safari would fail to draw the underline (#3) */
+        line-height: var(--line-height);
       }
       [lang="ja"] .font-footer {
         font-size: calc(var(--font10-japanese) / 16 * 1rem);
@@ -175,10 +180,148 @@
       [lang="ja"] .blockquote blockquote {
         font-style: normal;
       }
+      h1,
+      h2,
+      h3,
+      .footer-title {
+        font-family: "Zen Loop", "Courier New", monospace;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+      .title-card[data-variant="blog"] h3 {
+        letter-spacing: -0.01em;
+        text-transform: none;
+        word-spacing: -0.01em;
+      }
+      h2 {
+        letter-spacing: 0.02em;
+      }
+      h1 {
+        --line-height: calc(
+          (
+              var(--font500-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font500-zenloop)
+        );
+        font-size: calc(var(--font500-zenloop) / 16 * 1rem);
+        line-height: var(--line-height);
+      }
+      h1.fallback {
+        --font500-couriernew: calc(
+          var(--font500-zenloop) * (33 / 50)
+        ); /* For the width "MASA KUDAMATSU" to be equal, font-size needs to be 33px for Courier New when it's 50px for Zen Loop */
+        font-size: calc(var(--font500-couriernew) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font500-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font500-couriernew)
+        );
+        word-spacing: 0.03em; /* Add 2px so Courier New wraps the word for less than 660px wide screens */
+      }
+      @media screen and (max-width: 45.5rem) {
+        /* = 728px / 16 (under which the zen loop would wrap the text) */
+        h1 {
+          --line-height: calc(
+            (
+                var(--font400-zenloop) * var(--zenloop-capHeight) +
+                  var(--whitespace100)
+              ) / var(--font400-zenloop)
+          );
+          font-size: calc(var(--font400-zenloop) / 16 * 1rem);
+          line-height: var(--line-height);
+        }
+        h1.fallback {
+          --font400-couriernew: calc(
+            var(--font400-zenloop) * (33 / 50)
+          ); /* For the width "MASA KUDAMATSU" to be equal, font-size needs to be 33px for Courier New when it's 50px for Zen Loop */
+          font-size: calc(var(--font400-couriernew) / 16 * 1rem);
+          line-height: calc(
+            (
+                var(--font400-zenloop) * var(--zenloop-capHeight) +
+                  var(--whitespace100)
+              ) / var(--font400-couriernew)
+          );
+          word-spacing: 0.0453em; /* Add 2px to wrap the word at less than 403px wide screens */
+        }
+      }
+      h2 {
+        --line-height: calc(
+          (
+              var(--font200-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font200-zenloop)
+        );
+        font-size: calc(var(--font200-zenloop) / 16 * 1rem);
+        line-height: var(--line-height);
+      }
+      h2.fallback {
+        --font200-couriernew: calc(
+          var(--font200-zenloop) * (21 / 30)
+        ); /* For the width "WORKS" to be equal, font-size needs to be 21px for Courier New when it's 30px for Zen Loop */
+        font-size: calc(var(--font200-couriernew) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font200-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font200-couriernew)
+        );
+      }
+      h3,
+      .footer-title {
+        --line-height: calc(
+          (
+              var(--font300-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font300-zenloop)
+        );
+        font-size: calc(var(--font300-zenloop) / 16 * 1rem);
+        line-height: var(--line-height);
+      }
+      h3.fallback,
+      .footer-title.fallback {
+        --font300-couriernew: calc(
+          var(--font300-zenloop) * (24 / 45)
+        ); /* For the width "LINE-HEIGHT PICKER" to be equal, font-size needs to be 24px for Courier New when it's 45px for Zen Loop */
+        font-size: calc(var(--font300-couriernew) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font300-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font300-couriernew)
+        );
+      }
+      @media screen and (max-width: 23.5em) {
+        /* = 376px / 16 */
+        h3,
+        .footer-title {
+          --line-height: calc(
+            (
+                var(--font200-zenloop) * var(--zenloop-capHeight) +
+                  var(--whitespace100)
+              ) / var(--font200-zenloop)
+          );
+          font-size: calc(var(--font200-zenloop) / 16 * 1rem);
+          line-height: var(--line-height);
+        }
+        h3.fallback,
+        .footer-title.fallback {
+          --font200-couriernew: calc(
+            var(--font200-zenloop) * (24 / 45)
+          ); /* For the width "LINE-HEIGHT PICKER" to be equal, font-size needs to be 24px for Courier New when it's 45px for Zen Loop */
+          font-size: calc(var(--font200-couriernew) / 16 * 1rem);
+          line-height: calc(
+            (
+                var(--font200-zenloop) * var(--zenloop-capHeight) +
+                  var(--whitespace100)
+              ) / var(--font200-couriernew)
+          );
+        }
+      }
+      /* Text Crop */
+      /* we cannot apply text-crop directly on <blockquote> because it will disable text-indent */
       .blockquote::before,
       .blockquote::after,
-      .font-footer::before,
-      .font-footer::after,
       .footer-title::before,
       .footer-title::after,
       .language-selector::before,
@@ -197,189 +340,39 @@
         width: 0;
       }
       .blockquote::before,
+      .language-selector::before,
       p::before {
-        margin-bottom: calc(-6 / 16 * 1rem);
+        margin-bottom: calc(
+          var(--raleway-topcrop) - (var(--line-height) - 1) / 2 * 1em
+        );
       }
       .blockquote::after,
       p::after {
-        margin-top: calc(-7 / 16 * 1rem);
-      }
-      /* 
-      for some reason, text crop behaves differently between <p> and <button>.
-      we don't need to crop text for buttons to achieve the desired vertical spacing.
-      .language-selector::before {
+        margin-top: calc(
+          var(--raleway-bottomcrop) - (var(--line-height) - 1) / 2 * 1em
+        );
       }
       .language-selector::after {
-      } 
-      */
-      .font-footer::before {
-        margin-bottom: calc(-4 / 16 * 1rem);
+        margin-top: calc(
+          var(--raleway-bottomcrop) - (var(--line-height) - 1) / 2 * 1em +
+            var(--underline-offset) + var(--underline-thickness)
+        ); /* crop up to underline */
       }
-      .font-footer::after {
-        margin-top: calc(-4 / 16 * 1rem);
-      }
-      h1,
-      h2,
-      h3,
-      .footer-title {
-        font-family: "Zen Loop", "Courier New", monospace;
-        font-weight: 400;
-        text-transform: uppercase;
-      }
-      .title-card[data-variant="blog"] h3 {
-        letter-spacing: -0.01em;
-        text-transform: none;
-        word-spacing: -0.01em;
-      }
-      h2 {
-        letter-spacing: 0.02em;
-      }
-      h1 {
-        font-size: calc(var(--font500-zenloop) / 16 * 1rem);
-        line-height: calc(
-          (
-              var(--font500-zenloop) * var(--zenloop-capHeight) +
-                var(--whitespace100)
-            ) / var(--font500-zenloop)
-        );
-      }
-      h1.fallback {
-        --font500-couriernew: calc(
-          var(--font500-zenloop) * (33 / 50)
-        ); /* For the width "MASA KUDAMATSU" to be equal, font-size needs to be 33px for Courier New when it's 50px for Zen Loop */
-        font-size: calc(var(--font500-couriernew) / 16 * 1rem);
-        line-height: calc(
-          (
-              var(--font500-zenloop) * var(--zenloop-capHeight) +
-                var(--whitespace100)
-            ) / var(--font500-couriernew)
-        );
-        word-spacing: 0.03em; /* Add 2px so Courier New wraps the word for less than 660px wide screens */
-      }
-      h1::before {
-        margin-bottom: calc(-2 / 16 * 1rem);
-      }
-      h1::after {
-        margin-top: calc(-14 / 16 * 1rem);
-      }
-      @media screen and (max-width: 45.5em) {
-        /* = 728px / 16 (under which the zen loop would wrap the text) */
-        h1 {
-          font-size: calc(var(--font400-zenloop) / 16 * 1rem);
-          line-height: calc(
-            (
-                var(--font400-zenloop) * var(--zenloop-capHeight) +
-                  var(--whitespace100)
-              ) / var(--font400-zenloop)
-          );
-        }
-        h1.fallback {
-          --font400-couriernew: calc(
-            var(--font400-zenloop) * (33 / 50)
-          ); /* For the width "MASA KUDAMATSU" to be equal, font-size needs to be 33px for Courier New when it's 50px for Zen Loop */
-          font-size: calc(var(--font400-couriernew) / 16 * 1rem);
-          line-height: calc(
-            (
-                var(--font400-zenloop) * var(--zenloop-capHeight) +
-                  var(--whitespace100)
-              ) / var(--font400-couriernew)
-          );
-          word-spacing: 0.0453em; /* Add 2px to wrap the word at less than 403px wide screens */
-        }
-        h1::before {
-          margin-bottom: calc(-4 / 16 * 1rem);
-        }
-        h1::after {
-          margin-top: calc(-12 / 16 * 1rem);
-        }
-      }
-      h2 {
-        font-size: calc(var(--font200-zenloop) / 16 * 1rem);
-        line-height: calc(
-          (
-              var(--font200-zenloop) * var(--zenloop-capHeight) +
-                var(--whitespace100)
-            ) / var(--font200-zenloop)
-        );
-      }
-      h2.fallback {
-        --font200-couriernew: calc(
-          var(--font200-zenloop) * (21 / 30)
-        ); /* For the width "WORKS" to be equal, font-size needs to be 21px for Courier New when it's 30px for Zen Loop */
-        font-size: calc(var(--font200-couriernew) / 16 * 1rem);
-        line-height: calc(
-          (
-              var(--font200-zenloop) * var(--zenloop-capHeight) +
-                var(--whitespace100)
-            ) / var(--font200-couriernew)
-        );
-      }
-      h2::before {
-        margin-bottom: calc(-7 / 16 * 1rem);
-      }
-      h2::after {
-        margin-top: calc(-10 / 16 * 1rem);
-      }
-      h3,
-      .footer-title {
-        font-size: calc(var(--font300-zenloop) / 16 * 1rem);
-        line-height: calc(
-          (
-              var(--font300-zenloop) * var(--zenloop-capHeight) +
-                var(--whitespace100)
-            ) / var(--font300-zenloop)
-        );
-      }
-      h3.fallback,
-      .footer-title.fallback {
-        --font300-couriernew: calc(
-          var(--font300-zenloop) * (24 / 45)
-        ); /* For the width "LINE-HEIGHT PICKER" to be equal, font-size needs to be 24px for Courier New when it's 45px for Zen Loop */
-        font-size: calc(var(--font300-couriernew) / 16 * 1rem);
-        line-height: calc(
-          (
-              var(--font300-zenloop) * var(--zenloop-capHeight) +
-                var(--whitespace100)
-            ) / var(--font300-couriernew)
-        );
-      }
+      h1::before,
+      h2::before,
       h3::before,
       .footer-title::before {
-        margin-bottom: calc(-5 / 16 * 1rem);
+        margin-bottom: calc(
+          var(--zenloop-topcrop) - (var(--line-height) - 1) / 2 * 1em
+        );
       }
+      h1::after,
+      h2::after,
       h3::after,
       .footer-title::after {
-        margin-top: calc(-11 / 16 * 1rem);
-      }
-      @media screen and (max-width: 23.5em) {
-        /* = 376px / 16 */
-        h3,
-        .footer-title {
-          font-size: calc(var(--font200-zenloop) / 16 * 1rem);
-          line-height: calc(
-            (
-                var(--font200-zenloop) * var(--zenloop-capHeight) +
-                  var(--whitespace100)
-              ) / var(--font200-zenloop)
-          );
-        }
-        h3.fallback,
-        .footer-title.fallback {
-          --font200-couriernew: calc(
-            var(--font200-zenloop) * (24 / 45)
-          ); /* For the width "LINE-HEIGHT PICKER" to be equal, font-size needs to be 24px for Courier New when it's 45px for Zen Loop */
-          font-size: calc(var(--font200-couriernew) / 16 * 1rem);
-          line-height: calc(
-            (
-                var(--font200-zenloop) * var(--zenloop-capHeight) +
-                  var(--whitespace100)
-              ) / var(--font200-couriernew)
-          );
-        }
-        h3::after,
-        .footer-title::after {
-          margin-top: calc(-9 / 16 * 1rem);
-        }
+        margin-top: calc(
+          var(--zenloop-bottomcrop) - (var(--line-height) - 1) / 2 * 1em
+        );
       }
       /* Optical alignment */
       h1,
@@ -403,18 +396,6 @@
         line-break: strict; /* to prevent ッ from being at the beginning of a line */
         text-align: justify;
       }
-      p[lang="ja"]::before,
-      [lang="ja"] blockquote::before,
-      [lang="ja"] figcaption::before,
-      [lang="ja"] p::before {
-        margin-bottom: calc(-6 / 16 * 1rem);
-      }
-      p[lang="ja"]::after,
-      [lang="ja"] blockquote::after,
-      [lang="ja"] figcaption::before,
-      [lang="ja"] p::after {
-        margin-top: calc(-5 / 16 * 1rem);
-      }
       /* Hard-wrap long words (https://www.joshwcomeau.com/css/custom-css-reset/#seven-word-wrapping-8) */
       p {
         overflow-wrap: break-word;
@@ -422,14 +403,17 @@
       /* link text style */
       a,
       .language-selector {
+        --underline-offset: 0.26em; /* Draw underline below the descender, consistently across browsers (#5) */
+        --underline-thickness: 1px; /* Match the stroke width of Raleway 400 */
         color: currentColor;
-        text-decoration-thickness: 1px; /* Match the stroke width of Raleway 400 */
-        text-underline-offset: 0.26em; /* Draw underline below the descender, consistently across browsers (#5) */
+        text-decoration-thickness: var(--underline-thickness);
+        text-underline-offset: var(--underline-offset);
       }
       [lang="ja"] a,
       footer a,
       footer .language-selector {
-        text-decoration-thickness: 0.5px; /* Match the stroke width of Zen Kurenaido 400 */
+        --underline-thickness: 0.5px; /* Match the stroke width of Zen Kurenaido 400 */
+        text-decoration-thickness: var(--underline-thickness);
       }
       figcaption a[target],
       footer a[target],
@@ -1114,8 +1098,8 @@
       }
       .pill:has(:focus-visible) {
         /*
-          This pseudo selector is the `focus-visible` version of `:focus-within`. 
-          See https://larsmagnus.co/blog/focus-visible-within-the-missing-pseudo-class 
+          This pseudo selector is the `focus-visible` version of `:focus-within`.
+          See https://larsmagnus.co/blog/focus-visible-within-the-missing-pseudo-class
         */
         outline-color: var(--focusBlueDark);
         outline-offset: var(--focus-ring-offset);
@@ -1193,7 +1177,6 @@
       .paragraph-wrapper[data-status="japanese"] div[lang="ja"] {
         position: absolute;
         top: 0;
-        transform: translateY(0.3em); /* Match the first line of text */
       }
       .paragraph-wrapper[data-status="js-enabled"] div[lang="ja"] {
         opacity: 0;
