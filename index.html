@@ -410,14 +410,12 @@
         --underline-offset: 0.1em; /* Draw underline below the descender, consistently across browsers (#5) */
         --underline-thickness: 1px; /* Match the stroke width of Raleway 400 */
         color: currentColor;
+        text-decoration-color: var(--off-white);
         text-decoration-thickness: var(--underline-thickness);
         text-underline-offset: var(--underline-offset);
       }
-      [lang="ja"] a,
-      footer a,
-      footer .language-selector {
-        --underline-thickness: 0.5px; /* Match the stroke width of Zen Kurenaido 400 */
-        text-decoration-thickness: var(--underline-thickness);
+      .bg-white .language-selector {
+        text-decoration-color: var(--off-black);
       }
       figcaption a[target],
       footer a[target],
@@ -523,6 +521,7 @@
         );
         /* Color scheme */
         --black: #121212; /* (1.12) base color */
+        --off-black: #343434; /* (1.68) 1.5 to 1 contrast against --black */
         --mid-grey: #646464; /* (3.55) ensure 3 to 1 contrast against --black (https://www.siegemedia.com/contrast-ratio#%23949494-on-%23fefefe) */
         --light-grey: #838383; /* (5.54) ensure 3 to 1 contrast against --white (https://www.siegemedia.com/contrast-ratio#%23767676-on-%23030303) */
         --off-white: #bfbfbf; /* (11.42) ensure 1.5 to 1 contrast against --white */
