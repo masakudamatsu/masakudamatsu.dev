@@ -1047,9 +1047,6 @@
       .footer-paragraphs {
         grid-area: paragraphs;
       }
-      .whitespace-footer > * + * {
-        margin-top: calc(var(--whitespace100) / 16 * 1rem);
-      }
       /* In-page link scrolling behavior */
       html {
         scroll-behavior: smooth;
@@ -3125,12 +3122,9 @@ body {
           <li><a class="text-button font-footer" href="#about">About Me</a></li>
         </ul>
       </nav>
-      <div class="footer-paragraphs whitespace-footer">
-        <div
-          class="paragraph-wrapper whitespace-footer"
-          data-status="js-disabled"
-        >
-          <div class="whitespace-footer">
+      <div class="footer-paragraphs whitespace-100">
+        <div class="paragraph-wrapper whitespace-100" data-status="js-disabled">
+          <div class="whitespace-100">
             <p class="font-footer">
               Thank you for scrolling down until the end.
             </p>
@@ -3153,7 +3147,7 @@ body {
               Japanese
             </button>
           </div>
-          <div class="measure whitespace-footer" lang="ja">
+          <div class="measure whitespace-100" lang="ja">
             <p class="font-footer">
               一番下までスクロールしていただきありがとうございます。
             </p>
@@ -3189,7 +3183,7 @@ body {
     paragraphWrappers.forEach((paragraphWrapper) => {
       paragraphWrapper.classList.remove("whitespace-200"); // for blog posts
       paragraphWrapper.classList.remove("whitespace-300");
-      paragraphWrapper.classList.remove("whitespace-footer"); // for footer
+      paragraphWrapper.classList.remove("whitespace-100"); // for footer
       paragraphWrapper.dataset.status = "js-enabled";
     });
     const languageSelectors = document.querySelectorAll(".language-selector");
