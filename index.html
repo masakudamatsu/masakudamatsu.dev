@@ -162,7 +162,7 @@
         --line-height: 2; /* With a smaller value, MacOS Safari would fail to draw the underline (#3) */
         line-height: var(--line-height);
       }
-      [lang="ja"] .font-footer {
+      footer div[lang="ja"] {
         font-size: calc(var(--font10-japanese) / 16 * 1rem);
       }
       .blockquote.fallback,
@@ -381,10 +381,7 @@
           -0.05em
         ); /* text-indent does not work as we use ::before for text scropping */
       }
-      p[lang="ja"],
-      [lang="ja"] blockquote,
-      [lang="ja"] figcaption,
-      [lang="ja"] p {
+      div[lang="ja"] {
         font-family: "YakuHanJP_Narrow", "Zen Kurenaido", "Helvetica Neue",
           "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo,
           sans-serif;
