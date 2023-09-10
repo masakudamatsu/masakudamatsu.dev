@@ -155,9 +155,6 @@
       footer {
         font-size: calc(var(--font10-raleway) / 16 * 1rem);
       }
-      .font-footer {
-        max-width: 33em;
-      }
       .font-footer.language-selector {
         --line-height: 2; /* With a smaller value, MacOS Safari would fail to draw the underline (#3) */
         line-height: var(--line-height);
@@ -552,7 +549,10 @@
       }
       /* Measure */
       .measure {
-        max-width: var(--video-max-width);
+        max-width: calc(558 / var(--font100-raleway) * 1em);
+      }
+      .measure[lang="ja"] {
+        max-width: calc(558 / var(--font100-japanese) * 1em);
       }
       /* Background color */
       html {
@@ -983,6 +983,7 @@
       }
       /* Footer Block */
       .footer {
+        --footer-measure-px: 372;
         display: grid;
         grid-template-areas: "contact" "sitemap" "paragraphs" "copyright";
         row-gap: calc(var(--whitespace200) / 16 * 1rem);
@@ -990,6 +991,14 @@
       .footer .footer-paragraphs {
         padding-top: calc(
           (var(--minimum-target-size) - var(--xHeight10) * 1px) / 2
+        );
+      }
+      footer .measure {
+        max-width: calc(var(--footer-measure-px) / var(--font10-raleway) * 1em);
+      }
+      footer .measure[lang="ja"] {
+        max-width: calc(
+          var(--footer-measure-px) / var(--font10-japanese) * 1em
         );
       }
       @media screen and (min-width: 468px) {
@@ -1008,9 +1017,9 @@
             ". sitemap . paragraphs .";
           grid-template-columns:
             /* 17.1rem = width of MASA KUDAMATSU (273.68px) when rendered with font-size for .footer-title (48.913px) */
-            /* 25.3rem = width of footer paragraph (404.8px) */
+            /* 23.25rem = width of footer paragraph (372px) */
             1fr 17.1rem calc(var(--whitespace400) / 16 * 1rem)
-            25.3rem 1fr;
+            calc(var(--footer-measure-px) / 16 * 1rem) 1fr;
         }
         .footer .contact,
         .footer .sitemap {
@@ -1289,7 +1298,7 @@
               Japanese
             </button>
           </div>
-          <div class="measure whitespace-200" lang="ja">
+          <div class="whitespace-200" lang="ja">
             <p class="line-break">
               最良のユーザー体験を実現するためにコードを書く<span
                 >京都在住のWebエンジニア</span
@@ -1313,10 +1322,10 @@
         <div class="whitespace-300">
           <h2 class="color-pure-white" id="works">Works</h2>
           <div
-            class="paragraph-wrapper measure whitespace-300"
+            class="paragraph-wrapper whitespace-300"
             data-status="js-disabled"
           >
-            <div class="whitespace-200">
+            <div class="measure whitespace-200">
               <p>
                 All designed and coded from scratch by myself, along with test
                 code in Jest, Cypress, and Testing Library
@@ -1463,7 +1472,7 @@
                       Japanese
                     </button>
                   </div>
-                  <div class="measure whitespace-200" lang="ja">
+                  <div class="whitespace-200" lang="ja">
                     <p class="removed-if-js-disabled">
                       2021年8月〜12月、2022年8月〜現在
                     </p>
@@ -1624,7 +1633,7 @@
                       Japanese
                     </button>
                   </div>
-                  <div class="measure whitespace-200" lang="ja">
+                  <div class="whitespace-200" lang="ja">
                     <p class="removed-if-js-disabled">2021年6月〜8月</p>
                     <p>
                       日本庭園愛好家（私のことです）が、歴史的な名庭園のデザイン意図を深読みするブログ。
@@ -1770,7 +1779,7 @@
                       Japanese
                     </button>
                   </div>
-                  <div class="measure whitespace-200" lang="ja">
+                  <div class="whitespace-200" lang="ja">
                     <p class="removed-if-js-disabled">2020年12月〜2021年3月</p>
                     <p>
                       Webデザイナーが、アクセシビリティーと他の色との調和を考慮した色を選びやすくしたWebツール。
@@ -1998,7 +2007,7 @@
                       Japanese
                     </button>
                   </div>
-                  <div class="measure whitespace-200" lang="ja">
+                  <div class="whitespace-200" lang="ja">
                     <p class="removed-if-js-disabled">2020年3月〜7月</p>
                     <p>
                       Webデザイナーが、欧文フォントの行間を小文字のエックスの高さとの比で指定するためのWebツール。
@@ -2035,10 +2044,10 @@
         <div class="whitespace-300">
           <h2 class="color-pure-white" id="blog">Blog</h2>
           <div
-            class="paragraph-wrapper measure whitespace-300"
+            class="paragraph-wrapper whitespace-300"
             data-status="js-disabled"
           >
-            <div class="whitespace-200">
+            <div class="measure whitespace-200">
               <p>
                 I’ve been blogging about web development on
                 <a
@@ -2211,7 +2220,7 @@
                     Japanese
                   </button>
                 </div>
-                <div class="measure whitespace-200" lang="ja">
+                <div class="whitespace-200" lang="ja">
                   <p class="removed-if-js-disabled">
                     2021年1月（2023年8月更新）
                   </p>
@@ -2371,7 +2380,7 @@ export const FileUploader = ({handleFile}) => {
                     Japanese
                   </button>
                 </div>
-                <div class="measure whitespace-200" lang="ja">
+                <div class="whitespace-200" lang="ja">
                   <p class="removed-if-js-disabled">
                     2020年3月（2023年8月更新）
                   </p>
@@ -2512,7 +2521,7 @@ export const FileUploader = ({handleFile}) => {
                     Japanese
                   </button>
                 </div>
-                <div class="measure whitespace-200" lang="ja">
+                <div class="whitespace-200" lang="ja">
                   <p class="removed-if-js-disabled">2021年6月</p>
                   <figure class="blockquote">
                     <blockquote>
@@ -2630,7 +2639,7 @@ export const FileUploader = ({handleFile}) => {
                     Japanese
                   </button>
                 </div>
-                <div class="measure whitespace-200" lang="ja">
+                <div class="whitespace-200" lang="ja">
                   <p class="removed-if-js-disabled">
                     2021年5月（2021年8月更新）
                   </p>
@@ -2761,7 +2770,7 @@ const loader = new Loader({
                     Japanese
                   </button>
                 </div>
-                <div class="measure whitespace-200" lang="ja">
+                <div class="whitespace-200" lang="ja">
                   <p class="removed-if-js-disabled">
                     2021年2月（2021年9月更新）
                   </p>
@@ -2880,7 +2889,7 @@ body {
                     Japanese
                   </button>
                 </div>
-                <div class="measure whitespace-200" lang="ja">
+                <div class="whitespace-200" lang="ja">
                   <p class="removed-if-js-disabled">
                     2020年3月（2020年9月更新）
                   </p>
@@ -2914,13 +2923,13 @@ body {
         </div>
       </section>
       <section class="bg-brown divider-light-grey" data-variant="about">
-        <div class="measure whitespace-300">
+        <div class="whitespace-300">
           <h2 class="color-pure-white" id="about">About Me</h2>
           <div
             class="paragraph-wrapper whitespace-300"
             data-status="js-disabled"
           >
-            <div class="whitespace-200">
+            <div class="measure whitespace-200">
               <p>
                 While my life has been eclectic, I’ve always been interested in
                 the use of “metaphors”.
@@ -3127,7 +3136,7 @@ body {
       </nav>
       <div class="footer-paragraphs whitespace-100">
         <div class="paragraph-wrapper whitespace-100" data-status="js-disabled">
-          <div class="whitespace-100">
+          <div class="measure whitespace-100">
             <p class="font-footer">
               Thank you for scrolling down until the end.
             </p>
