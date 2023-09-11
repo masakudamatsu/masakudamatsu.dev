@@ -405,13 +405,20 @@
       }
       figcaption a[target],
       footer a[target],
-      p a[target] {
+      p a[target],
+      .pill a[target] {
         --space-for-icon: 1.2em;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke-width='1' stroke='rgb(232,232,232)' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6' /%3E%3Cpath d='M11 13l9 -9' /%3E%3Cpath d='M15 4h5v5' /%3E%3C/svg%3E");
         background-position: center right;
         background-repeat: no-repeat;
         background-size: 1.1em;
         padding-right: var(--space-for-icon);
+      }
+      .pill a[target] {
+        /* Remove underline */
+        text-decoration: none;
+        /* Use black version of external link icon */
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke-width='1' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6' /%3E%3Cpath d='M11 13l9 -9' /%3E%3Cpath d='M15 4h5v5' /%3E%3C/svg%3E");
       }
       [lang="ja"] a[target] {
         background-position: 100% 71%; /* to align the icon bottom with Zen Kurenaido Latin glyph baseline */
@@ -1084,26 +1091,28 @@
         padding: 0 10px;
         text-align: center;
       }
-      .pill a {
-        /* Style text */
-        color: inherit;
-        text-decoration: none;
-        /* Add the open-in icon */
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke-width='1' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6' /%3E%3Cpath d='M11 13l9 -9' /%3E%3Cpath d='M15 4h5v5' /%3E%3C/svg%3E");
-        background-position: center right;
-        background-repeat: no-repeat;
-        background-size: 1.1em;
-        padding-right: 1.2em;
-      }
-      .pill:has(:focus-visible) {
-        /*
-          This pseudo selector is the `focus-visible` version of `:focus-within`.
-          See https://larsmagnus.co/blog/focus-visible-within-the-missing-pseudo-class
-        */
+      .pill:focus-within {
+        /* #12: for Firefox until it supports :has() */
         outline-color: var(--focusBlueDark);
         outline-offset: var(--focus-ring-offset);
         outline-style: var(--focus-ring-style);
         outline-width: var(--focus-ring-width);
+      }
+      @supports selector(:has(:focus-visible)) {
+        /*
+          This pseudo selector is the `focus-visible` version of `:focus-within`.
+          See https://larsmagnus.co/blog/focus-visible-within-the-missing-pseudo-class
+          #12: But the :has() selector is not yet supported by Firefox as of Sep 2023: https://caniuse.com/css-has
+        */
+        .pill:focus-within {
+          outline-style: none;
+        }
+        .pill:has(:focus-visible) {
+          outline-color: var(--focusBlueDark);
+          outline-offset: var(--focus-ring-offset);
+          outline-style: var(--focus-ring-style);
+          outline-width: var(--focus-ring-width);
+        }
       }
       /* Title-card Block */
       .title-card {
@@ -1133,6 +1142,9 @@
         .masonry section {
           break-inside: avoid;
         }
+        .masonry section:nth-child(4) {
+          margin-top: 0; /* #9 Safari would otherwise insert margin-top at the top of the second column */
+        }
       }
       @media screen and (min-width: 1216.25px) {
         .masonry {
@@ -1142,6 +1154,17 @@
         .masonry code {
           font-size: clamp(10px, calc(-4.6274px + 5 / 416 * 100vw), 15px);
           /* 10px at 1217px wide screens; 15px at 1633px wide screens or wider */
+        }
+        .masonry > section:nth-child(3),
+        .masonry > section:nth-child(5) {
+          margin-top: 0;
+          /* #9 Safari would otherwise insert margin-top at the top of the second column */
+          /* For the third column, Safari does ignore margin-top. But for the sake of consistency, I set it to be 0. */
+        }
+        .masonry > section:nth-child(4) {
+          margin-top: calc(
+            var(--whitespace200) / 16 * 1rem
+          ); /* #9: Revert to the narrow screen widths */
         }
       }
       /* Shadow utility */
@@ -1220,6 +1243,19 @@
       }
       p.removed-if-js-disabled {
         display: none;
+      }
+      .language-selector:focus {
+        --focus-ring-offset: 6px;
+        outline-color: var(--focusBlueLight);
+        outline-offset: var(--focus-ring-offset);
+        outline-style: var(--focus-ring-style);
+        outline-width: var(--focus-ring-width);
+      }
+      .bg-white .language-selector:focus {
+        outline-color: var(--focusBlueDark);
+      }
+      .language-selector:focus:not(:focus-visible) {
+        outline: none;
       }
       /* spinning animation */
       .spinning {
@@ -3255,7 +3291,9 @@ body {
     );
 
     // Prepare for playing videos only when fully visible within the screen
-    const observer = new IntersectionObserver(callback, { threshold: 1.0 });
+    const observer = new IntersectionObserver(callback, {
+      threshold: 0.999,
+    }); /* #11: threshold of 1 does not work with MS Edge (https://stackoverflow.com/questions/56367425/intersection-observer-doesnt-work-in-edge/77036742#77036742) */
     function callback(videos) {
       videos.forEach((video) => {
         if (video.isIntersecting) {
