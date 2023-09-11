@@ -145,19 +145,11 @@
         font-weight: 400;
         line-height: var(--line-height);
       }
-      .language-selector {
-        --line-height: 1.43; /* With a smaller value, MacOS Safari would fail to draw the underline (#3) */
-        line-height: var(--line-height);
-      }
       .pill {
         font-size: calc(var(--font50-raleway) / 16 * 1rem);
       }
       footer {
         font-size: calc(var(--font10-raleway) / 16 * 1rem);
-      }
-      .font-footer.language-selector {
-        --line-height: 2; /* With a smaller value, MacOS Safari would fail to draw the underline (#3) */
-        line-height: var(--line-height);
       }
       footer div[lang="ja"] {
         font-size: calc(var(--font10-japanese) / 16 * 1rem);
@@ -1220,6 +1212,9 @@
         text-align: start;
         text-decoration-line: underline;
       }
+      .language-selector span {
+        position: relative; /* #3: Prevent MacOS Safari from cropping text (https://stackoverflow.com/a/41633840/11847654) */
+      }
       .language-selector.removed-if-js-disabled {
         display: none;
       }
@@ -1295,7 +1290,7 @@
               class="language-selector removed-if-js-disabled"
               type="button"
             >
-              Japanese
+              <span>Japanese</span>
             </button>
           </div>
           <div class="whitespace-200" lang="ja">
@@ -1308,7 +1303,7 @@
               class="language-selector removed-if-js-disabled"
               type="button"
             >
-              English
+              <span>English</span>
             </button>
           </div>
         </div>
@@ -1334,7 +1329,7 @@
                 class="language-selector removed-if-js-disabled"
                 type="button"
               >
-                Japanese
+                <span>Japanese</span>
               </button>
             </div>
             <div class="measure whitespace-200" lang="ja">
@@ -1346,7 +1341,7 @@
                 class="language-selector removed-if-js-disabled"
                 type="button"
               >
-                English
+                <span>English</span>
               </button>
             </div>
           </div>
@@ -1469,7 +1464,7 @@
                       class="language-selector removed-if-js-disabled"
                       type="button"
                     >
-                      Japanese
+                      <span>Japanese</span>
                     </button>
                   </div>
                   <div class="whitespace-200" lang="ja">
@@ -1483,7 +1478,7 @@
                       class="language-selector removed-if-js-disabled"
                       type="button"
                     >
-                      English
+                      <span>English</span>
                     </button>
                   </div>
                 </div>
@@ -1630,7 +1625,7 @@
                       class="language-selector removed-if-js-disabled"
                       type="button"
                     >
-                      Japanese
+                      <span>Japanese</span>
                     </button>
                   </div>
                   <div class="whitespace-200" lang="ja">
@@ -1642,7 +1637,7 @@
                       class="language-selector removed-if-js-disabled"
                       type="button"
                     >
-                      English
+                      <span>English</span>
                     </button>
                   </div>
                 </div>
@@ -1776,7 +1771,7 @@
                       class="language-selector removed-if-js-disabled"
                       type="button"
                     >
-                      Japanese
+                      <span>Japanese</span>
                     </button>
                   </div>
                   <div class="whitespace-200" lang="ja">
@@ -1788,7 +1783,7 @@
                       class="language-selector removed-if-js-disabled"
                       type="button"
                     >
-                      English
+                      <span>English</span>
                     </button>
                   </div>
                 </div>
@@ -2004,7 +1999,7 @@
                       class="language-selector removed-if-js-disabled"
                       type="button"
                     >
-                      Japanese
+                      <span>Japanese</span>
                     </button>
                   </div>
                   <div class="whitespace-200" lang="ja">
@@ -2016,7 +2011,7 @@
                       class="language-selector removed-if-js-disabled"
                       type="button"
                     >
-                      English
+                      <span>English</span>
                     </button>
                   </div>
                 </div>
@@ -2068,7 +2063,7 @@
                 class="language-selector removed-if-js-disabled"
                 type="button"
               >
-                Japanese
+                <span>Japanese</span>
               </button>
             </div>
             <div class="measure whitespace-200" lang="ja">
@@ -2093,7 +2088,7 @@
                 class="language-selector removed-if-js-disabled"
                 type="button"
               >
-                English
+                <span>English</span>
               </button>
             </div>
           </div>
@@ -2217,7 +2212,7 @@
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    Japanese
+                    <span>Japanese</span>
                   </button>
                 </div>
                 <div class="whitespace-200" lang="ja">
@@ -2272,7 +2267,7 @@
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    English
+                    <span>English</span>
                   </button>
                 </div>
               </div>
@@ -2377,7 +2372,7 @@ export const FileUploader = ({handleFile}) => {
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    Japanese
+                    <span>Japanese</span>
                   </button>
                 </div>
                 <div class="whitespace-200" lang="ja">
@@ -2416,7 +2411,7 @@ export const FileUploader = ({handleFile}) => {
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    English
+                    <span>English</span>
                   </button>
                 </div>
               </div>
@@ -2518,7 +2513,7 @@ export const FileUploader = ({handleFile}) => {
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    Japanese
+                    <span>Japanese</span>
                   </button>
                 </div>
                 <div class="whitespace-200" lang="ja">
@@ -2554,7 +2549,7 @@ export const FileUploader = ({handleFile}) => {
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    English
+                    <span>English</span>
                   </button>
                 </div>
               </div>
@@ -2636,7 +2631,7 @@ export const FileUploader = ({handleFile}) => {
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    Japanese
+                    <span>Japanese</span>
                   </button>
                 </div>
                 <div class="whitespace-200" lang="ja">
@@ -2661,7 +2656,7 @@ export const FileUploader = ({handleFile}) => {
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    English
+                    <span>English</span>
                   </button>
                 </div>
               </div>
@@ -2767,7 +2762,7 @@ const loader = new Loader({
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    Japanese
+                    <span>Japanese</span>
                   </button>
                 </div>
                 <div class="whitespace-200" lang="ja">
@@ -2806,7 +2801,7 @@ const loader = new Loader({
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    English
+                    <span>English</span>
                   </button>
                 </div>
               </div>
@@ -2886,7 +2881,7 @@ body {
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    Japanese
+                    <span>Japanese</span>
                   </button>
                 </div>
                 <div class="whitespace-200" lang="ja">
@@ -2911,7 +2906,7 @@ body {
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    English
+                    <span>English</span>
                   </button>
                 </div>
               </div>
@@ -3020,7 +3015,7 @@ body {
                 class="language-selector removed-if-js-disabled"
                 type="button"
               >
-                Japanese
+                <span>Japanese</span>
               </button>
             </div>
             <div class="measure whitespace-200" lang="ja">
@@ -3094,7 +3089,7 @@ body {
                 class="language-selector removed-if-js-disabled"
                 type="button"
               >
-                English
+                <span>English</span>
               </button>
             </div>
           </div>
@@ -3156,7 +3151,7 @@ body {
               class="language-selector font-footer removed-if-js-disabled"
               type="button"
             >
-              Japanese
+              <span>Japanese</span>
             </button>
           </div>
           <div class="measure whitespace-100" lang="ja">
@@ -3173,7 +3168,7 @@ body {
               class="language-selector font-footer removed-if-js-disabled"
               type="button"
             >
-              English
+              <span>English</span>
             </button>
           </div>
         </div>
