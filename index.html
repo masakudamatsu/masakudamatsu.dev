@@ -27,10 +27,10 @@
       * {
         margin: 0;
       }
-      /* 
-        Enable kerning and ligature 
+      /*
+        Enable kerning and ligature
          https://helpx.adobe.com/fonts/using/open-type-syntax.html#kern
-         https://helpx.adobe.com/fonts/using/open-type-syntax.html#liga 
+         https://helpx.adobe.com/fonts/using/open-type-syntax.html#liga
          https://helpx.adobe.com/fonts/using/open-type-syntax.html#calt
       */
       :root {
@@ -104,14 +104,23 @@
         --sqrt-scale: 1.225;
         --raleway-xHeight: calc(519 / 1000); /* sxHeight / unitsPerEm */
         --raleway-capHeight: calc(710 / 1000); /* sCapHeight / unitsPerEm */
+        --raleway-topcrop: -0.33em; /* text box top to x-height when line height is 1 */
+        --raleway-bottomcrop: -0.14em; /* baseline to text box bottom when line height is 1 */
         --zenloop-capHeight: calc(690 / 1000); /* sCapHeight / unitsPerEm */
+        --zenloop-topcrop: -0.1em; /* text box top to cap height when line height is 1 */
+        --zenloop-bottomcrop: -0.22em; /* baseline to text box bottom when line height is 1 */ /* Font size (in px) */
         /* Font size (in px) */
         --font100-raleway: calc(var(--xHeight) / var(--raleway-xHeight));
+        --font50-raleway: calc(
+          (1 / var(--sqrt-scale)) * var(--font100-raleway)
+        );
         --font100-japanese: 17.6; /* make it look similar in size to Raleway if --xHeight: 10 */
         --capHeight100: calc(var(--font100-raleway) * var(--raleway-capHeight));
         --font100-zenloop: calc(var(--capHeight100) / var(--zenloop-capHeight));
-        --font200-zenloop: calc(var(--scale) * var(--font100-zenloop));
-        --font250-zenloop: calc(var(--sqrt-scale) * var(--font200-zenloop));
+        --font200-zenloop: calc(
+          var(--scale) * var(--scale) * var(--xHeight) /
+            var(--zenloop-capHeight)
+        );
         --font300-zenloop: calc(var(--scale) * var(--font200-zenloop));
         --font400-zenloop: calc(var(--scale) * var(--font300-zenloop));
         --font500-zenloop: calc(var(--scale) * var(--font400-zenloop));
@@ -127,39 +136,22 @@
         --whitespace10: var(--xHeight);
       }
       /* Font */
-      .blockquote,
-      .font-footer,
-      .language-selector,
-      p {
-        font-family: Raleway, "Trebuchet MS", sans-serif;
-        font-weight: 400;
-      }
-      .blockquote,
-      .language-selector,
-      p {
-        font-size: calc(var(--font100-raleway) / 16 * 1rem);
-      }
-      .blockquote,
-      p {
-        line-height: calc(
+      body {
+        --line-height: calc(
           (var(--whitespace100) + var(--xHeight)) / var(--font100-raleway)
-        );
+        ); /* to be used for text cropping */
+        font-family: Raleway, "Trebuchet MS", sans-serif;
+        font-size: calc(var(--font100-raleway) / 16 * 1rem);
+        font-weight: 400;
+        line-height: var(--line-height);
       }
-      .language-selector {
-        line-height: 1.43; /* With a smaller value, MacOS Safari would fail to draw the underline (#3) */
+      .pill {
+        font-size: calc(var(--font50-raleway) / 16 * 1rem);
       }
-
-      .font-footer {
+      footer {
         font-size: calc(var(--font10-raleway) / 16 * 1rem);
-        line-height: calc(
-          (var(--whitespace10) + var(--xHeight10)) / var(--font10-raleway)
-        );
-        max-width: 33em;
       }
-      .font-footer.language-selector {
-        line-height: 2; /* With a smaller value, MacOS Safari would fail to draw the underline (#3) */
-      }
-      [lang="ja"] .font-footer {
+      footer div[lang="ja"] {
         font-size: calc(var(--font10-japanese) / 16 * 1rem);
       }
       .blockquote.fallback,
@@ -177,10 +169,148 @@
       [lang="ja"] .blockquote blockquote {
         font-style: normal;
       }
+      h1,
+      h2,
+      h3,
+      .footer-title {
+        font-family: "Zen Loop", "Courier New", monospace;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+      .title-card[data-variant="blog"] h3 {
+        letter-spacing: -0.01em;
+        text-transform: none;
+        word-spacing: -0.01em;
+      }
+      h2 {
+        letter-spacing: 0.02em;
+      }
+      h1 {
+        --line-height: calc(
+          (
+              var(--font500-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font500-zenloop)
+        );
+        font-size: calc(var(--font500-zenloop) / 16 * 1rem);
+        line-height: var(--line-height);
+      }
+      h1.fallback {
+        --font500-couriernew: calc(
+          var(--font500-zenloop) * (33 / 50)
+        ); /* For the width "MASA KUDAMATSU" to be equal, font-size needs to be 33px for Courier New when it's 50px for Zen Loop */
+        font-size: calc(var(--font500-couriernew) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font500-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font500-couriernew)
+        );
+        word-spacing: 0.03em; /* Add 2px so Courier New wraps the word for less than 660px wide screens */
+      }
+      @media screen and (max-width: 45.5rem) {
+        /* = 728px / 16 (under which the zen loop would wrap the text) */
+        h1 {
+          --line-height: calc(
+            (
+                var(--font400-zenloop) * var(--zenloop-capHeight) +
+                  var(--whitespace100)
+              ) / var(--font400-zenloop)
+          );
+          font-size: calc(var(--font400-zenloop) / 16 * 1rem);
+          line-height: var(--line-height);
+        }
+        h1.fallback {
+          --font400-couriernew: calc(
+            var(--font400-zenloop) * (33 / 50)
+          ); /* For the width "MASA KUDAMATSU" to be equal, font-size needs to be 33px for Courier New when it's 50px for Zen Loop */
+          font-size: calc(var(--font400-couriernew) / 16 * 1rem);
+          line-height: calc(
+            (
+                var(--font400-zenloop) * var(--zenloop-capHeight) +
+                  var(--whitespace100)
+              ) / var(--font400-couriernew)
+          );
+          word-spacing: 0.0453em; /* Add 2px to wrap the word at less than 403px wide screens */
+        }
+      }
+      h2 {
+        --line-height: calc(
+          (
+              var(--font200-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font200-zenloop)
+        );
+        font-size: calc(var(--font200-zenloop) / 16 * 1rem);
+        line-height: var(--line-height);
+      }
+      h2.fallback {
+        --font200-couriernew: calc(
+          var(--font200-zenloop) * (21 / 30)
+        ); /* For the width "WORKS" to be equal, font-size needs to be 21px for Courier New when it's 30px for Zen Loop */
+        font-size: calc(var(--font200-couriernew) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font200-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font200-couriernew)
+        );
+      }
+      h3,
+      .footer-title {
+        --line-height: calc(
+          (
+              var(--font300-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font300-zenloop)
+        );
+        font-size: calc(var(--font300-zenloop) / 16 * 1rem);
+        line-height: var(--line-height);
+      }
+      h3.fallback,
+      .footer-title.fallback {
+        --font300-couriernew: calc(
+          var(--font300-zenloop) * (24 / 45)
+        ); /* For the width "LINE-HEIGHT PICKER" to be equal, font-size needs to be 24px for Courier New when it's 45px for Zen Loop */
+        font-size: calc(var(--font300-couriernew) / 16 * 1rem);
+        line-height: calc(
+          (
+              var(--font300-zenloop) * var(--zenloop-capHeight) +
+                var(--whitespace100)
+            ) / var(--font300-couriernew)
+        );
+      }
+      @media screen and (max-width: 23.5em) {
+        /* = 376px / 16 */
+        h3,
+        .footer-title {
+          --line-height: calc(
+            (
+                var(--font200-zenloop) * var(--zenloop-capHeight) +
+                  var(--whitespace100)
+              ) / var(--font200-zenloop)
+          );
+          font-size: calc(var(--font200-zenloop) / 16 * 1rem);
+          line-height: var(--line-height);
+        }
+        h3.fallback,
+        .footer-title.fallback {
+          --font200-couriernew: calc(
+            var(--font200-zenloop) * (24 / 45)
+          ); /* For the width "LINE-HEIGHT PICKER" to be equal, font-size needs to be 24px for Courier New when it's 45px for Zen Loop */
+          font-size: calc(var(--font200-couriernew) / 16 * 1rem);
+          line-height: calc(
+            (
+                var(--font200-zenloop) * var(--zenloop-capHeight) +
+                  var(--whitespace100)
+              ) / var(--font200-couriernew)
+          );
+        }
+      }
+      /* Text Crop */
+      /* we cannot apply text-crop directly on <blockquote> because it will disable text-indent */
       .blockquote::before,
       .blockquote::after,
-      .font-footer::before,
-      .font-footer::after,
       .footer-title::before,
       .footer-title::after,
       .language-selector::before,
@@ -199,185 +329,39 @@
         width: 0;
       }
       .blockquote::before,
+      .language-selector::before,
       p::before {
-        margin-bottom: calc(-6 / 16 * 1rem);
+        margin-bottom: calc(
+          var(--raleway-topcrop) - (var(--line-height) - 1) / 2 * 1em
+        );
       }
       .blockquote::after,
       p::after {
-        margin-top: calc(-7 / 16 * 1rem);
-      }
-      /* 
-      for some reason, text crop behaves differently between <p> and <button>.
-      we don't need to crop text for buttons to achieve the desired vertical spacing.
-      .language-selector::before {
+        margin-top: calc(
+          var(--raleway-bottomcrop) - (var(--line-height) - 1) / 2 * 1em
+        );
       }
       .language-selector::after {
-      } 
-      */
-      .font-footer::before {
-        margin-bottom: calc(-4 / 16 * 1rem);
+        margin-top: calc(
+          var(--raleway-bottomcrop) - (var(--line-height) - 1) / 2 * 1em +
+            var(--underline-offset) + var(--underline-thickness)
+        ); /* crop up to underline */
       }
-      .font-footer::after {
-        margin-top: calc(-4 / 16 * 1rem);
-      }
-      .pill {
-        font-family: Raleway, "Trebuchet MS", sans-serif;
-        font-size: var(--font10-raleway / 16 * 1rem);
-        font-weight: 400;
-        line-height: calc(
-          (var(--whitespace10) + var(--xHeight10)) / var(--font10-raleway)
-        );
-      }
-      h1,
-      h2,
-      h3,
-      .footer-title {
-        font-family: "Zen Loop", "Courier New", monospace;
-        font-weight: 400;
-        text-transform: uppercase;
-      }
-      .title-card[data-variant="blog"] h3 {
-        letter-spacing: -0.01em;
-        text-transform: capitalize;
-        word-spacing: -0.01em;
-      }
-      h2 {
-        letter-spacing: 0.02em;
-      }
-      h1 {
-        font-size: calc(var(--font500-zenloop) / 16 * 1rem);
-        line-height: calc(
-          (
-              var(--font500-zenloop) * var(--zenloop-capHeight) +
-                var(--whitespace100)
-            ) / var(--font500-zenloop)
-        );
-      }
-      h1.fallback {
-        --font500-couriernew: calc(
-          var(--font500-zenloop) * (33 / 50)
-        ); /* For the width "MASA KUDAMATSU" to be equal, font-size needs to be 33px for Courier New when it's 50px for Zen Loop */
-        font-size: calc(var(--font500-couriernew) / 16 * 1rem);
-        line-height: calc(
-          (
-              var(--font500-zenloop) * var(--zenloop-capHeight) +
-                var(--whitespace100)
-            ) / var(--font500-couriernew)
-        );
-        word-spacing: 0.03em; /* Add 2px so Courier New wraps the word for less than 660px wide screens */
-      }
-      h1::before {
-        margin-bottom: calc(-2 / 16 * 1rem);
-      }
-      h1::after {
-        margin-top: calc(-14 / 16 * 1rem);
-      }
-      @media screen and (max-width: 38.75em) {
-        /* = 620px / 16 */
-        h1 {
-          font-size: calc(var(--font400-zenloop) / 16 * 1rem);
-          line-height: calc(
-            (
-                var(--font400-zenloop) * var(--zenloop-capHeight) +
-                  var(--whitespace100)
-              ) / var(--font400-zenloop)
-          );
-        }
-        h1.fallback {
-          --font400-couriernew: calc(
-            var(--font400-zenloop) * (33 / 50)
-          ); /* For the width "MASA KUDAMATSU" to be equal, font-size needs to be 33px for Courier New when it's 50px for Zen Loop */
-          font-size: calc(var(--font400-couriernew) / 16 * 1rem);
-          line-height: calc(
-            (
-                var(--font400-zenloop) * var(--zenloop-capHeight) +
-                  var(--whitespace100)
-              ) / var(--font400-couriernew)
-          );
-          word-spacing: 0.0453em; /* Add 2px to wrap the word at less than 403px wide screens */
-        }
-        h1::before {
-          margin-bottom: calc(-4 / 16 * 1rem);
-        }
-        h1::after {
-          margin-top: calc(-12 / 16 * 1rem);
-        }
-      }
-      h2 {
-        font-size: calc(var(--font200-zenloop) / 16 * 1rem);
-        line-height: calc(
-          (
-              var(--font200-zenloop) * var(--zenloop-capHeight) +
-                var(--whitespace100)
-            ) / var(--font200-zenloop)
-        );
-      }
-      h2.fallback {
-        --font200-couriernew: calc(
-          var(--font200-zenloop) * (21 / 30)
-        ); /* For the width "WORKS" to be equal, font-size needs to be 21px for Courier New when it's 30px for Zen Loop */
-        font-size: calc(var(--font200-couriernew) / 16 * 1rem);
-        line-height: calc(
-          (
-              var(--font200-zenloop) * var(--zenloop-capHeight) +
-                var(--whitespace100)
-            ) / var(--font200-couriernew)
-        );
-      }
-      h2::before {
-        margin-bottom: calc(-7 / 16 * 1rem);
-      }
-      h2::after {
-        margin-top: calc(-10 / 16 * 1rem);
-      }
-      h3,
-      .footer-title {
-        font-size: calc(var(--font300-zenloop) / 16 * 1rem);
-        line-height: calc(
-          (
-              var(--font300-zenloop) * var(--zenloop-capHeight) +
-                var(--whitespace100)
-            ) / var(--font300-zenloop)
-        );
-      }
-      h3.fallback,
-      .footer-title.fallback {
-        --font300-couriernew: calc(
-          var(--font300-zenloop) * (24 / 45)
-        ); /* For the width "LINE-HEIGHT PICKER" to be equal, font-size needs to be 24px for Courier New when it's 45px for Zen Loop */
-        font-size: calc(var(--font300-couriernew) / 16 * 1rem);
-        line-height: calc(
-          (
-              var(--font300-zenloop) * var(--zenloop-capHeight) +
-                var(--whitespace100)
-            ) / var(--font300-couriernew)
-        );
-      }
+      h1::before,
+      h2::before,
       h3::before,
       .footer-title::before {
-        margin-bottom: calc(-5 / 16 * 1rem);
+        margin-bottom: calc(
+          var(--zenloop-topcrop) - (var(--line-height) - 1) / 2 * 1em
+        );
       }
+      h1::after,
+      h2::after,
       h3::after,
       .footer-title::after {
-        margin-top: calc(-11 / 16 * 1rem);
-      }
-      @media screen and (max-width: 21.5625em) {
-        /* = 345px / 16 */
-        h3,
-        .footer-title {
-          font-size: calc(var(--font250-zenloop) / 16 * 1rem);
-        }
-        h3.fallback,
-        .footer-title.fallback {
-          --font250-couriernew: calc(
-            var(--font250-zenloop) * (24 / 45)
-          ); /* For the width "LINE-HEIGHT PICKER" to be equal, font-size needs to be 24px for Courier New when it's 45px for Zen Loop */
-          font-size: calc(var(--font250-couriernew) / 16 * 1rem);
-        }
-        h3::after,
-        .footer-title::after {
-          margin-top: calc(-9 / 16 * 1rem);
-        }
+        margin-top: calc(
+          var(--zenloop-bottomcrop) - (var(--line-height) - 1) / 2 * 1em
+        );
       }
       /* Optical alignment */
       h1,
@@ -386,10 +370,7 @@
           -0.05em
         ); /* text-indent does not work as we use ::before for text scropping */
       }
-      p[lang="ja"],
-      [lang="ja"] blockquote,
-      [lang="ja"] figcaption,
-      [lang="ja"] p {
+      div[lang="ja"] {
         font-family: "YakuHanJP_Narrow", "Zen Kurenaido", "Helvetica Neue",
           "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo,
           sans-serif;
@@ -401,17 +382,9 @@
         line-break: strict; /* to prevent ッ from being at the beginning of a line */
         text-align: justify;
       }
-      p[lang="ja"]::before,
-      [lang="ja"] blockquote::before,
-      [lang="ja"] figcaption::before,
-      [lang="ja"] p::before {
-        margin-bottom: calc(-6 / 16 * 1rem);
-      }
-      p[lang="ja"]::after,
-      [lang="ja"] blockquote::after,
-      [lang="ja"] figcaption::before,
-      [lang="ja"] p::after {
-        margin-top: calc(-5 / 16 * 1rem);
+      /* Use lining figures for the title of writings */
+      cite {
+        font-variant-numeric: lining-nums;
       }
       /* Hard-wrap long words (https://www.joshwcomeau.com/css/custom-css-reset/#seven-word-wrapping-8) */
       p {
@@ -420,13 +393,15 @@
       /* link text style */
       a,
       .language-selector {
+        --underline-offset: 0.1em; /* Draw underline below the descender, consistently across browsers (#5) */
+        --underline-thickness: 1px; /* Match the stroke width of Raleway 400 */
         color: currentColor;
-        text-decoration-thickness: 1px; /* Match the stroke width of Raleway 400 */
-        text-underline-offset: 0.26em; /* Draw underline below the descender, consistently across browsers (#5) */
+        text-decoration-color: var(--off-white);
+        text-decoration-thickness: var(--underline-thickness);
+        text-underline-offset: var(--underline-offset);
       }
-      [lang="ja"] a,
-      footer a {
-        text-decoration-thickness: 0.5px; /* Match the stroke width of Zen Kurenaido 400 */
+      .bg-white .language-selector {
+        text-decoration-color: var(--off-black);
       }
       figcaption a[target],
       footer a[target],
@@ -437,6 +412,9 @@
         background-repeat: no-repeat;
         background-size: 1.1em;
         padding-right: var(--space-for-icon);
+      }
+      [lang="ja"] a[target] {
+        background-position: 100% 71%; /* to align the icon bottom with Zen Kurenaido Latin glyph baseline */
       }
       a:focus {
         border-color: var(--focusBlueLight);
@@ -520,16 +498,19 @@
       .whitespace-400 > * + * {
         margin-top: calc(var(--whitespace400) / 16 * 1rem);
       }
-      .padding {
-        /* If changed, adjust the `sizes` attribute for <img> */
-        padding: calc(var(--whitespace200) / 16 * 1rem);
-      }
       :root {
         --minimum-target-size: 48px;
         /* Video/Image max-width */
         --video-max-width: 624px;
+        /* maximum content width */
+        --work-section-max-width: calc(
+          var(--video-max-width) + 2 * var(--video-max-width) * 2 / 3 + 2 *
+            var(--whitespace100) / 16 * 1rem + 2 * var(--whitespace200) / 16 *
+            1rem
+        );
         /* Color scheme */
         --black: #121212; /* (1.12) base color */
+        --off-black: #343434; /* (1.68) 1.5 to 1 contrast against --black */
         --mid-grey: #646464; /* (3.55) ensure 3 to 1 contrast against --black (https://www.siegemedia.com/contrast-ratio#%23949494-on-%23fefefe) */
         --light-grey: #838383; /* (5.54) ensure 3 to 1 contrast against --white (https://www.siegemedia.com/contrast-ratio#%23767676-on-%23030303) */
         --off-white: #bfbfbf; /* (11.42) ensure 1.5 to 1 contrast against --white */
@@ -560,7 +541,10 @@
       }
       /* Measure */
       .measure {
-        max-width: var(--video-max-width);
+        max-width: calc(558 / var(--font100-raleway) * 1em);
+      }
+      .measure[lang="ja"] {
+        max-width: calc(558 / var(--font100-japanese) * 1em);
       }
       /* Background color */
       html {
@@ -569,6 +553,9 @@
       }
       .bg-black {
         background: var(--black);
+      }
+      .bg-white {
+        background: var(--white);
       }
       .bg-green {
         background: linear-gradient(
@@ -686,6 +673,15 @@
       .transparent {
         opacity: 0;
       }
+      @media screen and (min-width: 28.625rem) {
+        /* 458px if Zen Kurenaido's font-size is 17.6px (to match the x-height of 10px with Raleway) */
+        .line-break {
+          /* Ref: https://css-tricks.com/injecting-line-break/#comment-1601720 */
+          align-items: flex-start;
+          display: flex;
+          flex-direction: column;
+        }
+      }
       /* Video block */
       /* Prevent layout shift in Safari when first playing the video (source: https://www.amitmerchant.com/prevent-image-layout-shift-using-this-simple-css-hack/) */
       .video {
@@ -760,7 +756,8 @@
         overflow: hidden;
       }
       /* Blockquote block */
-      .blockquote {
+      .blockquote,
+      .blockquote + button {
         padding: 0 1em; /* indentation */
       }
       .blockquote blockquote {
@@ -768,9 +765,6 @@
       }
       [lang="ja"] .blockquote blockquote {
         text-indent: -0.5em;
-      }
-      .blockquote.removed-if-js-disabled {
-        display: none;
       }
       /* Leaf Card block */
       .leaf-card {
@@ -784,6 +778,8 @@
         grid-template-areas: "video video" "playback text" "button text";
         grid-template-columns: var(--minimum-target-size) 1fr;
         grid-template-rows: auto var(--minimum-target-size) auto;
+        /* If changed, adjust the `sizes` attribute for <img> */
+        padding: calc(var(--whitespace200) / 16 * 1rem);
         width: 100%;
       }
       .leaf-card:nth-of-type(even) {
@@ -900,19 +896,28 @@
           justify-self: end;
         }
       }
+      section[data-variant="about"] {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
       @media screen and (min-width: 1632.25px) {
         /* breakpoint: var(--video-max-width) + 2 * var(--video-max-width) * 2/3 + 2 * var(--whitespace100) + 2 * var(--whitespace200) + 2 * var(--whitespace400) */
+        header,
         main > section {
           align-items: center;
           display: flex;
           flex-direction: column;
           justify-content: center;
         }
+        header > div:first-child,
+        main > section[data-variant="works"] > div:first-child,
+        main > section[data-variant="blog"] > div:first-child {
+          width: var(--work-section-max-width);
+        }
         .alternate-position {
-          width: calc(
-            var(--video-max-width) * 7 / 3 + var(--whitespace100) / 16 * 1rem *
-              2 + var(--whitespace200) / 16 * 1rem * 2
-          );
+          width: var(--work-section-max-width);
         }
       }
       .buttonGroup[data-variant="blog"] {
@@ -970,6 +975,7 @@
       }
       /* Footer Block */
       .footer {
+        --footer-measure-px: 372;
         display: grid;
         grid-template-areas: "contact" "sitemap" "paragraphs" "copyright";
         row-gap: calc(var(--whitespace200) / 16 * 1rem);
@@ -977,6 +983,14 @@
       .footer .footer-paragraphs {
         padding-top: calc(
           (var(--minimum-target-size) - var(--xHeight10) * 1px) / 2
+        );
+      }
+      footer .measure {
+        max-width: calc(var(--footer-measure-px) / var(--font10-raleway) * 1em);
+      }
+      footer .measure[lang="ja"] {
+        max-width: calc(
+          var(--footer-measure-px) / var(--font10-japanese) * 1em
         );
       }
       @media screen and (min-width: 468px) {
@@ -988,14 +1002,16 @@
             1fr;
         }
       }
-      @media screen and (min-width: 806px) {
+      @media screen and (min-width: 830px) {
         .footer {
           grid-template-areas:
             ". contact . paragraphs ."
             ". sitemap . paragraphs .";
           grid-template-columns:
-            1fr 15.6rem calc(var(--whitespace400) / 16 * 1rem)
-            25.3rem 1fr;
+            /* 17.1rem = width of MASA KUDAMATSU (273.68px) when rendered with font-size for .footer-title (48.913px) */
+            /* 23.25rem = width of footer paragraph (372px) */
+            1fr 17.1rem calc(var(--whitespace400) / 16 * 1rem)
+            calc(var(--footer-measure-px) / 16 * 1rem) 1fr;
         }
         .footer .contact,
         .footer .sitemap {
@@ -1009,6 +1025,9 @@
         }
         .footer .footer-paragraphs {
           padding-top: 0;
+        }
+        .footer-title {
+          transform: translateX(0); /* disable optical left-alignment */
         }
       }
       /* Contact Block */
@@ -1031,9 +1050,6 @@
       }
       .footer-paragraphs {
         grid-area: paragraphs;
-      }
-      .whitespace-footer > * + * {
-        margin-top: calc(var(--whitespace100) / 16 * 1rem);
       }
       /* In-page link scrolling behavior */
       html {
@@ -1081,8 +1097,8 @@
       }
       .pill:has(:focus-visible) {
         /*
-          This pseudo selector is the `focus-visible` version of `:focus-within`. 
-          See https://larsmagnus.co/blog/focus-visible-within-the-missing-pseudo-class 
+          This pseudo selector is the `focus-visible` version of `:focus-within`.
+          See https://larsmagnus.co/blog/focus-visible-within-the-missing-pseudo-class
         */
         outline-color: var(--focusBlueDark);
         outline-offset: var(--focus-ring-offset);
@@ -1091,18 +1107,16 @@
       }
       /* Title-card Block */
       .title-card {
-        background: var(--white);
         padding: calc(var(--whitespace100) / 16 * 1rem);
         width: 100%; /* necessary to expand beyond its text content length */
       }
       .title-card[data-variant="blog"] {
-        background: transparent;
         border: 1px solid var(--white);
-        max-width: calc(
-          var(--video-max-width) - var(--gap100) - var(--minimum-target-size)
-        );
       }
       /* Masonry composition */
+      .masonry > * + * {
+        margin-top: calc(var(--whitespace200) / 16 * 1rem);
+      }
       .masonry code {
         font-size: calc(4.13px + (7 / 460) * 100vw);
         /* 9px at 320px wide screens; 16px at 780px wide screens */
@@ -1110,11 +1124,11 @@
       @media screen and (min-width: 780.25px) {
         .masonry {
           columns: 2;
-          gap: var(--whitespace100);
+          column-gap: calc(var(--whitespace200) / 16 * 1rem);
         }
         .masonry code {
-          font-size: calc(-0.7724px + (6 / 435) * 100vw);
-          /* 10px at 781px wide screens; 16px at 1216px wide screens */
+          font-size: calc(-3.5678px + (7 / 435) * 100vw);
+          /* 9px at 781px wide screens; 16px at 1216px wide screens */
         }
         .masonry section {
           break-inside: avoid;
@@ -1123,15 +1137,11 @@
       @media screen and (min-width: 1216.25px) {
         .masonry {
           columns: 3;
-          max-width: calc(
-            var(--video-max-width) + 2 * var(--video-max-width) * 2 / 3 + 2 *
-              var(--whitespace100) / 16 * 1rem + 2 * var(--whitespace200) / 16 *
-              1rem
-          );
+          max-width: var(--work-section-max-width);
         }
         .masonry code {
-          font-size: clamp(11px, calc(-3.6274px + 5 / 416 * 100vw), 16px);
-          /* 11px at 1217px wide screens; 16px at 1633px wide screens or wider */
+          font-size: clamp(10px, calc(-4.6274px + 5 / 416 * 100vw), 15px);
+          /* 10px at 1217px wide screens; 15px at 1633px wide screens or wider */
         }
       }
       /* Shadow utility */
@@ -1169,7 +1179,6 @@
       .paragraph-wrapper[data-status="japanese"] div[lang="ja"] {
         position: absolute;
         top: 0;
-        transform: translateY(0.3em); /* Match the first line of text */
       }
       .paragraph-wrapper[data-status="js-enabled"] div[lang="ja"] {
         opacity: 0;
@@ -1203,7 +1212,13 @@
         text-align: start;
         text-decoration-line: underline;
       }
+      .language-selector span {
+        position: relative; /* #3: Prevent MacOS Safari from cropping text (https://stackoverflow.com/a/41633840/11847654) */
+      }
       .language-selector.removed-if-js-disabled {
+        display: none;
+      }
+      p.removed-if-js-disabled {
         display: none;
       }
       /* spinning animation */
@@ -1262,40 +1277,50 @@
     <meta name="twitter:creator" content="@masa_kudamatsu" />
   </head>
   <body class="color-white">
-    <header class="whitespace-300 bg-black">
-      <h1>Masa Kudamatsu</h1>
-      <div class="paragraph-wrapper whitespace-300" data-status="js-disabled">
-        <div class="whitespace-200">
-          <p>Kyoto-based web developer with UX design best practices in mind</p>
-          <button
-            class="language-selector removed-if-js-disabled"
-            type="button"
-          >
-            Japanese
-          </button>
-        </div>
-        <div class="measure whitespace-200" lang="ja">
-          <p>
-            最良のユーザー体験を実現するためにコードを書く、京都在住のWebエンジニア
-          </p>
-          <button
-            class="language-selector removed-if-js-disabled"
-            type="button"
-          >
-            English
-          </button>
+    <header class="bg-black">
+      <div class="whitespace-300">
+        <h1>Masa Kudamatsu</h1>
+        <div class="paragraph-wrapper whitespace-300" data-status="js-disabled">
+          <div class="whitespace-200">
+            <p class="line-break">
+              Kyoto-based web developer
+              <span>with UX design best practices in mind</span>
+            </p>
+            <button
+              class="language-selector removed-if-js-disabled"
+              type="button"
+            >
+              <span>Japanese</span>
+            </button>
+          </div>
+          <div class="whitespace-200" lang="ja">
+            <p class="line-break">
+              最良のユーザー体験を実現するためにコードを書く<span
+                >京都在住のWebエンジニア</span
+              >
+            </p>
+            <button
+              class="language-selector removed-if-js-disabled"
+              type="button"
+            >
+              <span>English</span>
+            </button>
+          </div>
         </div>
       </div>
     </header>
     <main>
-      <section class="bg-green divider-light-grey whitespace-300">
-        <div class="measure whitespace-300">
+      <section
+        class="bg-green divider-light-grey whitespace-300"
+        data-variant="works"
+      >
+        <div class="whitespace-300">
           <h2 class="color-pure-white" id="works">Works</h2>
           <div
             class="paragraph-wrapper whitespace-300"
             data-status="js-disabled"
           >
-            <div class="whitespace-200">
+            <div class="measure whitespace-200">
               <p>
                 All designed and coded from scratch by myself, along with test
                 code in Jest, Cypress, and Testing Library
@@ -1304,7 +1329,7 @@
                 class="language-selector removed-if-js-disabled"
                 type="button"
               >
-                Japanese
+                <span>Japanese</span>
               </button>
             </div>
             <div class="measure whitespace-200" lang="ja">
@@ -1316,13 +1341,13 @@
                 class="language-selector removed-if-js-disabled"
                 type="button"
               >
-                English
+                <span>English</span>
               </button>
             </div>
           </div>
         </div>
         <div class="alternate-position whitespace-300">
-          <section class="leaf-card padding bg-grid color-black">
+          <section class="leaf-card bg-grid color-black">
             <figure class="video" data-variant="my-ideal-map">
               <video
                 height="624"
@@ -1422,42 +1447,43 @@
                 </svg>
               </a>
             </div>
-            <div class="title-card shadow whitespace-300">
+            <div class="title-card bg-white shadow whitespace-300">
               <div class="whitespace-200">
                 <h3>My Ideal Map</h3>
-                <p>August – December 2021, August 2022 — present</p>
-              </div>
-              <div
-                class="paragraph-wrapper whitespace-300"
-                data-status="js-disabled"
-              >
-                <div class="whitespace-200">
-                  <p>
-                    A full-stack web app for those who love exploring cities to
-                    save places on the embedded Google Maps
-                    <em>with links to external sites</em>. I’m planning on
-                    making the app available to the public by the end of this
-                    year.
-                  </p>
-                  <button
-                    class="language-selector removed-if-js-disabled"
-                    type="button"
-                  >
-                    Japanese
-                  </button>
+                <div class="paragraph-wrapper" data-status="js-disabled">
+                  <div class="whitespace-200">
+                    <p>August–December 2021, August 2022–present</p>
+                    <p>
+                      A full-stack web app for those who love exploring cities
+                      to save places on the embedded Google Maps
+                      <em>with links to external sites</em>. I’m planning on
+                      making the app available to the public by the end of this
+                      year.
+                    </p>
+                    <button
+                      class="language-selector removed-if-js-disabled"
+                      type="button"
+                    >
+                      <span>Japanese</span>
+                    </button>
+                  </div>
+                  <div class="whitespace-200" lang="ja">
+                    <p class="removed-if-js-disabled">
+                      2021年8月〜12月、2022年8月〜現在
+                    </p>
+                    <p>
+                      街歩きが好きなユーザーが、Googleマップ上の場所を保存する際のメモに、外部サイトへのリンクを貼ることができるようにしたWebアプリ。今年中に一般公開予定。
+                    </p>
+                    <button
+                      class="language-selector removed-if-js-disabled"
+                      type="button"
+                    >
+                      <span>English</span>
+                    </button>
+                  </div>
                 </div>
-                <div class="measure whitespace-200" lang="ja">
-                  <p>
-                    街歩きが好きなユーザーが、Googleマップ上の場所を保存する際のメモに、外部サイトへのリンクを貼ることができるようにしたWebアプリ。今年中に一般公開予定。
-                  </p>
-                  <button
-                    class="language-selector removed-if-js-disabled"
-                    type="button"
-                  >
-                    English
-                  </button>
-                </div>
               </div>
+
               <ul role="list" class="pill-container">
                 <li class="pill">Geolocation API</li>
                 <li class="pill">React</li>
@@ -1484,7 +1510,7 @@
               </ul>
             </div>
           </section>
-          <section class="leaf-card padding bg-garden">
+          <section class="leaf-card bg-garden">
             <figure class="video" data-variant="tjg">
               <video
                 height="624"
@@ -1584,39 +1610,36 @@
                 </svg>
               </a>
             </div>
-            <div class="title-card shadow whitespace-300 color-black">
+            <div class="title-card bg-white shadow whitespace-300 color-black">
               <div class="whitespace-200">
                 <h3>Translating Japanese Gardens</h3>
-
-                <p>June–August 2021</p>
-              </div>
-              <div
-                class="paragraph-wrapper whitespace-300"
-                data-status="js-disabled"
-              >
-                <div class="whitespace-200">
-                  <p>
-                    A blog for a Japanese garden design enthusiast (that is, me)
-                    to articulate his thought on the design intent behind
-                    historical gardens.
-                  </p>
-                  <button
-                    class="language-selector removed-if-js-disabled"
-                    type="button"
-                  >
-                    Japanese
-                  </button>
-                </div>
-                <div class="measure whitespace-200" lang="ja">
-                  <p>
-                    日本庭園愛好家（私のことです）が、歴史的な名庭園のデザイン意図を深読みするブログ。
-                  </p>
-                  <button
-                    class="language-selector removed-if-js-disabled"
-                    type="button"
-                  >
-                    English
-                  </button>
+                <div class="paragraph-wrapper" data-status="js-disabled">
+                  <div class="whitespace-200">
+                    <p>June–August 2021</p>
+                    <p>
+                      A blog for a Japanese garden design enthusiast (that is,
+                      me) to articulate his thought on the design intent behind
+                      historical gardens.
+                    </p>
+                    <button
+                      class="language-selector removed-if-js-disabled"
+                      type="button"
+                    >
+                      <span>Japanese</span>
+                    </button>
+                  </div>
+                  <div class="whitespace-200" lang="ja">
+                    <p class="removed-if-js-disabled">2021年6月〜8月</p>
+                    <p>
+                      日本庭園愛好家（私のことです）が、歴史的な名庭園のデザイン意図を深読みするブログ。
+                    </p>
+                    <button
+                      class="language-selector removed-if-js-disabled"
+                      type="button"
+                    >
+                      <span>English</span>
+                    </button>
+                  </div>
                 </div>
               </div>
               <ul role="list" class="pill-container">
@@ -1634,7 +1657,7 @@
               </ul>
             </div>
           </section>
-          <section class="leaf-card padding bg-color">
+          <section class="leaf-card bg-color">
             <figure class="video" data-variant="triangulum">
               <video
                 height="624"
@@ -1734,37 +1757,35 @@
                 </svg>
               </a>
             </div>
-            <div class="title-card shadow whitespace-300 color-black">
+            <div class="title-card bg-white shadow whitespace-300 color-black">
               <div class="whitespace-200">
                 <h3>Triangulum Color Picker</h3>
-                <p>December 2020–March 2021</p>
-              </div>
-              <div
-                class="paragraph-wrapper whitespace-300"
-                data-status="js-disabled"
-              >
-                <div class="whitespace-200">
-                  <p>
-                    A web tool for web designers to pick accessible and
-                    harmonious colors with ease.
-                  </p>
-                  <button
-                    class="language-selector removed-if-js-disabled"
-                    type="button"
-                  >
-                    Japanese
-                  </button>
-                </div>
-                <div class="measure whitespace-200" lang="ja">
-                  <p>
-                    Webデザイナーが、アクセシビリティーと他の色との調和を考慮した色を選びやすくしたWebツール。
-                  </p>
-                  <button
-                    class="language-selector removed-if-js-disabled"
-                    type="button"
-                  >
-                    English
-                  </button>
+                <div class="paragraph-wrapper" data-status="js-disabled">
+                  <div class="whitespace-200">
+                    <p>December 2020–March 2021</p>
+                    <p>
+                      A web tool for web designers to pick accessible and
+                      harmonious colors with ease.
+                    </p>
+                    <button
+                      class="language-selector removed-if-js-disabled"
+                      type="button"
+                    >
+                      <span>Japanese</span>
+                    </button>
+                  </div>
+                  <div class="whitespace-200" lang="ja">
+                    <p class="removed-if-js-disabled">2020年12月〜2021年3月</p>
+                    <p>
+                      Webデザイナーが、アクセシビリティーと他の色との調和を考慮した色を選びやすくしたWebツール。
+                    </p>
+                    <button
+                      class="language-selector removed-if-js-disabled"
+                      type="button"
+                    >
+                      <span>English</span>
+                    </button>
+                  </div>
                 </div>
               </div>
               <ul role="list" class="pill-container">
@@ -1775,7 +1796,7 @@
               </ul>
             </div>
           </section>
-          <section class="leaf-card padding bg-typeset color-black">
+          <section class="leaf-card bg-typeset color-black">
             <div aria-hidden="true" class="background">
               <p>
                 I am honored to be with you today at your commencement from one
@@ -1963,38 +1984,36 @@
                 </svg>
               </a>
             </div>
-            <div class="title-card shadow whitespace-300">
+            <div class="title-card bg-white shadow whitespace-300">
               <div class="whitespace-200">
                 <h3>Line-height Picker</h3>
-                <p>March–July 2020</p>
-              </div>
-              <div
-                class="paragraph-wrapper whitespace-300"
-                data-status="js-disabled"
-              >
-                <div class="whitespace-200">
-                  <p>
-                    A web tool for web designers to set the line height of
-                    paragraph text as the ratio to the x-height of a chosen
-                    font.
-                  </p>
-                  <button
-                    class="language-selector removed-if-js-disabled"
-                    type="button"
-                  >
-                    Japanese
-                  </button>
-                </div>
-                <div class="measure whitespace-200" lang="ja">
-                  <p>
-                    Webデザイナーが、欧文フォントの行間を小文字のエックスの高さとの比で指定するためのWebツール。
-                  </p>
-                  <button
-                    class="language-selector removed-if-js-disabled"
-                    type="button"
-                  >
-                    English
-                  </button>
+                <div class="paragraph-wrapper" data-status="js-disabled">
+                  <div class="whitespace-200">
+                    <p>March–July 2020</p>
+                    <p>
+                      A web tool for web designers to set the line height of
+                      paragraph text as the ratio to the x-height of a chosen
+                      font.
+                    </p>
+                    <button
+                      class="language-selector removed-if-js-disabled"
+                      type="button"
+                    >
+                      <span>Japanese</span>
+                    </button>
+                  </div>
+                  <div class="whitespace-200" lang="ja">
+                    <p class="removed-if-js-disabled">2020年3月〜7月</p>
+                    <p>
+                      Webデザイナーが、欧文フォントの行間を小文字のエックスの高さとの比で指定するためのWebツール。
+                    </p>
+                    <button
+                      class="language-selector removed-if-js-disabled"
+                      type="button"
+                    >
+                      <span>English</span>
+                    </button>
+                  </div>
                 </div>
               </div>
               <ul role="list" class="pill-container">
@@ -2013,14 +2032,17 @@
           </section>
         </div>
       </section>
-      <section class="bg-purple divider-light-grey whitespace-300">
-        <div class="measure whitespace-300">
+      <section
+        class="bg-purple divider-light-grey whitespace-300"
+        data-variant="blog"
+      >
+        <div class="whitespace-300">
           <h2 class="color-pure-white" id="blog">Blog</h2>
           <div
             class="paragraph-wrapper whitespace-300"
             data-status="js-disabled"
           >
-            <div class="whitespace-200">
+            <div class="measure whitespace-200">
               <p>
                 I’ve been blogging about web development on
                 <a
@@ -2041,7 +2063,7 @@
                 class="language-selector removed-if-js-disabled"
                 type="button"
               >
-                Japanese
+                <span>Japanese</span>
               </button>
             </div>
             <div class="measure whitespace-200" lang="ja">
@@ -2066,12 +2088,12 @@
                 class="language-selector removed-if-js-disabled"
                 type="button"
               >
-                English
+                <span>English</span>
               </button>
             </div>
           </div>
         </div>
-        <div class="masonry whitespace-100">
+        <div class="masonry">
           <section class="title-card whitespace-300" data-variant="blog">
             <div class="whitespace-200">
               <div class="whitespace-100">
@@ -2127,12 +2149,12 @@
                 </div>
               </div>
               <h3>Definitive Edition of “How to Favicon” in 2023</h3>
-              <p>January 2021; Last updated in August 2023</p>
               <div
                 class="paragraph-wrapper whitespace-200"
                 data-status="js-disabled"
               >
                 <div class="whitespace-200">
+                  <p>January 2021; Last updated in August 2023</p>
                   <figure class="blockquote">
                     <blockquote>
                       “Favicon support is a complicated topic. See this guide
@@ -2190,11 +2212,14 @@
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    Japanese
+                    <span>Japanese</span>
                   </button>
                 </div>
-                <div class="measure whitespace-200" lang="ja">
-                  <figure class="blockquote removed-if-js-disabled">
+                <div class="whitespace-200" lang="ja">
+                  <p class="removed-if-js-disabled">
+                    2021年1月（2023年8月更新）
+                  </p>
+                  <figure class="blockquote">
                     <blockquote>
                       「ファビコンの実装方法は複雑です。詳しくはこのガイドをご覧ください。」
                     </blockquote>
@@ -2242,7 +2267,7 @@
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    English
+                    <span>English</span>
                   </button>
                 </div>
               </div>
@@ -2310,13 +2335,13 @@ export const FileUploader = ({handleFile}) => {
                   </a>
                 </div>
               </div>
-              <h3>How to customize the file upload button in React</h3>
-              <p>March 2020; Last updated in August 2023</p>
+              <h3>How to Customize the File Upload Button in React</h3>
               <div
                 class="paragraph-wrapper whitespace-200"
                 data-status="js-disabled"
               >
                 <div class="whitespace-200">
+                  <p>March 2020; Last updated in August 2023</p>
                   <figure class="blockquote">
                     <blockquote>“very helpful article. thanks :)”</blockquote>
                     <figcaption>
@@ -2347,11 +2372,14 @@ export const FileUploader = ({handleFile}) => {
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    Japanese
+                    <span>Japanese</span>
                   </button>
                 </div>
-                <div class="measure whitespace-200" lang="ja">
-                  <figure class="blockquote removed-if-js-disabled">
+                <div class="whitespace-200" lang="ja">
+                  <p class="removed-if-js-disabled">
+                    2020年3月（2023年8月更新）
+                  </p>
+                  <figure class="blockquote">
                     <blockquote>
                       「とても役に立つ記事。ありがとう(^_^)」
                     </blockquote>
@@ -2383,7 +2411,7 @@ export const FileUploader = ({handleFile}) => {
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    English
+                    <span>English</span>
                   </button>
                 </div>
               </div>
@@ -2444,15 +2472,15 @@ export const FileUploader = ({handleFile}) => {
                 </div>
               </div>
               <h3>
-                Don't nest &lt;nav&gt; inside &lt;header&gt;. Do nest the
-                hamburger menu button inside &lt;nav&gt;.
+                Don't Nest &lt;nav&gt; inside &lt;header&gt;. Do Nest the
+                Hamburger Menu Button inside &lt;nav&gt;.
               </h3>
-              <p>June 2021</p>
               <div
                 class="paragraph-wrapper whitespace-200"
                 data-status="js-disabled"
               >
                 <div class="whitespace-200">
+                  <p>June 2021</p>
                   <figure class="blockquote">
                     <blockquote>
                       “I am building my portfolio atm and this article was
@@ -2485,11 +2513,12 @@ export const FileUploader = ({handleFile}) => {
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    Japanese
+                    <span>Japanese</span>
                   </button>
                 </div>
-                <div class="measure whitespace-200" lang="ja">
-                  <figure class="blockquote removed-if-js-disabled">
+                <div class="whitespace-200" lang="ja">
+                  <p class="removed-if-js-disabled">2021年6月</p>
+                  <figure class="blockquote">
                     <blockquote>
                       「今、自分のポートフォリオを作成中で、この記事はちょうどいいタイミングで役に立った。ありがとう。」
                     </blockquote>
@@ -2520,7 +2549,7 @@ export const FileUploader = ({handleFile}) => {
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    English
+                    <span>English</span>
                   </button>
                 </div>
               </div>
@@ -2576,13 +2605,13 @@ export const FileUploader = ({handleFile}) => {
                   </a>
                 </div>
               </div>
-              <h3>Mastering the art of `alt` text for images</h3>
-              <p>May 2021; Last updated in August 2021</p>
+              <h3>Mastering the Art of `alt` Text for Images</h3>
               <div
                 class="paragraph-wrapper whitespace-200"
                 data-status="js-disabled"
               >
                 <div class="whitespace-200">
+                  <p>May 2021; Last updated in August 2021</p>
                   <figure class="blockquote">
                     <blockquote>
                       “I am enjoying this deep dive into HTML elements and
@@ -2602,13 +2631,16 @@ export const FileUploader = ({handleFile}) => {
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    Japanese
+                    <span>Japanese</span>
                   </button>
                 </div>
-                <div class="measure whitespace-200" lang="ja">
-                  <figure class="blockquote removed-if-js-disabled">
+                <div class="whitespace-200" lang="ja">
+                  <p class="removed-if-js-disabled">
+                    2021年5月（2021年8月更新）
+                  </p>
+                  <figure class="blockquote">
                     <blockquote>
-                      「HTMLの要素や属性を深く掘り下げるこの記事を楽しく読んでいます...」
+                      「HTMLの要素や属性を深く掘り下げるこの記事を楽しく読ませてもらっています...」
                     </blockquote>
                     <figcaption>
                       &mdash;
@@ -2624,7 +2656,7 @@ export const FileUploader = ({handleFile}) => {
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    English
+                    <span>English</span>
                   </button>
                 </div>
               </div>
@@ -2690,15 +2722,15 @@ const loader = new Loader({
                 </div>
               </div>
               <h3>
-                4 gotchas when setting up Google Maps API with Next.js and
+                4 Gotchas when Setting Up Google Maps API with Next.js and
                 ESLint
               </h3>
-              <p>February 2021; Last updated in September 2021</p>
               <div
                 class="paragraph-wrapper whitespace-200"
                 data-status="js-disabled"
               >
                 <div class="whitespace-200">
+                  <p>February 2021; Last updated in September 2021</p>
                   <figure class="blockquote">
                     <blockquote>
                       “This is a great article. There's not nearly enough Nextjs
@@ -2730,11 +2762,14 @@ const loader = new Loader({
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    Japanese
+                    <span>Japanese</span>
                   </button>
                 </div>
-                <div class="measure whitespace-200" lang="ja">
-                  <figure class="blockquote removed-if-js-disabled">
+                <div class="whitespace-200" lang="ja">
+                  <p class="removed-if-js-disabled">
+                    2021年2月（2021年9月更新）
+                  </p>
+                  <figure class="blockquote">
                     <blockquote>
                       「これは素晴らしい記事です。Next.jsについての記事はもっとたくさんあるべきです。」
                     </blockquote>
@@ -2766,7 +2801,7 @@ const loader = new Loader({
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    English
+                    <span>English</span>
                   </button>
                 </div>
               </div>
@@ -2819,13 +2854,13 @@ body {
                   </a>
                 </div>
               </div>
-              <h3>System Font Stack: its history and rationale</h3>
-              <p>March 2020; Last updated in September 2020</p>
+              <h3>System Font Stack: its History and Rationale</h3>
               <div
                 class="paragraph-wrapper whitespace-200"
                 data-status="js-disabled"
               >
                 <div class="whitespace-200">
+                  <p>March 2020; Last updated in September 2020</p>
                   <figure class="blockquote">
                     <blockquote>
                       “An excellent overview and analysis of trends on the
@@ -2846,11 +2881,14 @@ body {
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    Japanese
+                    <span>Japanese</span>
                   </button>
                 </div>
-                <div class="measure whitespace-200" lang="ja">
-                  <figure class="blockquote removed-if-js-disabled">
+                <div class="whitespace-200" lang="ja">
+                  <p class="removed-if-js-disabled">
+                    2020年3月（2020年9月更新）
+                  </p>
+                  <figure class="blockquote">
                     <blockquote>
                       「システムフォントスタックと呼ばれるアプローチの動向に関する優れた概要と分析、共有に感謝します。」
                     </blockquote>
@@ -2868,7 +2906,7 @@ body {
                     class="language-selector removed-if-js-disabled"
                     type="button"
                   >
-                    English
+                    <span>English</span>
                   </button>
                 </div>
               </div>
@@ -2879,14 +2917,14 @@ body {
           </section>
         </div>
       </section>
-      <section class="bg-brown divider-light-grey">
-        <div class="measure whitespace-300">
+      <section class="bg-brown divider-light-grey" data-variant="about">
+        <div class="whitespace-300">
           <h2 class="color-pure-white" id="about">About Me</h2>
           <div
             class="paragraph-wrapper whitespace-300"
             data-status="js-disabled"
           >
-            <div class="whitespace-200">
+            <div class="measure whitespace-200">
               <p>
                 While my life has been eclectic, I’ve always been interested in
                 the use of “metaphors”.
@@ -2977,7 +3015,7 @@ body {
                 class="language-selector removed-if-js-disabled"
                 type="button"
               >
-                Japanese
+                <span>Japanese</span>
               </button>
             </div>
             <div class="measure whitespace-200" lang="ja">
@@ -3051,7 +3089,7 @@ body {
                 class="language-selector removed-if-js-disabled"
                 type="button"
               >
-                English
+                <span>English</span>
               </button>
             </div>
           </div>
@@ -3091,12 +3129,9 @@ body {
           <li><a class="text-button font-footer" href="#about">About Me</a></li>
         </ul>
       </nav>
-      <div class="footer-paragraphs whitespace-footer">
-        <div
-          class="paragraph-wrapper whitespace-footer"
-          data-status="js-disabled"
-        >
-          <div class="whitespace-footer">
+      <div class="footer-paragraphs whitespace-100">
+        <div class="paragraph-wrapper whitespace-100" data-status="js-disabled">
+          <div class="measure whitespace-100">
             <p class="font-footer">
               Thank you for scrolling down until the end.
             </p>
@@ -3116,10 +3151,10 @@ body {
               class="language-selector font-footer removed-if-js-disabled"
               type="button"
             >
-              Japanese
+              <span>Japanese</span>
             </button>
           </div>
-          <div class="measure whitespace-footer" lang="ja">
+          <div class="measure whitespace-100" lang="ja">
             <p class="font-footer">
               一番下までスクロールしていただきありがとうございます。
             </p>
@@ -3133,7 +3168,7 @@ body {
               class="language-selector font-footer removed-if-js-disabled"
               type="button"
             >
-              English
+              <span>English</span>
             </button>
           </div>
         </div>
@@ -3155,7 +3190,7 @@ body {
     paragraphWrappers.forEach((paragraphWrapper) => {
       paragraphWrapper.classList.remove("whitespace-200"); // for blog posts
       paragraphWrapper.classList.remove("whitespace-300");
-      paragraphWrapper.classList.remove("whitespace-footer"); // for footer
+      paragraphWrapper.classList.remove("whitespace-100"); // for footer
       paragraphWrapper.dataset.status = "js-enabled";
     });
     const languageSelectors = document.querySelectorAll(".language-selector");
