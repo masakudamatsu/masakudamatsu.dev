@@ -1133,6 +1133,9 @@
         .masonry section {
           break-inside: avoid;
         }
+        .masonry section:nth-child(4) {
+          margin-top: 0; /* #9 Safari would otherwise insert margin-top at the top of the second column */
+        }
       }
       @media screen and (min-width: 1216.25px) {
         .masonry {
@@ -1142,6 +1145,17 @@
         .masonry code {
           font-size: clamp(10px, calc(-4.6274px + 5 / 416 * 100vw), 15px);
           /* 10px at 1217px wide screens; 15px at 1633px wide screens or wider */
+        }
+        .masonry > section:nth-child(3),
+        .masonry > section:nth-child(5) {
+          margin-top: 0;
+          /* #9 Safari would otherwise insert margin-top at the top of the second column */
+          /* For the third column, Safari does ignore margin-top. But for the sake of consistency, I set it to be 0. */
+        }
+        .masonry > section:nth-child(4) {
+          margin-top: calc(
+            var(--whitespace200) / 16 * 1rem
+          ); /* #9: Revert to the narrow screen widths */
         }
       }
       /* Shadow utility */
