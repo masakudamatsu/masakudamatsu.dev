@@ -1244,6 +1244,19 @@
       p.removed-if-js-disabled {
         display: none;
       }
+      .language-selector:focus {
+        --focus-ring-offset: 6px;
+        outline-color: var(--focusBlueLight);
+        outline-offset: var(--focus-ring-offset);
+        outline-style: var(--focus-ring-style);
+        outline-width: var(--focus-ring-width);
+      }
+      .bg-white .language-selector:focus {
+        outline-color: var(--focusBlueDark);
+      }
+      .language-selector:focus:not(:focus-visible) {
+        outline: none;
+      }
       /* spinning animation */
       .spinning {
         animation: rotation 1s linear infinite;
