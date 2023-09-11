@@ -3255,7 +3255,9 @@ body {
     );
 
     // Prepare for playing videos only when fully visible within the screen
-    const observer = new IntersectionObserver(callback, { threshold: 1.0 });
+    const observer = new IntersectionObserver(callback, {
+      threshold: 0.999,
+    }); /* #11: threshold of 1 does not work with MS Edge (https://stackoverflow.com/questions/56367425/intersection-observer-doesnt-work-in-edge/77036742#77036742) */
     function callback(videos) {
       videos.forEach((video) => {
         if (video.isIntersecting) {
