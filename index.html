@@ -1091,15 +1091,28 @@
         padding: 0 10px;
         text-align: center;
       }
-      .pill:has(:focus-visible) {
-        /*
-          This pseudo selector is the `focus-visible` version of `:focus-within`.
-          See https://larsmagnus.co/blog/focus-visible-within-the-missing-pseudo-class
-        */
+      .pill:focus-within {
+        /* #12: for Firefox until it supports :has() */
         outline-color: var(--focusBlueDark);
         outline-offset: var(--focus-ring-offset);
         outline-style: var(--focus-ring-style);
         outline-width: var(--focus-ring-width);
+      }
+      @supports selector(:has(:focus-visible)) {
+        /*
+          This pseudo selector is the `focus-visible` version of `:focus-within`.
+          See https://larsmagnus.co/blog/focus-visible-within-the-missing-pseudo-class
+          #12: But the :has() selector is not yet supported by Firefox as of Sep 2023: https://caniuse.com/css-has
+        */
+        .pill:focus-within {
+          outline-style: none;
+        }
+        .pill:has(:focus-visible) {
+          outline-color: var(--focusBlueDark);
+          outline-offset: var(--focus-ring-offset);
+          outline-style: var(--focus-ring-style);
+          outline-width: var(--focus-ring-width);
+        }
       }
       /* Title-card Block */
       .title-card {
