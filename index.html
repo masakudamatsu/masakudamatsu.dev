@@ -1388,17 +1388,23 @@
                 <!-- Offer download -->
                 <a href="media/my-ideal-map.mp4">Download the video</a>
               </video>
-              <img
-                alt=""
-                class="removed-if-js-disabled transparent"
-                sizes="(max-width: 600px) calc(100vw - 75px), (max-width: 766px) calc(100vw - 141.25px), 624px"
-                srcset="
-                  media/my-ideal-map624.png   624w,
-                  media/my-ideal-map990.png   990w,
-                  media/my-ideal-map1248.png 1248w
-                "
-                src="media/my-ideal-map624.png"
-              />
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="media/my-ideal-map1248.webp"
+                />
+                <img
+                  alt=""
+                  class="removed-if-js-disabled transparent"
+                  sizes="(max-width: 600px) calc(100vw - 75px), (max-width: 766px) calc(100vw - 141.25px), 624px"
+                  srcset="
+                    media/my-ideal-map624.png   624w,
+                    media/my-ideal-map990.png   990w,
+                    media/my-ideal-map1248.png 1248w
+                  "
+                  src="media/my-ideal-map624.png"
+                />
+              </picture>
             </figure>
             <button
               aria-label="Play  demo for My Ideal Map"
@@ -1550,18 +1556,21 @@
                 <!-- Offer download -->
                 <a href="media/tjg.mp4">Download the video</a>
               </video>
-              <img
-                alt=""
-                class="removed-if-js-disabled transparent"
-                loading="lazy"
-                sizes="(max-width: 600px) calc(100vw - 75px), (max-width: 766px) calc(100vw - 141.25px), 624px"
-                srcset="
-                  media/tjg624.png   624w,
-                  media/tjg990.png   990w,
-                  media/tjg1248.png 1248w
-                "
-                src="media/tjg624.png"
-              />
+              <picture>
+                <source type="image/webp" srcset="media/tjg1248.webp" />
+                <img
+                  alt=""
+                  class="removed-if-js-disabled transparent"
+                  loading="lazy"
+                  sizes="(max-width: 600px) calc(100vw - 75px), (max-width: 766px) calc(100vw - 141.25px), 624px"
+                  srcset="
+                    media/tjg624.png   624w,
+                    media/tjg990.png   990w,
+                    media/tjg1248.png 1248w
+                  "
+                  src="media/tjg624.png"
+                />
+              </picture>
             </figure>
             <button
               aria-label="Play  demo for Translating Japanese Gardens"
@@ -1697,18 +1706,22 @@
                 <!-- Offer download -->
                 <a href="media/triangulum.mp4">Download the video</a>
               </video>
-              <img
-                alt=""
-                class="removed-if-js-disabled transparent"
-                loading="lazy"
-                sizes="(max-width: 600px) calc(100vw - 75px), (max-width: 766px) calc(100vw - 141.25px), 624px"
-                srcset="
-                  media/triangulum624.png   624w,
-                  media/triangulum990.png   990w,
-                  media/triangulum1248.png 1248w
-                "
-                src="media/triangulum624.png"
-              />
+              <picture>
+                <source type="image/webp" srcset="media/triangulum1248.webp" />
+
+                <img
+                  alt=""
+                  class="removed-if-js-disabled transparent"
+                  loading="lazy"
+                  sizes="(max-width: 600px) calc(100vw - 75px), (max-width: 766px) calc(100vw - 141.25px), 624px"
+                  srcset="
+                    media/triangulum624.png   624w,
+                    media/triangulum990.png   990w,
+                    media/triangulum1248.png 1248w
+                  "
+                  src="media/triangulum624.png"
+                />
+              </picture>
             </figure>
             <button
               aria-label="Play  demo for Triangulum Color Picker"
@@ -1925,18 +1938,25 @@
                 <!-- Offer download -->
                 <a href="media/line-height-picker.mp4">Download the video</a>
               </video>
-              <img
-                alt=""
-                class="removed-if-js-disabled transparent"
-                loading="lazy"
-                sizes="(max-width: 600px) calc(100vw - 75px), (max-width: 780px) calc(100vw - 146.25px), 624px"
-                srcset="
-                  media/line-height-picker624.png   624w,
-                  media/line-height-picker990.png   990w,
-                  media/line-height-picker1248.png 1248w
-                "
-                src="media/line-height-picker624.png"
-              />
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="media/line-height-picker1248.webp"
+                />
+
+                <img
+                  alt=""
+                  class="removed-if-js-disabled transparent"
+                  loading="lazy"
+                  sizes="(max-width: 600px) calc(100vw - 75px), (max-width: 780px) calc(100vw - 146.25px), 624px"
+                  srcset="
+                    media/line-height-picker624.png   624w,
+                    media/line-height-picker990.png   990w,
+                    media/line-height-picker1248.png 1248w
+                  "
+                  src="media/line-height-picker624.png"
+                />
+              </picture>
             </figure>
             <button
               aria-label="Play  demo for Line-height Picker"
@@ -3300,13 +3320,13 @@ body {
     for (let i = 0; i < videos.length; i++) {
       // Replace video files for mobile devices
       if (i === 0) {
-        filename = "line-height-picker";
-      } else if (i === 1) {
-        filename = "triangulum";
-      } else if (i === 2) {
-        filename = "tjg";
-      } else if (i === 3) {
         filename = "my-ideal-map";
+      } else if (i === 1) {
+        filename = "tjg";
+      } else if (i === 2) {
+        filename = "triangulum";
+      } else if (i === 3) {
+        filename = "line-height-picker";
       } else {
         filename = null;
       }
@@ -3393,62 +3413,62 @@ body {
         once: true,
       });
     }
-    // // debugging
-    // for (let i = 0; i < imgs.length; i++) {
-    //   if (imgs[i].complete) {
-    //     console.log(`Poster image ${i} cached`);
-    //   } else {
-    //     let handleEvent;
-    //     if (i === 0) {
-    //       handleEvent = (event) => {
-    //         console.log(
-    //           `Poster image for Line-height Picker: "${event.type}" event fired`
-    //         );
-    //       };
-    //     } else if (i === 1) {
-    //       handleEvent = (event) => {
-    //         console.log(
-    //           `Poster image for Triangulum: "${event.type}" event fired`
-    //         );
-    //       };
-    //     } else if (i === 2) {
-    //       handleEvent = (event) => {
-    //         console.log(`Poster image for TJG: "${event.type}" event fired`);
-    //       };
-    //     } else if (i === 3) {
-    //       handleEvent = (event) => {
-    //         console.log(
-    //           `Poster image for My Ideal Map: "${event.type}" event fired`
-    //         );
-    //       };
-    //     }
-    //     imgs[i].addEventListener("load", handleEvent);
-    //   }
-    // }
+    // debugging
+    for (let i = 0; i < imgs.length; i++) {
+      if (imgs[i].complete) {
+        console.log(`Poster image ${i} cached`);
+      } else {
+        let handleEvent;
+        if (i === 0) {
+          handleEvent = (event) => {
+            console.log(
+              `Poster image for My Ideal Map: "${event.type}" event fired`
+            );
+          };
+        } else if (i === 1) {
+          handleEvent = (event) => {
+            console.log(`Poster image for TJG: "${event.type}" event fired`);
+          };
+        } else if (i === 2) {
+          handleEvent = (event) => {
+            console.log(
+              `Poster image for Triangulum: "${event.type}" event fired`
+            );
+          };
+        } else if (i === 3) {
+          handleEvent = (event) => {
+            console.log(
+              `Poster image for Line-height Picker: "${event.type}" event fired`
+            );
+          };
+        }
+        imgs[i].addEventListener("load", handleEvent);
+      }
+    }
     // for (let i = 0; i < videos.length; i++) {
     //   let handleEvent;
     //   if (i === 0) {
     //     handleEvent = (event) => {
     //       console.log(
-    //         `Line-height Picker at ${videos[i].currentTime}: "${event.type}" event fired`
+    //         `My Ideal Map at ${videos[i].currentTime}: "${event.type}" event fired`
     //       );
     //     };
     //   } else if (i === 1) {
     //     handleEvent = (event) => {
     //       console.log(
-    //         `Triangulum at ${videos[i].currentTime}: "${event.type}" event fired`
+    //         `TJG at ${videos[i].currentTime}: "${event.type}" event fired`
     //       );
     //     };
     //   } else if (i === 2) {
     //     handleEvent = (event) => {
     //       console.log(
-    //         `TJG at ${videos[i].currentTime}: "${event.type}" event fired`
+    //         `Triangulum at ${videos[i].currentTime}: "${event.type}" event fired`
     //       );
     //     };
     //   } else if (i === 3) {
     //     handleEvent = (event) => {
     //       console.log(
-    //         `My Ideal Map at ${videos[i].currentTime}: "${event.type}" event fired`
+    //         `Line-height Picker at ${videos[i].currentTime}: "${event.type}" event fired`
     //       );
     //     };
     //   }
