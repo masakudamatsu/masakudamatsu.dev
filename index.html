@@ -3240,24 +3240,30 @@ body {
       paragraphWrapper.dataset.status = "js-enabled";
     });
     const languageSelectors = document.querySelectorAll(".language-selector");
-    languageSelectors.forEach((languageSelector) => {
-      languageSelector.addEventListener("click", () => {
-        paragraphWrappers.forEach((paragraphWrapper) => {
-          if (
-            paragraphWrapper.dataset.status === "js-enabled" ||
-            paragraphWrapper.dataset.status === "english"
-          ) {
-            paragraphWrapper.dataset.status = "japanese";
-          } else if (paragraphWrapper.dataset.status === "japanese") {
-            paragraphWrapper.dataset.status = "english";
-          } else {
-            console.error(
-              "paragraph-wrapper data-status value is not english or japanese."
-            );
-          }
-        });
+    languageSelectors[0].addEventListener("click", () => {
+      // First "Japanese" button
+      paragraphWrappers.forEach((paragraphWrapper) => {
+        paragraphWrapper.dataset.status = "japanese";
       });
     });
+    languageSelectors[1].addEventListener("click", () => {
+      // First "English" button
+      paragraphWrappers.forEach((paragraphWrapper) => {
+        paragraphWrapper.dataset.status = "english";
+      });
+    });
+    for (let i = 2; i < languageSelectors.length; i = i + 2) {
+      // Other "Japanese" buttons
+      languageSelectors[i].addEventListener("click", () => {
+        paragraphWrappers[i / 2].dataset.status = "japanese";
+      });
+    }
+    for (let i = 3; i < languageSelectors.length; i = i + 2) {
+      // Other "English" buttons
+      languageSelectors[i].addEventListener("click", () => {
+        paragraphWrappers[(i - 1) / 2].dataset.status = "english";
+      });
+    }
     // Fallback font styling
     const zenloopElements = document.querySelectorAll("h1, h2 ,h3");
     const ralewayElements = document.querySelectorAll("p, .blockquote");
