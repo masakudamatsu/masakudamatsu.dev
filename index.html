@@ -3234,9 +3234,9 @@ body {
     // Language selector
     const paragraphWrappers = document.querySelectorAll(".paragraph-wrapper");
     paragraphWrappers.forEach((paragraphWrapper) => {
-      paragraphWrapper.classList.remove("whitespace-200"); // for blog posts
-      paragraphWrapper.classList.remove("whitespace-300");
       paragraphWrapper.classList.remove("whitespace-100"); // for footer
+      paragraphWrapper.classList.remove("whitespace-200"); // for blog posts
+      paragraphWrapper.classList.remove("whitespace-300"); // lead paragraph in each section
       paragraphWrapper.dataset.status = "js-enabled";
     });
     const languageSelectors = document.querySelectorAll(".language-selector");
