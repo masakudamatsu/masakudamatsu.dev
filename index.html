@@ -1210,6 +1210,7 @@
       /* Transition to Japanese */
       .paragraph-wrapper[data-status="japanese"] div:first-of-type {
         opacity: 0;
+        pointer-events: none;
         transition: opacity var(--duration-exit) var(--ease-out);
       }
       .paragraph-wrapper[data-status="japanese"] div[lang="ja"] {
@@ -1226,6 +1227,7 @@
       }
       .paragraph-wrapper[data-status="english"] div:first-of-type {
         opacity: 1;
+        pointer-events: auto;
         transition: opacity var(--duration-enter) var(--ease-in)
           var(--duration-exit);
       }
