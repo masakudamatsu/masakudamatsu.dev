@@ -871,19 +871,28 @@
         }
         .leaf-card {
           align-items: flex-start; /* avoid stretching title-card */
-          grid-template-areas: "video text" "video button" "video ." "video playback";
-          grid-template-columns: 3fr 2fr;
-          grid-template-rows: auto var(--minimum-target-size) auto var(
-              --minimum-target-size
-            );
+          grid-template-areas: "video video text" "playback button text" ". . text";
+          grid-template-columns:
+            var(--minimum-target-size) calc(
+              var(--video-max-width) - var(--minimum-target-size) -
+                (var(--whitespace100) / 16 * 1rem)
+            )
+            1fr;
+          grid-template-rows: var(--video-max-width) var(--minimum-target-size) auto;
           max-width: calc(
             var(--video-max-width) * 5 / 3 + (var(--whitespace100) / 16 * 1rem) +
               (var(--whitespace200) / 16 * 1rem) * 2
           );
         }
         .leaf-card:nth-of-type(even) {
-          grid-template-areas: "text video" "button video" ". video" "playback video";
-          grid-template-columns: 2fr 3fr;
+          grid-template-areas: "text video video" "text button playback" "text . .";
+          grid-template-columns:
+            1fr
+            calc(
+              var(--video-max-width) - var(--minimum-target-size) -
+                (var(--whitespace100) / 16 * 1rem)
+            )
+            var(--minimum-target-size);
         }
         .leaf-card .title-card {
           width: calc(var(--video-max-width) * 2 / 3);
