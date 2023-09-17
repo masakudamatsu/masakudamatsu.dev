@@ -335,16 +335,40 @@
           var(--raleway-topcrop) - (var(--line-height) - 1) / 2 * 1em
         );
       }
+      [lang="ja"] .blockquote::before,
+      [lang="ja"] .language-selector::before,
+      [lang="ja"] p::before {
+        margin-bottom: calc(
+          (var(--raleway-topcrop) - (var(--line-height) - 1) / 2 * 1em) *
+            var(--font100-raleway) / var(--font100-japanese)
+        );
+      }
       .blockquote::after,
       p::after {
         margin-top: calc(
           var(--raleway-bottomcrop) - (var(--line-height) - 1) / 2 * 1em
         );
       }
+      [lang="ja"] .blockquote::after,
+      [lang="ja"] p::after {
+        margin-top: calc(
+          (var(--raleway-bottomcrop) - (var(--line-height) - 1) / 2 * 1em) *
+            var(--font100-raleway) / var(--font100-japanese)
+        );
+      }
       .language-selector::after {
         margin-top: calc(
           var(--raleway-bottomcrop) - (var(--line-height) - 1) / 2 * 1em +
             var(--underline-offset) + var(--underline-thickness)
+        ); /* crop up to underline */
+      }
+      [lang="ja"] .language-selector::after {
+        margin-top: calc(
+          (
+              var(--raleway-bottomcrop) - (var(--line-height) - 1) / 2 * 1em +
+                var(--underline-offset)
+            ) * var(--font100-raleway) / var(--font100-japanese) +
+            var(--underline-thickness)
         ); /* crop up to underline */
       }
       h1::before,
@@ -871,20 +895,30 @@
         }
         .leaf-card {
           align-items: flex-start; /* avoid stretching title-card */
-          grid-template-areas: "video text" "video button" "video ." "video playback";
-          grid-template-columns: 3fr 2fr;
-          grid-template-rows: auto var(--minimum-target-size) auto var(
-              --minimum-target-size
-            );
+          grid-template-areas: "video video text" "playback button text" ". . text";
+          grid-template-columns:
+            var(--minimum-target-size) calc(
+              var(--video-max-width) - var(--minimum-target-size) -
+                (var(--whitespace100) / 16 * 1rem)
+            )
+            1fr;
+          grid-template-rows: var(--video-max-width) var(--minimum-target-size) auto;
           max-width: calc(
             var(--video-max-width) * 5 / 3 + (var(--whitespace100) / 16 * 1rem) +
               (var(--whitespace200) / 16 * 1rem) * 2
           );
         }
         .leaf-card:nth-of-type(even) {
-          grid-template-areas: "text video" "button video" ". video" "playback video";
-          grid-template-columns: 2fr 3fr;
+          grid-template-areas: "text video video" "text playback button" "text . .";
+          grid-template-columns:
+            1fr
+            var(--minimum-target-size)
+            calc(
+              var(--video-max-width) - var(--minimum-target-size) -
+                (var(--whitespace100) / 16 * 1rem)
+            );
         }
+
         .leaf-card .title-card {
           width: calc(var(--video-max-width) * 2 / 3);
         }
@@ -892,9 +926,6 @@
           display: flex;
           flex-direction: row;
           justify-content: flex-end;
-        }
-        .leaf-card:nth-of-type(even) .buttonGroup {
-          justify-content: flex-start;
         }
         .leaf-card .button[data-type="playback"] {
           align-self: end;
@@ -1674,9 +1705,9 @@
                     </p>
                     <p>
                       By building this blog of mine, I meticulously adjust the
-                      size of white space to indicate whether an image belongs
-                      to the paragraph above or below in terms of informational
-                      content, for example.
+                      size of white space to indicate, for example, whether an
+                      image belongs to the paragraph above or below in terms of
+                      informational content.
                     </p>
                     <p>
                       A generous use of various fonts (including Japanese
@@ -1694,13 +1725,13 @@
                   <div class="whitespace-200" lang="ja">
                     <p class="removed-if-js-disabled">2021年6月〜8月</p>
                     <p>
-                      Webページ上での欧文組版は多くの場合とてもいい加減です。特に、余白の大きさによって、段落や画像の論理的な関係性を視覚的に伝えることが、ほとんどの場合できていません。
+                      文字組版にこだわったWebサイトを目にすることは稀です。特に、段落や画像などのグラフィック要素間の関係を、余白の大きさで丁寧に視覚化したサイトはまずありません。
                     </p>
                     <p>
-                      このブログを作るにあたり、余白の大きさを綿密に計算して設定することで、例えば、ある画像が、内容的にその上にある段落の一部なのか、その下にある段落の一部なのか、を視覚化しました。
+                      この私のブログの文字組版をするにあたり、余白の大きさを綿密に計算して設定することで、例えば、ある画像が、内容的にその上にある段落の一部なのか、その下にある段落の一部なのか、を視覚化しました。
                     </p>
                     <p>
-                      また、ページ全体の表示速度を遅くすることなく様々なフォント（幾つかの漢字を含む）を使うために、使用されている文字だけをフォントファイルに含め、そのファイルがページ全体と同じサーバーからダウンロードされるようにしました。
+                      また、ページ全体の表示速度を遅くすることなく様々なフォント（漢字を含む）を使うために、ブログで使用されている文字だけをフォントファイルに残し、ページ全体と同じサーバーからダウンロードされるようにしました。
                     </p>
                     <button
                       class="language-selector removed-if-js-disabled"
@@ -1845,11 +1876,15 @@
                     <p>
                       This web tool visualizes the level of luminance and the
                       share of pure hue for the color code entered by the user.
+                    </p>
+                    <p>
                       Clicking along the horizontal line allows the user to
-                      choose among colors of the same level of luminance. By
-                      clicking along the vertical line, the user can adjust the
-                      brightness of color while keeping the share of pure hue
-                      constant and thus maintaining color harmony.
+                      choose among colors of the same level of luminance.
+                    </p>
+                    <p>
+                      By clicking along the vertical line, the user can adjust
+                      the brightness of color while keeping the share of pure
+                      hue constant and thus maintaining color harmony.
                     </p>
                     <button
                       class="language-selector removed-if-js-disabled"
@@ -1861,10 +1896,16 @@
                   <div class="whitespace-200" lang="ja">
                     <p class="removed-if-js-disabled">2020年12月〜2021年3月</p>
                     <p>
-                      一般的なカラーピッカーは、アクセシビリティを保つために色をその明るさに基づいて選ぶことができません。また、他の色と調和する色を選ぶ助けにもなりません。
+                      一般的なカラーピッカーは、それぞれの色の明るさを表示しないので、アクセシビリティを考慮した色選びに役立ちません。また、他の色と調和する色を選ぶ助けにもなりません。
                     </p>
                     <p>
-                      このWebツールに色コードを入力すると、その色について、その明るさと純色の含有比率が図示されます。横線に沿ってクリックすると、同じ明るさの色の中から一つ色を選ぶことができます。縦線に沿ってクリックすれば、純色の含有比率を一定にして色の調和を保ったまま、色の明るさを調節することができます。
+                      このWebツールに色コードを入力すると、その明るさと純色の含有比率が図示されます。
+                    </p>
+                    <p>
+                      横線に沿ってクリックすると、同じ明るさの色の中から一つ色を選ぶことができます。
+                    </p>
+                    <p>
+                      縦線に沿ってクリックすれば、純色の含有比率を一定にして色の調和を保ったまま、色の明るさを調節することができます。
                     </p>
                     <button
                       class="language-selector removed-if-js-disabled"
@@ -2107,7 +2148,7 @@
                   <div class="whitespace-200" lang="ja">
                     <p class="removed-if-js-disabled">2020年3月〜7月</p>
                     <p>
-                      欧文の段落は、行間の幅を小文字のエックスの高さとの簡単な比率に設定することで、美しく見えるようになると私は考えています。しかし、CSSでは、行間はフォントサイズというユーザーが目にすることのない大きさとの比率でしか設定できません。
+                      欧文の段落は、行間（行の高さ）を小文字のエックスの高さとの簡単な比率に設定することで、美しく見えるようになると私は考えています。しかし、CSSでは、行間はフォントサイズというユーザーが目にすることのない大きさとの比率でしか設定できません。
                     </p>
                     <p>
                       このWebツールを用いると、自分のコンピューターの中から選んだフォントについて、小文字のエックスの高さとその行間との比率からCSSコードを生成することができます。
@@ -3210,6 +3251,24 @@ body {
               class="text-button font-footer"
               href="mailto:masakudamatsu@gmail.com?subject=Sent%20From%20Website"
               >masakudamatsu@gmail.com</a
+            >
+          </li>
+          <li>
+            <a
+              class="text-button font-footer"
+              href="https://github.com/masakudamatsu"
+              rel="noopener noreferrer"
+              target="_blank"
+              >GitHub</a
+            >
+          </li>
+          <li>
+            <a
+              class="text-button font-footer"
+              href="https://www.linkedin.com/in/masayuki-kudamatsu"
+              rel="noopener noreferrer"
+              target="_blank"
+              >LinkedIn</a
             >
           </li>
           <li>
