@@ -335,16 +335,40 @@
           var(--raleway-topcrop) - (var(--line-height) - 1) / 2 * 1em
         );
       }
+      [lang="ja"] .blockquote::before,
+      [lang="ja"] .language-selector::before,
+      [lang="ja"] p::before {
+        margin-bottom: calc(
+          (var(--raleway-topcrop) - (var(--line-height) - 1) / 2 * 1em) *
+            var(--font100-raleway) / var(--font100-japanese)
+        );
+      }
       .blockquote::after,
       p::after {
         margin-top: calc(
           var(--raleway-bottomcrop) - (var(--line-height) - 1) / 2 * 1em
         );
       }
+      [lang="ja"] .blockquote::after,
+      [lang="ja"] p::after {
+        margin-top: calc(
+          (var(--raleway-bottomcrop) - (var(--line-height) - 1) / 2 * 1em) *
+            var(--font100-raleway) / var(--font100-japanese)
+        );
+      }
       .language-selector::after {
         margin-top: calc(
           var(--raleway-bottomcrop) - (var(--line-height) - 1) / 2 * 1em +
             var(--underline-offset) + var(--underline-thickness)
+        ); /* crop up to underline */
+      }
+      [lang="ja"] .language-selector::after {
+        margin-top: calc(
+          (
+              var(--raleway-bottomcrop) - (var(--line-height) - 1) / 2 * 1em +
+                var(--underline-offset)
+            ) * var(--font100-raleway) / var(--font100-japanese) +
+            var(--underline-thickness)
         ); /* crop up to underline */
       }
       h1::before,
