@@ -909,15 +909,16 @@
           );
         }
         .leaf-card:nth-of-type(even) {
-          grid-template-areas: "text video video" "text button playback" "text . .";
+          grid-template-areas: "text video video" "text playback button" "text . .";
           grid-template-columns:
             1fr
+            var(--minimum-target-size)
             calc(
               var(--video-max-width) - var(--minimum-target-size) -
                 (var(--whitespace100) / 16 * 1rem)
-            )
-            var(--minimum-target-size);
+            );
         }
+
         .leaf-card .title-card {
           width: calc(var(--video-max-width) * 2 / 3);
         }
@@ -925,9 +926,6 @@
           display: flex;
           flex-direction: row;
           justify-content: flex-end;
-        }
-        .leaf-card:nth-of-type(even) .buttonGroup {
-          justify-content: flex-start;
         }
         .leaf-card .button[data-type="playback"] {
           align-self: end;
