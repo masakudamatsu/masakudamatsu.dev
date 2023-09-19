@@ -3438,6 +3438,19 @@ body {
       });
     }
 
+    // Handle iOS low power mode
+    // #21: Start playing the video when the user touches the screen
+    // Otherwise, the video never gets downloaded.
+    document.querySelector("body").addEventListener(
+      "touchstart",
+      () => {
+        videos.forEach((video) => {
+          video.play();
+        });
+      },
+      { once: true }
+    );
+
     // Prepare for replacing video files by screen width
     let filename;
     // Loop over all videos
