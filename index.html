@@ -3417,11 +3417,82 @@ body {
       ".button[data-type='playback']"
     );
     const imgs = document.querySelectorAll(".leaf-card .video img");
+
+    // track whether the video has been fully loaded
+    let isVideoLoaded = new Array(videos.length).fill(false);
+
+    // Reveal poster images
+    for (let i = 0; i < videos.length; i++) {
+      if (imgs[i].complete) {
+        // image file has been cached
+        imgs[i].classList.remove("transparent");
+      } else {
+        // Detect when the image is loaded
+        imgs[i].addEventListener("load", revealPosterImage, { once: true });
+        function revealPosterImage(event) {
+          if (!isVideoLoaded[i]) {
+            event.target.classList.remove("transparent");
+          }
+        }
+      }
+    }
+
+    // Replace video files by screen width & DPR
     const isNonRetinaScreen = window.matchMedia(
       "(-webkit-max-device-pixel-ratio: 1)"
     );
     const isRetinaMobileScreen = window.matchMedia(
       "(-webkit-min-device-pixel-ratio: 2) and (max-width: 382px)"
+    );
+    let filename;
+    for (let i = 0; i < videos.length; i++) {
+      if (i === 0) {
+        filename = "my-ideal-map";
+      } else if (i === 1) {
+        filename = "tjg";
+      } else if (i === 2) {
+        filename = "triangulum";
+      } else if (i === 3) {
+        filename = "line-height-picker";
+      } else {
+        filename = null;
+      }
+      if (isNonRetinaScreen.matches || isRetinaMobileScreen.matches) {
+        videos[i].children[0].src = `media/${filename}-mobile.mp4`;
+        videos[i].children[1].href = `media/${filename}-mobile.mp4`;
+      }
+    }
+    // Customize video players
+    for (let i = 0; i < videos.length; i++) {
+      // Disable the default video player
+      videos[i].controls = false;
+      // Configure playback buttons
+      playbackButtons[i].addEventListener("click", (event) => {
+        event.stopPropagation();
+        if (videos[i].paused) {
+          videos[i].play();
+        } else {
+          videos[i].pause();
+        }
+      });
+    }
+
+    // Start loading the entire video files
+    videos[0].play();
+    for (let i = 1; i < videos.length; i++) {
+      videos[i].play();
+    }
+    // Handle iOS low power mode
+    // #21: Start playing the video when the user touches the screen
+    // Otherwise, the video never gets downloaded.
+    document.querySelector("body").addEventListener(
+      "touchstart",
+      () => {
+        videos.forEach((video) => {
+          video.play();
+        });
+      },
+      { once: true }
     );
 
     // Prepare for playing videos only when fully visible within the screen
@@ -3438,72 +3509,10 @@ body {
       });
     }
 
-    // Handle iOS low power mode
-    // #21: Start playing the video when the user touches the screen
-    // Otherwise, the video never gets downloaded.
-    document.querySelector("body").addEventListener(
-      "touchstart",
-      () => {
-        videos.forEach((video) => {
-          video.play();
-        });
-      },
-      { once: true }
-    );
-
-    // Prepare for replacing video files by screen width
-    let filename;
-    // Loop over all videos
     for (let i = 0; i < videos.length; i++) {
-      // Replace video files for mobile devices
-      if (i === 0) {
-        filename = "my-ideal-map";
-      } else if (i === 1) {
-        filename = "tjg";
-      } else if (i === 2) {
-        filename = "triangulum";
-      } else if (i === 3) {
-        filename = "line-height-picker";
-      } else {
-        filename = null;
-      }
-      if (isNonRetinaScreen.matches || isRetinaMobileScreen.matches) {
-        videos[i].children[0].src = `media/${filename}-mobile.mp4`;
-        videos[i].children[1].href = `media/${filename}-mobile.mp4`;
-      }
-      // Disable the default video player
-      videos[i].controls = false;
-      // Reveal playback buttons
-      playbackButtons[i].addEventListener("click", (event) => {
-        event.stopPropagation();
-        if (videos[i].paused) {
-          videos[i].play();
-        } else {
-          videos[i].pause();
-        }
-      });
-      // Start loading the entire video files
-      videos[i].play();
-
-      // track whether the video has been fully loaded
-      let isVideoLoaded = false;
-
-      // Reveal poster images
-      if (imgs[i].complete) {
-        // image file has been cached
-        imgs[i].classList.remove("transparent");
-      } else {
-        // Detect when the image is loaded
-        imgs[i].addEventListener("load", revealPosterImage, { once: true });
-        function revealPosterImage(event) {
-          if (!isVideoLoaded) {
-            event.target.classList.remove("transparent");
-          }
-        }
-      }
       // Handle the event in which each video is fully loaded
       const handleCanplaythrough = (event) => {
-        isVideoLoaded = true;
+        isVideoLoaded[i] = true;
         // pause videos (to match the playback button labels)
         videos[i].pause();
         // rewind the video to the beginning (it may have started playing before fully loaded)
