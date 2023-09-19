@@ -3477,23 +3477,33 @@ body {
       });
     }
 
-    // Start loading the entire video files
+    // Start loading the first video
     videos[0].play();
-    for (let i = 1; i < videos.length; i++) {
-      videos[i].play();
+    // Check whether the video starts playing to check if the user device is iOS in low power mode (#21)
+    const isVideoPlaying = !!(
+      videos[0].currentTime > 0 &&
+      !videos[0].paused &&
+      !videos[0].ended &&
+      videos[0].readyState > 2
+    ); // Ref: https://stackoverflow.com/a/6877530/11847654
+    if (isVideoPlaying) {
+      // Start loading the rest of videos
+      for (let i = 1; i < videos.length; i++) {
+        videos[i].play();
+      }
+    } else {
+      // #21: Start playing the video when the user touches the screen
+      // Otherwise, iOS in low power mode never starts downloading the videos
+      document.querySelector("body").addEventListener(
+        "touchstart",
+        () => {
+          videos.forEach((video) => {
+            video.play();
+          });
+        },
+        { once: true }
+      );
     }
-    // Handle iOS low power mode
-    // #21: Start playing the video when the user touches the screen
-    // Otherwise, the video never gets downloaded.
-    document.querySelector("body").addEventListener(
-      "touchstart",
-      () => {
-        videos.forEach((video) => {
-          video.play();
-        });
-      },
-      { once: true }
-    );
 
     // Prepare for playing videos only when fully visible within the screen
     const observer = new IntersectionObserver(callback, {
