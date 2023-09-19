@@ -1107,12 +1107,20 @@
       /* pills */
       .pill-container {
         --row-gap: calc(var(--whitespace10) / 16 * 1rem);
-        column-gap: calc(
+        --column-gap: calc(
           var(--row-gap) / 2
         ); /* to be optically equal to row-gap */
         display: flex;
         flex-wrap: wrap;
-        row-gap: var(--row-gap);
+        /* Remove the margin created by the last row of pills (#24) */
+        margin-bottom: calc(-1 * var(--column-gap));
+        /* Remove the margin created by the last pill in each row (#24) */
+        margin-right: calc(-1 * var(--row-gap));
+      }
+      .pill-container > .pill {
+        /* #24: fallback for column-gap and row-gap with flexbox */
+        margin-bottom: var(--row-gap);
+        margin-right: var(--column-gap);
       }
       .pill {
         border: 1px solid currentColor;
