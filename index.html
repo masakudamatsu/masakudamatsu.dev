@@ -168,11 +168,8 @@
         letter-spacing: 0.0115em; /* Add 0.15px */
         word-spacing: 0.00865em; /* Add 1px which is divided by 9 word spaces in "to custom fonts, and language switched between English and Japanese" */
       }
-      .blockquote blockquote {
+      .italic {
         font-style: italic;
-      }
-      [lang="ja"] .blockquote blockquote {
-        font-style: normal;
       }
       h1,
       h2,
@@ -2315,7 +2312,7 @@
                 <div class="whitespace-200">
                   <p>January 2021; Last updated in August 2023</p>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “Favicon support is a complicated topic. See this guide
                       for more information.”
                     </blockquote>
@@ -2332,7 +2329,7 @@
                     </figcaption>
                   </figure>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “I invite you to read Masa Kudamatsu’s obsessively
                       researched How to Favicon in 2021.”
                     </blockquote>
@@ -2349,7 +2346,7 @@
                     </figcaption>
                   </figure>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “If you’re looking for the definitive way to handle
                       favicons-and-such these days, Masa Kudamatsu’s more recent
                       and extraordinarily well-researched article is where I’d
@@ -2502,7 +2499,9 @@ export const FileUploader = ({handleFile}) => {
                 <div class="whitespace-200">
                   <p>March 2020; Last updated in August 2023</p>
                   <figure class="blockquote">
-                    <blockquote>“very helpful article. thanks :)”</blockquote>
+                    <blockquote class="italic">
+                      “very helpful article. thanks :)”
+                    </blockquote>
                     <figcaption>
                       &mdash;
                       <a
@@ -2514,7 +2513,7 @@ export const FileUploader = ({handleFile}) => {
                     </figcaption>
                   </figure>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “The TLDR is a killer! Awesome! Thank you!”
                     </blockquote>
                     <figcaption>
@@ -2641,7 +2640,7 @@ export const FileUploader = ({handleFile}) => {
                 <div class="whitespace-200">
                   <p>June 2021</p>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “I am building my portfolio atm and this article was
                       helpful and timely. thank you.”
                     </blockquote>
@@ -2655,7 +2654,7 @@ export const FileUploader = ({handleFile}) => {
                     </figcaption>
                   </figure>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “great article, very complete and informative. thanks!”
                     </blockquote>
                     <figcaption>
@@ -2772,7 +2771,7 @@ export const FileUploader = ({handleFile}) => {
                 <div class="whitespace-200">
                   <p>May 2021; Last updated in August 2021</p>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “I am enjoying this deep dive into HTML elements and
                       attributes...”
                     </blockquote>
@@ -2891,7 +2890,7 @@ const loader = new Loader({
                 <div class="whitespace-200">
                   <p>February 2021; Last updated in September 2021</p>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “This is a great article. There's not nearly enough Nextjs
                       content out there as there should be.”
                     </blockquote>
@@ -2906,7 +2905,9 @@ const loader = new Loader({
                     </figcaption>
                   </figure>
                   <figure class="blockquote">
-                    <blockquote>“Thanks for this! Super helpful.”</blockquote>
+                    <blockquote class="italic">
+                      “Thanks for this! Super helpful.”
+                    </blockquote>
                     <figcaption>
                       &mdash;
                       <a
@@ -3021,7 +3022,7 @@ body {
                 <div class="whitespace-200">
                   <p>March 2020; Last updated in September 2020</p>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “An excellent overview and analysis of trends on the
                       System Font Stack approach, thank you very much for
                       sharing.”
@@ -3156,11 +3157,11 @@ body {
                 sound is a metaphor of emotion; I dance salsa and bachata
                 because the body movement is a metaphor of melody and rhythm; I
                 practice tea ceremony because it is a metaphor of the Japanese
-                philosophy known as <i lang="ja">wabi-sabi</i>.
+                philosophy known as <i class="italic" lang="ja">wabi-sabi</i>.
               </p>
               <p>
                 And I upload the photos of seasonal flowers and
-                <i lang="ja">wagashi</i> sweets in Kyoto to
+                <i class="italic" lang="ja">wagashi</i> sweets in Kyoto to
                 <a
                   href="https://www.instagram.com/masakudamatsu/"
                   rel="noopener noreferrer"
@@ -3315,9 +3316,10 @@ body {
             <p class="font-footer">
               This site is designed and coded from scratch by myself, with
               vanilla JavaScript only to
-              <em>progressively enhance</em> the user experiences of viewing
-              videos looping without sound, text swapped from system fonts to
-              custom fonts, and language switched between English and Japanese.
+              <em class="italic">progressively enhance</em> the user experiences
+              of viewing videos looping without sound, text swapped from system
+              fonts to custom fonts, and language switched between English and
+              Japanese.
             </p>
             <p class="font-footer">
               No framework such as React is used, to minimize the bundle size so
