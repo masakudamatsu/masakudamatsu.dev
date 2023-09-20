@@ -9,6 +9,7 @@
     "commit": "git-cz",
     "subset": "npm-run-all subset:*",
     "subset:raleway-italic": "npx glyphhanger http://localhost:8080 --subset=font-original/Raleway-Italic.ttf --cssSelector='.italic ' --family='Raleway' --formats=woff2,ttf --output=font",
+    "subset:raleway-light": "npx glyphhanger http://localhost:8080 --subset=font-original/Raleway-Light.ttf --family='YakuHanJP Zen Kurenaido' --formats=woff2,ttf --output=font",
     "subset:raleway-regular": "npx glyphhanger http://localhost:8080 --subset=font-original/Raleway-Regular.ttf --family='Raleway' --formats=woff2,ttf --output=font",
     "subset:yakuhanjp": "npx glyphhanger http://localhost:8080 --subset=font-original/YakuHanJP-Light.ttf --family='YakuHanJP Zen Kurenaido' --formats=woff2,ttf --output=font",
     "subset:zenkurenaido": "npx glyphhanger http://localhost:8080 --subset=font-original/ZenKurenaido-Regular.ttf --family='YakuHanJP Zen Kurenaido' --formats=woff2,ttf --output=font",

@@ -102,6 +102,17 @@
            which will override the rule for Zen Kurenaido 
            when they are newly used after the revision of text. */
       }
+      @font-face {
+        /* To replace Zen Kurenaido's Latin glyphs with Raleway Light's
+           because they do not appear congruent to the rest of text. */
+        font-family: "YakuHanJP Zen Kurenaido";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(font/Raleway-Light-subset.woff2) format("woff2"),
+          url(font/Raleway-Light-subset.ttf) format("ttf");
+        unicode-range: U+41-5A, U+61-7A; /* A-Z, a-z (to prevent numbers from being replaced with Raleway) */
+      }
       *,
       *::before,
       *::after {
