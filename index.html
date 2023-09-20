@@ -6,19 +6,102 @@
     <title>
       Masa Kudamatsu — Kyoto-based web developer with UX design skills
     </title>
-    <!-- Google Fonts (to be removed by locally hosting it)-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Raleway:ital@0;1&family=Zen+Kurenaido&family=Zen+Loop&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/yakuhanjp@3.4.1/dist/css/yakuhanjp-narrow.min.css"
-    />
     <style>
+      @font-face {
+        font-family: "Zen Loop";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(font/ZenLoop-Regular-subset.woff2) format("woff2"),
+          url(font/ZenLoop-Regular-subset.ttf) format("ttf");
+        unicode-range: U+A, U+20, U+27, U+2D, U+2E, U+30, U+32-34, U+3A, U+3C,
+          U+3E, U+41-50, U+52-55, U+57, U+59, U+60-70, U+72-7A, U+201C, U+201D;
+      }
+      @font-face {
+        font-family: "Raleway";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(font/Raleway-Regular-subset.woff2) format("woff2"),
+          url(font/Raleway-Regular-subset.ttf) format("ttf");
+        unicode-range: U+A, U+20, U+21, U+26-29, U+2C-37, U+39-3B, U+3F-58, U+5F,
+          U+61-7A, U+A9, U+2013, U+2014, U+2019, U+201C, U+201D;
+      }
+      @font-face {
+        font-family: "Raleway";
+        font-style: italic;
+        font-weight: 400;
+        font-display: swap;
+        src: url(font/Raleway-Italic-subset.woff2) format("woff2"),
+          url(font/Raleway-Italic-subset.ttf) format("ttf");
+        unicode-range: U+A, U+20, U+21, U+27, U+29, U+2C-2E, U+30-32, U+3A, U+41,
+          U+44, U+46, U+48, U+49, U+4B-4E, U+52-54, U+61-70, U+72-79, U+2019,
+          U+201C, U+201D;
+      }
+      @font-face {
+        font-family: "YakuHanJP Zen Kurenaido";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(font/ZenKurenaido-Regular-subset.woff2) format("woff2"),
+          url(font/ZenKurenaido-Regular-subset.ttf) format("ttf");
+        unicode-range: U+A, U+20, U+26, U+28, U+29, U+2E, U+30-39, U+3F-45,
+          U+47-4E, U+50, U+52-55, U+57, U+5E, U+5F, U+61-70, U+72-7A, U+2013,
+          U+2014, U+3001, U+3002, U+3005, U+300C, U+300D, U+301C, U+3042, U+3044,
+          U+3046, U+3048, U+304B-304D, U+304F, U+3051-305B, U+305D-3061,
+          U+3063-306B, U+306E-3070, U+3073, U+3076, U+3078, U+3079, U+307E-3084,
+          U+3087-308C, U+308F, U+3092, U+3093, U+30A1-30A4, U+30A6, U+30A8-30AD,
+          U+30AF, U+30B0, U+30B3, U+30B5-30BB, U+30BF-30C1, U+30C3, U+30C4,
+          U+30C6-30C9, U+30CB, U+30D0, U+30D3-30D7, U+30DA, U+30DB, U+30DD-30E3,
+          U+30E5, U+30E6, U+30E9-30ED, U+30EF, U+30F3, U+30FB, U+30FC, U+4E00,
+          U+4E01, U+4E09-4E0B, U+4E2D, U+4E88, U+4E8B, U+4EAC, U+4EBA, U+4ECA,
+          U+4ECB, U+4ED6, U+4EE5, U+4F1D, U+4F4E, U+4F4F, U+4F53, U+4F59, U+4F5C,
+          U+4F7F, U+4F8B, U+4F98, U+4FC2, U+4FDD, U+50CD, U+50CF, U+512A, U+5165,
+          U+5168, U+516C, U+5171, U+5177, U+5185, U+518D, U+5199, U+5206, U+5207,
+          U+521D, U+529B, U+52A9, U+52B9, U+52C9, U+52D5, U+52E2, U+5316, U+5358,
+          U+535A, U+53CA, U+53CD, U+53D6, U+53EF, U+53F7, U+540C, U+5411, U+542B,
+          U+5473, U+547C, U+548C, U+54F2, U+55A9, U+56DB, U+56F3, U+5728, U+5834,
+          U+58EB, U+5927, U+59CB, U+59FF, U+5B50, U+5B57, U+5B58, U+5B63, U+5B66,
+          U+5B8C, U+5B9A, U+5B9F, U+5BB6, U+5BB9, U+5BC2, U+5BC6, U+5BE7, U+5C0F,
+          U+5C11, U+5C5E, U+5DE1, U+5E38, U+5E74, U+5E7E, U+5EA6, U+5F0F, U+5F15,
+          U+5F37, U+5F62, U+5F79, U+5F8C, U+5F97, U+5FC3, U+5FC5, U+601D, U+6027,
+          U+60C5, U+610F, U+611F, U+616E, U+6210, U+6240, U+6291, U+632F, U+6398,
+          U+6570, U+6587, U+65B0, U+65B9, U+65E9, U+660E, U+6674, U+66F4, U+66F8,
+          U+66FF, U+6700, U+6708, U+6709, U+671B, U+6790, U+697D, U+6982, U+69D8,
+          U+6A2A, U+6A5F, U+6B27, U+6B8B, U+6BB5, U+6BD4, U+6C17, U+6CBF, U+6CD5,
+          U+6DF1, U+6E08, U+6E6F, U+6F22, U+7121, U+7169, U+7248, U+7279, U+7387,
+          U+73FE, U+751F, U+7528, U+753B, U+7559, U+756A, U+767D, U+7684, U+76EE,
+          U+771F, U+77E5, U+7814, U+793A, U+79C1, U+7A00, U+7A76, U+7A7A, U+7ACB,
+          U+7B97, U+7BC0, U+7C21, U+7D04, U+7D14, U+7D20, U+7D30, U+7D39, U+7D44,
+          U+7D4C, U+7D9A, U+7DBF, U+7DDA, U+7E26, U+7F6E, U+7F8E, U+7FD2, U+8003,
+          U+8005, U+8074, U+80FD, U+81EA, U+822C, U+826F, U+8272, U+82B1, U+82F1,
+          U+8336, U+83D3, U+843D, U+884C, U+8853, U+8868, U+88C5, U+8907, U+8981,
+          U+898B, U+8996, U+899A, U+89A7, U+8A00, U+8A08, U+8A18, U+8A2D, U+8A33,
+          U+8A73, U+8A9E, U+8AAD, U+8ABF, U+8B1D, U+8B58, U+8CBC, U+8CEA, U+8DA3,
+          U+8E0A, U+8EAB, U+8FD4, U+8FF0, U+901F, U+9045, U+9078, U+90E8, U+90FD,
+          U+958B, U+9593, U+95A2, U+962A, U+964D, U+9650, U+969B, U+96D1, U+97F3,
+          U+97FF, U+9858, U+9A13, U+9AD8, U+FF01, U+FF08, U+FF09;
+      }
+      @font-face {
+        /* This font-face rule for YakuHanJP should come below the one for Zen Kurenaido 
+           because those unicode-range values in this rule that are actually used 
+           also appear in the rule for Zen Kurenaido, 
+           and the rule that comes later will override the one before, 
+           as defined in the spec: https://drafts.csswg.org/css-fonts/#composite-fonts 
+           */
+        font-family: "YakuHanJP Zen Kurenaido";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(font/YakuHanJP-Light-subset.woff2) format("woff2"),
+          url(font/YakuHanJP-Light-subset.ttf) format("ttf");
+        unicode-range: U+3001, U+3002, U+3008, U+3009, U+300a, U+300b, U+300c,
+          U+300d, U+300e, U+300f, U+3010, U+3011, U+3014, U+3015, U+30fb, U+ff01,
+          U+ff08, U+ff09, U+ff1a, U+ff1b, U+ff1f, U+ff3b, U+ff3d, U+ff5b, U+ff5d;
+        /* This list deliberately includes those characters not actually used,
+           which will override the rule for Zen Kurenaido 
+           when they are newly used after the revision of text. */
+      }
       *,
       *::before,
       *::after {
@@ -163,11 +246,8 @@
         letter-spacing: 0.0115em; /* Add 0.15px */
         word-spacing: 0.00865em; /* Add 1px which is divided by 9 word spaces in "to custom fonts, and language switched between English and Japanese" */
       }
-      .blockquote blockquote {
+      .italic {
         font-style: italic;
-      }
-      [lang="ja"] .blockquote blockquote {
-        font-style: normal;
       }
       h1,
       h2,
@@ -395,9 +475,8 @@
         ); /* text-indent does not work as we use ::before for text scropping */
       }
       div[lang="ja"] {
-        font-family: "YakuHanJP_Narrow", "Zen Kurenaido", "Helvetica Neue",
-          "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo,
-          sans-serif;
+        font-family: "YakuHanJP Zen Kurenaido", "Helvetica Neue", "Segoe UI",
+          "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
         font-size: calc(var(--font100-japanese) / 16 * 1rem);
         font-weight: 400;
         line-height: calc(
@@ -2310,7 +2389,7 @@
                 <div class="whitespace-200">
                   <p>January 2021; Last updated in August 2023</p>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “Favicon support is a complicated topic. See this guide
                       for more information.”
                     </blockquote>
@@ -2327,7 +2406,7 @@
                     </figcaption>
                   </figure>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “I invite you to read Masa Kudamatsu’s obsessively
                       researched How to Favicon in 2021.”
                     </blockquote>
@@ -2344,7 +2423,7 @@
                     </figcaption>
                   </figure>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “If you’re looking for the definitive way to handle
                       favicons-and-such these days, Masa Kudamatsu’s more recent
                       and extraordinarily well-researched article is where I’d
@@ -2497,7 +2576,9 @@ export const FileUploader = ({handleFile}) => {
                 <div class="whitespace-200">
                   <p>March 2020; Last updated in August 2023</p>
                   <figure class="blockquote">
-                    <blockquote>“very helpful article. thanks :)”</blockquote>
+                    <blockquote class="italic">
+                      “very helpful article. thanks :)”
+                    </blockquote>
                     <figcaption>
                       &mdash;
                       <a
@@ -2509,7 +2590,7 @@ export const FileUploader = ({handleFile}) => {
                     </figcaption>
                   </figure>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “The TLDR is a killer! Awesome! Thank you!”
                     </blockquote>
                     <figcaption>
@@ -2636,7 +2717,7 @@ export const FileUploader = ({handleFile}) => {
                 <div class="whitespace-200">
                   <p>June 2021</p>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “I am building my portfolio atm and this article was
                       helpful and timely. thank you.”
                     </blockquote>
@@ -2650,7 +2731,7 @@ export const FileUploader = ({handleFile}) => {
                     </figcaption>
                   </figure>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “great article, very complete and informative. thanks!”
                     </blockquote>
                     <figcaption>
@@ -2767,7 +2848,7 @@ export const FileUploader = ({handleFile}) => {
                 <div class="whitespace-200">
                   <p>May 2021; Last updated in August 2021</p>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “I am enjoying this deep dive into HTML elements and
                       attributes...”
                     </blockquote>
@@ -2886,7 +2967,7 @@ const loader = new Loader({
                 <div class="whitespace-200">
                   <p>February 2021; Last updated in September 2021</p>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “This is a great article. There's not nearly enough Nextjs
                       content out there as there should be.”
                     </blockquote>
@@ -2901,7 +2982,9 @@ const loader = new Loader({
                     </figcaption>
                   </figure>
                   <figure class="blockquote">
-                    <blockquote>“Thanks for this! Super helpful.”</blockquote>
+                    <blockquote class="italic">
+                      “Thanks for this! Super helpful.”
+                    </blockquote>
                     <figcaption>
                       &mdash;
                       <a
@@ -3016,7 +3099,7 @@ body {
                 <div class="whitespace-200">
                   <p>March 2020; Last updated in September 2020</p>
                   <figure class="blockquote">
-                    <blockquote>
+                    <blockquote class="italic">
                       “An excellent overview and analysis of trends on the
                       System Font Stack approach, thank you very much for
                       sharing.”
@@ -3151,11 +3234,11 @@ body {
                 sound is a metaphor of emotion; I dance salsa and bachata
                 because the body movement is a metaphor of melody and rhythm; I
                 practice tea ceremony because it is a metaphor of the Japanese
-                philosophy known as <i lang="ja">wabi-sabi</i>.
+                philosophy known as <i class="italic" lang="ja">wabi-sabi</i>.
               </p>
               <p>
                 And I upload the photos of seasonal flowers and
-                <i lang="ja">wagashi</i> sweets in Kyoto to
+                <i class="italic" lang="ja">wagashi</i> sweets in Kyoto to
                 <a
                   href="https://www.instagram.com/masakudamatsu/"
                   rel="noopener noreferrer"
@@ -3310,9 +3393,10 @@ body {
             <p class="font-footer">
               This site is designed and coded from scratch by myself, with
               vanilla JavaScript only to
-              <em>progressively enhance</em> the user experiences of viewing
-              videos looping without sound, text swapped from system fonts to
-              custom fonts, and language switched between English and Japanese.
+              <em class="italic">progressively enhance</em> the user experiences
+              of viewing videos looping without sound, text swapped from system
+              fonts to custom fonts, and language switched between English and
+              Japanese.
             </p>
             <p class="font-footer">
               No framework such as React is used, to minimize the bundle size so
