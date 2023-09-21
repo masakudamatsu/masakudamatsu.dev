@@ -42,7 +42,7 @@ source ~/.zshrc
 In the root directory, create a folder called `font-original`.
 
 In this folder, download master font files:
-- `Raleway-Italic.ttf` and `Raleway-Regular.ttf` from [Google Fonts](https://fonts.google.com/specimen/Raleway)
+- `Raleway-Italic.ttf`, `Raleway-Light.ttf`, and `Raleway-Regular.ttf` from [Google Fonts](https://fonts.google.com/specimen/Raleway)
 - `ZenLoop-Regular.ttf` from [Google Fonts](https://fonts.google.com/specimen/Zen+Loop)
 - `ZenKurenaido-Regular.ttf` from [Google Fonts](https://fonts.google.com/specimen/Zen+Kurenaido)
 - `YakuHanJP-Light.ttf` from [YakuHanJP GitHub repo](https://github.com/qrac/yakuhanjp/tree/main/packages/core/YakuHanJP/ttf)
