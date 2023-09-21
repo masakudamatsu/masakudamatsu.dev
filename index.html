@@ -514,8 +514,13 @@
         text-decoration-thickness: var(--underline-thickness);
         text-underline-offset: var(--underline-offset);
       }
+      .bg-white a[target],
       .bg-white .language-selector {
         text-decoration-color: var(--off-black);
+      }
+      .bg-white a[target] {
+        /* Use black version of external link icon */
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke-width='1' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6' /%3E%3Cpath d='M11 13l9 -9' /%3E%3Cpath d='M15 4h5v5' /%3E%3C/svg%3E");
       }
       figcaption a[target],
       footer a[target],
@@ -1614,6 +1619,10 @@
                 <div class="paragraph-wrapper" data-status="js-disabled">
                   <div class="whitespace-200">
                     <p>August–December 2021, August 2022–present</p>
+                    <p
+                      class="transparent"
+                      data-error-message-english="my-ideal-map"
+                    ></p>
                     <p>
                       Google Maps only allows plain text as the notes for saved
                       places. I always wish I could add links to the web
@@ -1641,6 +1650,10 @@
                     <p class="removed-if-js-disabled">
                       2021年8月〜12月、2022年8月〜現在
                     </p>
+                    <p
+                      class="transparent"
+                      data-error-message-japanese="my-ideal-map"
+                    ></p>
                     <p>
                       Googleマップは、保存した場所についてのメモにテキスト形式しか使えません。その場所を知るきっかけになったWeb記事へのリンクを貼ることができたらいいのに、といつも思っていました。
                     </p>
@@ -1795,6 +1808,7 @@
                 <div class="paragraph-wrapper" data-status="js-disabled">
                   <div class="whitespace-200">
                     <p>June–August 2021</p>
+                    <p class="transparent" data-error-message-english="tjg"></p>
                     <p>
                       Typography on the web is often very sloppy. In particular,
                       the size of white space usually fails to visualize the
@@ -1821,6 +1835,10 @@
                   </div>
                   <div class="whitespace-200" lang="ja">
                     <p class="removed-if-js-disabled">2021年6月〜8月</p>
+                    <p
+                      class="transparent"
+                      data-error-message-japanese="tjg"
+                    ></p>
                     <p>
                       文字組版にこだわったWebサイトを目にすることは稀です。特に、段落や画像などのグラフィック要素間の関係を、余白の大きさで丁寧に視覚化したサイトはまずありません。
                     </p>
@@ -1964,6 +1982,10 @@
                 <div class="paragraph-wrapper" data-status="js-disabled">
                   <div class="whitespace-200">
                     <p>December 2020–March 2021</p>
+                    <p
+                      class="transparent"
+                      data-error-message-english="triangulum"
+                    ></p>
                     <p>
                       The standard color pickers do not allow us to ensure the
                       sufficient level of luminance contrast for accessibility.
@@ -1992,6 +2014,10 @@
                   </div>
                   <div class="whitespace-200" lang="ja">
                     <p class="removed-if-js-disabled">2020年12月〜2021年3月</p>
+                    <p
+                      class="transparent"
+                      data-error-message-japanese="triangulum"
+                    ></p>
                     <p>
                       一般的なカラーピッカーは、それぞれの色の明るさを表示しないので、アクセシビリティを考慮した色選びに役立ちません。また、他の色と調和する色を選ぶ助けにもなりません。
                     </p>
@@ -2223,6 +2249,10 @@
                 <div class="paragraph-wrapper" data-status="js-disabled">
                   <div class="whitespace-200">
                     <p>March–July 2020</p>
+                    <p
+                      class="transparent"
+                      data-error-message-english="line-height-picker"
+                    ></p>
                     <p>
                       I believe a paragraph of text appears the most appealing
                       if its line height is set as a simple ratio to the
@@ -2244,6 +2274,10 @@
                   </div>
                   <div class="whitespace-200" lang="ja">
                     <p class="removed-if-js-disabled">2020年3月〜7月</p>
+                    <p
+                      class="transparent"
+                      data-error-message-japanese="line-height-picker"
+                    ></p>
                     <p>
                       欧文の段落は、行間（行の高さ）を小文字のエックスの高さとの簡単な比率に設定することで、美しく見えるようになると私は考えています。しかし、CSSでは、行間はフォントサイズというユーザーが目にすることのない大きさとの比率でしか設定できません。
                     </p>
@@ -3672,6 +3706,63 @@ body {
       videos[i].addEventListener("canplaythrough", handleCanplaythrough, {
         once: true,
       });
+      // Error handling
+      const handleError = (error) => {
+        // change playback button appearance
+        playbackButtons[i].disabled = true;
+        playbackButtons[i].children[0].classList.remove("spinning");
+        playbackButtons[i].children[0].children[0].setAttribute(
+          "d",
+          "M7 4v16l13 -8z"
+        );
+        playbackButtons[i].children[0].children[1].setAttribute(
+          "d",
+          "M3 3l18 18" // Diagonal line from top left to bottom right
+        );
+        playbackButtons[i].ariaLabel = ``;
+        playbackButtons[i].setAttribute(
+          "title",
+          "Demo cannot be played on this page at this moment."
+        );
+        // set the video file name
+        let filename;
+        if (i === 0) {
+          filename = "my-ideal-map";
+        } else if (i === 1) {
+          filename = "tjg";
+        } else if (i === 2) {
+          filename = "triangulum";
+        } else if (i === 3) {
+          filename = "line-height-picker";
+        }
+        // insert the English text link to the demo
+        anchorEnglish = document.createElement("a");
+        anchorEnglish.setAttribute("href", `media/${filename}.mp4`);
+        anchorEnglish.setAttribute("rel", "noopener noreferrer");
+        anchorEnglish.setAttribute("target", "_blank");
+        anchorEnglish.appendChild(document.createTextNode("See the demo"));
+        const paragraphEnglish = document.querySelector(
+          `[data-error-message-english="${filename}"]`
+        );
+        paragraphEnglish.appendChild(anchorEnglish);
+        paragraphEnglish.classList.remove("transparent");
+        // insert the Japanese text link to the demo
+        anchorJapanese = document.createElement("a");
+        anchorJapanese.setAttribute("href", `media/${filename}.mp4`);
+        anchorJapanese.setAttribute("rel", "noopener noreferrer");
+        anchorJapanese.setAttribute("target", "_blank");
+        anchorJapanese.appendChild(document.createTextNode("デモを見る"));
+        const paragraphJapanese = document.querySelector(
+          `[data-error-message-japanese="${filename}"]`
+        );
+        paragraphJapanese.appendChild(anchorJapanese);
+        paragraphJapanese.classList.remove("transparent");
+      };
+      videos[i].addEventListener(
+        "error",
+        handleError,
+        { capture: true } // https://stackoverflow.com/a/20704999/11847654
+      );
     }
     // // debugging
     // for (let i = 0; i < imgs.length; i++) {
