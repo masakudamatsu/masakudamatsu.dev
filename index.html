@@ -3566,12 +3566,12 @@ body {
         imgs[i].classList.remove("transparent");
       } else {
         // Detect when the image is loaded
-        imgs[i].addEventListener("load", revealPosterImage, { once: true });
-        function revealPosterImage(event) {
+        const revealPosterImage = (event) => {
           if (!isVideoLoaded[i]) {
             event.target.classList.remove("transparent");
           }
-        }
+        };
+        imgs[i].addEventListener("load", revealPosterImage, { once: true });
       }
     }
 
