@@ -1324,13 +1324,12 @@
       .paragraph-wrapper {
         --duration-enter: 250ms;
         --duration-exit: 150ms;
-        position: relative;
+        display: grid;
       }
-      .paragraph-wrapper[data-status="js-enabled"] div[lang="ja"],
-      .paragraph-wrapper[data-status="english"] div[lang="ja"],
-      .paragraph-wrapper[data-status="japanese"] div[lang="ja"] {
-        position: absolute;
-        top: 0;
+      .paragraph-wrapper[data-status="js-enabled"] > div,
+      .paragraph-wrapper[data-status="english"] > div,
+      .paragraph-wrapper[data-status="japanese"] > div {
+        grid-area: 1 / 1;
       }
       .paragraph-wrapper[data-status="js-enabled"] div[lang="ja"] {
         opacity: 0;
