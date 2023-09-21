@@ -3615,21 +3615,19 @@ body {
       });
     }
 
-    // Start loading the first video
-    videos[0].play();
-    // Check whether the video starts playing to check if the user device is iOS in low power mode (#21)
+    // Start loading all the videos
+    for (let i = 0; i < videos.length; i++) {
+      videos[i].play(); // this command is ignored by iOS if it's in low power mode
+    }
+    // Check if the user device is iOS in low power mode (#21)
+    // (but this technique fails with macOS Safari, which is why the .play() method executed for all the videos)
     const isVideoPlaying = !!(
       videos[0].currentTime > 0 &&
       !videos[0].paused &&
       !videos[0].ended &&
       videos[0].readyState > 2
     ); // Ref: https://stackoverflow.com/a/6877530/11847654
-    if (isVideoPlaying) {
-      // Start loading the rest of videos
-      for (let i = 1; i < videos.length; i++) {
-        videos[i].play();
-      }
-    } else {
+    if (!isVideoPlaying) {
       // #21: Start playing the video when the user touches the screen
       // Otherwise, iOS in low power mode never starts downloading the videos
       document.querySelector("body").addEventListener(
@@ -3760,11 +3758,6 @@ body {
       };
       videos[i].addEventListener(
         "error",
-        handleError,
-        { capture: true } // https://stackoverflow.com/a/20704999/11847654
-      );
-      videos[i].addEventListener(
-        "stalled",
         handleError,
         { capture: true } // https://stackoverflow.com/a/20704999/11847654
       );
