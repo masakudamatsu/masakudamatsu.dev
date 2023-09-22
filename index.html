@@ -1331,16 +1331,11 @@
         --duration-exit: 150ms;
         display: grid;
       }
-      .paragraph-wrapper[data-status="js-enabled"] > div,
       .paragraph-wrapper[data-status="english"] > div,
       .paragraph-wrapper[data-status="japanese"] > div {
         grid-area: 1 / 1;
       }
-      .paragraph-wrapper[data-status="js-enabled"] div[lang="ja"] {
-        opacity: 0;
-        pointer-events: none;
-      }
-      /* Transition to Japanese */
+      /* Transition from English to Japanese */
       .paragraph-wrapper[data-status="japanese"] div:first-of-type {
         opacity: 0;
         pointer-events: none;
@@ -1352,7 +1347,7 @@
         transition: opacity var(--duration-enter) var(--ease-in)
           var(--duration-exit);
       }
-      /* Transition back to English */
+      /* Transition from Japanese to English */
       .paragraph-wrapper[data-status="english"] div[lang="ja"] {
         opacity: 0;
         pointer-events: none;
@@ -3487,13 +3482,18 @@ body {
       .forEach((hiddenElement) => {
         hiddenElement.classList.remove("removed-if-js-disabled");
       });
+    // Detecting whether user's language preference being Japanese
+    const prefersJapanese =
+      navigator.language === "ja" || navigator.language === "ja-JP"; // https://www.localeplanet.com/icu/
     // Language selector
     const paragraphWrappers = document.querySelectorAll(".paragraph-wrapper");
     paragraphWrappers.forEach((paragraphWrapper) => {
       paragraphWrapper.classList.remove("whitespace-100"); // for footer
       paragraphWrapper.classList.remove("whitespace-200"); // for blog posts
       paragraphWrapper.classList.remove("whitespace-300"); // lead paragraph in each section
-      paragraphWrapper.dataset.status = "js-enabled";
+      paragraphWrapper.dataset.status = prefersJapanese
+        ? "japanese"
+        : "english";
     });
     const languageSelectors = document.querySelectorAll(".language-selector");
     languageSelectors[0].addEventListener("click", () => {
