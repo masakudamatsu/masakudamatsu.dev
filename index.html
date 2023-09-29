@@ -3635,7 +3635,10 @@ body {
       // Otherwise, iOS in low power mode never starts downloading the videos
       document
         .querySelector("body")
-        .addEventListener("touchstart", loadVideos, { once: true });
+        .addEventListener("touchstart", loadVideos, {
+          once: true,
+          passive: true,
+        });
     }
 
     // Prepare for playing videos only when fully visible within the screen
