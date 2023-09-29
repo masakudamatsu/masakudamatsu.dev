@@ -3616,9 +3616,12 @@ body {
     }
 
     // Start loading all the videos
-    for (let i = 0; i < videos.length; i++) {
-      videos[i].play(); // this command is ignored by iOS if it's in low power mode
-    }
+    const loadVideos = () => {
+      for (let i = 0; i < videos.length; i++) {
+        videos[i].play(); // this command is ignored by iOS if it's in low power mode
+      }
+    };
+    loadVideos();
     // Check if the user device is iOS in low power mode (#21)
     // (but this technique fails with macOS Safari, which is why the .play() method executed for all the videos)
     const isVideoPlaying = !!(
@@ -3630,15 +3633,9 @@ body {
     if (!isVideoPlaying) {
       // #21: Start playing the video when the user touches the screen
       // Otherwise, iOS in low power mode never starts downloading the videos
-      document.querySelector("body").addEventListener(
-        "touchstart",
-        () => {
-          videos.forEach((video) => {
-            video.play();
-          });
-        },
-        { once: true }
-      );
+      document
+        .querySelector("body")
+        .addEventListener("touchstart", loadVideos, { once: true });
     }
 
     // Prepare for playing videos only when fully visible within the screen
