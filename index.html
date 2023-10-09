@@ -910,7 +910,7 @@
         background-clip: padding-box;
         display: grid;
         gap: calc(var(--whitespace100) / 16 * 1rem);
-        grid-template-areas: "video video" "playback text" "button text";
+        grid-template-areas: "video video" "playback button" "text text";
         grid-template-columns: var(--minimum-target-size) 1fr;
         grid-template-rows: auto var(--minimum-target-size) auto;
         /* If changed, adjust the `sizes` attribute for <img> */
@@ -945,8 +945,8 @@
         display: grid;
         gap: calc(var(--whitespace100) / 16 * 1rem);
         grid-area: button;
-        grid-template-areas: "." "website" "source";
-        grid-template-rows:
+        grid-template-areas: ". website source";
+        grid-template-columns:
           1fr var(--minimum-target-size)
           var(--minimum-target-size);
       }
@@ -963,6 +963,21 @@
         grid-area: source;
       }
       /* Responsive layout */
+      @media screen and (min-width: 500px) {
+        /* breakpoint: below this width, the paragraph width becomes too narrow to read comfortably */
+        .leaf-card {
+          grid-template-areas: "video video" "playback text" "button text";
+          grid-template-columns: var(--minimum-target-size) 1fr;
+          grid-template-rows: auto var(--minimum-target-size) auto;
+        }
+        .leaf-card .buttonGroup {
+          grid-template-areas: "." "website" "source";
+          grid-template-columns: none;
+          grid-template-rows:
+            1fr var(--minimum-target-size)
+            var(--minimum-target-size);
+        }
+      }
       @media screen and (min-width: 780.25px) {
         /* breakpoint: var(--video-max-width) + 2 * var(--whitespace200) + 2 * var(--whitespace400) */
         .leaf-card {
