@@ -3,3 +3,7 @@
 /font-original
 /media-original
 *.xlsx
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/tests/*.spec.js-snapshots/
