@@ -1,19 +1,24 @@
 {
   "devDependencies": {
+    "@playwright/test": "1.39.0",
     "commitizen": "4.3.0",
     "cz-conventional-changelog": "3.3.0",
     "glyphhanger": "5.0.0",
+    "husky": "8.0.3",
     "npm-run-all": "4.1.5"
   },
   "scripts": {
     "commit": "git-cz",
+    "start": "http-server",
     "subset": "npm-run-all subset:*",
     "subset:raleway-italic": "npx glyphhanger http://localhost:8080 --subset=font-original/Raleway-Italic.ttf --cssSelector='.italic ' --family='Raleway' --formats=woff2,ttf --output=font",
     "subset:raleway-light": "npx glyphhanger http://localhost:8080 --subset=font-original/Raleway-Light.ttf --family='YakuHanJP Zen Kurenaido' --formats=woff2,ttf --output=font",
     "subset:raleway-regular": "npx glyphhanger http://localhost:8080 --subset=font-original/Raleway-Regular.ttf --family='Raleway' --formats=woff2,ttf --output=font",
     "subset:yakuhanjp": "npx glyphhanger http://localhost:8080 --subset=font-original/YakuHanJP-Light.ttf --family='YakuHanJP Zen Kurenaido' --formats=woff2,ttf --output=font",
     "subset:zenkurenaido": "npx glyphhanger http://localhost:8080 --subset=font-original/ZenKurenaido-Regular.ttf --family='YakuHanJP Zen Kurenaido' --formats=woff2,ttf --output=font",
-    "subset:zenloop": "npx glyphhanger http://localhost:8080 --subset=font-original/ZenLoop-Regular.ttf --family='Zen Loop' --formats=woff2,ttf --output=font"
+    "subset:zenloop": "npx glyphhanger http://localhost:8080 --subset=font-original/ZenLoop-Regular.ttf --family='Zen Loop' --formats=woff2,ttf --output=font",
+    "test": "npx playwright test",
+    "test:update": "npx playwright test --update-snapshots"
   },
   "config": {
     "commitizen": {
